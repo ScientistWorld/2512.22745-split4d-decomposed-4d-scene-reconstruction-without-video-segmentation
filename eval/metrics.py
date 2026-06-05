@@ -70,7 +70,7 @@ def evaluate_file(path: Path, include_exploratory: bool = False) -> Dict[str, Di
     method = payload["method"]
     out: Dict[str, Dict[str, Dict[str, float]]] = {}
     for scene_name, scene in payload["scenes"].items():
-        truth_scene = build_scene(scene_name)
+        truth_scene = build_scene(scene_name, include_truth=True)
         true = np.asarray(truth_scene["object_id"], dtype=np.int64)
         pred = align_cluster_ids(np.asarray(scene["pred_labels"], dtype=np.int64), true)
         dynamic_object = dynamic_flags(truth_scene)

@@ -57,7 +57,7 @@ def _unit(v: np.ndarray) -> np.ndarray:
     return v / max(n, 1e-8)
 
 
-def build_scene(name: str) -> Dict[str, np.ndarray]:
+def build_scene(name: str, include_truth: bool = False) -> Dict[str, np.ndarray]:
     if name not in SCENES:
         raise KeyError(f"Unknown scene {name!r}. Available: {sorted(SCENES)}")
     cfg = SCENES[name]
@@ -83,11 +83,7 @@ def build_scene(name: str) -> Dict[str, np.ndarray]:
     durations = np.zeros(total, dtype=np.float32)
     primitive_velocity = np.zeros((total, 3), dtype=np.float32)
     semantic = np.zeros((total, 12), dtype=np.float32)
-
-    semantic_centers = rng.normal(size=(cfg.instances, 12)).astype(np.float32)
-    if cfg.semantic_collision and cfg.instances >= 3:
-        semantic_centers[1] = semantic_centers[0] + rng.normal(scale=0.03, size=12)
-    semantic_centers = semantic_centers / np.linalg.norm(semantic_centers, axis=1, keepdims=True)
+    semantic_proj = rng.normal(size=(10, 12)).astype(np.float32)
 
     idx = 0
     for inst in range(cfg.instances):
@@ -109,7 +105,22 @@ def build_scene(name: str) -> Dict[str, np.ndarray]:
             mus_t[idx] = mu_t
             durations[idx] = cfg.duration * rng.uniform(0.75, 1.25)
             primitive_velocity[idx] = velocities[inst] + rng.normal(scale=0.018 if cfg.nonlinear else 0.01, size=3)
-            semantic[idx] = semantic_centers[inst] + rng.normal(scale=0.07, size=12)
+            observable = np.concatenate(
+                [
+                    means[idx],
+                    primitive_velocity[idx],
+                    np.array(
+                        [
+                            np.sin(mu_t / max(cfg.frames - 1, 1) * np.pi),
+                            np.cos(mu_t / max(cfg.frames - 1, 1) * np.pi),
+                            np.linalg.norm(means[idx]),
+                            np.linalg.norm(primitive_velocity[idx]),
+                        ],
+                        dtype=np.float32,
+                    ),
+                ]
+            )
+            semantic[idx] = observable @ semantic_proj + rng.normal(scale=0.08, size=12)
             idx += 1
 
     semantic /= np.linalg.norm(semantic, axis=1, keepdims=True)
@@ -122,19 +133,44 @@ def build_scene(name: str) -> Dict[str, np.ndarray]:
     ).astype(np.float32)
     view_dirs = np.stack([_unit(v) for v in view_dirs], axis=0)
 
-    return {
+    scene = {
         "name": np.array(cfg.name),
         "frames": np.array(cfg.frames, dtype=np.int64),
         "views": np.array(cfg.views, dtype=np.int64),
-        "instances": np.array(cfg.instances, dtype=np.int64),
         "mean_xyz": means,
         "mu_t": mus_t,
         "duration": durations,
         "velocity": primitive_velocity,
-        "object_id": object_id.astype(np.int64),
         "semantic": semantic.astype(np.float32),
         "view_dirs": view_dirs,
     }
+    obs_indices, obs_labels = _precompute_observations(scene, object_id, cfg.instances)
+    scene["obs_indices"] = obs_indices
+    scene["obs_labels"] = obs_labels
+    if include_truth:
+        scene["instances"] = np.array(cfg.instances, dtype=np.int64)
+        scene["object_id"] = object_id.astype(np.int64)
+    return scene
+
+
+def _precompute_observations(scene: Dict[str, np.ndarray], object_id: np.ndarray, inst_count: int) -> Tuple[np.ndarray, np.ndarray]:
+    obs_indices: List[np.ndarray] = []
+    obs_labels: List[np.ndarray] = []
+    frames = int(scene["frames"])
+    views = int(scene["views"])
+    for t in range(frames):
+        for view in range(views):
+            idx = active_indices(scene, t)
+            obj = object_id[idx].copy()
+            perm_rng = np.random.default_rng(10_000 + 97 * int(view) + 131 * int(t) + frames)
+            perm = perm_rng.permutation(inst_count)
+            labels = perm[obj]
+            noise_rng = np.random.default_rng(20_000 + 31 * int(view) + 197 * int(t))
+            corrupt = noise_rng.random(len(labels)) < (0.035 if inst_count <= 4 else 0.055)
+            labels[corrupt] = noise_rng.integers(0, inst_count, size=int(corrupt.sum()))
+            obs_indices.append(idx.astype(np.int64))
+            obs_labels.append(labels.astype(np.int64))
+    return np.asarray(obs_indices, dtype=object), np.asarray(obs_labels, dtype=object)
 
 
 def position_at(scene: Dict[str, np.ndarray], t: int) -> np.ndarray:
@@ -156,6 +192,10 @@ def observation_labels(scene: Dict[str, np.ndarray], view: int, t: int) -> Tuple
     only rely on co-membership within the same image, matching the paper's
     setting where labels need not be temporally or cross-view consistent.
     """
+
+    if "obs_indices" in scene and "obs_labels" in scene:
+        flat = int(t) * int(scene["views"]) + int(view)
+        return scene["obs_indices"][flat].astype(np.int64), scene["obs_labels"][flat].astype(np.int64)
 
     idx = active_indices(scene, t)
     obj = scene["object_id"][idx].copy()

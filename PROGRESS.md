@@ -12,6 +12,7 @@
 - Job `9005fb39-3a1` completed the fair equal-step ablation run. A later audit found that its score was invalid for `core_claim` because method-side inference aligned clusters using hidden evaluation labels.
 - Inference now attempts the paper's HDBSCAN first-frame clustering step and falls back to deterministic KMeans only when density clustering produces too few clusters on the reduced benchmark.
 - Method outputs no longer include `object_id` or `dynamic_object`; `eval/metrics.py` now reconstructs benchmark labels independently and performs generic Hungarian cluster-id matching during scoring.
+- 3D tracking regularization now matches adjacent-frame primitives by spatial nearest neighbor only; it no longer uses hidden object ids to find same-instance pairs.
 
 ## Results
 
@@ -58,7 +59,7 @@ These diagnostics remain useful for future work, but they are not included in ac
 - The first completed method run showed streaming was weaker than the random-order ablation. The retry adds local temporal feature transfer along the synthetic scene's explicit adjacent-frame primitive matches and gives the streaming run more steps than the ablation.
 - Job `3ac23854-ac0` succeeded, but its ablation used unequal step budgets. `scripts/run.sh` now gives streaming and random-order 2200 steps each, while `--temporal-transfer` is exposed as an explicit method hyperparameter.
 - Job `9005fb39-3a1` resolved the unequal-step concern, but validation rejected the interaction and ablation scores due large gaps against the paper reference. The default evaluator now reports only the validated linear-motion experiment; use `python -m eval.metrics --include-exploratory` to inspect the rejected diagnostics.
-- A milestone-integrity audit found hidden-label leakage: `method/split4d.py` used `object_id` to align cluster ids and wrote evaluation labels into its output artifacts. This is fixed; cluster matching is now a method-agnostic evaluator step.
+- A milestone-integrity audit found hidden-label leakage: `method/split4d.py` used `object_id` to align cluster ids and wrote evaluation labels into its output artifacts. A follow-up audit also found that tracking regularization used `object_id` to choose same-object adjacent matches. Both issues are fixed; cluster matching is now a method-agnostic evaluator step, and tracking pairs are spatial nearest-neighbor matches.
 
 ## Deviations from Paper
 

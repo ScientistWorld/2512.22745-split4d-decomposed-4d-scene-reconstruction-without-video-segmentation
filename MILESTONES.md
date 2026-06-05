@@ -12,6 +12,7 @@
 - A milestone audit found that the previous scores used method-side oracle cluster-id alignment from evaluation labels.
 - Removed evaluation labels from method outputs and moved generic Hungarian cluster matching into `eval/metrics.py`.
 - Updated inference to use the paper's HDBSCAN clustering step when available, with deterministic KMeans only as a small-sample fallback.
+- Removed hidden-label use from 3D tracking regularization; adjacent-frame primitive pairs now use spatial nearest-neighbor matching, matching the paper's regularizer.
 
 ## Stop Justification
-- Not stopped; submitting another validation job for the HDBSCAN-packaged method.
+- Not stopped; submitting corrected non-oracle validation.

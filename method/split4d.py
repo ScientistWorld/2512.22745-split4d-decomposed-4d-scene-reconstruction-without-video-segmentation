@@ -18,7 +18,7 @@ import torch
 import torch.nn.functional as F
 from sklearn.cluster import KMeans
 
-from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, position_at, temporal_opacity
+from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, observation_labels, position_at, temporal_opacity
 
 try:
     import hdbscan
@@ -88,7 +88,6 @@ def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor
 def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.ndarray]]:
     pairs: List[Tuple[np.ndarray, np.ndarray]] = []
     frames = int(scene["frames"])
-    obj = scene["object_id"]
     for t in range(frames - 1):
         a = active_indices(scene, t)
         b = active_indices(scene, t + 1)
@@ -103,10 +102,9 @@ def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.nd
         pos_b = position_at(scene, t + 1)[b]
         src, dst = [], []
         for i, p in zip(disappearing, pos_a):
-            same = b[obj[b] == obj[i]]
-            candidates = same if len(same) else b
-            cand_pos = position_at(scene, t + 1)[candidates]
-            j = candidates[np.argmin(((cand_pos - p) ** 2).sum(axis=1))]
+            # The paper's tracking regularizer matches adjacent-frame
+            # primitives by spatial proximity, without using instance labels.
+            j = b[np.argmin(((pos_b - p) ** 2).sum(axis=1))]
             src.append(i)
             dst.append(j)
         pairs.append((np.asarray(src, dtype=np.int64), np.asarray(dst, dtype=np.int64)))
@@ -119,7 +117,7 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
     torch.manual_seed(args.seed)
     scene_np = build_scene(scene_name)
     scene = _torch_scene(scene_np, device)
-    n = int(scene_np["object_id"].shape[0])
+    n = int(scene_np["mean_xyz"].shape[0])
     generator = torch.Generator(device=device).manual_seed(args.seed + 17)
 
     raw_features = torch.nn.Parameter(torch.randn(n, args.feature_dim, device=device) * 0.05)
@@ -182,7 +180,7 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
 
 
 def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarray:
-    inst = int(scene["instances"])
+    inst = infer_instance_count(scene)
     first = active_indices(scene, 0)
     if len(first) < inst:
         first = np.arange(len(features))
@@ -211,6 +209,20 @@ def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarr
         if np.any(bad):
             labels[members[bad]] = sims[members[bad]].argmax(axis=1)
     return labels.astype(np.int64)
+
+
+def infer_instance_count(scene: Dict[str, np.ndarray]) -> int:
+    """Estimate object count from public per-image mask supervision."""
+
+    labels = scene.get("obs_labels")
+    if labels is not None and len(labels):
+        return int(max(int(np.max(x)) for x in labels if len(x)) + 1)
+    max_label = 0
+    for t in range(int(scene["frames"])):
+        for view in range(int(scene["views"])):
+            _, obs_labels = observation_labels(scene, view, t)
+            max_label = max(max_label, int(np.max(obs_labels)))
+    return max_label + 1
 
 
 def hdbscan_centers(features: np.ndarray, first: np.ndarray, inst: int) -> np.ndarray | None:

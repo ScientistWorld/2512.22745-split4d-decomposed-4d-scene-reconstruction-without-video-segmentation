@@ -30,5 +30,10 @@
 - The reproduced streaming method did not yet support the core claim: on the interaction scene, streaming mIoU was 0.215 versus 0.344 for the random-order ablation.
 - Fixed the score mapping and added explicit local temporal feature transfer for the scaled streaming benchmark before retrying.
 
+### [2026-06-05 05:51] - method_runs
+- Job `3ac23854-ac0` completed successfully and `validate.py --compare` passed.
+- Streaming improved to 0.723 mIoU on the linear scene and 0.362 mIoU on the interaction scene; the interaction ablation showed streaming at 0.362 mIoU versus random-order at 0.198 mIoU.
+- The run used fewer optimization steps for the random-order ablation than for streaming, so the ablation is being rerun with an equal step budget before claiming `core_claim`.
+
 ## Stop Justification
-- Not stopped. A CPU retry is being submitted to regenerate scores with the corrected evaluator and test whether the strengthened streaming propagation supports the core claim.
+- Not stopped. A CPU retry is being submitted with equal streaming and random-order step budgets to validate the core claim under a fair ablation.

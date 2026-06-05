@@ -160,7 +160,7 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
                 src = torch.as_tensor(src_np, dtype=torch.long, device=device)
                 dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
                 with torch.no_grad():
-                    raw_features[dst].lerp_(raw_features[src], 0.18)
+                    raw_features[dst].lerp_(raw_features[src], args.temporal_transfer)
         if (step + 1) % max(1, args.steps // 8) == 0:
             history.append(float(loss.detach().cpu()))
 
@@ -238,6 +238,7 @@ def main() -> None:
     parser.add_argument("--lambda-align", type=float, default=0.35)
     parser.add_argument("--lambda-dino", type=float, default=0.08)
     parser.add_argument("--dino-fraction", type=float, default=0.35)
+    parser.add_argument("--temporal-transfer", type=float, default=0.35)
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--streaming", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--cpu", action="store_true")

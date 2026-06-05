@@ -31,4 +31,4 @@ action: submit
 gpus: 0
 test: true
 milestone: method_runs
-notes: "Retry after fixing score/reference mapping and adding local streaming temporal feature transfer; regenerate scores and run validate comparison."
+notes: "Fair ablation retry: run streaming and random-order Split4D with equal 2200-step budgets, regenerate scores, and validate comparison."

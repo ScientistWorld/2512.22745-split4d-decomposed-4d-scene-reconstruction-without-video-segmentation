@@ -21,6 +21,7 @@ python -m method.split4d \
   --lambda-align 0.35 \
   --lambda-dino 0.08 \
   --dino-fraction 0.35 \
+  --temporal-transfer "${SPLIT4D_TEMPORAL_TRANSFER:-0.35}" \
   --streaming
 
 bash scripts/evaluate.sh

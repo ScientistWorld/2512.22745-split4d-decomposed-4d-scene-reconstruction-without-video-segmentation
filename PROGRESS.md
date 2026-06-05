@@ -8,6 +8,7 @@
 - `eval/metrics.py` computes mIoU, mAcc, Recall, F1, and dynamic recall from method output artifacts without importing `method/`.
 - `python validate.py` passes before submission.
 - Job `dbd053f2-d80` ran both the Split4D method and random-order ablation end-to-end inside the container and wrote output artifacts, reaching `method_runs`.
+- Job `3ac23854-ac0` completed the full reproduction script and `python validate.py --compare` passed.
 
 ## Results
 
@@ -20,10 +21,18 @@ Job `dbd053f2-d80` produced the first complete method outputs:
 
 These results prove the method runs, but they do not yet support the paper's core claim because streaming underperformed the random-order ablation on the scaled benchmark.
 
+Job `3ac23854-ac0` improved the streaming results and produced structurally valid scores:
+
+- Linear motion, Split4D streaming: mIoU 0.723, F1 0.835, dynamic recall 0.870.
+- Interaction motion, Split4D streaming: mIoU 0.362, F1 0.495, dynamic recall 0.675.
+- Interaction motion, random-order ablation: mIoU 0.198, F1 0.328, dynamic recall 0.349.
+
+The interaction ablation supports the expected direction, but the run used fewer steps for random-order than streaming. I am rerunning with equal 2200-step budgets before treating it as core-claim evidence.
+
 ## Remaining
 
-- Rerun after fixing the score/reference mapping so `validate.py --compare` succeeds.
-- Verify whether explicit local temporal feature transfer plus more streaming steps makes streaming outperform the random-order ablation.
+- Rerun with equal streaming and random-order step budgets so the ablation isolates temporal ordering instead of optimization length.
+- Verify whether explicit local temporal feature transfer makes streaming outperform the random-order ablation under the equal-step protocol.
 - If the gap remains weak, tune only scale-preserving hyperparameters such as step count, temporal transfer strength, and loss weights.
 
 ## Issues
@@ -32,6 +41,7 @@ These results prove the method runs, but they do not yet support the paper's cor
 - Job `86f87ec1-124` failed inside `method/split4d.py` because the installed Torch build did not expose `torch.flatnonzero`. Replaced it with a local `_nonzero1d` wrapper around `torch.nonzero(...).flatten()`.
 - Job `dbd053f2-d80` failed at `validate.py --compare` because `scoring/scores.json` placed `split4d_random_order` inside primary experiments where `reference.json` only lists `split4d_streaming`. The evaluator now reports the baseline only under `streaming_ablation`.
 - The first completed method run showed streaming was weaker than the random-order ablation. The retry adds local temporal feature transfer along the synthetic scene's explicit adjacent-frame primitive matches and gives the streaming run more steps than the ablation.
+- Job `3ac23854-ac0` succeeded, but its ablation used unequal step budgets. `scripts/run.sh` now gives streaming and random-order 2200 steps each, while `--temporal-transfer` is exposed as an explicit method hyperparameter.
 
 ## Deviations from Paper
 

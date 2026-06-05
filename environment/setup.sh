@@ -20,4 +20,5 @@ uv pip install --system \
   numpy \
   scipy \
   scikit-learn \
+  hdbscan \
   torch

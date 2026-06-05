@@ -6,6 +6,32 @@ from pathlib import Path
 from typing import Dict, Iterable
 
 import numpy as np
+from scipy.optimize import linear_sum_assignment
+
+from data.split4d_synthetic import build_scene
+
+
+def dynamic_flags(scene: Dict[str, np.ndarray]) -> np.ndarray:
+    speed = np.linalg.norm(scene["velocity"], axis=1)
+    obj_speed = np.zeros(int(scene["instances"]), dtype=np.float32)
+    for inst in range(int(scene["instances"])):
+        obj_speed[inst] = float(np.median(speed[scene["object_id"] == inst]))
+    return obj_speed > np.median(obj_speed) * 0.9
+
+
+def align_cluster_ids(pred: np.ndarray, true: np.ndarray) -> np.ndarray:
+    pred_labels = sorted(int(x) for x in np.unique(pred))
+    true_labels = sorted(int(x) for x in np.unique(true))
+    if not pred_labels or not true_labels:
+        return pred
+    cost = np.zeros((len(pred_labels), len(true_labels)), dtype=np.int64)
+    for i, p in enumerate(pred_labels):
+        for j, t in enumerate(true_labels):
+            cost[i, j] = -int(((pred == p) & (true == t)).sum())
+    rows, cols = linear_sum_assignment(cost)
+    mapping = {pred_labels[r]: true_labels[c] for r, c in zip(rows, cols)}
+    unmatched = max(true_labels) + 1
+    return np.asarray([mapping.get(int(p), unmatched) for p in pred], dtype=np.int64)
 
 
 def instance_metrics(pred: np.ndarray, true: np.ndarray, dynamic_object: np.ndarray) -> Dict[str, float]:
@@ -44,9 +70,10 @@ def evaluate_file(path: Path, include_exploratory: bool = False) -> Dict[str, Di
     method = payload["method"]
     out: Dict[str, Dict[str, Dict[str, float]]] = {}
     for scene_name, scene in payload["scenes"].items():
-        pred = np.asarray(scene["pred_labels"], dtype=np.int64)
-        true = np.asarray(scene["object_id"], dtype=np.int64)
-        dynamic_object = np.asarray(scene["dynamic_object"], dtype=bool)
+        truth_scene = build_scene(scene_name)
+        true = np.asarray(truth_scene["object_id"], dtype=np.int64)
+        pred = align_cluster_ids(np.asarray(scene["pred_labels"], dtype=np.int64), true)
+        dynamic_object = dynamic_flags(truth_scene)
         if scene_name == "linear_motion" and method != "split4d_random_order":
             out.setdefault("linear_motion_segmentation", {"results": {}})
             out["linear_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)

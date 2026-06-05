@@ -1,15 +1,3 @@
 {
-  "experiments": {
-    "linear_motion_segmentation": {
-      "results": {
-        "split4d_streaming": {
-          "F1": 0.8354684991974317,
-          "Recall": 0.8333333333333333,
-          "Recalldyn": 0.8703703703703703,
-          "mAcc": 0.9166666666666667,
-          "mIoU": 0.7227293082556241
-        }
-      }
-    }
-  }
+  "experiments": {}
 }

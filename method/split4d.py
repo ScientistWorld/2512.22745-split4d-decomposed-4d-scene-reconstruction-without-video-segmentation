@@ -16,10 +16,14 @@ from typing import Dict, List, Tuple
 import numpy as np
 import torch
 import torch.nn.functional as F
-from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import KMeans
 
 from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, position_at, temporal_opacity
+
+try:
+    import hdbscan
+except ImportError:  # pragma: no cover - fallback is exercised when optional dep is absent.
+    hdbscan = None
 
 
 def _nonzero1d(mask: torch.Tensor) -> torch.Tensor:
@@ -171,20 +175,10 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
         "method": method_name,
         "features": features.tolist(),
         "pred_labels": pred.tolist(),
-        "object_id": scene_np["object_id"].astype(int).tolist(),
-        "dynamic_object": dynamic_flags(scene_np).astype(int).tolist(),
         "history": history,
         "config": vars(args),
     }
     return out
-
-
-def dynamic_flags(scene: Dict[str, np.ndarray]) -> np.ndarray:
-    speed = np.linalg.norm(scene["velocity"], axis=1)
-    obj_speed = np.zeros(int(scene["instances"]), dtype=np.float32)
-    for inst in range(int(scene["instances"])):
-        obj_speed[inst] = float(np.median(speed[scene["object_id"] == inst]))
-    return obj_speed > np.median(obj_speed) * 0.9
 
 
 def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarray:
@@ -192,11 +186,13 @@ def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarr
     first = active_indices(scene, 0)
     if len(first) < inst:
         first = np.arange(len(features))
-    # HDBSCAN is the paper's clustering choice.  KMeans with the known number of
-    # evaluation instances is used here as a deterministic fallback suitable for
-    # this small benchmark, followed by the paper's spatial/motion filtering.
-    kmeans = KMeans(n_clusters=inst, n_init=20, random_state=5).fit(features[first])
-    centers = kmeans.cluster_centers_
+
+    centers = hdbscan_centers(features, first, inst)
+    if centers is None:
+        # Deterministic fallback for very small runs where density clustering
+        # finds too few clusters after downsampling.
+        kmeans = KMeans(n_clusters=inst, n_init=20, random_state=5).fit(features[first])
+        centers = kmeans.cluster_centers_
     sims = features @ (centers / np.linalg.norm(centers, axis=1, keepdims=True)).T
     labels = sims.argmax(axis=1)
 
@@ -214,17 +210,26 @@ def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarr
         bad = (dv > 3 * (dv.std() + 1e-6)) & (dp > 3 * (dp.std() + 1e-6)) & (sim < 0.5)
         if np.any(bad):
             labels[members[bad]] = sims[members[bad]].argmax(axis=1)
-    return align_labels(labels, scene["object_id"], inst)
+    return labels.astype(np.int64)
 
 
-def align_labels(pred: np.ndarray, true: np.ndarray, k: int) -> np.ndarray:
-    cost = np.zeros((k, k), dtype=np.int64)
-    for p in range(k):
-        for t in range(k):
-            cost[p, t] = -int(((pred == p) & (true == t)).sum())
-    rows, cols = linear_sum_assignment(cost)
-    mapping = {r: c for r, c in zip(rows, cols)}
-    return np.asarray([mapping.get(int(p), int(p)) for p in pred], dtype=np.int64)
+def hdbscan_centers(features: np.ndarray, first: np.ndarray, inst: int) -> np.ndarray | None:
+    """Cluster the first-frame primitive sample with the paper's HDBSCAN step."""
+
+    if hdbscan is None or len(first) < max(inst * 3, 8):
+        return None
+    min_cluster_size = max(3, len(first) // max(inst * 4, 1))
+    labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size, min_samples=2).fit_predict(features[first])
+    valid = [lab for lab in np.unique(labels) if lab >= 0]
+    if len(valid) < inst:
+        return None
+
+    valid = sorted(valid, key=lambda lab: int((labels == lab).sum()), reverse=True)[:inst]
+    centers = []
+    for lab in valid:
+        members = first[labels == lab]
+        centers.append(features[members].mean(axis=0))
+    return np.stack(centers, axis=0)
 
 
 def main() -> None:

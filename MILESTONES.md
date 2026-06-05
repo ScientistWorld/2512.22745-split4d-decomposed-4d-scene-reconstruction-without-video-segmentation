@@ -4,5 +4,14 @@
 
 ## Progress Log
 
+### [2026-06-05 05:56] - method_runs
+- Implemented the Split4D feature-stage algorithm on fixed dynamic Gaussian-style scenes.
+- Submitted a container job that ran the method and random-order ablation end-to-end.
+
+### [2026-06-05 06:01] - method_runs
+- A milestone audit found that the previous scores used method-side oracle cluster-id alignment from evaluation labels.
+- Removed evaluation labels from method outputs and moved generic Hungarian cluster matching into `eval/metrics.py`.
+- Updated inference to use the paper's HDBSCAN clustering step when available, with deterministic KMeans only as a small-sample fallback.
+
 ## Stop Justification
-- Completed at milestone `method_runs`.
+- Not stopped; submitting another validation job for the HDBSCAN-packaged method.

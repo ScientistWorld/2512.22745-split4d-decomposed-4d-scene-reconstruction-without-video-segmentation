@@ -13,8 +13,8 @@ set -e
 
 cd /home/user
 
-# Example: train a model
-python method/train.py --epochs 10 --lr 0.001
+export SPLIT4D_BASELINE_STEPS="${SPLIT4D_BASELINE_STEPS:-1600}"
+export SPLIT4D_STEPS="${SPLIT4D_STEPS:-1600}"
 
-# Example: evaluate
-bash scripts/evaluate.sh checkpoints/best.pt
+bash scripts/reproduce.sh
+python validate.py --compare

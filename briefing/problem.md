@@ -6,12 +6,12 @@ Do NOT describe the paper's method or solution here — only the problem itself.
 
 ## Research Question
 
-<!-- What problem or challenge does this paper tackle? What gap in existing work does it address? -->
+How can a system recover temporally consistent instance-level segmentation of a dynamic 3D scene from multi-view videos when the available 2D masks are independent per image and do not have stable labels across views or time?
 
 ## Why It Matters
 
-<!-- Why is this problem important? What would a good solution enable? Make it short -->
+Reliable decomposed 4D scene representations enable object-level editing, removal, duplication, and analysis in dynamic scenes with interacting people and objects. The hard case is preserving object identity and boundaries over time without assuming a video tracker has already solved the correspondence problem.
 
 ## Success Criteria
 
-<!-- What would a successful solution look like? What properties should it have? This is about the goal, not the paper's specific approach. Make it short -->
+A successful solution should assign consistent instance identities to scene elements across time, preserve boundaries under motion and interaction, work for both static and dynamic objects, and outperform methods that rely on inconsistent framewise labels or weak temporal propagation.

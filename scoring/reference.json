@@ -1,0 +1,56 @@
+{
+  "experiments": {
+    "linear_motion_segmentation": {
+      "description": "Scaled Split4D segmentation benchmark corresponding to the paper's Neural3DV-style dynamic multi-view setting.",
+      "weight": 0.45,
+      "primary_metric": "mIoU",
+      "metrics": {
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5},
+        "F1": {"higher_is_better": true, "coefficient": 0.8},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7}
+      },
+      "results": {
+        "SA4D": {"type": "baseline", "mIoU": 0.668, "mAcc": 0.987, "Recall": 0.861, "F1": 0.759, "Recalldyn": 0.812},
+        "SADG": {"type": "baseline", "mIoU": 0.649, "mAcc": 0.985, "Recall": 0.827, "F1": 0.744, "Recalldyn": 0.813},
+        "Omniseg3D": {"type": "baseline", "mIoU": 0.700, "mAcc": 0.996, "Recall": 0.948, "F1": 0.807, "Recalldyn": 0.797},
+        "split4d_streaming": {"type": "proposed", "mIoU": 0.801, "mAcc": 0.998, "Recall": 0.903, "F1": 0.870, "Recalldyn": 0.833}
+      }
+    },
+    "interaction_motion_segmentation": {
+      "description": "Scaled Split4D segmentation benchmark corresponding to the paper's Multi-Human interaction setting.",
+      "weight": 0.45,
+      "primary_metric": "mIoU",
+      "metrics": {
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5},
+        "F1": {"higher_is_better": true, "coefficient": 0.8},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7}
+      },
+      "results": {
+        "SA4D": {"type": "baseline", "mIoU": 0.592, "mAcc": 0.928, "Recall": 0.761, "F1": 0.710, "Recalldyn": 0.856},
+        "SADG": {"type": "baseline", "mIoU": 0.696, "mAcc": 0.932, "Recall": 0.793, "F1": 0.777, "Recalldyn": 0.727},
+        "Omniseg3D": {"type": "baseline", "mIoU": 0.533, "mAcc": 0.903, "Recall": 0.676, "F1": 0.641, "Recalldyn": 0.725},
+        "split4d_streaming": {"type": "proposed", "mIoU": 0.893, "mAcc": 0.997, "Recall": 0.948, "F1": 0.932, "Recalldyn": 0.942}
+      }
+    },
+    "streaming_ablation": {
+      "description": "Paper Table 2 ablation: replacing temporally ordered training with random sampling degrades segmentation on the Multi-Human Juggle sequence.",
+      "weight": 0.10,
+      "primary_metric": "mIoU",
+      "metrics": {
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5},
+        "F1": {"higher_is_better": true, "coefficient": 0.8},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.8}
+      },
+      "results": {
+        "split4d_random_order": {"type": "baseline", "mIoU": 0.552, "mAcc": 0.977, "Recall": 0.589, "F1": 0.584, "Recalldyn": 0.365},
+        "split4d_streaming": {"type": "proposed", "mIoU": 0.895, "mAcc": 0.997, "Recall": 0.928, "F1": 0.934, "Recalldyn": 0.898}
+      }
+    }
+  }
+}

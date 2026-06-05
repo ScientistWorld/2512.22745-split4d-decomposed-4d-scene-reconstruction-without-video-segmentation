@@ -1,50 +1,19 @@
 # Evaluation Targets
 
-<!-- Do not edit this unless you decide to stop -->
+## Primary: linear_motion_segmentation
+Tests whether a method can recover temporally consistent instance labels on a dynamic multi-view scene with moderate linear motion and inconsistent per-image mask ids.
+- **Metric**: `mIoU` (higher is better)
+- **Secondary metrics**: `mAcc`, `Recall`, `F1`, `Recalldyn` (higher is better)
+- **How to run**: write method outputs in the JSON format used by `outputs/split4d/results.json`, then run `bash scripts/evaluate.sh`.
 
-<!--
-Describe what a scientist could optimize and how to measure it.
+## Primary: interaction_motion_segmentation
+Tests whether the same task remains successful when objects have more interaction-like motion and semantic ambiguity.
+- **Metric**: `mIoU` (higher is better)
+- **Secondary metrics**: `mAcc`, `Recall`, `F1`, `Recalldyn` (higher is better)
+- **How to run**: write method outputs in the JSON format used by `outputs/split4d/results.json`, then run `bash scripts/evaluate.sh`.
 
-If a paper claims "we get X without sacrificing Y." Your targets must
-capture BOTH sides. Without constraint targets, a scientist can trivially
-"improve" by breaking the property the paper was designed to satisfy.
-
-Three kinds of targets:
-
-  PRIMARY    — the main thing the paper optimizes (accuracy, PSNR, etc.)
-  CONSTRAINT — what the paper must maintain (security, fairness, param count,
-               baseline comparison). Constraint metrics guard against cheating:
-               a scientist who ignores the constraint should score WORSE.
-  ABLATION   — what breaks when the key idea is removed (wrong-key test,
-               no-module test). Proves the method actually does something. 
-               This can be ignored if truly not important.
-
-For each target, write:
-- What the experiment tests (one sentence)
-- The primary metric and direction (higher/lower is better)
-- How to run evaluation
-
-Every target here MUST appear in both reference.json and scores.json.
-Do not list targets you cannot measure — phantom targets are worse than
-missing targets.
-
-Example for a steganography paper:
-
-## Primary: reconstruction_quality
-Cover and hidden scene PSNR on Blender Synthetic.
-- **Metric**: psnr (higher is better)
-
-## Constraint: key_security
-Wrong-key rendering must produce incoherent output.
-- **Metric**: wrong_key_psnr (lower is better — high means security is broken)
-
-## Ablation: vs_standalone_baseline
-Cover quality should match standalone model (no hidden scene embedded).
-- **Metric**: psnr_gap (lower is better — large gap means hiding costs quality)
-
-Delete this comment block and fill in your actual targets below.
--->
-
-<!-- This is high-level. IT IS ABOUT CONCEPT, NOT NUMBERS. DO NOT INCLUDE ANY ACTUAL VALUES FROM THE PAPER OR YOUR EXPERIMENTS HERE. -->
-
-<!-- This should EXACTLY corresponds to the structure in your scores.json. -->
+## Ablation Constraint: streaming_ablation
+Tests whether temporally coherent learning improves dynamic-instance segmentation relative to the same feature-learning task with randomized temporal order.
+- **Metric**: `mIoU` (higher is better)
+- **Constraint metric**: `Recalldyn` (higher is better; low dynamic recall means the central temporal consistency claim is not supported)
+- **How to run**: run both `bash scripts/baseline.sh` and `bash scripts/method.sh`, then inspect `scoring/scores.json`.

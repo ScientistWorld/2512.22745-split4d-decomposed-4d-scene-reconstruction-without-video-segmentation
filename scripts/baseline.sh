@@ -17,4 +17,18 @@ set -e
 
 cd /home/user
 
-# TODO: run baseline
+mkdir -p outputs/baseline
+python -m method.split4d \
+  --output outputs/baseline/random_order.json \
+  --method-name split4d_random_order \
+  --scenes linear_motion interaction_motion \
+  --steps "${SPLIT4D_BASELINE_STEPS:-1400}" \
+  --feature-dim 32 \
+  --samples-per-mask 32 \
+  --lr 2.5e-3 \
+  --lambda-align 0.35 \
+  --lambda-dino 0.08 \
+  --dino-fraction 0.35 \
+  --no-streaming
+
+bash scripts/evaluate.sh

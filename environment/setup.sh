@@ -16,4 +16,8 @@
 
 set -e
 
-# uv pip install --system <packages>
+uv pip install --system \
+  numpy \
+  scipy \
+  scikit-learn \
+  torch

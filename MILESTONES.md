@@ -15,7 +15,10 @@
 
 ## Progress Log
 
-<!-- Write your progress here -->
+### [2026-06-05 00:00] - none
+- Read the Split4D paper markdown and extracted the method, metrics, tables, ablations, and implementation settings.
+- Implemented a scaled reproduction environment with fixed dynamic Gaussian primitives, inconsistent per-image masks, Split4D feature learning, a random-order ablation baseline, and method-agnostic evaluation.
+- Local source validation passes, but the method has not yet run inside the dependency-equipped compute container.
 
 ## Stop Justification
-- Completed at milestone `none`.
+- Not stopped. First validation job is being submitted.

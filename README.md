@@ -156,4 +156,4 @@ This reproduction evaluates on deterministic scaled dynamic scenes with fixed 4D
 **Current: method_runs**
 
 ## Stop Justification
-- Completed at milestone `method_runs`.
+- Completed at milestone `core_claim`.

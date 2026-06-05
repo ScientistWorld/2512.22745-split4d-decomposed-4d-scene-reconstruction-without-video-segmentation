@@ -47,4 +47,4 @@
 - The accepted score now covers `linear_motion_segmentation`, where mIoU is close to the paper result and above the paper baseline range, while dynamic recall is also strong.
 
 ## Stop Justification
-- Stopping at `core_claim`. The core method runs end-to-end, the accepted scaled benchmark supports the benefit claim with a dynamic-recall constraint, and the reusable environment is packaged and validated.
+- Completed at milestone `core_claim`.

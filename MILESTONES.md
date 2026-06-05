@@ -20,4 +20,4 @@
 - Kept milestone at `method_runs` because mIoU is slightly below the strongest baseline in the accepted target.
 
 ## Stop Justification
-- Not stopped; submitting a stronger paper-native tracking/streaming run.
+- Completed at milestone `method_runs`.

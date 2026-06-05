@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: method_runs
-notes: "Run corrected non-oracle Split4D reproduction: public method data excludes truth labels, tracking uses spatial matching, eval owns truth-label alignment."
+notes: "Run stronger non-oracle Split4D configuration with spatial/velocity tracking matches, longer streaming optimization, and updated regularizer weights."

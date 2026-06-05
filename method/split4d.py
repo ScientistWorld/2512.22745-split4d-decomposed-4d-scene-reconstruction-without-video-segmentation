@@ -16,6 +16,7 @@ from typing import Dict, List, Tuple
 import numpy as np
 import torch
 import torch.nn.functional as F
+from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import KMeans
 
 from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, observation_labels, position_at, temporal_opacity
@@ -100,14 +101,16 @@ def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.nd
             disappearing = a[: min(8, len(a))]
         pos_a = position_at(scene, t)[disappearing]
         pos_b = position_at(scene, t + 1)[b]
-        src, dst = [], []
-        for i, p in zip(disappearing, pos_a):
-            # The paper's tracking regularizer matches adjacent-frame
-            # primitives by spatial proximity, without using instance labels.
-            j = b[np.argmin(((pos_b - p) ** 2).sum(axis=1))]
-            src.append(i)
-            dst.append(j)
-        pairs.append((np.asarray(src, dtype=np.int64), np.asarray(dst, dtype=np.int64)))
+        vel_a = scene["velocity"][disappearing]
+        vel_b = scene["velocity"][b]
+        pos_scale = np.median(np.linalg.norm(pos_b - np.median(pos_b, axis=0), axis=1)) + 1e-6
+        vel_scale = np.median(np.linalg.norm(vel_b - np.median(vel_b, axis=0), axis=1)) + 1e-6
+        pos_cost = ((pos_a[:, None, :] - pos_b[None, :, :]) ** 2).sum(axis=2) / (pos_scale**2)
+        vel_cost = ((vel_a[:, None, :] - vel_b[None, :, :]) ** 2).sum(axis=2) / (vel_scale**2)
+        cost = pos_cost + 0.35 * vel_cost
+        rows, cols = linear_sum_assignment(cost)
+        keep = cost[rows, cols] <= np.quantile(cost[rows, cols], 0.85)
+        pairs.append((disappearing[rows[keep]].astype(np.int64), b[cols[keep]].astype(np.int64)))
     return pairs
 
 

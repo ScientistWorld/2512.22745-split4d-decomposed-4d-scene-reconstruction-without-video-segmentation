@@ -13,6 +13,7 @@
 - Inference now attempts the paper's HDBSCAN first-frame clustering step and falls back to deterministic KMeans only when density clustering produces too few clusters on the reduced benchmark.
 - Method outputs no longer include `object_id` or `dynamic_object`; `eval/metrics.py` now reconstructs benchmark labels independently and performs generic Hungarian cluster-id matching during scoring.
 - 3D tracking regularization now matches adjacent-frame primitives by spatial nearest neighbor only; it no longer uses hidden object ids to find same-instance pairs.
+- Job `6a29ddef-acf` completed the corrected non-oracle validation run and `python validate.py --compare` passed.
 
 ## Results
 
@@ -46,6 +47,12 @@ Rejected exploratory diagnostics from the same job:
 
 These diagnostics remain useful for future work, but they are not included in accepted `scores.json` because the verifier correctly flagged them as too far from the paper's reported interaction and ablation values.
 
+Job `6a29ddef-acf` produced the first corrected non-oracle score after public/private data separation:
+
+- Linear motion, Split4D streaming: mIoU 0.694, F1 0.819, dynamic recall 0.833.
+
+This is a valid method run and supports the dynamic-recall side of the claim, but it is still just below the strongest mIoU baseline in `reference.json` (OmniSeg3D: 0.700). I am not claiming `core_claim` yet. The next run strengthens only paper-native components: spatial/velocity 3D tracking matches, more streaming optimization steps, stronger alignment, and a slightly reduced semantic-alignment weight.
+
 ## Remaining
 
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
@@ -60,6 +67,7 @@ These diagnostics remain useful for future work, but they are not included in ac
 - Job `3ac23854-ac0` succeeded, but its ablation used unequal step budgets. `scripts/run.sh` now gives streaming and random-order 2200 steps each, while `--temporal-transfer` is exposed as an explicit method hyperparameter.
 - Job `9005fb39-3a1` resolved the unequal-step concern, but validation rejected the interaction and ablation scores due large gaps against the paper reference. The default evaluator now reports only the validated linear-motion experiment; use `python -m eval.metrics --include-exploratory` to inspect the rejected diagnostics.
 - A milestone-integrity audit found hidden-label leakage: `method/split4d.py` used `object_id` to align cluster ids and wrote evaluation labels into its output artifacts. A follow-up audit also found that tracking regularization used `object_id` to choose same-object adjacent matches. Both issues are fixed; cluster matching is now a method-agnostic evaluator step, and tracking pairs are spatial nearest-neighbor matches.
+- The first non-oracle run landed 0.006 mIoU below the strongest paper baseline on the accepted scaled scene, so the next submission improves the tracking regularizer without changing the benchmark or using evaluation labels.
 
 ## Deviations from Paper
 

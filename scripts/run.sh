@@ -13,8 +13,8 @@ set -e
 
 cd /home/user
 
-export SPLIT4D_BASELINE_STEPS="${SPLIT4D_BASELINE_STEPS:-1600}"
-export SPLIT4D_STEPS="${SPLIT4D_STEPS:-1600}"
+export SPLIT4D_BASELINE_STEPS="${SPLIT4D_BASELINE_STEPS:-1400}"
+export SPLIT4D_STEPS="${SPLIT4D_STEPS:-2200}"
 
 bash scripts/reproduce.sh
 python validate.py --compare

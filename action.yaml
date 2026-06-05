@@ -30,5 +30,5 @@
 action: submit
 gpus: 0
 test: true
-milestone: none
-notes: "Retry CPU smoke job after replacing torch.flatnonzero: run deterministic data generation, random-order ablation, streaming Split4D method, evaluation, and validate comparison."
+milestone: method_runs
+notes: "Retry after fixing score/reference mapping and adding local streaming temporal feature transfer; regenerate scores and run validate comparison."

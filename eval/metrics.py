@@ -47,8 +47,12 @@ def evaluate_file(path: Path) -> Dict[str, Dict[str, Dict[str, float]]]:
         pred = np.asarray(scene["pred_labels"], dtype=np.int64)
         true = np.asarray(scene["object_id"], dtype=np.int64)
         dynamic_object = np.asarray(scene["dynamic_object"], dtype=bool)
-        out.setdefault(f"{scene_name}_segmentation", {"results": {}})
-        out[f"{scene_name}_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+        if method != "split4d_random_order":
+            out.setdefault(f"{scene_name}_segmentation", {"results": {}})
+            out[f"{scene_name}_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+        if scene_name == "interaction_motion" and method in {"split4d_streaming", "split4d_random_order"}:
+            out.setdefault("streaming_ablation", {"results": {}})
+            out["streaming_ablation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
     return out
 
 
@@ -61,14 +65,6 @@ def merge_scores(paths: Iterable[Path]) -> Dict[str, Dict[str, Dict[str, float]]
         for exp, body in scores.items():
             merged.setdefault(exp, {"results": {}})
             merged[exp]["results"].update(body["results"])
-    interaction = merged.get("interaction_motion_segmentation", {}).get("results", {})
-    ablation_methods = {
-        k: v
-        for k, v in interaction.items()
-        if k in {"split4d_streaming", "split4d_random_order"}
-    }
-    if ablation_methods:
-        merged["streaming_ablation"] = {"results": ablation_methods}
     return {"experiments": merged}
 
 

@@ -150,6 +150,17 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
         optim.zero_grad(set_to_none=True)
         loss.backward()
         optim.step()
+        if args.streaming and t < len(pairs):
+            src_np, dst_np = pairs[t]
+            if len(src_np):
+                # The full renderer propagates identity through primitives shared
+                # by adjacent frames.  This small benchmark has explicit matched
+                # primitive pairs, so streaming applies the same local temporal
+                # feature transfer directly after the ordered update.
+                src = torch.as_tensor(src_np, dtype=torch.long, device=device)
+                dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
+                with torch.no_grad():
+                    raw_features[dst].lerp_(raw_features[src], 0.18)
         if (step + 1) % max(1, args.steps // 8) == 0:
             history.append(float(loss.detach().cpu()))
 

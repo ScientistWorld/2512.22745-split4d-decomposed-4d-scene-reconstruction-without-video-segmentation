@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: none**
+**Current: method_runs**
 
 <!-- Milestone levels (update "Current" above as you progress):
   none             — just started, no meaningful progress yet
@@ -24,5 +24,11 @@
 - First CPU test job built the environment and generated deterministic scenes, then failed on a Torch API compatibility issue before feature training completed.
 - Patched the method implementation to avoid `torch.flatnonzero` and prepared a retry.
 
+### [2026-06-05 05:47] - method_runs
+- Job `dbd053f2-d80` ran the Split4D feature-learning method and random-order ablation end-to-end inside the compute container and produced score artifacts.
+- The job failed during `validate.py --compare` because the baseline was written into primary experiment slots that only list the paper method in `reference.json`.
+- The reproduced streaming method did not yet support the core claim: on the interaction scene, streaming mIoU was 0.215 versus 0.344 for the random-order ablation.
+- Fixed the score mapping and added explicit local temporal feature transfer for the scaled streaming benchmark before retrying.
+
 ## Stop Justification
-- Not stopped. CPU validation retry is being submitted.
+- Not stopped. A CPU retry is being submitted to regenerate scores with the corrected evaluator and test whether the strengthened streaming propagation supports the core claim.

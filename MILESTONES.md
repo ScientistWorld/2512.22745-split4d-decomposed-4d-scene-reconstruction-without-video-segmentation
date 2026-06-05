@@ -20,4 +20,4 @@
 - Kept milestone at `method_runs` because mIoU is slightly below the strongest baseline in the accepted target.
 
 ## Stop Justification
-- Completed at milestone `core_claim`.
+- Completed at milestone `method_runs`.

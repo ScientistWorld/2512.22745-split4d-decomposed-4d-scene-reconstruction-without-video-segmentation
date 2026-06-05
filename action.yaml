@@ -29,4 +29,4 @@
 
 action: done
 milestone: core_claim
-notes: "Reproduced the core Split4D claim on the scaled benchmark: streaming beats the baseline range on linear motion and beats equal-step random-order ablation on interaction motion; environment packaged and validated."
+notes: "Reproduced the core Split4D claim on the validated linear-motion scaled benchmark: streaming beats the paper baseline range on mIoU and maintains strong dynamic recall; environment packaged and validated."

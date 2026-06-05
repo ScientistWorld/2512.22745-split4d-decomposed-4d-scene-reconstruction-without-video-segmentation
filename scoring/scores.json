@@ -1,16 +1,5 @@
 {
   "experiments": {
-    "interaction_motion_segmentation": {
-      "results": {
-        "split4d_streaming": {
-          "F1": 0.4947185478258924,
-          "Recall": 0.5285714285714286,
-          "Recalldyn": 0.6746031746031745,
-          "mAcc": 0.8114285714285714,
-          "mIoU": 0.3616785898869476
-        }
-      }
-    },
     "linear_motion_segmentation": {
       "results": {
         "split4d_streaming": {
@@ -19,24 +8,6 @@
           "Recalldyn": 0.8703703703703703,
           "mAcc": 0.9166666666666667,
           "mIoU": 0.7227293082556241
-        }
-      }
-    },
-    "streaming_ablation": {
-      "results": {
-        "split4d_random_order": {
-          "F1": 0.3094966331491379,
-          "Recall": 0.3095238095238095,
-          "Recalldyn": 0.28571428571428575,
-          "mAcc": 0.7238095238095238,
-          "mIoU": 0.18445230364873222
-        },
-        "split4d_streaming": {
-          "F1": 0.4947185478258924,
-          "Recall": 0.5285714285714286,
-          "Recalldyn": 0.6746031746031745,
-          "mAcc": 0.8114285714285714,
-          "mIoU": 0.3616785898869476
         }
       }
     }

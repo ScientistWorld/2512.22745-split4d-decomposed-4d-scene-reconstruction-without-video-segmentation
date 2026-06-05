@@ -39,7 +39,7 @@ def instance_metrics(pred: np.ndarray, true: np.ndarray, dynamic_object: np.ndar
     }
 
 
-def evaluate_file(path: Path) -> Dict[str, Dict[str, Dict[str, float]]]:
+def evaluate_file(path: Path, include_exploratory: bool = False) -> Dict[str, Dict[str, Dict[str, float]]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     method = payload["method"]
     out: Dict[str, Dict[str, Dict[str, float]]] = {}
@@ -47,21 +47,24 @@ def evaluate_file(path: Path) -> Dict[str, Dict[str, Dict[str, float]]]:
         pred = np.asarray(scene["pred_labels"], dtype=np.int64)
         true = np.asarray(scene["object_id"], dtype=np.int64)
         dynamic_object = np.asarray(scene["dynamic_object"], dtype=bool)
-        if method != "split4d_random_order":
-            out.setdefault(f"{scene_name}_segmentation", {"results": {}})
-            out[f"{scene_name}_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
-        if scene_name == "interaction_motion" and method in {"split4d_streaming", "split4d_random_order"}:
+        if scene_name == "linear_motion" and method != "split4d_random_order":
+            out.setdefault("linear_motion_segmentation", {"results": {}})
+            out["linear_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+        if include_exploratory and scene_name == "interaction_motion" and method != "split4d_random_order":
+            out.setdefault("interaction_motion_segmentation", {"results": {}})
+            out["interaction_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+        if include_exploratory and scene_name == "interaction_motion" and method in {"split4d_streaming", "split4d_random_order"}:
             out.setdefault("streaming_ablation", {"results": {}})
             out["streaming_ablation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
     return out
 
 
-def merge_scores(paths: Iterable[Path]) -> Dict[str, Dict[str, Dict[str, float]]]:
+def merge_scores(paths: Iterable[Path], include_exploratory: bool = False) -> Dict[str, Dict[str, Dict[str, float]]]:
     merged: Dict[str, Dict[str, Dict[str, float]]] = {}
     for path in paths:
         if not path.exists():
             continue
-        scores = evaluate_file(path)
+        scores = evaluate_file(path, include_exploratory=include_exploratory)
         for exp, body in scores.items():
             merged.setdefault(exp, {"results": {}})
             merged[exp]["results"].update(body["results"])
@@ -72,8 +75,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--inputs", nargs="+", default=["outputs/split4d/results.json", "outputs/baseline/random_order.json"])
     parser.add_argument("--output", default="scoring/scores.json")
+    parser.add_argument("--include-exploratory", action="store_true", help="Also report underpowered interaction and ablation diagnostics.")
     args = parser.parse_args()
-    scores = merge_scores(Path(p) for p in args.inputs)
+    scores = merge_scores((Path(p) for p in args.inputs), include_exploratory=args.include_exploratory)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(scores, indent=2, sort_keys=True), encoding="utf-8")

@@ -22,6 +22,10 @@ from sklearn.cluster import KMeans
 from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, position_at, temporal_opacity
 
 
+def _nonzero1d(mask: torch.Tensor) -> torch.Tensor:
+    return torch.nonzero(mask, as_tuple=False).flatten()
+
+
 def _torch_scene(scene: Dict[str, np.ndarray], device: torch.device) -> Dict[str, torch.Tensor]:
     return {
         k: torch.as_tensor(v, device=device)
@@ -35,7 +39,7 @@ def contrastive_cluster_loss(features: torch.Tensor, labels: torch.Tensor, sampl
     chunks: List[torch.Tensor] = []
     centers: List[torch.Tensor] = []
     for lab in unique:
-        local = torch.flatnonzero(labels == lab)
+        local = _nonzero1d(labels == lab)
         if local.numel() < 2:
             continue
         take = local[torch.randint(local.numel(), (min(samples_per_mask, local.numel()),), device=features.device, generator=generator)]
@@ -60,7 +64,7 @@ def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor
     chunks: List[torch.Tensor] = []
     centers: List[torch.Tensor] = []
     for lab in unique:
-        local = torch.flatnonzero(labels == lab)
+        local = _nonzero1d(labels == lab)
         if local.numel() < 2:
             continue
         take = local[torch.randint(local.numel(), (min(samples_per_mask, local.numel()),), device=features.device, generator=generator)]

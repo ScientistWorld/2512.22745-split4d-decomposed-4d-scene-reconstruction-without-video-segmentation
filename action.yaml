@@ -31,4 +31,4 @@ action: submit
 gpus: 0
 test: true
 milestone: none
-notes: "CPU smoke job for the full Split4D reproduction pipeline: generate deterministic scenes, run random-order ablation and streaming method, evaluate scores, and validate comparison."
+notes: "Retry CPU smoke job after replacing torch.flatnonzero: run deterministic data generation, random-order ablation, streaming Split4D method, evaluation, and validate comparison."

@@ -20,5 +20,9 @@
 - Implemented a scaled reproduction environment with fixed dynamic Gaussian primitives, inconsistent per-image masks, Split4D feature learning, a random-order ablation baseline, and method-agnostic evaluation.
 - Local source validation passes, but the method has not yet run inside the dependency-equipped compute container.
 
+### [2026-06-05 01:45] - none
+- First CPU test job built the environment and generated deterministic scenes, then failed on a Torch API compatibility issue before feature training completed.
+- Patched the method implementation to avoid `torch.flatnonzero` and prepared a retry.
+
 ## Stop Justification
-- Not stopped. First validation job is being submitted.
+- Not stopped. CPU validation retry is being submitted.

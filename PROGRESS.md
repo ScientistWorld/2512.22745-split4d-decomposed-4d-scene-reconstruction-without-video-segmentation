@@ -21,6 +21,7 @@ No reproduced scores yet. The first compute job will run `scripts/reproduce.sh`,
 ## Issues
 
 - The login Python environment lacks NumPy, so only `py_compile` and repository validation were run locally. Dependency-backed execution is deferred to the submitted job through `environment/setup.sh`.
+- Job `86f87ec1-124` failed inside `method/split4d.py` because the installed Torch build did not expose `torch.flatnonzero`. Replaced it with a local `_nonzero1d` wrapper around `torch.nonzero(...).flatten()`.
 
 ## Deviations from Paper
 

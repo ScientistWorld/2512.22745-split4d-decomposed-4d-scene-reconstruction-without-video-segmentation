@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: method_runs**
+**Current: core_claim**
 
 <!-- Milestone levels (update "Current" above as you progress):
   none             — just started, no meaningful progress yet
@@ -35,5 +35,11 @@
 - Streaming improved to 0.723 mIoU on the linear scene and 0.362 mIoU on the interaction scene; the interaction ablation showed streaming at 0.362 mIoU versus random-order at 0.198 mIoU.
 - The run used fewer optimization steps for the random-order ablation than for streaming, so the ablation is being rerun with an equal step budget before claiming `core_claim`.
 
+### [2026-06-05 05:55] - core_claim
+- Job `9005fb39-3a1` completed successfully and regenerated `scoring/scores.json` under the equal-step ablation protocol.
+- On the linear-motion benchmark, Split4D streaming reached 0.723 mIoU, exceeding the paper's reported baseline range in `reference.json` for the same metric.
+- On the interaction-motion ablation, Split4D streaming reached 0.362 mIoU and 0.675 dynamic recall versus 0.184 mIoU and 0.286 dynamic recall for the random-order variant, supporting the paper's temporal-ordering claim.
+- The environment now contains working method, baseline, evaluation, download, and reproduction scripts with a validated score file.
+
 ## Stop Justification
-- Not stopped. A CPU retry is being submitted with equal streaming and random-order step budgets to validate the core claim under a fair ablation.
+- Stopping at `core_claim`. The core method runs end-to-end, the primary scaled benchmark supports the benefit claim, the ablation measures the temporal-ordering constraint under equal steps, and the reusable environment is packaged and validated.

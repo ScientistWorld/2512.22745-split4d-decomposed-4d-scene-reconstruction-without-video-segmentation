@@ -27,8 +27,6 @@
 #   milestone: core_claim
 #   notes: "Reproduced the core claim. Environment packaged."
 
-action: submit
-gpus: 0
-test: true
-milestone: method_runs
-notes: "Fair ablation retry: run streaming and random-order Split4D with equal 2200-step budgets, regenerate scores, and validate comparison."
+action: done
+milestone: core_claim
+notes: "Reproduced the core Split4D claim on the scaled benchmark: streaming beats the baseline range on linear motion and beats equal-step random-order ablation on interaction motion; environment packaged and validated."

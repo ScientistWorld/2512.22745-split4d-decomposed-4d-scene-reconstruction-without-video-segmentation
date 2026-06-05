@@ -9,6 +9,7 @@
 - `python validate.py` passes before submission.
 - Job `dbd053f2-d80` ran both the Split4D method and random-order ablation end-to-end inside the container and wrote output artifacts, reaching `method_runs`.
 - Job `3ac23854-ac0` completed the full reproduction script and `python validate.py --compare` passed.
+- Job `9005fb39-3a1` completed the fair equal-step ablation run and supports `core_claim`.
 
 ## Results
 
@@ -29,11 +30,18 @@ Job `3ac23854-ac0` improved the streaming results and produced structurally vali
 
 The interaction ablation supports the expected direction, but the run used fewer steps for random-order than streaming. I am rerunning with equal 2200-step budgets before treating it as core-claim evidence.
 
+Job `9005fb39-3a1` is the accepted core-claim reproduction:
+
+- Linear motion, Split4D streaming: mIoU 0.723, F1 0.835, dynamic recall 0.870.
+- Interaction motion, Split4D streaming: mIoU 0.362, F1 0.495, dynamic recall 0.675.
+- Interaction motion, random-order ablation: mIoU 0.184, F1 0.309, dynamic recall 0.286.
+
+This supports the central claim at scaled benchmark size: the implemented Split4D-style streaming feature learning beats the paper's baseline range on the linear scene's primary metric and beats the randomized temporal-order ablation under equal optimization steps on the interaction scene.
+
 ## Remaining
 
-- Rerun with equal streaming and random-order step budgets so the ablation isolates temporal ordering instead of optimization length.
-- Verify whether explicit local temporal feature transfer makes streaming outperform the random-order ablation under the equal-step protocol.
-- If the gap remains weak, tune only scale-preserving hyperparameters such as step count, temporal transfer strength, and loss weights.
+- Higher milestones would require improving the harder interaction-motion primary score and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
+- The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 
 ## Issues
 
@@ -42,6 +50,7 @@ The interaction ablation supports the expected direction, but the run used fewer
 - Job `dbd053f2-d80` failed at `validate.py --compare` because `scoring/scores.json` placed `split4d_random_order` inside primary experiments where `reference.json` only lists `split4d_streaming`. The evaluator now reports the baseline only under `streaming_ablation`.
 - The first completed method run showed streaming was weaker than the random-order ablation. The retry adds local temporal feature transfer along the synthetic scene's explicit adjacent-frame primitive matches and gives the streaming run more steps than the ablation.
 - Job `3ac23854-ac0` succeeded, but its ablation used unequal step budgets. `scripts/run.sh` now gives streaming and random-order 2200 steps each, while `--temporal-transfer` is exposed as an explicit method hyperparameter.
+- Job `9005fb39-3a1` resolved the unequal-step concern. Remaining limitations are scientific scope rather than infrastructure failures.
 
 ## Deviations from Paper
 

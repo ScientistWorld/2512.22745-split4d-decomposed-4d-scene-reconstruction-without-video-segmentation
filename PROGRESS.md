@@ -21,6 +21,8 @@
 - The reduced method now trains on projected synthetic 2D pixel observations with weighted primitive contributions, bringing the loss closer to the paper's rendered feature-map training instead of direct primitive-label supervision.
 - Removed the explicit post-optimizer temporal feature transfer, which was not part of the paper's algorithm. Streaming evidence must now come from temporally ordered sampling plus the paper-style loss terms and regularizers.
 - `scripts/evaluate.sh` now reports the `streaming_ablation` comparison by default when both streaming and random-order artifacts are present.
+- Job `665fe8cb-6d6` completed the first no-copy rendered-pixel run. It verified that the repaired algorithm executes, but scores regressed, so the milestone remains `method_runs`.
+- The next run switches synthetic rendered samples to paper-style alpha-transmittance compositing, composites raw primitive features before normalization, raises the 3D tracking regularization weight, and clears stale outputs before reproduction so printed evaluations cannot mix fresh and old artifacts.
 
 ## Results
 
@@ -80,8 +82,16 @@ Exploratory diagnostics from the same run:
 - Interaction motion, random-order ablation: mIoU 0.246, F1 0.392, dynamic recall 0.373.
 - These diagnostics show the streaming direction on the harder scene, but they are underpowered and are not counted for a milestone above `core_claim`.
 
+Job `665fe8cb-6d6` tested the renderer-based training path after removing direct temporal feature copying:
+
+- Linear motion, Split4D streaming: mIoU 0.194, F1 0.325, dynamic recall 0.324.
+- Interaction streaming ablation: streaming mIoU 0.180, random-order mIoU 0.155.
+
+This confirms the method runs but does not support the core claim. The likely issue is that the reduced synthetic renderer over-emphasized mixed boundary pixels and normalized primitive features before compositing. The next submission keeps rendered feature-map computation but uses alpha-transmittance weights from the paper, composites raw features before normalization, and applies nearest-neighbor 3D tracking alignment.
+
 ## Remaining
 
+- Reaching `core_claim` now requires the repaired rendered-pixel method to recover the linear-motion score and preserve a same-benchmark streaming advantage on `streaming_ablation`.
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 - The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
@@ -98,10 +108,11 @@ Exploratory diagnostics from the same run:
 - A milestone-integrity audit found hidden-label leakage: `method/split4d.py` used `object_id` to align cluster ids and wrote evaluation labels into its output artifacts. A follow-up audit also found that tracking regularization used `object_id` to choose same-object adjacent matches. Both issues are fixed; cluster matching is now a method-agnostic evaluator step, and tracking pairs are spatial nearest-neighbor matches.
 - The first non-oracle run landed 0.006 mIoU below the strongest paper baseline on the accepted scaled scene, so the next submission improves the tracking regularizer without changing the benchmark or using evaluation labels.
 - The subsequent longer configuration regressed, likely because tiny-benchmark HDBSCAN accepted degenerate first-frame clusters. The inference fix now guards against that without using evaluation labels.
+- Job `665fe8cb-6d6` showed that the first rendered-pixel synthetic observations were too boundary-heavy for the reduced benchmark. The next data patch uses alpha-transmittance compositing rather than normalized distance weights, matching the paper's feature-rendering equation more closely.
 
 ## Deviations from Paper
 
 - Original datasets are Neural3DV, Multi-Human, and SelfCap with large multi-view videos and pretrained 4D Gaussian reconstructions. This reproduction uses deterministic procedural dynamic Gaussian scenes because the original data plus reconstruction pipeline are large and not released as a ready benchmark in the paper markdown.
 - The algorithm is not replaced: the implemented computation still keeps fixed Gaussian geometry and optimizes per-primitive instance features using the paper's contrastive mask loss, streaming temporal sampling, 3D tracking regularization, semantic alignment, and clustering/filtering inference.
 - HDBSCAN inference is now the primary clustering path, matching the paper's postprocess. Deterministic KMeans remains as a fallback for small reduced-scale runs where HDBSCAN produces too few usable clusters, followed by the paper's filtering cues.
-- The full paper learns identity continuity through rendered fixed Gaussian primitives and tracking constraints. In this scaled benchmark, adjacent-frame primitive correspondences are explicit, so the streaming implementation applies a small post-update temporal feature transfer along those correspondences in addition to the alignment loss.
+- The full paper learns identity continuity through rendered fixed Gaussian primitives and tracking constraints. Earlier workspace versions applied a post-update temporal feature transfer, but that non-paper shortcut has been removed; the current method relies on streaming sampling, contrastive rendered-feature learning, 3D tracking alignment, and semantic alignment.

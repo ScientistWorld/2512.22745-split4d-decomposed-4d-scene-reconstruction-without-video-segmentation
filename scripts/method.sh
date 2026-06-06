@@ -18,10 +18,9 @@ python -m method.split4d \
   --feature-dim 32 \
   --samples-per-mask 32 \
   --lr 2.5e-3 \
-  --lambda-align "${SPLIT4D_LAMBDA_ALIGN:-0.35}" \
-  --lambda-dino "${SPLIT4D_LAMBDA_DINO:-0.08}" \
+  --lambda-align "${SPLIT4D_LAMBDA_ALIGN:-6.0}" \
+  --lambda-dino "${SPLIT4D_LAMBDA_DINO:-0.5}" \
   --dino-fraction 0.35 \
-  --temporal-transfer "${SPLIT4D_TEMPORAL_TRANSFER:-0.35}" \
   --streaming
 
 bash scripts/evaluate.sh

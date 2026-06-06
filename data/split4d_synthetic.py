@@ -184,14 +184,23 @@ def _precompute_observations(scene: Dict[str, np.ndarray], object_id: np.ndarray
             sample_xy = coords + render_rng.normal(scale=0.045, size=coords.shape)
             dist2 = ((sample_xy[:, None, :] - coords[None, :, :]) ** 2).sum(axis=2)
             k = min(5, len(idx))
-            top_local = np.argpartition(dist2, kth=k - 1, axis=1)[:, :k]
+            top_unsorted = np.argpartition(dist2, kth=k - 1, axis=1)[:, :k]
+            local_depth_unsorted = depth[top_unsorted]
+            depth_order = np.argsort(local_depth_unsorted, axis=1)[:, ::-1]
+            top_local = np.take_along_axis(top_unsorted, depth_order, axis=1)
             local_dist = np.take_along_axis(dist2, top_local, axis=1)
-            local_depth = depth[top_local]
             local_opacity = op[top_local]
-            front = local_depth.max(axis=1, keepdims=True) - local_depth
-            weight = np.exp(-local_dist / (2.0 * 0.16**2)) * local_opacity * np.exp(-0.15 * np.maximum(front, 0.0))
-            weight = weight / np.maximum(weight.sum(axis=1, keepdims=True), 1e-8)
             contrib = idx[top_local]
+            alpha = local_opacity * np.exp(-local_dist / (2.0 * 0.11**2))
+            alpha = np.clip(alpha, 0.0, 0.97).astype(np.float32)
+            trans = np.concatenate(
+                [
+                    np.ones((len(alpha), 1), dtype=np.float32),
+                    np.cumprod(1.0 - alpha[:, :-1], axis=1, dtype=np.float32),
+                ],
+                axis=1,
+            )
+            weight = (alpha * trans).astype(np.float32)
             dominant = contrib[np.arange(len(contrib)), weight.argmax(axis=1)]
             obj = object_id[dominant].copy()
             perm_rng = np.random.default_rng(10_000 + 97 * int(view) + 131 * int(t) + frames)

@@ -19,5 +19,7 @@ set -e
 cd /home/user
 
 bash scripts/download.sh
+rm -f outputs/split4d/results.json outputs/baseline/random_order.json scoring/scores.json tmp/exploratory_scores.json
 bash scripts/baseline.sh
 bash scripts/method.sh
+bash scripts/evaluate.sh

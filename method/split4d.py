@@ -16,7 +16,6 @@ from typing import Dict, List, Tuple
 import numpy as np
 import torch
 import torch.nn.functional as F
-from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import KMeans
 
 from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, observation_labels, position_at, temporal_opacity
@@ -68,19 +67,24 @@ def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor
     unique = torch.unique(labels)
     chunks: List[torch.Tensor] = []
     centers: List[torch.Tensor] = []
+    temperatures: List[torch.Tensor] = []
     for lab in unique:
         local = _nonzero1d(labels == lab)
         if local.numel() < 2:
             continue
         take = local[torch.randint(local.numel(), (min(samples_per_mask, local.numel()),), device=features.device, generator=generator)]
-        chunks.append(F.normalize(features[take], dim=-1))
+        vals = F.normalize(features[take], dim=-1)
+        chunks.append(vals)
         centers.append(F.normalize(projected_semantic[take].mean(dim=0), dim=0))
+        learned_center = F.normalize(vals.mean(dim=0), dim=0)
+        phi = ((vals - learned_center).pow(2).sum(dim=-1).mean() / (vals.shape[0] * np.log(vals.shape[0] + 10.0))).detach()
+        temperatures.append(torch.clamp(phi, min=0.035, max=0.25))
     if len(chunks) < 2:
         return features.sum() * 0.0
     centers_t = torch.stack(centers, dim=0)
     losses = []
     for cls, vals in enumerate(chunks):
-        logits = vals @ centers_t.T / 0.15
+        logits = vals @ centers_t.T / temperatures[cls]
         target = torch.full((vals.shape[0],), cls, dtype=torch.long, device=features.device)
         losses.append(F.cross_entropy(logits, target))
     return torch.stack(losses).mean()
@@ -89,8 +93,7 @@ def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor
 def render_pixel_features(raw_features: torch.Tensor, contrib_idx: torch.Tensor, weights: torch.Tensor) -> torch.Tensor:
     """Render per-primitive features to synthetic 2D pixel samples."""
 
-    primitive_features = F.normalize(raw_features, dim=-1)
-    rendered = (primitive_features[contrib_idx] * weights.unsqueeze(-1)).sum(dim=1)
+    rendered = (raw_features[contrib_idx] * weights.unsqueeze(-1)).sum(dim=1)
     return F.normalize(rendered, dim=-1)
 
 
@@ -103,8 +106,10 @@ def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.nd
         if len(a) == 0 or len(b) == 0:
             pairs.append((np.empty(0, dtype=np.int64), np.empty(0, dtype=np.int64)))
             continue
+        op_now = temporal_opacity(scene, t)[a]
         op_next = temporal_opacity(scene, t + 1)[a]
-        disappearing = a[op_next < np.quantile(op_next, 0.38)]
+        fade = op_now - op_next
+        disappearing = a[(fade > np.quantile(fade, 0.55)) & (op_now > 0.28)]
         if len(disappearing) == 0:
             disappearing = a[: min(8, len(a))]
         pos_a = position_at(scene, t)[disappearing]
@@ -116,9 +121,11 @@ def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.nd
         pos_cost = ((pos_a[:, None, :] - pos_b[None, :, :]) ** 2).sum(axis=2) / (pos_scale**2)
         vel_cost = ((vel_a[:, None, :] - vel_b[None, :, :]) ** 2).sum(axis=2) / (vel_scale**2)
         cost = pos_cost + 0.35 * vel_cost
-        rows, cols = linear_sum_assignment(cost)
-        keep = cost[rows, cols] <= np.quantile(cost[rows, cols], 0.85)
-        pairs.append((disappearing[rows[keep]].astype(np.int64), b[cols[keep]].astype(np.int64)))
+        cols = cost.argmin(axis=1)
+        best = cost[np.arange(len(disappearing)), cols]
+        robust_limit = np.median(best) + 2.5 * (np.median(np.abs(best - np.median(best))) + 1e-6)
+        keep = best <= max(float(np.quantile(best, 0.88)), float(robust_limit))
+        pairs.append((disappearing[keep].astype(np.int64), b[cols[keep]].astype(np.int64)))
     return pairs
 
 

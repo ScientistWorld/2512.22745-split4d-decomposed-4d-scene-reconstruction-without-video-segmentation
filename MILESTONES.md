@@ -26,3 +26,8 @@
 - Independent audit found the prior `core_claim` comparison mixed synthetic reproduced scores with paper baselines from different datasets.
 - Repaired the benchmark to score the same-benchmark `streaming_ablation` officially and changed training to use projected, weighted 2D pixel feature samples instead of direct primitive-label supervision.
 - Removed the non-paper direct temporal feature-copy step; the revised method now relies on ordered sampling and loss terms.
+
+### [2026-06-06 17:05] - method_runs
+- Job `665fe8cb-6d6` completed with the rendered-pixel implementation and regenerated `scoring/scores.json`.
+- The run stayed at `method_runs`: linear-motion mIoU dropped to 0.194, and the streaming ablation improved over random order only weakly (0.180 vs 0.155 mIoU).
+- Updated the next submission to use paper-style alpha-transmittance feature rendering, KNN tracking alignment, stronger regularization, and stale-output cleanup.

@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: method_runs
-notes: "Run repaired renderer-based Split4D feature learner and same-benchmark streaming ablation; regenerated scores.json will determine whether core_claim is justified."
+notes: "Retest paper-style alpha-composited rendered features, KNN tracking alignment, DINO phi temperatures, equal 3200-step streaming/random budgets, and stale-output cleanup."

@@ -65,5 +65,10 @@
 - Rechecked that `eval/` and `data/` do not import `method/`, and that committed method/eval/script/data paths contain no `shared/` references.
 - The stricter core-claim gate still requires a container refresh because the login-node Python environment lacks evaluator dependencies and the current canonical `scores.json` predates the full metric set.
 
+### [2026-06-06 19:36] - core_claim
+- Job `6eb37562-eec` regenerated canonical, train, and test scores inside the container with the full declared metric set.
+- `eval.check_core_claim` passed on `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json`.
+- `python validate.py --post-design` passed, confirming score structure, split artifacts, train/test independence, method/eval separation, and no committed `shared/` dependencies.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

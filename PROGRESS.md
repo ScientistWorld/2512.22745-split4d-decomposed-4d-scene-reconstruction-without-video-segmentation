@@ -43,6 +43,7 @@
 - Job `9b06983a-f2b` completed the standard reproduction, exploratory evaluation, train/test scoring, `validate.py --post-design`, and the explicit core-claim gate. The current milestone is restored to `core_claim`.
 - Fresh accepted scores are present in `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json`; all three show streaming Split4D beating the random-order ablation on F1 and dynamic recall while preserving the reported constraint metrics.
 - A final scoring audit found that canonical `scores.json` omitted `MaskFeatureAgreement` and `TrackingFeatureMargin` even though train/test scores and `reference.json` included them. `eval/metrics.py` and `eval/check_core_claim.py` are patched, and a CPU-only packaging job is being submitted to regenerate canonical scores inside the container because login Python lacks NumPy.
+- Job `6eb37562-eec` completed the CPU-only packaging check. Canonical, train, and test scores all include the full declared metric set; `eval.check_core_claim` passed; `python validate.py --post-design` passed.
 
 ## Results
 
@@ -191,9 +192,8 @@ This run is not accepted for the milestone because it violates the constraint si
 
 ## Remaining
 
-- The current CPU-only submission must refresh `scoring/scores.json` with `MaskFeatureAgreement` and `TrackingFeatureMargin`; after it passes, the environment remains at `core_claim`.
+- `core_claim` is restored with fresh current artifacts, not stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` all include `Recallstatic`, `ClusterSizeError`, `MaskFeatureAgreement`, and `TrackingFeatureMargin`, and streaming beats random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
 - Reaching `core_claim_plus` would require a new configuration that improves an additional setting without breaking the streaming-ablation constraint.
-- `core_claim` is now restored with fresh current artifacts, not stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` all include `Recallstatic` and `ClusterSizeError`, and streaming beats random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
 - Future improvements should be method-side, not evaluator-side: improve reduced-scale LR scheduling, scene-specific semantic-alignment scaling, or first-frame clustering stability while keeping the paper's loss and fixed-Gaussian procedure intact.
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap further, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
@@ -221,6 +221,7 @@ This run is not accepted for the milestone because it violates the constraint si
 - Job `6de5c4dd-699` failed for the intended reason: local temporal windows improved streaming F1 but did not recover moving-object recall, so the next iteration strengthens the paper-native 3D tracking regularizer instead of changing the evaluator.
 - Job `2c49d8db-c8a` failed for the intended reason: the broader 3D tracking regularizer regressed streaming as well as random-order, so it is reverted before testing the adjacent-frame streaming-pair term.
 - Job `9b06983a-f2b` resolved the stale-artifact and failed-ablation issues: the fresh container run passes the standard, train, and test score gates and restores `core_claim`.
+- Job `6eb37562-eec` resolved the final canonical-score metric mismatch: `scores.json`, `scores_train.json`, and `scores_test.json` now all expose the same declared metric family and pass the stricter score gate.
 
 ## Deviations from Paper
 

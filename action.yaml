@@ -1,8 +1,6 @@
 # Once you set action to 'done', STOP immediately.
 # Do NOT sleep, poll, or wait. The system reads this file
 # only after your turn ends.
-action: submit
-gpus: 0
-test: true
+action: done
 milestone: core_claim
-notes: "CPU-only packaging check: regenerate scores.json with full declared metrics, refresh train/test scores, run the stricter core-claim gate and post-design validator."
+notes: "Final verification passed: full metric scores regenerated, post-design validation passed, and gym documentation/scoring are ready."

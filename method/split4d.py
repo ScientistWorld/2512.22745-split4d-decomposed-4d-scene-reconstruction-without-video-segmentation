@@ -206,7 +206,11 @@ def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarr
     if len(first) < inst:
         first = np.arange(len(features))
     elif len(first) > inst:
-        sample_count = min(len(first), max(inst * 4, int(np.ceil(0.10 * len(first)))))
+        # The paper clusters a 2-10% sample of first-frame Gaussians.  The
+        # reduced benchmark has only hundreds of primitives, so keep a minimum
+        # absolute sample floor while preserving the same HDBSCAN-first
+        # inference path.
+        sample_count = min(len(first), max(inst * 10, int(np.ceil(0.10 * len(first)))))
         sample_rng = np.random.default_rng(919 + len(first) * 17 + inst)
         first = np.sort(sample_rng.choice(first, size=sample_count, replace=False))
 

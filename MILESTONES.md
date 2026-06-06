@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: core_claim**
+**Current: method_runs**
 
 ## Progress Log
 
@@ -23,5 +23,11 @@
 - Added the missing SelfCap Table 1 full-scale provenance group and reconciled the streaming-ablation target description with the primary metric used by the reduced benchmark.
 - Tightened the reduced implementation toward the paper procedure: learning-rate decay, epoch-level random ablation resampling, subset clustering, and non-self outlier reassignment in filtering.
 - Submitting a container job to regenerate method, baseline, standard, train, and test scores with the accepted scaled configuration.
+
+### [2026-06-06 18:10] - method_runs
+- Continuation audit found that the latest regenerated train/test scores and job logs no longer support the streaming-ablation constraint: random-order training beats streaming on F1 and dynamic recall.
+- Reset the current milestone to `method_runs` pending a fresh end-to-end run.
+- Added an explicit evaluator-side core-claim gate and adjusted the reduced first-frame HDBSCAN sample floor to avoid pathological tiny-sample clustering on the compact synthetic scenes.
+- Submitting a regeneration job; `core_claim` should only be restored if fresh `scores.json`, `scores_train.json`, and `scores_test.json` all pass the new gate.
 
 ## Stop Justification

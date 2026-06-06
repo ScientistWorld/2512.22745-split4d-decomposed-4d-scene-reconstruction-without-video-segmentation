@@ -29,3 +29,4 @@ rm -f outputs/split4d/results.json outputs/baseline/random_order.json scoring/sc
 bash scripts/baseline.sh
 bash scripts/method.sh
 bash scripts/evaluate.sh
+python -m eval.check_core_claim --score-files scoring/scores.json

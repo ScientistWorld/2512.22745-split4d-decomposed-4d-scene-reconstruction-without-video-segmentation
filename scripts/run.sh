@@ -17,3 +17,4 @@ python -m eval.metrics --include-exploratory --output tmp/exploratory_scores.jso
 bash scripts/evaluate_train.sh
 bash scripts/evaluate_test.sh
 python validate.py --post-design
+python -m eval.check_core_claim

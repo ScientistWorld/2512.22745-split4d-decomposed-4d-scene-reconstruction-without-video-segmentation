@@ -29,6 +29,8 @@
 - Job `d6f83e15-775` tested a longer 4200-step, 48-sample configuration. It improved linear-motion mIoU but broke the required streaming-ablation direction, so it is recorded as exploratory and not used as the accepted score.
 - `scripts/reproduce.sh` now sets the accepted 3200-step configuration itself, so running it directly reproduces the validated `core_claim` setup instead of depending on `scripts/run.sh` environment variables.
 - After validator feedback, the scored experiments were renamed to `scaled_linear_motion_segmentation` and `scaled_streaming_ablation`. The full-scale paper Table 1/Table 2 values remain in `reference.json` under `paper_fullscale_*` keys, while `scores.json` is compared only against the reduced synthetic benchmark it actually ran.
+- Continuation audit at 2026-06-06 18:10 found that the latest post-procedure artifacts no longer support `core_claim`: the random-order ablation beats streaming in the latest logs and in `scores_train.json`/`scores_test.json`.
+- The current milestone is reset to `method_runs` until a fresh regeneration passes an explicit core-claim gate over standard, train, and test score files.
 
 ## Results
 
@@ -39,6 +41,14 @@
 - Added the omitted SelfCap full-scale Table 1 provenance group to `scoring/reference.json` and aligned `TARGETS.md` with `scaled_streaming_ablation`'s F1 primary metric.
 - Tightened the method implementation toward the paper procedure: random-order ablations now reshuffle each epoch, the feature optimizer decays learning rate from 2.5e-3 toward 2e-6, first-frame inference uses a small deterministic primitive subset before HDBSCAN/KMeans, and filtering no longer reassigns an outlier to its current cluster.
 - Submitting the accepted 3200-step reproduction again to regenerate `scores.json`, `scores_train.json`, and `scores_test.json` inside the container.
+
+2026-06-06 18:10 continuation audit:
+
+- Latest completed logs do not justify restoring `core_claim`: `jobs/e249f8fc-0f4` reports streaming F1 below random-order F1 on `scaled_streaming_ablation`, and the current train/test score files show the same direction.
+- Current `scoring/scores.json` is stale relative to the updated evaluator because it lacks `Recallstatic` and `ClusterSizeError`; future accepted scores must be regenerated, not copied from the prior accepted run.
+- Added `eval/check_core_claim.py` and wired it into `scripts/reproduce.sh` and `scripts/run.sh` so jobs fail unless the score files include the constraint metrics and streaming beats random-order on both F1 and dynamic recall.
+- Adjusted the reduced inference sampler to keep a larger first-frame Gaussian subset before HDBSCAN. This preserves the paper's first-frame clustering step while avoiding unstable tiny clusters in the compact procedural benchmark.
+- Submitting a regeneration job. Until it passes, accepted status is only `method_runs`.
 
 Job `dbd053f2-d80` produced the first complete method outputs:
 
@@ -129,6 +139,7 @@ This run is not accepted for the milestone because it violates the constraint si
 ## Remaining
 
 - Reaching `core_claim_plus` would require a new configuration that improves an additional setting without breaking the streaming-ablation constraint.
+- Restoring `core_claim` now requires fresh current artifacts, not the stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` must all include `Recallstatic` and `ClusterSizeError`, and streaming must beat random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap further, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 - The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
@@ -149,6 +160,7 @@ This run is not accepted for the milestone because it violates the constraint si
 - Job `0ff27010-ea3` showed alpha-transmittance alone is insufficient when every active primitive projection is used as a supervision sample. The next data patch keeps only visible, confident surface observations for training.
 - Job `82b7b084-80f` verified that visible-surface filtering fixes the same-benchmark ablation direction. The next risk is whether a longer run improves interaction segmentation or overfits the reduced benchmark.
 - Job `d6f83e15-775` confirmed that longer training with more contrastive samples overfits or destabilizes the interaction-motion ablation in this reduced setup.
+- The 2026-06-06 18:10 audit found a second stale-artifact problem: the standard score file still contained older accepted values, while live outputs and train/test score files came from a run that failed the ablation constraint. The new core-claim gate is intended to prevent this mismatch from being accepted again.
 
 ## Deviations from Paper
 

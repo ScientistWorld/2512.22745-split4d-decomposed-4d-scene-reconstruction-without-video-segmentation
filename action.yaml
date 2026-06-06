@@ -2,7 +2,7 @@
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
 action: submit
-gpus: 1
+gpus: 0
 test: false
-milestone: core_claim
-notes: "Regenerate Split4D method/baseline outputs after evaluator constraint-metric additions and paper-procedure fixes: LR decay, random ablation reshuffling, subset clustering, and filtering reassignment."
+milestone: method_runs
+notes: "Regenerate Split4D outputs after fixing reduced HDBSCAN sample fragility and adding a core-claim gate; restore core_claim only if fresh standard/train/test scores pass the streaming ablation constraint."

@@ -35,4 +35,9 @@
 - Fixed the ablation implementation to match the paper's described random sampling more directly: non-streaming now draws a random observation with replacement at each iteration instead of using a shuffled full epoch.
 - Resubmitting the same reduced reproduction; milestone remains `method_runs` until the fresh score files pass the core-claim gate.
 
+### [2026-06-06 18:22] - method_runs
+- Job `ce5ba05d-e13` failed the core-claim gate again: random-order still beat streaming on `scaled_streaming_ablation` F1 and dynamic recall.
+- Added a paper-consistent causal same-view temporal window to streaming training so each ordered step optimizes the rendered-feature contrastive loss and regularizers over adjacent frames, while the random-order ablation remains single-sample random training.
+- Resubmitting the full standard/train/test regeneration; milestone remains `method_runs` until all fresh score files pass the gate.
+
 ## Stop Justification

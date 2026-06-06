@@ -11,6 +11,7 @@ export SPLIT4D_STEPS="${SPLIT4D_STEPS:-3200}"
 export SPLIT4D_SAMPLES_PER_MASK="${SPLIT4D_SAMPLES_PER_MASK:-32}"
 export SPLIT4D_LAMBDA_ALIGN="${SPLIT4D_LAMBDA_ALIGN:-1.0}"
 export SPLIT4D_LAMBDA_DINO="${SPLIT4D_LAMBDA_DINO:-0.08}"
+export SPLIT4D_STREAMING_WINDOW="${SPLIT4D_STREAMING_WINDOW:-3}"
 
 bash scripts/reproduce.sh
 python -m eval.metrics --include-exploratory --output tmp/exploratory_scores.json

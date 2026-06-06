@@ -29,6 +29,7 @@ python -m method.split4d \
   --lambda-align "${SPLIT4D_LAMBDA_ALIGN:-1.0}" \
   --lambda-dino "${SPLIT4D_LAMBDA_DINO:-0.08}" \
   --dino-fraction 0.35 \
+  --streaming-window "${SPLIT4D_STREAMING_WINDOW:-3}" \
   --no-streaming
 
 bash scripts/evaluate.sh --inputs outputs/baseline/random_order.json --output tmp/baseline_scores.json

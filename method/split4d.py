@@ -97,6 +97,24 @@ def render_pixel_features(raw_features: torch.Tensor, contrib_idx: torch.Tensor,
     return F.normalize(rendered, dim=-1)
 
 
+def streaming_observation_batch(
+    observations: List[Tuple[int, int, np.ndarray, np.ndarray, np.ndarray]],
+    index: int,
+    window: int,
+) -> List[Tuple[int, int, np.ndarray, np.ndarray, np.ndarray]]:
+    """Return recent same-view frames from the temporally ordered sample stream."""
+
+    width = max(1, int(window))
+    current_t, current_view, *_ = observations[index]
+    min_t = current_t - width + 1
+    batch = [
+        item
+        for item in observations
+        if item[1] == current_view and min_t <= item[0] <= current_t
+    ]
+    return batch or [observations[index]]
+
+
 def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.ndarray]]:
     pairs: List[Tuple[np.ndarray, np.ndarray]] = []
     frames = int(scene["frames"])
@@ -158,28 +176,36 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
             for group in optim.param_groups:
                 group["lr"] = lr
         if args.streaming:
-            t, _view, contrib_np, weights_np, labels_np = obs[step % len(obs)]
+            stream_index = step % len(obs)
+            batch = streaming_observation_batch(obs, stream_index, args.streaming_window)
         else:
             # Paper ablation: observations are sampled randomly instead of
             # walking the temporally ordered sequence, so long gaps and repeated
             # frames can interrupt local feature propagation.
-            t, _view, contrib_np, weights_np, labels_np = obs[int(random_order_rng.integers(len(obs)))]
-        contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
-        weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
-        labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)
-        feats_all = F.normalize(raw_features, dim=-1)
-        feats = render_pixel_features(raw_features, contrib, weights)
-        loss = contrastive_cluster_loss(feats, labels, args.samples_per_mask, generator)
+            batch = [obs[int(random_order_rng.integers(len(obs)))]]
 
-        if args.lambda_align > 0 and t < len(pairs):
-            src_np, dst_np = pairs[t]
-            if len(src_np):
-                src = torch.as_tensor(src_np, dtype=torch.long, device=device)
-                dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
-                loss = loss + args.lambda_align * (feats_all[src] - feats_all[dst]).abs().sum(dim=-1).mean()
-        if args.lambda_dino > 0 and step < int(args.steps * args.dino_fraction):
-            semantic_pixels = F.normalize((projected_semantic[contrib] * weights.unsqueeze(-1)).sum(dim=1), dim=-1)
-            loss = loss + args.lambda_dino * dino_alignment_loss(feats, semantic_pixels, labels, args.samples_per_mask, generator)
+        feats_all = F.normalize(raw_features, dim=-1)
+        batch_losses: List[torch.Tensor] = []
+        for t, _view, contrib_np, weights_np, labels_np in batch:
+            contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
+            weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
+            labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)
+            feats = render_pixel_features(raw_features, contrib, weights)
+            sample_loss = contrastive_cluster_loss(feats, labels, args.samples_per_mask, generator)
+
+            if args.lambda_align > 0 and t < len(pairs):
+                src_np, dst_np = pairs[t]
+                if len(src_np):
+                    src = torch.as_tensor(src_np, dtype=torch.long, device=device)
+                    dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
+                    sample_loss = sample_loss + args.lambda_align * (feats_all[src] - feats_all[dst]).abs().sum(dim=-1).mean()
+            if args.lambda_dino > 0 and step < int(args.steps * args.dino_fraction):
+                semantic_pixels = F.normalize((projected_semantic[contrib] * weights.unsqueeze(-1)).sum(dim=1), dim=-1)
+                sample_loss = sample_loss + args.lambda_dino * dino_alignment_loss(
+                    feats, semantic_pixels, labels, args.samples_per_mask, generator
+                )
+            batch_losses.append(sample_loss)
+        loss = torch.stack(batch_losses).mean()
 
         optim.zero_grad(set_to_none=True)
         loss.backward()
@@ -294,6 +320,7 @@ def main() -> None:
     parser.add_argument("--lambda-align", type=float, default=0.35)
     parser.add_argument("--lambda-dino", type=float, default=0.08)
     parser.add_argument("--dino-fraction", type=float, default=0.35)
+    parser.add_argument("--streaming-window", type=int, default=1, help="Causal same-view temporal frames per ordered streaming step.")
     parser.add_argument("--temporal-transfer", type=float, default=0.0, help="Deprecated compatibility flag; Split4D uses ordered sampling and losses, not direct feature copying.")
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--streaming", action=argparse.BooleanOptionalAction, default=True)

@@ -23,6 +23,7 @@ export SPLIT4D_STEPS="${SPLIT4D_STEPS:-3200}"
 export SPLIT4D_SAMPLES_PER_MASK="${SPLIT4D_SAMPLES_PER_MASK:-32}"
 export SPLIT4D_LAMBDA_ALIGN="${SPLIT4D_LAMBDA_ALIGN:-1.0}"
 export SPLIT4D_LAMBDA_DINO="${SPLIT4D_LAMBDA_DINO:-0.08}"
+export SPLIT4D_STREAMING_WINDOW="${SPLIT4D_STREAMING_WINDOW:-3}"
 
 bash scripts/download.sh
 rm -f outputs/split4d/results.json outputs/baseline/random_order.json scoring/scores.json tmp/exploratory_scores.json

@@ -16,13 +16,13 @@
     "scaled_streaming_ablation": {
       "results": {
         "split4d_random_order": {
-          "ClusterSizeError": 0.07619047619047618,
-          "F1": 0.46035639396471534,
-          "Recall": 0.46190476190476193,
-          "Recalldyn": 0.4761904761904762,
-          "Recallstatic": 0.44047619047619047,
-          "mAcc": 0.7847619047619048,
-          "mIoU": 0.30261802713415614
+          "ClusterSizeError": 0.2857142857142857,
+          "F1": 0.45826704376159205,
+          "Recall": 0.4666666666666667,
+          "Recalldyn": 0.5793650793650794,
+          "Recallstatic": 0.2976190476190476,
+          "mAcc": 0.7866666666666667,
+          "mIoU": 0.3051502287195434
         },
         "split4d_streaming": {
           "ClusterSizeError": 0.2,

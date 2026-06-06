@@ -9,7 +9,7 @@
           "Recall": 0.7361111111111112,
           "Recalldyn": 0.7777777777777778,
           "Recallstatic": 0.6111111111111112,
-          "TrackingFeatureAgreement": 1.0000000350570433,
+          "TrackingFeatureMargin": 0.41734120959327337,
           "mAcc": 0.8680555555555555,
           "mIoU": 0.5905483405483405
         }
@@ -24,7 +24,7 @@
           "Recall": 0.44761904761904764,
           "Recalldyn": 0.4920634920634921,
           "Recallstatic": 0.38095238095238093,
-          "TrackingFeatureAgreement": 1.0000000450346205,
+          "TrackingFeatureMargin": 0.577777729380048,
           "mAcc": 0.779047619047619,
           "mIoU": 0.28808882615334225
         },
@@ -35,7 +35,7 @@
           "Recall": 0.5428571428571429,
           "Recalldyn": 0.5396825396825397,
           "Recallstatic": 0.5476190476190477,
-          "TrackingFeatureAgreement": 1.0000000461522076,
+          "TrackingFeatureMargin": 0.5124825944503149,
           "mAcc": 0.8171428571428571,
           "mIoU": 0.3668223443223443
         }

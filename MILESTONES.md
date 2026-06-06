@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: method_runs**
+**Current: core_claim**
 
 ## Progress Log
 
@@ -19,5 +19,10 @@
 - Corrected linear-motion score: mIoU 0.694, F1 0.819, dynamic recall 0.833.
 - Kept milestone at `method_runs` because mIoU is slightly below the strongest baseline in the accepted target.
 
+### [2026-06-06 16:39] - core_claim
+- Job `030a094a-79e` completed the fixed non-oracle Split4D run and passed `python validate.py --compare`.
+- Accepted linear-motion score improved to mIoU 0.709, F1 0.824, and dynamic recall 0.833.
+- This clears the strongest paper baseline mIoU target in the accepted scaled benchmark while preserving dynamic-object recall.
+
 ## Stop Justification
-- Completed at milestone `method_runs`.
+- Completed at milestone `core_claim`.

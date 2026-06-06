@@ -1,8 +1,6 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: submit
-gpus: 0
-test: true
-milestone: method_runs
-notes: "Test fixed non-oracle Split4D inference with degenerate HDBSCAN rejection and moderate equal-step training."
+action: done
+milestone: core_claim
+notes: "Core claim reproduced on the accepted scaled linear-motion benchmark: Split4D streaming reached mIoU 0.709 with dynamic recall 0.833 and passed validate.py --compare."

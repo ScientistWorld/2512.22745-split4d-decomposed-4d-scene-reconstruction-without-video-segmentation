@@ -10,4 +10,4 @@ Reliable decomposed 4D scene representations enable object-level editing, remova
 
 ## Success Criteria
 
-A successful solution should assign consistent instance identities to scene elements across time, preserve boundaries under motion and interaction, work for both static and dynamic objects, and outperform methods that rely on inconsistent framewise labels or weak temporal propagation.
+A successful solution should assign consistent instance identities to scene elements across time, preserve boundaries under motion and interaction, work for both static and dynamic objects, and outperform simple references that fail to maintain coherent identities through motion.

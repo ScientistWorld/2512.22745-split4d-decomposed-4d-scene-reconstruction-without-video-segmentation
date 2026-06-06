@@ -13,8 +13,8 @@ Evaluation uses instance segmentation metrics over annotated objects:
 - `Recalldyn`: recall restricted to dynamic instances. Higher is better and is the key constraint against methods that only handle static or slow objects.
 - `Recallstatic`: recall restricted to static instances. Higher is better.
 - `ClusterSizeError`: mean relative error in predicted instance sizes. Lower is better.
-- `MaskFeatureAgreement`: separation margin between features rendered within the same 2D mask and competing masks. Higher is better.
-- `TrackingFeatureMargin`: feature consistency margin for geometrically matched elements across adjacent frames. Higher is better.
+- `MaskFeatureAgreement`: separation margin between candidate-provided element representations for elements that agree or disagree with observed masks. Higher is better.
+- `TrackingFeatureMargin`: representation consistency margin for geometrically matched elements across adjacent frames. Higher is better.
 
 ## Baselines and Targets
 
@@ -22,4 +22,4 @@ The paper reports comparisons against OmniSeg3D, DGD, SA4D, and SADG on Neural3D
 
 ## Evaluation Protocol
 
-Accepted runs evaluate on deterministic dynamic scenes with fixed geometry, fixed observation masks, and hidden instance labels. Methods write primitive-level predicted instance labels and per-primitive features to JSON. `scripts/evaluate.sh` reads those artifacts and computes metrics without importing method code. Scores are written to `scoring/scores.json`.
+Accepted runs evaluate on deterministic dynamic scenes with fixed geometry, fixed observation masks, and hidden instance labels. Methods write primitive-level predicted instance labels and per-primitive representation vectors to JSON. `scripts/evaluate.sh` reads those artifacts and computes metrics without importing method code. Scores are written to `scoring/scores.json`.

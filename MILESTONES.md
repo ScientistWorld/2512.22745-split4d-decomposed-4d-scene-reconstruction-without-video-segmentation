@@ -70,5 +70,10 @@
 - `eval.check_core_claim` passed on `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json`.
 - `python validate.py --post-design` passed, confirming score structure, split artifacts, train/test independence, method/eval separation, and no committed `shared/` dependencies.
 
+### [2026-06-06 19:45] - core_claim
+- Final verification preserved the `core_claim` milestone after confirming the latest container-generated canonical, train, and test scores passed the gate.
+- Removed remaining solution-specific hints from from-scratch-facing documentation while keeping the benchmark constraints, output contract, and active experiment descriptions clear.
+- Wrote `VERIFICATION.md` with the final gym-readiness judgment and the reduced-synthetic-benchmark limitation.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

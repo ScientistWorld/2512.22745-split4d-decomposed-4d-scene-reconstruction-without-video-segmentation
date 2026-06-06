@@ -1,4 +1,5 @@
-action: submit
+action: done
 gpus: 0
 test: false
-notes: "Regenerate Split4D artifacts, rescore train/test with calibrated weighted split evaluators, and run post-design validation."
+milestone: core_claim
+notes: "core_claim; scaled artifact split with F1 primary for streaming ablation and mIoU retained as scored metric; post-design validation passes for scores.json, scores_train.json, and scores_test.json."

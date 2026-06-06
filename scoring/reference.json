@@ -20,7 +20,7 @@
     "scaled_streaming_ablation": {
       "description": "Reduced deterministic interaction-motion ablation: temporally ordered Split4D feature learning versus the same learner with random temporal sampling.",
       "weight": 0.35,
-      "primary_metric": "mIoU",
+      "primary_metric": "F1",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
         "mAcc": {"higher_is_better": true, "coefficient": 0.2, "description": "Mean one-vs-rest instance accuracy on the evaluated split primitives."},

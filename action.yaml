@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: pending
+action: done
 gpus: 1
 test: false
-milestone: method_runs
-notes: ""
+milestone: core_claim
+notes: "Validated scaled Split4D core claim: streaming method mIoU 0.709 exceeds strongest listed baseline 0.700 on linear_motion_segmentation, with dynamic recall 0.833. Environment is packaged and reusable; harder interaction/ablation results are documented as exploratory."

@@ -5,9 +5,11 @@
         "split4d_streaming": {
           "ClusterSizeError": 0.3333333333333333,
           "F1": 0.7562330557576737,
+          "MaskFeatureAgreement": 0.2193943287674892,
           "Recall": 0.7569444444444444,
           "Recalldyn": 0.8055555555555555,
           "Recallstatic": 0.6111111111111112,
+          "TrackingFeatureMargin": 0.4204986758549195,
           "mAcc": 0.8784722222222222,
           "mIoU": 0.6139082462253195
         }
@@ -18,18 +20,22 @@
         "split4d_random_order": {
           "ClusterSizeError": 0.19047619047619047,
           "F1": 0.431859785226192,
+          "MaskFeatureAgreement": 0.27116787194335545,
           "Recall": 0.4428571428571429,
           "Recalldyn": 0.5396825396825397,
           "Recallstatic": 0.2976190476190476,
+          "TrackingFeatureMargin": 0.5809515151804484,
           "mAcc": 0.7771428571428571,
           "mIoU": 0.28077823408354985
         },
         "split4d_streaming": {
           "ClusterSizeError": 0.11428571428571428,
           "F1": 0.6118707484659188,
+          "MaskFeatureAgreement": 0.1442006987376805,
           "Recall": 0.6142857142857142,
           "Recalldyn": 0.6428571428571429,
           "Recallstatic": 0.5714285714285714,
+          "TrackingFeatureMargin": 0.5140058602991338,
           "mAcc": 0.8457142857142855,
           "mIoU": 0.44327790214262874
         }

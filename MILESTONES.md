@@ -19,4 +19,3 @@
 
 ## Stop Justification
 - Completed at milestone `core_claim`.
-- Further work toward `core_claim_plus` would require finding a new configuration that improves an additional setting without breaking the streaming-ablation constraint; the current packaged gym is validated and usable.

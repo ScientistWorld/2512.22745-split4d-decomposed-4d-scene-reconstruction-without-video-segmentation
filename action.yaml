@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: method_runs
-notes: "Run stronger non-oracle Split4D configuration with spatial/velocity tracking matches, longer streaming optimization, and updated regularizer weights."
+notes: "Run stronger non-oracle Split4D configuration, refresh accepted scores, and save separate exploratory interaction/ablation diagnostics."

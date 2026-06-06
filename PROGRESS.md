@@ -53,6 +53,12 @@ Job `6a29ddef-acf` produced the first corrected non-oracle score after public/pr
 
 This is a valid method run and supports the dynamic-recall side of the claim, but it is still just below the strongest mIoU baseline in `reference.json` (OmniSeg3D: 0.700). I am not claiming `core_claim` yet. The next run strengthens only paper-native components: spatial/velocity 3D tracking matches, more streaming optimization steps, stronger alignment, and a slightly reduced semantic-alignment weight.
 
+Current submission:
+
+- Runs both the streaming Split4D method and the random-order ablation with the stronger non-oracle configuration in `scripts/run.sh`.
+- Refreshes accepted `scoring/scores.json` through `scripts/evaluate.sh`.
+- Also writes `tmp/exploratory_scores.json` with interaction-motion and ablation diagnostics for analysis, while keeping verifier-facing scores restricted to the accepted target.
+
 ## Remaining
 
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.

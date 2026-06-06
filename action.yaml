@@ -1,8 +1,8 @@
 # Once you set action to 'done', STOP immediately.
 # Do NOT sleep, poll, or wait. The system reads this file
 # only after your turn ends.
-action: submit
+action: done
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Rerun split scoring after replacing saturated TrackingFeatureAgreement with TrackingFeatureMargin."
+notes: "Hash-split primitive and observation slices; 27 train metrics and 27 test metrics; train/test method keys match, primary gaps are comparable, TrackingFeatureMargin replaces saturated agreement metric."

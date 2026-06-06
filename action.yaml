@@ -1,6 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: done
-milestone: core_claim
-notes: "Core claim reproduced on the accepted scaled linear-motion benchmark: Split4D streaming reached mIoU 0.709 with dynamic recall 0.833 and passed validate.py --compare."
+action: pending
+gpus: 1
+test: false
+milestone: method_runs
+notes: ""

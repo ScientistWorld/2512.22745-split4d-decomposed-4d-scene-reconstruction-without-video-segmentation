@@ -26,7 +26,8 @@
 - Job `0ff27010-ea3` completed the alpha-transmittance run. It also stayed at `method_runs`; the reduced renderer still trained on too many occluded or mixed rays.
 - The next run filters observations to visible, confident surface samples before applying the same alpha-composited rendered-feature loss.
 - Job `82b7b084-80f` completed the visible-surface run and restored `core_claim`. The method now produces a non-trivial linear-motion segmentation result and beats the random-order ablation on the same harder interaction scene.
-- The next run keeps the accepted protocol but increases the equal streaming/random budgets and per-mask contrastive samples to see whether the harder interaction setting can support `core_claim_plus`.
+- Job `d6f83e15-775` tested a longer 4200-step, 48-sample configuration. It improved linear-motion mIoU but broke the required streaming-ablation direction, so it is recorded as exploratory and not used as the accepted score.
+- `scripts/reproduce.sh` now sets the accepted 3200-step configuration itself, so running it directly reproduces the validated `core_claim` setup instead of depending on `scripts/run.sh` environment variables.
 
 ## Results
 
@@ -108,9 +109,17 @@ Job `82b7b084-80f` tested visible, confident alpha-composited surface samples wi
 
 This restores `core_claim`. The absolute scores remain below the paper's full-scale values, but the run uses the paper's actual computation on a reduced rendered-feature benchmark and demonstrates the central claim under a same-benchmark constraint: temporally ordered Split4D training improves moving-object segmentation over random temporal sampling.
 
+Job `d6f83e15-775` tested a longer equal-budget configuration with 4200 steps and 48 samples per mask:
+
+- Linear motion, Split4D streaming: mIoU 0.423, F1 0.580, dynamic recall 0.657.
+- Interaction streaming ablation: streaming mIoU 0.180, F1 0.304, dynamic recall 0.254.
+- Interaction streaming ablation baseline: random-order mIoU 0.241, F1 0.385, dynamic recall 0.349.
+
+This run is not accepted for the milestone because it violates the constraint side of the claim: random temporal sampling beats streaming on the ablation. The accepted `scores.json` is restored to job `82b7b084-80f`, where both benefit and constraint metrics support `core_claim`.
+
 ## Remaining
 
-- Reaching `core_claim_plus` requires improving or formally accepting an additional setting beyond the current linear-motion target and interaction streaming ablation.
+- Reaching `core_claim_plus` would require a new configuration that improves an additional setting without breaking the streaming-ablation constraint.
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap further, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 - The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
@@ -130,6 +139,7 @@ This restores `core_claim`. The absolute scores remain below the paper's full-sc
 - Job `665fe8cb-6d6` showed that the first rendered-pixel synthetic observations were too boundary-heavy for the reduced benchmark. The next data patch uses alpha-transmittance compositing rather than normalized distance weights, matching the paper's feature-rendering equation more closely.
 - Job `0ff27010-ea3` showed alpha-transmittance alone is insufficient when every active primitive projection is used as a supervision sample. The next data patch keeps only visible, confident surface observations for training.
 - Job `82b7b084-80f` verified that visible-surface filtering fixes the same-benchmark ablation direction. The next risk is whether a longer run improves interaction segmentation or overfits the reduced benchmark.
+- Job `d6f83e15-775` confirmed that longer training with more contrastive samples overfits or destabilizes the interaction-motion ablation in this reduced setup.
 
 ## Deviations from Paper
 

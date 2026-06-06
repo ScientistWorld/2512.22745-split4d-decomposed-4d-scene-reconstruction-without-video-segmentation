@@ -42,3 +42,8 @@
 - Restored `core_claim`: linear-motion Split4D streaming reached mIoU 0.365 and dynamic recall 0.602 on the scaled rendered-feature benchmark.
 - The same run supports the required constraint/ablation: streaming outperformed random-order training on the interaction scene, 0.373 vs 0.249 mIoU and 0.611 vs 0.317 dynamic recall.
 - Submitted one more equal-budget run with more contrastive samples and more steps to try to strengthen the harder interaction setting toward `core_claim_plus`.
+
+### [2026-06-06 17:17] - core_claim
+- Job `d6f83e15-775` tested a longer 4200-step, 48-sample configuration.
+- The longer run improved linear-motion mIoU to 0.423 but regressed the required streaming ablation: streaming scored 0.180 mIoU vs random-order 0.241.
+- Kept `core_claim`, restored `scoring/scores.json` to the accepted job `82b7b084-80f` results, and made `scripts/reproduce.sh` use the accepted 3200-step configuration by default.

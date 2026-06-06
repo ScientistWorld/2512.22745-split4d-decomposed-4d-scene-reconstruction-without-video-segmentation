@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: submit
+action: done
 gpus: 0
 test: true
 milestone: core_claim
-notes: "Core claim restored in job 82b7b084-80f; run equal 4200-step/48-sample configuration to try to improve the harder interaction setting toward core_claim_plus."
+notes: "Core claim restored with job 82b7b084-80f. Longer follow-up improved linear motion but broke the streaming ablation, so accepted scores were restored and reproduce.sh now runs the validated 3200-step configuration."

@@ -3,4 +3,4 @@
 # only after your turn ends.
 action: done
 milestone: core_claim
-notes: "Final verification passed: full metric scores regenerated, post-design validation passed, and gym documentation/scoring are ready."
+notes: "Final audit confirmed core_claim on the documented reduced Split4D benchmark: method/eval separation holds, the score gate passes on canonical/train/test scores, and no further productive work remains."

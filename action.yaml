@@ -5,4 +5,4 @@ action: done
 gpus: 1
 test: false
 milestone: core_claim
-notes: "Reproduced the core Split4D claim on the validated reduced benchmark; scores and reusable environment are packaged."
+notes: "Continuation audit restored core_claim: implementation, evaluation separation, scripts, docs, and validated scores are intact on the reduced Split4D benchmark."

@@ -1,5 +1,8 @@
-action: done
-gpus: 0
+# IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
+# Do NOT sleep, poll, or wait for jobs. The system reads this file
+# only after your turn ends. Sleeping blocks the entire pipeline.
+action: pending
+gpus: 1
 test: false
-milestone: core_claim
-notes: "core_claim; scaled artifact split with F1 primary for streaming ablation and mIoU retained as scored metric; post-design validation passes for scores.json, scores_train.json, and scores_test.json."
+milestone: none
+notes: ""

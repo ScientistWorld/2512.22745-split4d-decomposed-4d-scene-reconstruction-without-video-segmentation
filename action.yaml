@@ -1,4 +1,4 @@
-action: submit
+action: done
 gpus: 0
 test: false
-notes: "Rerun fixed train/test evaluators: replace saturated cluster-count metric with cluster-size error and exclude random-order from primary linear score."
+notes: "Deterministic 50/50 stratified primitive split; 21 train and 21 test metrics; train/test gaps are small, but current artifacts fail the ablation reasonableness gate because streaming scores below random-order on every ablation metric."

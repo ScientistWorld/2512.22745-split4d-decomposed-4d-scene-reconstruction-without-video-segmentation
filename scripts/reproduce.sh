@@ -16,7 +16,8 @@
 
 set -e
 
-cd /home/user
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
 
 export SPLIT4D_BASELINE_STEPS="${SPLIT4D_BASELINE_STEPS:-3200}"
 export SPLIT4D_STEPS="${SPLIT4D_STEPS:-3200}"

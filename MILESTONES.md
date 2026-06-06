@@ -55,5 +55,10 @@
 - Fresh `scores.json`, `scores_train.json`, and `scores_test.json` all passed `eval.check_core_claim`: streaming Split4D beats the random-order ablation on F1 and dynamic recall while reporting the constraint metrics.
 - `python validate.py --post-design` passed, confirming score structure, train/test independence, method/eval separation, and artifact coverage.
 
+### [2026-06-06 19:30] - core_claim
+- A final audit found canonical `scores.json` was missing two declared constraint metrics that train/test scoring already reported: `MaskFeatureAgreement` and `TrackingFeatureMargin`.
+- Patched the standard evaluator and core-claim gate to require those metrics.
+- Submitting a CPU-only validation job to regenerate `scores.json`, train/test scores, and run the stricter gate inside the container.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

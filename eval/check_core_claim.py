@@ -14,6 +14,8 @@ REQUIRED_METRICS = {
     "Recalldyn",
     "Recallstatic",
     "ClusterSizeError",
+    "MaskFeatureAgreement",
+    "TrackingFeatureMargin",
 }
 
 

@@ -1,8 +1,8 @@
 # Once you set action to 'done', STOP immediately.
 # Do NOT sleep, poll, or wait. The system reads this file
 # only after your turn ends.
-action: done
+action: submit
 gpus: 0
-test: false
+test: true
 milestone: core_claim
-notes: "Fixed fresh-clone packaging paths and made download.sh independent of host Python packages; no external artifacts are required."
+notes: "CPU-only packaging check: regenerate scores.json with full declared metrics, refresh train/test scores, run the stricter core-claim gate and post-design validator."

@@ -3,6 +3,7 @@
 ## What Works
 
 - Paper analysis and benchmark documentation are filled in.
+- The canonical evaluator now reports the same benefit and constraint metric family as the split evaluators, including mask-feature agreement and tracking feature margin.
 - `data/split4d_synthetic.py` defines deterministic fixed 4D Gaussian-style scenes with linear primitive motion, temporal opacity, inconsistent per-image mask ids, and semantic vectors.
 - `method/split4d.py` implements the paper's feature-stage algorithm at reduced scale: learnable per-primitive features, contrastive mask clustering, streaming temporal sampling, 3D tracking alignment, early semantic alignment, clustering, and filtering.
 - `eval/metrics.py` computes mIoU, mAcc, Recall, F1, and dynamic recall from method output artifacts without importing `method/`.
@@ -41,6 +42,7 @@
 - The next run reverts the broadened tracking selection and adds a local adjacent-frame mask-center consistency term for ordered streaming batches. This implements the reduced benchmark's missing streaming-pair propagation without using hidden object ids or changing the evaluator.
 - Job `9b06983a-f2b` completed the standard reproduction, exploratory evaluation, train/test scoring, `validate.py --post-design`, and the explicit core-claim gate. The current milestone is restored to `core_claim`.
 - Fresh accepted scores are present in `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json`; all three show streaming Split4D beating the random-order ablation on F1 and dynamic recall while preserving the reported constraint metrics.
+- A final scoring audit found that canonical `scores.json` omitted `MaskFeatureAgreement` and `TrackingFeatureMargin` even though train/test scores and `reference.json` included them. `eval/metrics.py` and `eval/check_core_claim.py` are patched, and a CPU-only packaging job is being submitted to regenerate canonical scores inside the container because login Python lacks NumPy.
 
 ## Results
 
@@ -189,6 +191,7 @@ This run is not accepted for the milestone because it violates the constraint si
 
 ## Remaining
 
+- The current CPU-only submission must refresh `scoring/scores.json` with `MaskFeatureAgreement` and `TrackingFeatureMargin`; after it passes, the environment remains at `core_claim`.
 - Reaching `core_claim_plus` would require a new configuration that improves an additional setting without breaking the streaming-ablation constraint.
 - `core_claim` is now restored with fresh current artifacts, not stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` all include `Recallstatic` and `ClusterSizeError`, and streaming beats random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
 - Future improvements should be method-side, not evaluator-side: improve reduced-scale LR scheduling, scene-specific semantic-alignment scaling, or first-frame clustering stability while keeping the paper's loss and fixed-Gaussian procedure intact.

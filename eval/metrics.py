@@ -80,7 +80,7 @@ def evaluate_file(path: Path, include_exploratory: bool = False) -> Dict[str, Di
         if include_exploratory and scene_name == "interaction_motion" and method != "split4d_random_order":
             out.setdefault("interaction_motion_segmentation", {"results": {}})
             out["interaction_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
-        if include_exploratory and scene_name == "interaction_motion" and method in {"split4d_streaming", "split4d_random_order"}:
+        if scene_name == "interaction_motion" and method in {"split4d_streaming", "split4d_random_order"}:
             out.setdefault("streaming_ablation", {"results": {}})
             out["streaming_ablation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
     return out

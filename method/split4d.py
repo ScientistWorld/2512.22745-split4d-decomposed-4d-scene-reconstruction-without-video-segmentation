@@ -86,6 +86,14 @@ def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor
     return torch.stack(losses).mean()
 
 
+def render_pixel_features(raw_features: torch.Tensor, contrib_idx: torch.Tensor, weights: torch.Tensor) -> torch.Tensor:
+    """Render per-primitive features to synthetic 2D pixel samples."""
+
+    primitive_features = F.normalize(raw_features, dim=-1)
+    rendered = (primitive_features[contrib_idx] * weights.unsqueeze(-1)).sum(dim=1)
+    return F.normalize(rendered, dim=-1)
+
+
 def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.ndarray]]:
     pairs: List[Tuple[np.ndarray, np.ndarray]] = []
     frames = int(scene["frames"])
@@ -136,11 +144,12 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
 
     history = []
     for step in range(args.steps):
-        t, _view, idx_np, labels_np = obs[step % len(obs)]
-        idx = torch.as_tensor(idx_np, dtype=torch.long, device=device)
+        t, _view, contrib_np, weights_np, labels_np = obs[step % len(obs)]
+        contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
+        weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
         labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)
         feats_all = F.normalize(raw_features, dim=-1)
-        feats = feats_all[idx]
+        feats = render_pixel_features(raw_features, contrib, weights)
         loss = contrastive_cluster_loss(feats, labels, args.samples_per_mask, generator)
 
         if args.lambda_align > 0 and t < len(pairs):
@@ -150,22 +159,12 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
                 dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
                 loss = loss + args.lambda_align * (feats_all[src] - feats_all[dst]).abs().sum(dim=-1).mean()
         if args.lambda_dino > 0 and step < int(args.steps * args.dino_fraction):
-            loss = loss + args.lambda_dino * dino_alignment_loss(feats, projected_semantic[idx], labels, args.samples_per_mask, generator)
+            semantic_pixels = F.normalize((projected_semantic[contrib] * weights.unsqueeze(-1)).sum(dim=1), dim=-1)
+            loss = loss + args.lambda_dino * dino_alignment_loss(feats, semantic_pixels, labels, args.samples_per_mask, generator)
 
         optim.zero_grad(set_to_none=True)
         loss.backward()
         optim.step()
-        if args.streaming and t < len(pairs):
-            src_np, dst_np = pairs[t]
-            if len(src_np):
-                # The full renderer propagates identity through primitives shared
-                # by adjacent frames.  This small benchmark has explicit matched
-                # primitive pairs, so streaming applies the same local temporal
-                # feature transfer directly after the ordered update.
-                src = torch.as_tensor(src_np, dtype=torch.long, device=device)
-                dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
-                with torch.no_grad():
-                    raw_features[dst].lerp_(raw_features[src], args.temporal_transfer)
         if (step + 1) % max(1, args.steps // 8) == 0:
             history.append(float(loss.detach().cpu()))
 
@@ -265,7 +264,7 @@ def main() -> None:
     parser.add_argument("--lambda-align", type=float, default=0.35)
     parser.add_argument("--lambda-dino", type=float, default=0.08)
     parser.add_argument("--dino-fraction", type=float, default=0.35)
-    parser.add_argument("--temporal-transfer", type=float, default=0.35)
+    parser.add_argument("--temporal-transfer", type=float, default=0.0, help="Deprecated compatibility flag; Split4D uses ordered sampling and losses, not direct feature copying.")
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--streaming", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--cpu", action="store_true")

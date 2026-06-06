@@ -15,6 +15,12 @@
 - 3D tracking regularization now matches adjacent-frame primitives by spatial nearest neighbor only; it no longer uses hidden object ids to find same-instance pairs.
 - Job `6a29ddef-acf` completed the corrected non-oracle validation run and `python validate.py --compare` passed.
 - Job `030a094a-79e` completed the fixed non-oracle run and `python validate.py --compare` passed, reaching `core_claim`.
+- Continuation audit on 2026-06-06 rechecked method authenticity, eval/method separation, score provenance, scripts, and environment logs. The audit restored the reset milestone to `core_claim`.
+- `scoring/reference.json` now includes the DGD baseline rows from Table 1 for the included Neural3DV-style and Multi-Human-style reference groups.
+- A follow-up independent audit rejected the prior `core_claim` because it compared synthetic reproduced scores to paper baselines from different datasets. The milestone is reset to `method_runs` until a same-benchmark comparison completes.
+- The reduced method now trains on projected synthetic 2D pixel observations with weighted primitive contributions, bringing the loss closer to the paper's rendered feature-map training instead of direct primitive-label supervision.
+- Removed the explicit post-optimizer temporal feature transfer, which was not part of the paper's algorithm. Streaming evidence must now come from temporally ordered sampling plus the paper-style loss terms and regularizers.
+- `scripts/evaluate.sh` now reports the `streaming_ablation` comparison by default when both streaming and random-order artifacts are present.
 
 ## Results
 
@@ -78,6 +84,8 @@ Exploratory diagnostics from the same run:
 
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
+- The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
+- `README.md` and `manifest.json` are host bind mounts to `/dev/null` in this session, so they cannot be removed or rewritten without superuser unmount privileges. Their tracked contents are still recoverable through git, but the live paths are controlled by the host mount table.
 
 ## Issues
 

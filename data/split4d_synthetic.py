@@ -57,6 +57,16 @@ def _unit(v: np.ndarray) -> np.ndarray:
     return v / max(n, 1e-8)
 
 
+def _camera_axes(view_dir: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    z_axis = _unit(view_dir.astype(np.float32))
+    up = np.array([0.0, 0.0, 1.0], dtype=np.float32)
+    if abs(float(np.dot(up, z_axis))) > 0.95:
+        up = np.array([0.0, 1.0, 0.0], dtype=np.float32)
+    x_axis = _unit(np.cross(up, z_axis))
+    y_axis = _unit(np.cross(z_axis, x_axis))
+    return x_axis.astype(np.float32), y_axis.astype(np.float32), z_axis.astype(np.float32)
+
+
 def build_scene(name: str, include_truth: bool = False) -> Dict[str, np.ndarray]:
     if name not in SCENES:
         raise KeyError(f"Unknown scene {name!r}. Available: {sorted(SCENES)}")
@@ -144,8 +154,10 @@ def build_scene(name: str, include_truth: bool = False) -> Dict[str, np.ndarray]
         "semantic": semantic.astype(np.float32),
         "view_dirs": view_dirs,
     }
-    obs_indices, obs_labels = _precompute_observations(scene, object_id, cfg.instances)
+    obs_indices, obs_contrib_indices, obs_weights, obs_labels = _precompute_observations(scene, object_id, cfg.instances)
     scene["obs_indices"] = obs_indices
+    scene["obs_contrib_indices"] = obs_contrib_indices
+    scene["obs_weights"] = obs_weights
     scene["obs_labels"] = obs_labels
     if include_truth:
         scene["instances"] = np.array(cfg.instances, dtype=np.int64)
@@ -153,24 +165,51 @@ def build_scene(name: str, include_truth: bool = False) -> Dict[str, np.ndarray]
     return scene
 
 
-def _precompute_observations(scene: Dict[str, np.ndarray], object_id: np.ndarray, inst_count: int) -> Tuple[np.ndarray, np.ndarray]:
+def _precompute_observations(scene: Dict[str, np.ndarray], object_id: np.ndarray, inst_count: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     obs_indices: List[np.ndarray] = []
+    obs_contrib_indices: List[np.ndarray] = []
+    obs_weights: List[np.ndarray] = []
     obs_labels: List[np.ndarray] = []
     frames = int(scene["frames"])
     views = int(scene["views"])
     for t in range(frames):
         for view in range(views):
             idx = active_indices(scene, t)
-            obj = object_id[idx].copy()
+            pos = position_at(scene, t)[idx]
+            op = temporal_opacity(scene, t)[idx]
+            x_axis, y_axis, z_axis = _camera_axes(scene["view_dirs"][view])
+            coords = np.stack([pos @ x_axis, pos @ y_axis], axis=1)
+            depth = pos @ z_axis
+            render_rng = np.random.default_rng(30_000 + 43 * int(view) + 211 * int(t) + frames)
+            sample_xy = coords + render_rng.normal(scale=0.045, size=coords.shape)
+            dist2 = ((sample_xy[:, None, :] - coords[None, :, :]) ** 2).sum(axis=2)
+            k = min(5, len(idx))
+            top_local = np.argpartition(dist2, kth=k - 1, axis=1)[:, :k]
+            local_dist = np.take_along_axis(dist2, top_local, axis=1)
+            local_depth = depth[top_local]
+            local_opacity = op[top_local]
+            front = local_depth.max(axis=1, keepdims=True) - local_depth
+            weight = np.exp(-local_dist / (2.0 * 0.16**2)) * local_opacity * np.exp(-0.15 * np.maximum(front, 0.0))
+            weight = weight / np.maximum(weight.sum(axis=1, keepdims=True), 1e-8)
+            contrib = idx[top_local]
+            dominant = contrib[np.arange(len(contrib)), weight.argmax(axis=1)]
+            obj = object_id[dominant].copy()
             perm_rng = np.random.default_rng(10_000 + 97 * int(view) + 131 * int(t) + frames)
             perm = perm_rng.permutation(inst_count)
             labels = perm[obj]
             noise_rng = np.random.default_rng(20_000 + 31 * int(view) + 197 * int(t))
             corrupt = noise_rng.random(len(labels)) < (0.035 if inst_count <= 4 else 0.055)
             labels[corrupt] = noise_rng.integers(0, inst_count, size=int(corrupt.sum()))
-            obs_indices.append(idx.astype(np.int64))
+            obs_indices.append(dominant.astype(np.int64))
+            obs_contrib_indices.append(contrib.astype(np.int64))
+            obs_weights.append(weight.astype(np.float32))
             obs_labels.append(labels.astype(np.int64))
-    return np.asarray(obs_indices, dtype=object), np.asarray(obs_labels, dtype=object)
+    return (
+        np.asarray(obs_indices, dtype=object),
+        np.asarray(obs_contrib_indices, dtype=object),
+        np.asarray(obs_weights, dtype=object),
+        np.asarray(obs_labels, dtype=object),
+    )
 
 
 def position_at(scene: Dict[str, np.ndarray], t: int) -> np.ndarray:
@@ -212,7 +251,29 @@ def observation_labels(scene: Dict[str, np.ndarray], view: int, t: int) -> Tuple
     return idx.astype(np.int64), labels.astype(np.int64)
 
 
-def iter_observations(scene: Dict[str, np.ndarray], streaming: bool = True) -> Iterable[Tuple[int, int, np.ndarray, np.ndarray]]:
+def observation_pixels(scene: Dict[str, np.ndarray], view: int, t: int) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Return rendered pixel samples for one view/time observation.
+
+    Each synthetic pixel stores the top contributing Gaussian primitives and
+    differentiable rasterization weights.  Labels are independent per-image mask
+    ids, so methods see only the same kind of local 2D co-membership signal used
+    by the paper rather than globally consistent object ids.
+    """
+
+    if "obs_contrib_indices" in scene and "obs_weights" in scene and "obs_labels" in scene:
+        flat = int(t) * int(scene["views"]) + int(view)
+        return (
+            scene["obs_contrib_indices"][flat].astype(np.int64),
+            scene["obs_weights"][flat].astype(np.float32),
+            scene["obs_labels"][flat].astype(np.int64),
+        )
+    raw_name = scene["name"]
+    name = raw_name.item() if isinstance(raw_name, np.ndarray) else str(raw_name)
+    regenerated = build_scene(str(name))
+    return observation_pixels(regenerated, view, t)
+
+
+def iter_observations(scene: Dict[str, np.ndarray], streaming: bool = True) -> Iterable[Tuple[int, int, np.ndarray, np.ndarray, np.ndarray]]:
     frames = range(int(scene["frames"]))
     views = range(int(scene["views"]))
     pairs: List[Tuple[int, int]] = [(t, v) for t in frames for v in views]
@@ -220,8 +281,8 @@ def iter_observations(scene: Dict[str, np.ndarray], streaming: bool = True) -> I
         rng = np.random.default_rng(777 + int(scene["frames"]))
         rng.shuffle(pairs)
     for t, v in pairs:
-        idx, labels = observation_labels(scene, v, t)
-        yield t, v, idx, labels
+        contrib, weights, labels = observation_pixels(scene, v, t)
+        yield t, v, contrib, weights, labels
 
 
 def save_all(out_dir: str = "data/generated") -> None:

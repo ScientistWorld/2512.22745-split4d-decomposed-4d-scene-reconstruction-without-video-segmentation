@@ -39,6 +39,8 @@
 - The next run strengthens paper-native temporal coherence by matching every visibly fading primitive in the 3D tracking regularizer, uses a larger four-frame streaming window, increases the tracking weight to 1.35, and lowers semantic alignment to 0.03 so the semantic-collision scene relies less on long-range procedural semantic shortcuts.
 - Job `2c49d8db-c8a` showed that broadening tracking was the wrong direction: it reduced random-order scores but also lowered streaming F1 to 0.420 and dynamic recall to 0.444.
 - The next run reverts the broadened tracking selection and adds a local adjacent-frame mask-center consistency term for ordered streaming batches. This implements the reduced benchmark's missing streaming-pair propagation without using hidden object ids or changing the evaluator.
+- Job `9b06983a-f2b` completed the standard reproduction, exploratory evaluation, train/test scoring, `validate.py --post-design`, and the explicit core-claim gate. The current milestone is restored to `core_claim`.
+- Fresh accepted scores are present in `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json`; all three show streaming Split4D beating the random-order ablation on F1 and dynamic recall while preserving the reported constraint metrics.
 
 ## Results
 
@@ -89,6 +91,15 @@ Job `2c49d8db-c8a` after broadening fading-primitive tracking:
 - Interaction random-order ablation: random-order mIoU 0.281, F1 0.432, dynamic recall 0.540.
 
 The run is still only `method_runs`. Broader tracking and stronger alignment did not improve the ordered stream; it mostly lowered both methods. The next submission restores the prior disappearing-Gaussian tracking selection and adds an adjacent-frame center consistency term only when the streaming sampler provides a temporal batch.
+
+Job `9b06983a-f2b` after restoring disappearing-primitive tracking and adding adjacent-frame mask-center consistency:
+
+- Linear motion, Split4D streaming: mIoU 0.614, F1 0.756, dynamic recall 0.806, static recall 0.611, cluster-size error 0.333.
+- Interaction streaming ablation, standard split: streaming F1 0.612 and dynamic recall 0.643 versus random-order F1 0.432 and dynamic recall 0.540.
+- Interaction streaming ablation, train split: streaming F1 0.598 and dynamic recall 0.621 versus random-order F1 0.435 and dynamic recall 0.548.
+- Interaction streaming ablation, test split: streaming F1 0.611 and dynamic recall 0.641 versus random-order F1 0.428 and dynamic recall 0.528.
+
+This restores `core_claim`. The result comes from the paper-style fixed-Gaussian feature learning pipeline on the reduced rendered-feature benchmark, and the accepted score files pass both `python validate.py --post-design` and `python -m eval.check_core_claim --score-files scoring/scores.json scoring/scores_train.json scoring/scores_test.json`.
 
 Job `dbd053f2-d80` produced the first complete method outputs:
 
@@ -179,8 +190,8 @@ This run is not accepted for the milestone because it violates the constraint si
 ## Remaining
 
 - Reaching `core_claim_plus` would require a new configuration that improves an additional setting without breaking the streaming-ablation constraint.
-- Restoring `core_claim` now requires fresh current artifacts, not the stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` must all include `Recallstatic` and `ClusterSizeError`, and streaming must beat random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
-- If the streaming-pair propagation run still fails, remaining fixes are streaming-side, not evaluator-side: revisit reduced-scale LR scheduling, scene-specific semantic-alignment scaling, or first-frame clustering stability while keeping the paper's loss and fixed-Gaussian procedure intact.
+- `core_claim` is now restored with fresh current artifacts, not stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` all include `Recallstatic` and `ClusterSizeError`, and streaming beats random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
+- Future improvements should be method-side, not evaluator-side: improve reduced-scale LR scheduling, scene-specific semantic-alignment scaling, or first-frame clustering stability while keeping the paper's loss and fixed-Gaussian procedure intact.
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap further, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 - The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
@@ -206,6 +217,7 @@ This run is not accepted for the milestone because it violates the constraint si
 - Job `ce5ba05d-e13` also failed for the intended reason: the ablation remained reversed after switching random-order to with-replacement sampling, so the next iteration strengthens only the paper-native ordered temporal propagation in `method/split4d.py`.
 - Job `6de5c4dd-699` failed for the intended reason: local temporal windows improved streaming F1 but did not recover moving-object recall, so the next iteration strengthens the paper-native 3D tracking regularizer instead of changing the evaluator.
 - Job `2c49d8db-c8a` failed for the intended reason: the broader 3D tracking regularizer regressed streaming as well as random-order, so it is reverted before testing the adjacent-frame streaming-pair term.
+- Job `9b06983a-f2b` resolved the stale-artifact and failed-ablation issues: the fresh container run passes the standard, train, and test score gates and restores `core_claim`.
 
 ## Deviations from Paper
 

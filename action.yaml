@@ -1,9 +1,4 @@
-# This iteration writes files only — do NOT submit compute jobs.
-# Once you set action to 'done', STOP immediately.
-# Do NOT sleep, poll, or wait. The system reads this file
-# only after your turn ends.
-action: done
+action: submit
 gpus: 0
 test: false
-milestone: core_claim
-notes: "Improvements: added static-object recall and cluster-count error to train/test scoring, completed metric descriptions in reference.json, wrote DESIGN_NOTES.md. Notes: no evaluators or experiments were run by design; runner should confirm new metrics appear in score files."
+notes: "Run evaluate_train.sh and evaluate_test.sh on existing output artifacts; populate scores_train.json and scores_test.json for split validation."

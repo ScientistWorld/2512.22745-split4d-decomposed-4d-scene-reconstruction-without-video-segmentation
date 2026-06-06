@@ -53,7 +53,6 @@ def instance_metrics(
     pred: np.ndarray,
     true: np.ndarray,
     dynamic_object: np.ndarray,
-    pred_cluster_count: int,
 ) -> Dict[str, float]:
     labels = sorted(int(x) for x in np.unique(true))
     ious = []
@@ -62,6 +61,7 @@ def instance_metrics(
     f1s = []
     dyn_recalls = []
     static_recalls = []
+    size_errors = []
     for label in labels:
         predicted = pred == label
         target = true == label
@@ -79,6 +79,7 @@ def instance_metrics(
             dyn_recalls.append(recall)
         else:
             static_recalls.append(recall)
+        size_errors.append(abs(float(predicted.sum()) - float(target.sum())) / max(float(target.sum()), 1.0))
     return {
         "mIoU": float(np.mean(ious)),
         "mAcc": float(np.mean(accs)),
@@ -86,7 +87,7 @@ def instance_metrics(
         "F1": float(np.mean(f1s)),
         "Recalldyn": float(np.mean(dyn_recalls) if dyn_recalls else np.mean(recalls)),
         "Recallstatic": float(np.mean(static_recalls) if static_recalls else np.mean(recalls)),
-        "ClusterCountError": float(abs(int(pred_cluster_count) - len(labels))),
+        "ClusterSizeError": float(np.mean(size_errors)),
     }
 
 
@@ -102,7 +103,7 @@ def score_scene(scene_name: str, scene_payload: Mapping[str, object]) -> Dict[st
     true = true_full[split_indices]
     pred_raw = pred_full[split_indices]
     pred = align_cluster_ids(pred_raw, true)
-    return instance_metrics(pred, true, dynamic_flags(truth_scene), len(np.unique(pred_raw)))
+    return instance_metrics(pred, true, dynamic_flags(truth_scene))
 
 
 def evaluate_payload(payload: Mapping[str, object]) -> Dict[str, Dict[str, Dict[str, float]]]:
@@ -116,7 +117,7 @@ def evaluate_payload(payload: Mapping[str, object]) -> Dict[str, Dict[str, Dict[
         if not isinstance(scene_payload, Mapping):
             raise ValueError(f"{scene_name}: scene payload must be an object.")
         metrics = score_scene(str(scene_name), scene_payload)
-        if scene_name == "linear_motion":
+        if scene_name == "linear_motion" and method != "split4d_random_order":
             out.setdefault("scaled_linear_motion_segmentation", {"results": {}})
             out["scaled_linear_motion_segmentation"]["results"][method] = metrics
         if scene_name == "interaction_motion":

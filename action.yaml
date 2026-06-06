@@ -1,4 +1,4 @@
 action: submit
 gpus: 0
 test: false
-notes: "Run evaluate_train.sh and evaluate_test.sh on existing output artifacts; populate scores_train.json and scores_test.json for split validation."
+notes: "Rerun fixed train/test evaluators: replace saturated cluster-count metric with cluster-size error and exclude random-order from primary linear score."

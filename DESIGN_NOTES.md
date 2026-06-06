@@ -10,11 +10,13 @@
 
 ## Changed
 - Added `Recallstatic` to both train and test evaluators. This keeps the score from rewarding methods that tune only for moving-object recall while sacrificing slower/static instances.
-- Added `ClusterCountError` to both train and test evaluators. This penalizes label fragmentation or instance collapse that can partially game overlap metrics.
+- Replaced the saturated `ClusterCountError` guard with `ClusterSizeError` in both train and test evaluators. This penalizes cluster imbalance without being zero whenever a method predicts the right number of clusters.
+- Matched the primary linear-motion split contract to `eval/metrics.py` by excluding the `split4d_random_order` ablation artifact from `scaled_linear_motion_segmentation`.
 - Added required `description` fields to every metric in `scoring/reference.json`.
 - Added the two new metrics to the reduced train/test-scored experiments in `scoring/reference.json` with modest coefficients. The full-scale paper-reference groups were left as provenance-only entries and were not given synthetic-only metrics.
 
-## Runtime Concerns For Next Iteration
-- I did not run either evaluator or generate scores, per the file-only instruction. The runner should confirm that the emitted `scores_train.json` and `scores_test.json` include `Recallstatic` and `ClusterCountError` for both reduced experiments.
-- `ClusterCountError` may saturate at zero for normal methods that infer the public instance count correctly. It is still useful as an anti-fragmentation guard, but should be treated as a constraint signal rather than the main benefit metric.
-- The train/test split remains a deterministic 50/50 stratified primitive split over the same scenes. This is lightweight and calibrated, but it is not a strong OOD split; the added static/dynamic/count triangulation is intended to reduce shortcut risk without changing the current artifact contract.
+## Runtime Findings
+- Job `d54f6cae-3da` ran `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh` successfully on CPU and wrote both split score files.
+- The first run exposed two evaluator issues: `ClusterCountError` saturated at zero for every emitted method and the primary linear-motion experiment included the random-order ablation artifact. Both issues were fixed before the next submission.
+- The current ignored `outputs/` artifacts score below the accepted `scoring/scores.json` baseline on the interaction ablation. Earlier accepted job `82b7b084-80f` had the proposed streaming method ahead, but its prediction JSON artifacts are not archived in git. The next run should verify the fixed evaluator output and then decide whether the missing accepted artifacts make the gym unusable.
+- The train/test split remains a deterministic 50/50 stratified primitive split over the same scenes. This is lightweight and calibrated, but it is not a strong OOD split; the added static/dynamic/size triangulation is intended to reduce shortcut risk without changing the current artifact contract.

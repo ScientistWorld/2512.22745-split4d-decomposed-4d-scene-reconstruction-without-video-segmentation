@@ -13,7 +13,7 @@
         "Recallstatic": {"higher_is_better": true, "coefficient": 0.35, "description": "Recall averaged over slower/static objects to catch dynamic-only tuning."},
         "ClusterSizeError": {"higher_is_better": false, "coefficient": -0.25, "description": "Mean normalized absolute difference between aligned predicted cluster sizes and true instance sizes, catching cluster imbalance without saturating on correct cluster counts."},
         "MaskFeatureAgreement": {"higher_is_better": true, "coefficient": 0.35, "description": "Mean same-mask feature margin over complementary observation slices, catching label-only shortcuts that do not learn coherent rendered features."},
-        "TrackingFeatureAgreement": {"higher_is_better": true, "coefficient": 0.25, "description": "Mean feature cosine similarity over geometry-matched adjacent-time primitive pairs, catching temporally inconsistent feature artifacts."}
+        "TrackingFeatureMargin": {"higher_is_better": true, "coefficient": 0.25, "description": "Mean positive-minus-hardest-negative feature cosine margin over geometry-matched adjacent-time primitive pairs, catching temporally inconsistent or non-discriminative feature artifacts."}
       },
       "results": {
         "split4d_streaming": {"type": "proposed", "mIoU": 0.36485487640378944, "mAcc": 0.763888888888889, "Recall": 0.5277777777777778, "F1": 0.5221647331964323, "Recalldyn": 0.6018518518518517}
@@ -32,7 +32,7 @@
         "Recallstatic": {"higher_is_better": true, "coefficient": 0.35, "description": "Recall averaged over slower/static objects to catch dynamic-only tuning."},
         "ClusterSizeError": {"higher_is_better": false, "coefficient": -0.25, "description": "Mean normalized absolute difference between aligned predicted cluster sizes and true instance sizes, catching cluster imbalance without saturating on correct cluster counts."},
         "MaskFeatureAgreement": {"higher_is_better": true, "coefficient": 0.35, "description": "Mean same-mask feature margin over complementary observation slices, catching label-only shortcuts that do not learn coherent rendered features."},
-        "TrackingFeatureAgreement": {"higher_is_better": true, "coefficient": 0.25, "description": "Mean feature cosine similarity over geometry-matched adjacent-time primitive pairs, catching temporally inconsistent feature artifacts."}
+        "TrackingFeatureMargin": {"higher_is_better": true, "coefficient": 0.25, "description": "Mean positive-minus-hardest-negative feature cosine margin over geometry-matched adjacent-time primitive pairs, catching temporally inconsistent or non-discriminative feature artifacts."}
       },
       "results": {
         "split4d_random_order": {"type": "baseline", "mIoU": 0.2485224220168792, "mAcc": 0.758095238095238, "Recall": 0.3952380952380952, "F1": 0.389181461631138, "Recalldyn": 0.31746031746031744},

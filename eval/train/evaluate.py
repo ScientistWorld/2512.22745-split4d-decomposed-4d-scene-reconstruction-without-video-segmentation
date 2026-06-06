@@ -101,7 +101,7 @@ def mask_feature_agreement(scene_name: str, scene: Dict[str, np.ndarray], featur
     return float(np.mean(margins))
 
 
-def tracking_feature_agreement(scene_name: str, scene: Dict[str, np.ndarray], features: np.ndarray) -> float:
+def tracking_feature_margin(scene_name: str, scene: Dict[str, np.ndarray], features: np.ndarray) -> float:
     scores: List[float] = []
     frames = int(scene["frames"])
     for t in range(frames - 1):
@@ -123,9 +123,16 @@ def tracking_feature_agreement(scene_name: str, scene: Dict[str, np.ndarray], fe
             continue
         src = active_now[keep]
         dst = active_next[nearest[keep]]
-        scores.extend((features[src] * features[dst]).sum(axis=1).tolist())
+        next_objects = scene["object_id"][active_next]
+        for src_index, dst_index in zip(src, dst):
+            positive = float(features[src_index] @ features[dst_index])
+            negatives = active_next[next_objects != scene["object_id"][src_index]]
+            if len(negatives) == 0:
+                continue
+            hardest_negative = float(np.max(features[src_index] @ features[negatives].T))
+            scores.append(positive - hardest_negative)
     if not scores:
-        raise ValueError(f"{scene_name}: no tracking pairs available for {SLICE} feature agreement")
+        raise ValueError(f"{scene_name}: no tracking pairs available for {SLICE} feature margin")
     return float(np.mean(scores))
 
 
@@ -192,7 +199,7 @@ def score_scene(scene_name: str, scene_payload: Mapping[str, object]) -> Dict[st
         raise ValueError(f"{scene_name}: empty {SLICE} slice")
     metrics = instance_metrics(pred[keep], true_full[keep], dynamic_flags(truth_scene))
     metrics["MaskFeatureAgreement"] = mask_feature_agreement(scene_name, truth_scene, features)
-    metrics["TrackingFeatureAgreement"] = tracking_feature_agreement(scene_name, truth_scene, features)
+    metrics["TrackingFeatureMargin"] = tracking_feature_margin(scene_name, truth_scene, features)
     return metrics
 
 

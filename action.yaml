@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Run evaluate_train.sh and evaluate_test.sh on frozen outputs to populate split score files."
+notes: "Rerun split scoring after replacing saturated TrackingFeatureAgreement with TrackingFeatureMargin."

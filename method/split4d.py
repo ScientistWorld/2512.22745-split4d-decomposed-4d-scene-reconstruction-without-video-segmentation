@@ -127,7 +127,10 @@ def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.nd
         op_now = temporal_opacity(scene, t)[a]
         op_next = temporal_opacity(scene, t + 1)[a]
         fade = op_now - op_next
-        disappearing = a[(fade > np.quantile(fade, 0.55)) & (op_now > 0.28)]
+        # The paper regularizes disappearing Gaussians.  In the compact
+        # synthetic scenes, replacement is gradual, so include every visibly
+        # fading primitive instead of only the top fade quantile.
+        disappearing = a[(fade > 0.0) & (op_now > 0.28)]
         if len(disappearing) == 0:
             disappearing = a[: min(8, len(a))]
         pos_a = position_at(scene, t)[disappearing]

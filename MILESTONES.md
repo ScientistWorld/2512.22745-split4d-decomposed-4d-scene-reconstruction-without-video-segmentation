@@ -40,4 +40,9 @@
 - Added a paper-consistent causal same-view temporal window to streaming training so each ordered step optimizes the rendered-feature contrastive loss and regularizers over adjacent frames, while the random-order ablation remains single-sample random training.
 - Resubmitting the full standard/train/test regeneration; milestone remains `method_runs` until all fresh score files pass the gate.
 
+### [2026-06-06 18:55] - method_runs
+- Job `6de5c4dd-699` improved the streaming ablation F1 but still failed the gate: streaming F1 0.443 remained below random-order F1 0.458, and streaming dynamic recall 0.460 remained below random-order 0.579.
+- Broadened the paper's 3D tracking regularization to include all visibly fading primitives in the reduced scenes, increased the temporal alignment weight, reduced early semantic alignment for the semantic-collision scene, and expanded the streaming temporal window.
+- Resubmitting the full regeneration; milestone remains `method_runs` until fresh standard, train, and test score files pass the gate.
+
 ## Stop Justification

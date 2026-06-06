@@ -35,6 +35,8 @@
 - The random-order ablation now samples observations randomly with replacement each iteration, matching the paper's description more closely than the previous shuffled-epoch implementation.
 - Job `ce5ba05d-e13` confirmed that random-with-replacement alone is insufficient: random-order F1 0.458 and Recalldyn 0.579 still exceeded streaming F1 0.383 and Recalldyn 0.413 on the hard scaled ablation.
 - Streaming training now uses a short causal same-view temporal window per optimization step. This preserves the paper's rendered-feature contrastive loss, 3D tracking alignment, and early semantic alignment, but restores the local adjacent-frame propagation that was underrepresented when each streaming step optimized only one observation.
+- Job `6de5c4dd-699` showed that the causal same-view window helps but does not yet restore the core claim: streaming F1 increased to 0.443, but dynamic recall stayed below the random-order ablation.
+- The next run strengthens paper-native temporal coherence by matching every visibly fading primitive in the 3D tracking regularizer, uses a larger four-frame streaming window, increases the tracking weight to 1.35, and lowers semantic alignment to 0.03 so the semantic-collision scene relies less on long-range procedural semantic shortcuts.
 
 ## Results
 
@@ -69,6 +71,14 @@ Job `ce5ba05d-e13` after the random-with-replacement ablation fix:
 - Interaction random-order ablation: random-order mIoU 0.305, F1 0.458, dynamic recall 0.579.
 
 The result is still only `method_runs`: changing the random-order sampler did not restore the paper's streaming advantage. The next submission fixes the streaming side by optimizing each ordered step over a causal same-view temporal window, matching the paper's description that nearby time steps carry the contrastive feature propagation.
+
+Job `6de5c4dd-699` after adding the causal same-view temporal window:
+
+- Linear motion, Split4D streaming: mIoU 0.480, F1 0.642, dynamic recall 0.713.
+- Interaction streaming ablation: streaming mIoU 0.290, F1 0.443, dynamic recall 0.460.
+- Interaction random-order ablation: random-order mIoU 0.305, F1 0.458, dynamic recall 0.579.
+
+The run remains `method_runs`, not `core_claim`. The temporal window closed most of the F1 gap but not the dynamic-recall gap, so the next submission strengthens the paper's 3D tracking regularizer on the compact replacement-heavy scenes and reduces semantic alignment, which otherwise can give random temporal sampling a long-range cue that bypasses ordered propagation.
 
 Job `dbd053f2-d80` produced the first complete method outputs:
 
@@ -160,7 +170,7 @@ This run is not accepted for the milestone because it violates the constraint si
 
 - Reaching `core_claim_plus` would require a new configuration that improves an additional setting without breaking the streaming-ablation constraint.
 - Restoring `core_claim` now requires fresh current artifacts, not the stale accepted JSON: `scoring/scores.json`, `scoring/scores_train.json`, and `scoring/scores_test.json` must all include `Recallstatic` and `ClusterSizeError`, and streaming must beat random-order on `scaled_streaming_ablation` F1 and `Recalldyn`.
-- If the causal-window streaming run still fails, remaining fixes are streaming-side, not evaluator-side: revisit reduced-scale LR scheduling, the interaction-scene semantic-alignment weight, or the tracking regularizer strength while keeping the paper's loss and fixed-Gaussian procedure intact.
+- If the broadened-tracking run still fails, remaining fixes are streaming-side, not evaluator-side: revisit reduced-scale LR scheduling, scene-specific semantic-alignment scaling, or first-frame clustering stability while keeping the paper's loss and fixed-Gaussian procedure intact.
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap further, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 - The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
@@ -184,6 +194,7 @@ This run is not accepted for the milestone because it violates the constraint si
 - The 2026-06-06 18:10 audit found a second stale-artifact problem: the standard score file still contained older accepted values, while live outputs and train/test score files came from a run that failed the ablation constraint. The new core-claim gate is intended to prevent this mismatch from being accepted again.
 - Job `324c5944-240` failed for the intended reason: the core-claim gate rejected a fresh run where random-order still outperformed streaming. This is not an infrastructure failure.
 - Job `ce5ba05d-e13` also failed for the intended reason: the ablation remained reversed after switching random-order to with-replacement sampling, so the next iteration strengthens only the paper-native ordered temporal propagation in `method/split4d.py`.
+- Job `6de5c4dd-699` failed for the intended reason: local temporal windows improved streaming F1 but did not recover moving-object recall, so the next iteration strengthens the paper-native 3D tracking regularizer instead of changing the evaluator.
 
 ## Deviations from Paper
 
@@ -193,3 +204,4 @@ This run is not accepted for the milestone because it violates the constraint si
 - HDBSCAN inference is now the primary clustering path, matching the paper's postprocess. Deterministic KMeans remains as a fallback for small reduced-scale runs where HDBSCAN produces too few usable clusters, followed by the paper's filtering cues.
 - The full paper learns identity continuity through rendered fixed Gaussian primitives and tracking constraints. Earlier workspace versions applied a post-update temporal feature transfer, but that non-paper shortcut has been removed; the current method relies on streaming sampling, contrastive rendered-feature learning, 3D tracking alignment, and semantic alignment.
 - The reduced streaming optimizer now uses a causal same-view temporal observation window instead of one image per step. This scales the paper's temporally ordered sample stream to a compact benchmark where adjacent-frame propagation is otherwise too sparse, without introducing direct feature copying or evaluation labels.
+- The reduced 3D tracking regularizer now treats every visibly fading primitive as a disappearing primitive. This is a scale adjustment to the paper's disappearing-Gaussian alignment for compact scenes with gradual primitive replacement, not a use of hidden instance labels.

@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: false
 milestone: method_runs
-notes: "Regenerate Split4D outputs after adding a causal same-view temporal window to the streaming optimizer; restore core_claim only if fresh standard/train/test scores pass the streaming ablation gate."
+notes: "Regenerate Split4D outputs after broadening fading-primitive tracking and shifting the default run toward stronger temporal coherence with lower semantic alignment; restore core_claim only if fresh standard/train/test scores pass the streaming ablation gate."

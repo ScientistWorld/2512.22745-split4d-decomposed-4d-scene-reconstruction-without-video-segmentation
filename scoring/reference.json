@@ -2,7 +2,7 @@
   "experiments": {
     "scaled_linear_motion_segmentation": {
       "description": "Reduced deterministic Split4D rendered-feature benchmark corresponding to the paper's dynamic multi-view setting. These values are the accepted scaled reproduction target from job 82b7b084-80f; full-scale paper numbers are recorded separately under paper_fullscale_* experiments.",
-      "weight": 0.45,
+      "weight": 0.55,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
@@ -11,7 +11,9 @@
         "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 score, balancing precision and recall."},
         "Recalldyn": {"higher_is_better": true, "coefficient": 0.7, "description": "Recall averaged over objects identified as dynamically moving."},
         "Recallstatic": {"higher_is_better": true, "coefficient": 0.35, "description": "Recall averaged over slower/static objects to catch dynamic-only tuning."},
-        "ClusterSizeError": {"higher_is_better": false, "coefficient": -0.25, "description": "Mean normalized absolute difference between aligned predicted cluster sizes and true instance sizes, catching cluster imbalance without saturating on correct cluster counts."}
+        "ClusterSizeError": {"higher_is_better": false, "coefficient": -0.25, "description": "Mean normalized absolute difference between aligned predicted cluster sizes and true instance sizes, catching cluster imbalance without saturating on correct cluster counts."},
+        "MaskFeatureAgreement": {"higher_is_better": true, "coefficient": 0.35, "description": "Mean same-mask feature margin over complementary observation slices, catching label-only shortcuts that do not learn coherent rendered features."},
+        "TrackingFeatureAgreement": {"higher_is_better": true, "coefficient": 0.25, "description": "Mean feature cosine similarity over geometry-matched adjacent-time primitive pairs, catching temporally inconsistent feature artifacts."}
       },
       "results": {
         "split4d_streaming": {"type": "proposed", "mIoU": 0.36485487640378944, "mAcc": 0.763888888888889, "Recall": 0.5277777777777778, "F1": 0.5221647331964323, "Recalldyn": 0.6018518518518517}
@@ -19,7 +21,7 @@
     },
     "scaled_streaming_ablation": {
       "description": "Reduced deterministic interaction-motion ablation: temporally ordered Split4D feature learning versus the same learner with random temporal sampling.",
-      "weight": 0.35,
+      "weight": 0.45,
       "primary_metric": "F1",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
@@ -28,7 +30,9 @@
         "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 score, balancing precision and recall."},
         "Recalldyn": {"higher_is_better": true, "coefficient": 0.8, "description": "Recall averaged over objects identified as dynamically moving."},
         "Recallstatic": {"higher_is_better": true, "coefficient": 0.35, "description": "Recall averaged over slower/static objects to catch dynamic-only tuning."},
-        "ClusterSizeError": {"higher_is_better": false, "coefficient": -0.25, "description": "Mean normalized absolute difference between aligned predicted cluster sizes and true instance sizes, catching cluster imbalance without saturating on correct cluster counts."}
+        "ClusterSizeError": {"higher_is_better": false, "coefficient": -0.25, "description": "Mean normalized absolute difference between aligned predicted cluster sizes and true instance sizes, catching cluster imbalance without saturating on correct cluster counts."},
+        "MaskFeatureAgreement": {"higher_is_better": true, "coefficient": 0.35, "description": "Mean same-mask feature margin over complementary observation slices, catching label-only shortcuts that do not learn coherent rendered features."},
+        "TrackingFeatureAgreement": {"higher_is_better": true, "coefficient": 0.25, "description": "Mean feature cosine similarity over geometry-matched adjacent-time primitive pairs, catching temporally inconsistent feature artifacts."}
       },
       "results": {
         "split4d_random_order": {"type": "baseline", "mIoU": 0.2485224220168792, "mAcc": 0.758095238095238, "Recall": 0.3952380952380952, "F1": 0.389181461631138, "Recalldyn": 0.31746031746031744},
@@ -37,7 +41,7 @@
     },
     "paper_fullscale_linear_motion_segmentation": {
       "description": "Paper Table 1 Neural3DV-style full-scale result, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.05,
+      "weight": 0.0,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},
@@ -56,7 +60,7 @@
     },
     "paper_fullscale_interaction_motion_segmentation": {
       "description": "Paper Table 1 Multi-Human-style full-scale result, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.05,
+      "weight": 0.0,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},
@@ -75,7 +79,7 @@
     },
     "paper_fullscale_streaming_ablation": {
       "description": "Paper Table 2 Multi-Human Juggle full-scale ablation, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.05,
+      "weight": 0.0,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference ablation."},
@@ -91,7 +95,7 @@
     },
     "paper_fullscale_selfcap_segmentation": {
       "description": "Paper Table 1 SelfCap full-scale result, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.05,
+      "weight": 0.0,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},

@@ -1,26 +1,20 @@
 # Design Notes
 
 ## Checked
-- Read `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh` side by side. Train calls `eval.train.evaluate` and writes `scoring/scores_train.json`; test calls `eval.test.evaluate` and writes `scoring/scores_test.json`.
-- Checked that both train and test evaluators discover JSON artifacts under `outputs/` by default, so future methods are scored through their emitted artifacts rather than through a hardcoded method name.
-- Checked for train/test cross-imports. None were found; the only test-side reference to train is the intended `--train-scores scoring/scores_train.json` method-key mirror.
-- Checked that no `scoring/scores_train.json` or `scoring/scores_test.json` stubs exist.
-- Ran `bash -n` on both train/test evaluator scripts.
-- Grepped the changed eval/scoring files for paper-agreement metric names or formulas; none were found in metric names or emitted keys.
+- Read `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh` side by side. Train invokes `eval.train.evaluate` and writes `scoring/scores_train.json`; test invokes `eval.test.evaluate` and writes `scoring/scores_test.json`.
+- Confirmed both split evaluators discover JSON method artifacts under `outputs/` by default and score those artifacts instead of rerunning the method or hardcoding a method name.
+- Grepped for train/test cross-imports in `eval/train`, `eval/test`, and the split scripts. None were found.
+- Grepped the edited eval/reference files for paper-agreement metric names such as `published`, `vs_paper`, `deviation_from_paper`, `reproduction_error`, and `fit_to_published`. None were found.
+- Confirmed `scoring/scores_train.json` and `scoring/scores_test.json` do not exist.
+- Ran `bash -n` on `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh`.
 
 ## Changed
-- Added `Recallstatic` to both train and test evaluators. This keeps the score from rewarding methods that tune only for moving-object recall while sacrificing slower/static instances.
-- Replaced the saturated `ClusterCountError` guard with `ClusterSizeError` in both train and test evaluators. This penalizes cluster imbalance without being zero whenever a method predicts the right number of clusters.
-- Matched the primary linear-motion split contract to `eval/metrics.py` by excluding the `split4d_random_order` ablation artifact from `scaled_linear_motion_segmentation`.
-- Changed the train/test split from hard 50/50 primitive filtering to deterministic complementary weighted views over the full method artifact. This keeps the primary mIoU comparable to the accepted full-scene reproduction while still making train and test score different held-out point emphasis.
-- Set `scaled_streaming_ablation` primary metric to F1 after validation showed hard-split mIoU was too unstable for paper-consistency gating. mIoU remains a scored metric with nonzero coefficient; F1 keeps the interaction ablation tied to segmentation quality without using a paper-agreement objective.
-- Added required `description` fields to every metric in `scoring/reference.json`.
-- Added the two new metrics to the reduced train/test-scored experiments in `scoring/reference.json` with modest coefficients. The full-scale paper-reference groups were left as provenance-only entries and were not given synthetic-only metrics.
+- Added `MaskFeatureAgreement` to both split evaluators. It scores the emitted per-primitive feature artifact on complementary observation subsets, using same-mask feature margins rather than final labels alone.
+- Added `TrackingFeatureAgreement` to both split evaluators. It scores feature consistency over adjacent-time geometry matches, making a label-only shortcut less likely to transfer from visible train to held-out test.
+- Added both feature metrics to the reduced, actually-emitted experiments in `scoring/reference.json` with modest positive coefficients.
+- Moved all ranking weight onto the two reduced experiments emitted by the evaluators: `scaled_linear_motion_segmentation` is now `0.55`, `scaled_streaming_ablation` is now `0.45`, and `paper_fullscale_*` provenance groups are `0.0`. This avoids giving weight to experiments the train/test scripts never compute while preserving the recorded paper values.
 
-## Runtime Findings
-- Job `d54f6cae-3da` ran `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh` successfully on CPU and wrote both split score files.
-- The first run exposed two evaluator issues: `ClusterCountError` saturated at zero for every emitted method and the primary linear-motion experiment included the random-order ablation artifact. Both issues were fixed before the next submission.
-- Job `e249f8fc-0f4` verified the fixed evaluators. Train and test now emit the same experiment/method key sets, with 21 numeric metric values per split and no nulls.
-- The current ignored `outputs/` artifacts score below the random-order baseline on every interaction-ablation metric in both train and test. Earlier accepted job `82b7b084-80f` had the proposed streaming method ahead, but its prediction JSON artifacts are not archived in git. Because this iteration is not allowed to retrain or modify the method, the split scores are real but fail the gym reasonableness gate for the current artifacts.
-- A post-design validation attempt caught that hard half-scene filtering made split mIoU more than 2x lower than the accepted reduced reference on the interaction ablation. The weighted full-artifact split is the correction; it preserves artifact-based scoring and avoids paper-agreement metrics while keeping the primary metric calibrated.
-- `python validate.py --post-design` now passes with `scores.json`, `scores_train.json`, and `scores_test.json` present. The accepted core-claim signal remains the standard scaled reproduction in `scoring/scores.json`; the split files provide the anti-shortcut train/test view.
+## Runtime Concerns For The Runner
+- The split evaluators now require every scored scene payload to include a `features` matrix with one row per primitive, in addition to `pred_labels`. The current `method.split4d` artifacts already use that contract, but the next runner should verify any baseline/future artifact format before executing the split.
+- The new feature metrics were added by source inspection only; this iteration did not run evaluators or produce numbers by instruction. The next runner should check that neither metric saturates on the existing artifacts and that train/test gaps are informative.
+- The synthetic data module can expose truth labels for internal evaluation. The added feature metrics do not fully prevent a method from deliberately emitting truth-derived labels and truth-derived features, but they make simple visible-label memorization less effective and better align the split with the paper's learned feature representation.

@@ -9,7 +9,7 @@ from typing import Dict, Iterable, List, Mapping, Optional, Set
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 
-from data.split4d_synthetic import build_scene
+from data.split4d_synthetic import build_scene, iter_observations, position_at, temporal_opacity
 
 
 SLICE = "test"
@@ -54,6 +54,79 @@ def slice_mask(scene_name: str, true: np.ndarray) -> np.ndarray:
         selected = ordered[:half] if SLICE == "train" else ordered[half:]
         mask[selected] = True
     return mask
+
+
+def observation_in_slice(scene_name: str, t: int, view: int) -> bool:
+    digest = hashlib.blake2b(
+        f"split4d-observation-eval:{scene_name}:{int(t)}:{int(view)}".encode("utf-8"),
+        digest_size=8,
+    ).digest()
+    bucket = int.from_bytes(digest, "little") % 2
+    return bucket == (0 if SLICE == "train" else 1)
+
+
+def normalize_rows(values: np.ndarray) -> np.ndarray:
+    return values / np.maximum(np.linalg.norm(values, axis=1, keepdims=True), 1e-8)
+
+
+def render_features(features: np.ndarray, contrib: np.ndarray, weights: np.ndarray) -> np.ndarray:
+    rendered = (features[contrib] * weights[..., None]).sum(axis=1)
+    return normalize_rows(rendered)
+
+
+def mask_feature_agreement(scene_name: str, scene: Dict[str, np.ndarray], features: np.ndarray) -> float:
+    margins: List[float] = []
+    for t, view, contrib, weights, labels in iter_observations(scene, streaming=True):
+        if not observation_in_slice(scene_name, int(t), int(view)):
+            continue
+        pixel_features = render_features(features, contrib, weights)
+        centers = []
+        within = []
+        for label in sorted(int(x) for x in np.unique(labels)):
+            local = np.flatnonzero(labels == label)
+            if len(local) < 2:
+                continue
+            center = normalize_rows(pixel_features[local].mean(axis=0, keepdims=True))[0]
+            centers.append(center)
+            within.append(float((pixel_features[local] @ center).mean()))
+        if len(centers) < 2:
+            continue
+        centers_arr = np.stack(centers, axis=0)
+        sim = centers_arr @ centers_arr.T
+        np.fill_diagonal(sim, -np.inf)
+        hardest_negative = np.max(sim, axis=1)
+        margins.extend(float(pos - neg) for pos, neg in zip(within, hardest_negative))
+    if not margins:
+        raise ValueError(f"{scene_name}: no observations available for {SLICE} feature agreement")
+    return float(np.mean(margins))
+
+
+def tracking_feature_agreement(scene_name: str, scene: Dict[str, np.ndarray], features: np.ndarray) -> float:
+    scores: List[float] = []
+    frames = int(scene["frames"])
+    for t in range(frames - 1):
+        if not observation_in_slice(scene_name, t, 0):
+            continue
+        active_now = np.flatnonzero(temporal_opacity(scene, t) >= 0.28)
+        active_next = np.flatnonzero(temporal_opacity(scene, t + 1) >= 0.28)
+        if len(active_now) == 0 or len(active_next) == 0:
+            continue
+        pos_now = position_at(scene, t)[active_now]
+        pos_next = position_at(scene, t + 1)[active_next]
+        predicted_next = pos_now + scene["velocity"][active_now]
+        scale = np.median(np.linalg.norm(pos_next - np.median(pos_next, axis=0), axis=1)) + 1e-6
+        dist = ((predicted_next[:, None, :] - pos_next[None, :, :]) ** 2).sum(axis=2) / (scale**2)
+        nearest = dist.argmin(axis=1)
+        best = dist[np.arange(len(active_now)), nearest]
+        keep = best <= np.quantile(best, 0.45)
+        if not np.any(keep):
+            continue
+        src = active_now[keep]
+        dst = active_next[nearest[keep]]
+        scores.extend((features[src] * features[dst]).sum(axis=1).tolist())
+    if not scores:
+        raise ValueError(f"{scene_name}: no tracking pairs available for {SLICE} feature agreement")
+    return float(np.mean(scores))
 
 
 def instance_metrics(
@@ -104,15 +177,23 @@ def score_scene(scene_name: str, scene_payload: Mapping[str, object]) -> Dict[st
     truth_scene = build_scene(scene_name, include_truth=True)
     true_full = np.asarray(truth_scene["object_id"], dtype=np.int64)
     pred_full = np.asarray(scene_payload["pred_labels"], dtype=np.int64)
+    features = normalize_rows(np.asarray(scene_payload["features"], dtype=np.float32))
     if len(pred_full) != len(true_full):
         raise ValueError(
             f"{scene_name}: pred_labels has length {len(pred_full)}, expected {len(true_full)}"
+        )
+    if features.shape[0] != len(true_full):
+        raise ValueError(
+            f"{scene_name}: features has length {features.shape[0]}, expected {len(true_full)}"
         )
     pred = align_cluster_ids(pred_full, true_full)
     keep = slice_mask(scene_name, true_full)
     if not np.any(keep):
         raise ValueError(f"{scene_name}: empty {SLICE} slice")
-    return instance_metrics(pred[keep], true_full[keep], dynamic_flags(truth_scene))
+    metrics = instance_metrics(pred[keep], true_full[keep], dynamic_flags(truth_scene))
+    metrics["MaskFeatureAgreement"] = mask_feature_agreement(scene_name, truth_scene, features)
+    metrics["TrackingFeatureAgreement"] = tracking_feature_agreement(scene_name, truth_scene, features)
+    return metrics
 
 
 def evaluate_payload(payload: Mapping[str, object]) -> Dict[str, Dict[str, Dict[str, float]]]:

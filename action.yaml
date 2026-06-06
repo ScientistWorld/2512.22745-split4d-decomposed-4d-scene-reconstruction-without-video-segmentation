@@ -1,4 +1,4 @@
 action: submit
 gpus: 0
 test: false
-notes: "Regenerate scaled Split4D artifacts with accepted 3200-step settings, validate core scores, then rerun train/test split scoring."
+notes: "Regenerate Split4D artifacts, rescore train/test with calibrated weighted split evaluators, and run post-design validation."

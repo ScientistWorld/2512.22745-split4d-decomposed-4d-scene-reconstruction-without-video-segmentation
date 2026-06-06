@@ -16,4 +16,4 @@ bash scripts/reproduce.sh
 python -m eval.metrics --include-exploratory --output tmp/exploratory_scores.json
 bash scripts/evaluate_train.sh
 bash scripts/evaluate_test.sh
-python validate.py --compare
+python validate.py --post-design

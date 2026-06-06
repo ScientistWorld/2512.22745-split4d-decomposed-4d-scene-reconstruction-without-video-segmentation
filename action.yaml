@@ -3,4 +3,4 @@
 # only after your turn ends.
 action: done
 milestone: core_claim
-notes: "Final audit confirmed core_claim on the documented reduced Split4D benchmark: method/eval separation holds, the score gate passes on canonical/train/test scores, and no further productive work remains."
+notes: "Final verification complete: core_claim preserved, validators and score gate pass, documentation hardened for gym use, and VERIFICATION.md records the reduced-benchmark limitation."

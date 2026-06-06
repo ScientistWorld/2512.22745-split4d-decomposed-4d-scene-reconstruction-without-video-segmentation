@@ -5,4 +5,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Reproduced the core Split4D claim on the accepted reduced dynamic-Gaussian benchmark. The environment is packaged, scores are written, and validation passes."
+notes: "Continuation audit confirmed the accepted reduced Split4D reproduction remains trustworthy. Validation passes and no higher milestone is supported by the available runs."

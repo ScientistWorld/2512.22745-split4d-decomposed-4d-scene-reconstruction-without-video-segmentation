@@ -4,7 +4,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-from typing import Dict, Iterable, Mapping, Optional, Set
+from typing import Dict, Iterable, List, Mapping, Optional, Set
 
 import numpy as np
 from scipy.optimize import linear_sum_assignment
@@ -13,8 +13,6 @@ from data.split4d_synthetic import build_scene
 
 
 SLICE = "test"
-FOCUS_WEIGHT = 1.25
-HOLDOUT_WEIGHT = 0.75
 
 
 def dynamic_flags(scene: Dict[str, np.ndarray]) -> np.ndarray:
@@ -40,27 +38,28 @@ def align_cluster_ids(pred: np.ndarray, true: np.ndarray) -> np.ndarray:
     return np.asarray([mapping.get(int(label), unmatched) for label in pred], dtype=np.int64)
 
 
-def split_focus_mask(scene_name: str, true: np.ndarray) -> np.ndarray:
-    focus = np.zeros(len(true), dtype=bool)
+def slice_mask(scene_name: str, true: np.ndarray) -> np.ndarray:
+    mask = np.zeros(len(true), dtype=bool)
     for label in sorted(int(x) for x in np.unique(true)):
         indices = np.flatnonzero(true == label)
         keyed = []
         for index in indices:
             digest = hashlib.blake2b(
-                f"{SLICE}:{scene_name}:{label}:{int(index)}".encode("utf-8"),
+                f"split4d-eval:{scene_name}:{label}:{int(index)}".encode("utf-8"),
                 digest_size=8,
             ).digest()
             keyed.append((int.from_bytes(digest, "little"), int(index)))
         ordered = [index for _key, index in sorted(keyed)]
-        focus[ordered[: len(ordered) // 2]] = True
-    return focus
+        half = len(ordered) // 2
+        selected = ordered[:half] if SLICE == "train" else ordered[half:]
+        mask[selected] = True
+    return mask
 
 
 def instance_metrics(
     pred: np.ndarray,
     true: np.ndarray,
     dynamic_object: np.ndarray,
-    weights: np.ndarray,
 ) -> Dict[str, float]:
     labels = sorted(int(x) for x in np.unique(true))
     ious = []
@@ -73,10 +72,10 @@ def instance_metrics(
     for label in labels:
         predicted = pred == label
         target = true == label
-        tp = float(weights[np.logical_and(predicted, target)].sum())
-        fp = float(weights[np.logical_and(predicted, ~target)].sum())
-        fn = float(weights[np.logical_and(~predicted, target)].sum())
-        tn = float(weights[np.logical_and(~predicted, ~target)].sum())
+        tp = float(np.logical_and(predicted, target).sum())
+        fp = float(np.logical_and(predicted, ~target).sum())
+        fn = float(np.logical_and(~predicted, target).sum())
+        tn = float(np.logical_and(~predicted, ~target).sum())
         ious.append(tp / max(tp + fp + fn, 1.0))
         accs.append((tp + tn) / max(tp + tn + fp + fn, 1.0))
         recall = tp / max(tp + fn, 1.0)
@@ -87,8 +86,8 @@ def instance_metrics(
             dyn_recalls.append(recall)
         else:
             static_recalls.append(recall)
-        pred_size = float(weights[predicted].sum())
-        target_size = float(weights[target].sum())
+        pred_size = float(predicted.sum())
+        target_size = float(target.sum())
         size_errors.append(abs(pred_size - target_size) / max(target_size, 1.0))
     return {
         "mIoU": float(np.mean(ious)),
@@ -110,9 +109,10 @@ def score_scene(scene_name: str, scene_payload: Mapping[str, object]) -> Dict[st
             f"{scene_name}: pred_labels has length {len(pred_full)}, expected {len(true_full)}"
         )
     pred = align_cluster_ids(pred_full, true_full)
-    focus = split_focus_mask(scene_name, true_full)
-    weights = np.where(focus, FOCUS_WEIGHT, HOLDOUT_WEIGHT).astype(np.float32)
-    return instance_metrics(pred, true_full, dynamic_flags(truth_scene), weights)
+    keep = slice_mask(scene_name, true_full)
+    if not np.any(keep):
+        raise ValueError(f"{scene_name}: empty {SLICE} slice")
+    return instance_metrics(pred[keep], true_full[keep], dynamic_flags(truth_scene))
 
 
 def evaluate_payload(payload: Mapping[str, object]) -> Dict[str, Dict[str, Dict[str, float]]]:

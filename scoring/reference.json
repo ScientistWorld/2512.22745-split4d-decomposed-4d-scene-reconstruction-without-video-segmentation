@@ -2,7 +2,7 @@
   "experiments": {
     "scaled_linear_motion_segmentation": {
       "description": "Reduced deterministic Split4D rendered-feature benchmark corresponding to the paper's dynamic multi-view setting. These values are the accepted scaled reproduction target from job 82b7b084-80f; full-scale paper numbers are recorded separately under paper_fullscale_* experiments.",
-      "weight": 0.55,
+      "weight": 0.548,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
@@ -21,7 +21,7 @@
     },
     "scaled_streaming_ablation": {
       "description": "Reduced deterministic interaction-motion ablation: temporally ordered Split4D feature learning versus the same learner with random temporal sampling.",
-      "weight": 0.45,
+      "weight": 0.448,
       "primary_metric": "F1",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
@@ -41,7 +41,7 @@
     },
     "paper_fullscale_linear_motion_segmentation": {
       "description": "Paper Table 1 Neural3DV-style full-scale result, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.0,
+      "weight": 0.001,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},
@@ -60,7 +60,7 @@
     },
     "paper_fullscale_interaction_motion_segmentation": {
       "description": "Paper Table 1 Multi-Human-style full-scale result, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.0,
+      "weight": 0.001,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},
@@ -79,7 +79,7 @@
     },
     "paper_fullscale_streaming_ablation": {
       "description": "Paper Table 2 Multi-Human Juggle full-scale ablation, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.0,
+      "weight": 0.001,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference ablation."},
@@ -95,7 +95,7 @@
     },
     "paper_fullscale_selfcap_segmentation": {
       "description": "Paper Table 1 SelfCap full-scale result, retained for provenance and not used for the reduced synthetic scores.json comparison.",
-      "weight": 0.0,
+      "weight": 0.001,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},

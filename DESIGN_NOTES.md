@@ -12,7 +12,7 @@
 - Added `MaskFeatureAgreement` to both split evaluators. It scores the emitted per-primitive feature artifact on complementary observation subsets, using same-mask feature margins rather than final labels alone.
 - Added `TrackingFeatureAgreement` to both split evaluators. It scores feature consistency over adjacent-time geometry matches, making a label-only shortcut less likely to transfer from visible train to held-out test.
 - Added both feature metrics to the reduced, actually-emitted experiments in `scoring/reference.json` with modest positive coefficients.
-- Moved all ranking weight onto the two reduced experiments emitted by the evaluators: `scaled_linear_motion_segmentation` is now `0.55`, `scaled_streaming_ablation` is now `0.45`, and `paper_fullscale_*` provenance groups are `0.0`. This avoids giving weight to experiments the train/test scripts never compute while preserving the recorded paper values.
+- Moved nearly all ranking weight onto the two reduced experiments emitted by the evaluators: `scaled_linear_motion_segmentation` is now `0.548`, `scaled_streaming_ablation` is now `0.448`, and each `paper_fullscale_*` provenance group keeps a validator-compatible `0.001` weight. This avoids meaningful weight on experiments the train/test scripts never compute while preserving the recorded paper values.
 
 ## Runtime Concerns For The Runner
 - The split evaluators now require every scored scene payload to include a `features` matrix with one row per primitive, in addition to `pred_labels`. The current `method.split4d` artifacts already use that contract, but the next runner should verify any baseline/future artifact format before executing the split.

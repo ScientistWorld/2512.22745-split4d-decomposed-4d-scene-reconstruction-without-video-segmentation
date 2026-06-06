@@ -56,3 +56,4 @@
 - `python validate.py --post-design` passed, confirming score structure, train/test independence, method/eval separation, and artifact coverage.
 
 ## Stop Justification
+- Completed at milestone `core_claim`.

@@ -5,4 +5,4 @@ action: done
 gpus: 0
 test: true
 milestone: core_claim
-notes: "Core claim restored with job 82b7b084-80f. Longer follow-up improved linear motion but broke the streaming ablation, so accepted scores were restored and reproduce.sh now runs the validated 3200-step configuration."
+notes: "Validation fixed by separating reduced synthetic scaled_* score groups from full-scale paper_fullscale_* provenance groups. Core claim remains based on accepted job 82b7b084-80f."

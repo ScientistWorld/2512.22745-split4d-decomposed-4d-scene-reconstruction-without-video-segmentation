@@ -75,14 +75,14 @@ def evaluate_file(path: Path, include_exploratory: bool = False) -> Dict[str, Di
         pred = align_cluster_ids(np.asarray(scene["pred_labels"], dtype=np.int64), true)
         dynamic_object = dynamic_flags(truth_scene)
         if scene_name == "linear_motion" and method != "split4d_random_order":
-            out.setdefault("linear_motion_segmentation", {"results": {}})
-            out["linear_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+            out.setdefault("scaled_linear_motion_segmentation", {"results": {}})
+            out["scaled_linear_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
         if include_exploratory and scene_name == "interaction_motion" and method != "split4d_random_order":
-            out.setdefault("interaction_motion_segmentation", {"results": {}})
-            out["interaction_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+            out.setdefault("scaled_interaction_motion_segmentation", {"results": {}})
+            out["scaled_interaction_motion_segmentation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
         if scene_name == "interaction_motion" and method in {"split4d_streaming", "split4d_random_order"}:
-            out.setdefault("streaming_ablation", {"results": {}})
-            out["streaming_ablation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
+            out.setdefault("scaled_streaming_ablation", {"results": {}})
+            out["scaled_streaming_ablation"]["results"][method] = instance_metrics(pred, true, dynamic_object)
     return out
 
 

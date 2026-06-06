@@ -47,3 +47,8 @@
 - Job `d6f83e15-775` tested a longer 4200-step, 48-sample configuration.
 - The longer run improved linear-motion mIoU to 0.423 but regressed the required streaming ablation: streaming scored 0.180 mIoU vs random-order 0.241.
 - Kept `core_claim`, restored `scoring/scores.json` to the accepted job `82b7b084-80f` results, and made `scripts/reproduce.sh` use the accepted 3200-step configuration by default.
+
+### [2026-06-06 17:22] - core_claim
+- Fixed validation failure caused by comparing reduced synthetic scores against full-scale paper Table 1/Table 2 numbers.
+- Renamed accepted score groups to `scaled_linear_motion_segmentation` and `scaled_streaming_ablation`.
+- Kept full-scale paper numbers in `reference.json` under separate `paper_fullscale_*` provenance keys.

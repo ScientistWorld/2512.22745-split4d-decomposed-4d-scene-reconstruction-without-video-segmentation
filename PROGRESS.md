@@ -28,6 +28,7 @@
 - Job `82b7b084-80f` completed the visible-surface run and restored `core_claim`. The method now produces a non-trivial linear-motion segmentation result and beats the random-order ablation on the same harder interaction scene.
 - Job `d6f83e15-775` tested a longer 4200-step, 48-sample configuration. It improved linear-motion mIoU but broke the required streaming-ablation direction, so it is recorded as exploratory and not used as the accepted score.
 - `scripts/reproduce.sh` now sets the accepted 3200-step configuration itself, so running it directly reproduces the validated `core_claim` setup instead of depending on `scripts/run.sh` environment variables.
+- After validator feedback, the scored experiments were renamed to `scaled_linear_motion_segmentation` and `scaled_streaming_ablation`. The full-scale paper Table 1/Table 2 values remain in `reference.json` under `paper_fullscale_*` keys, while `scores.json` is compared only against the reduced synthetic benchmark it actually ran.
 
 ## Results
 
@@ -107,7 +108,7 @@ Job `82b7b084-80f` tested visible, confident alpha-composited surface samples wi
 - Interaction streaming ablation: streaming mIoU 0.373, F1 0.534, dynamic recall 0.611.
 - Interaction streaming ablation baseline: random-order mIoU 0.249, F1 0.389, dynamic recall 0.317.
 
-This restores `core_claim`. The absolute scores remain below the paper's full-scale values, but the run uses the paper's actual computation on a reduced rendered-feature benchmark and demonstrates the central claim under a same-benchmark constraint: temporally ordered Split4D training improves moving-object segmentation over random temporal sampling.
+This restores `core_claim`. The absolute scores remain below the paper's full-scale values, so the accepted score keys are explicitly marked as `scaled_*`. The run uses the paper's actual computation on a reduced rendered-feature benchmark and demonstrates the central claim under a same-benchmark constraint: temporally ordered Split4D training improves moving-object segmentation over random temporal sampling.
 
 Job `d6f83e15-775` tested a longer equal-budget configuration with 4200 steps and 48 samples per mask:
 

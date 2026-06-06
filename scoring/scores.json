@@ -1,6 +1,6 @@
 {
   "experiments": {
-    "linear_motion_segmentation": {
+    "scaled_linear_motion_segmentation": {
       "results": {
         "split4d_streaming": {
           "F1": 0.5221647331964323,
@@ -11,7 +11,7 @@
         }
       }
     },
-    "streaming_ablation": {
+    "scaled_streaming_ablation": {
       "results": {
         "split4d_random_order": {
           "F1": 0.389181461631138,

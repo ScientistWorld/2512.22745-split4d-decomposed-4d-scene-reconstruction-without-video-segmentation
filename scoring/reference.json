@@ -5,11 +5,13 @@
       "weight": 0.45,
       "primary_metric": "mIoU",
       "metrics": {
-        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
-        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
-        "Recall": {"higher_is_better": true, "coefficient": 0.5},
-        "F1": {"higher_is_better": true, "coefficient": 0.8},
-        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7}
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2, "description": "Mean one-vs-rest instance accuracy on the evaluated split primitives."},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5, "description": "Mean instance recall across all objects."},
+        "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 score, balancing precision and recall."},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7, "description": "Recall averaged over objects identified as dynamically moving."},
+        "Recallstatic": {"higher_is_better": true, "coefficient": 0.35, "description": "Recall averaged over slower/static objects to catch dynamic-only tuning."},
+        "ClusterCountError": {"higher_is_better": false, "coefficient": -0.25, "description": "Absolute error between predicted and true instance counts, catching label fragmentation or collapse."}
       },
       "results": {
         "split4d_streaming": {"type": "proposed", "mIoU": 0.36485487640378944, "mAcc": 0.763888888888889, "Recall": 0.5277777777777778, "F1": 0.5221647331964323, "Recalldyn": 0.6018518518518517}
@@ -20,11 +22,13 @@
       "weight": 0.35,
       "primary_metric": "mIoU",
       "metrics": {
-        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
-        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
-        "Recall": {"higher_is_better": true, "coefficient": 0.5},
-        "F1": {"higher_is_better": true, "coefficient": 0.8},
-        "Recalldyn": {"higher_is_better": true, "coefficient": 0.8}
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU on the evaluated split primitives."},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2, "description": "Mean one-vs-rest instance accuracy on the evaluated split primitives."},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5, "description": "Mean instance recall across all objects."},
+        "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 score, balancing precision and recall."},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.8, "description": "Recall averaged over objects identified as dynamically moving."},
+        "Recallstatic": {"higher_is_better": true, "coefficient": 0.35, "description": "Recall averaged over slower/static objects to catch dynamic-only tuning."},
+        "ClusterCountError": {"higher_is_better": false, "coefficient": -0.25, "description": "Absolute error between predicted and true instance counts, catching label fragmentation or collapse."}
       },
       "results": {
         "split4d_random_order": {"type": "baseline", "mIoU": 0.2485224220168792, "mAcc": 0.758095238095238, "Recall": 0.3952380952380952, "F1": 0.389181461631138, "Recalldyn": 0.31746031746031744},
@@ -36,11 +40,11 @@
       "weight": 0.07,
       "primary_metric": "mIoU",
       "metrics": {
-        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
-        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
-        "Recall": {"higher_is_better": true, "coefficient": 0.5},
-        "F1": {"higher_is_better": true, "coefficient": 0.8},
-        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7}
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2, "description": "Mean one-vs-rest instance accuracy reported for the full-scale reference setting."},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5, "description": "Mean instance recall reported for the full-scale reference setting."},
+        "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 reported for the full-scale reference setting."},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7, "description": "Dynamic-object recall reported for the full-scale reference setting."}
       },
       "results": {
         "SA4D": {"type": "baseline", "mIoU": 0.668, "mAcc": 0.987, "Recall": 0.861, "F1": 0.759, "Recalldyn": 0.812},
@@ -55,11 +59,11 @@
       "weight": 0.07,
       "primary_metric": "mIoU",
       "metrics": {
-        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
-        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
-        "Recall": {"higher_is_better": true, "coefficient": 0.5},
-        "F1": {"higher_is_better": true, "coefficient": 0.8},
-        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7}
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference setting."},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2, "description": "Mean one-vs-rest instance accuracy reported for the full-scale reference setting."},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5, "description": "Mean instance recall reported for the full-scale reference setting."},
+        "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 reported for the full-scale reference setting."},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.7, "description": "Dynamic-object recall reported for the full-scale reference setting."}
       },
       "results": {
         "SA4D": {"type": "baseline", "mIoU": 0.592, "mAcc": 0.928, "Recall": 0.761, "F1": 0.710, "Recalldyn": 0.856},
@@ -74,11 +78,11 @@
       "weight": 0.06,
       "primary_metric": "mIoU",
       "metrics": {
-        "mIoU": {"higher_is_better": true, "coefficient": 1.0},
-        "mAcc": {"higher_is_better": true, "coefficient": 0.2},
-        "Recall": {"higher_is_better": true, "coefficient": 0.5},
-        "F1": {"higher_is_better": true, "coefficient": 0.8},
-        "Recalldyn": {"higher_is_better": true, "coefficient": 0.8}
+        "mIoU": {"higher_is_better": true, "coefficient": 1.0, "description": "Mean instance IoU reported for the full-scale reference ablation."},
+        "mAcc": {"higher_is_better": true, "coefficient": 0.2, "description": "Mean one-vs-rest instance accuracy reported for the full-scale reference ablation."},
+        "Recall": {"higher_is_better": true, "coefficient": 0.5, "description": "Mean instance recall reported for the full-scale reference ablation."},
+        "F1": {"higher_is_better": true, "coefficient": 0.8, "description": "Mean instance F1 reported for the full-scale reference ablation."},
+        "Recalldyn": {"higher_is_better": true, "coefficient": 0.8, "description": "Dynamic-object recall reported for the full-scale reference ablation."}
       },
       "results": {
         "split4d_random_order": {"type": "baseline", "mIoU": 0.552, "mAcc": 0.977, "Recall": 0.589, "F1": 0.584, "Recalldyn": 0.365},

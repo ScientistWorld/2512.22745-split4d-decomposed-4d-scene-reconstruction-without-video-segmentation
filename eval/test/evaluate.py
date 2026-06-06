@@ -49,13 +49,19 @@ def stratified_split_indices(scene_name: str, true: np.ndarray) -> np.ndarray:
     return np.sort(np.concatenate(selected)).astype(np.int64)
 
 
-def instance_metrics(pred: np.ndarray, true: np.ndarray, dynamic_object: np.ndarray) -> Dict[str, float]:
+def instance_metrics(
+    pred: np.ndarray,
+    true: np.ndarray,
+    dynamic_object: np.ndarray,
+    pred_cluster_count: int,
+) -> Dict[str, float]:
     labels = sorted(int(x) for x in np.unique(true))
     ious = []
     accs = []
     recalls = []
     f1s = []
     dyn_recalls = []
+    static_recalls = []
     for label in labels:
         predicted = pred == label
         target = true == label
@@ -71,12 +77,16 @@ def instance_metrics(pred: np.ndarray, true: np.ndarray, dynamic_object: np.ndar
         f1s.append(2 * precision * recall / max(precision + recall, 1e-12))
         if dynamic_object[label]:
             dyn_recalls.append(recall)
+        else:
+            static_recalls.append(recall)
     return {
         "mIoU": float(np.mean(ious)),
         "mAcc": float(np.mean(accs)),
         "Recall": float(np.mean(recalls)),
         "F1": float(np.mean(f1s)),
         "Recalldyn": float(np.mean(dyn_recalls) if dyn_recalls else np.mean(recalls)),
+        "Recallstatic": float(np.mean(static_recalls) if static_recalls else np.mean(recalls)),
+        "ClusterCountError": float(abs(int(pred_cluster_count) - len(labels))),
     }
 
 
@@ -90,8 +100,9 @@ def score_scene(scene_name: str, scene_payload: Mapping[str, object]) -> Dict[st
         )
     split_indices = stratified_split_indices(scene_name, true_full)
     true = true_full[split_indices]
-    pred = align_cluster_ids(pred_full[split_indices], true)
-    return instance_metrics(pred, true, dynamic_flags(truth_scene))
+    pred_raw = pred_full[split_indices]
+    pred = align_cluster_ids(pred_raw, true)
+    return instance_metrics(pred, true, dynamic_flags(truth_scene), len(np.unique(pred_raw)))
 
 
 def evaluate_payload(payload: Mapping[str, object]) -> Dict[str, Dict[str, Dict[str, float]]]:

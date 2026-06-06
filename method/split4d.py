@@ -147,12 +147,8 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
     projected_semantic = F.normalize(scene["semantic"].float() @ projection, dim=-1)
     optim = torch.optim.Adam([raw_features], lr=args.lr)
     pairs = tracking_pairs(scene_np)
-    obs = list(iter_observations(scene_np, streaming=args.streaming))
+    obs = list(iter_observations(scene_np, streaming=True))
     random_order_rng = np.random.default_rng(args.seed + 991)
-    if not args.streaming:
-        # The ablation samples observations in random temporal order rather
-        # than following the paper's streaming sequence.
-        obs = list(iter_observations(scene_np, streaming=False))
 
     history = []
     for step in range(args.steps):
@@ -161,9 +157,13 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
             lr = args.lr + (args.lr_final - args.lr) * progress
             for group in optim.param_groups:
                 group["lr"] = lr
-        if not args.streaming and step > 0 and step % len(obs) == 0:
-            random_order_rng.shuffle(obs)
-        t, _view, contrib_np, weights_np, labels_np = obs[step % len(obs)]
+        if args.streaming:
+            t, _view, contrib_np, weights_np, labels_np = obs[step % len(obs)]
+        else:
+            # Paper ablation: observations are sampled randomly instead of
+            # walking the temporally ordered sequence, so long gaps and repeated
+            # frames can interrupt local feature propagation.
+            t, _view, contrib_np, weights_np, labels_np = obs[int(random_order_rng.integers(len(obs)))]
         contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
         weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
         labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)

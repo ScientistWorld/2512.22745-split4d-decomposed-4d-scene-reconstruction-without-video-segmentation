@@ -30,4 +30,9 @@
 - Added an explicit evaluator-side core-claim gate and adjusted the reduced first-frame HDBSCAN sample floor to avoid pathological tiny-sample clustering on the compact synthetic scenes.
 - Submitting a regeneration job; `core_claim` should only be restored if fresh `scores.json`, `scores_train.json`, and `scores_test.json` all pass the new gate.
 
+### [2026-06-06 18:15] - method_runs
+- Job `324c5944-240` regenerated fresh standard scores but correctly failed the new gate: random-order still beat streaming on `scaled_streaming_ablation`.
+- Fixed the ablation implementation to match the paper's described random sampling more directly: non-streaming now draws a random observation with replacement at each iteration instead of using a shuffled full epoch.
+- Resubmitting the same reduced reproduction; milestone remains `method_runs` until the fresh score files pass the core-claim gate.
+
 ## Stop Justification

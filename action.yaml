@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: false
 milestone: method_runs
-notes: "Regenerate Split4D outputs after fixing reduced HDBSCAN sample fragility and adding a core-claim gate; restore core_claim only if fresh standard/train/test scores pass the streaming ablation constraint."
+notes: "Regenerate Split4D outputs after changing the non-streaming ablation from shuffled full epochs to random-with-replacement observation sampling; restore core_claim only if fresh standard/train/test scores pass the streaming ablation gate."

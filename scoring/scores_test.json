@@ -1,0 +1,48 @@
+{
+  "experiments": {
+    "scaled_linear_motion_segmentation": {
+      "results": {
+        "split4d_random_order": {
+          "ClusterCountError": 0.0,
+          "F1": 0.7095238095238096,
+          "Recall": 0.7083333333333334,
+          "Recalldyn": 0.7592592592592592,
+          "Recallstatic": 0.5555555555555556,
+          "mAcc": 0.8541666666666667,
+          "mIoU": 0.5602272727272728
+        },
+        "split4d_streaming": {
+          "ClusterCountError": 0.0,
+          "F1": 0.5777609777609778,
+          "Recall": 0.5833333333333333,
+          "Recalldyn": 0.648148148148148,
+          "Recallstatic": 0.3888888888888889,
+          "mAcc": 0.7916666666666666,
+          "mIoU": 0.4240656565656566
+        }
+      }
+    },
+    "scaled_streaming_ablation": {
+      "results": {
+        "split4d_random_order": {
+          "ClusterCountError": 0.0,
+          "F1": 0.4054258945897849,
+          "Recall": 0.39999999999999997,
+          "Recalldyn": 0.36507936507936506,
+          "Recallstatic": 0.45238095238095233,
+          "mAcc": 0.76,
+          "mIoU": 0.2564700313737541
+        },
+        "split4d_streaming": {
+          "ClusterCountError": 0.0,
+          "F1": 0.3092707144961166,
+          "Recall": 0.3142857142857143,
+          "Recalldyn": 0.3333333333333333,
+          "Recallstatic": 0.2857142857142857,
+          "mAcc": 0.7257142857142858,
+          "mIoU": 0.18416422287390027
+        }
+      }
+    }
+  }
+}

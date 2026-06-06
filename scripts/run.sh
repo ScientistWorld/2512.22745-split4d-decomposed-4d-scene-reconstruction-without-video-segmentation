@@ -15,8 +15,8 @@ cd /home/user
 
 export SPLIT4D_BASELINE_STEPS="${SPLIT4D_BASELINE_STEPS:-3200}"
 export SPLIT4D_STEPS="${SPLIT4D_STEPS:-3200}"
-export SPLIT4D_LAMBDA_ALIGN="${SPLIT4D_LAMBDA_ALIGN:-6.0}"
-export SPLIT4D_LAMBDA_DINO="${SPLIT4D_LAMBDA_DINO:-0.5}"
+export SPLIT4D_LAMBDA_ALIGN="${SPLIT4D_LAMBDA_ALIGN:-1.0}"
+export SPLIT4D_LAMBDA_DINO="${SPLIT4D_LAMBDA_DINO:-0.08}"
 
 bash scripts/reproduce.sh
 python -m eval.metrics --include-exploratory --output tmp/exploratory_scores.json

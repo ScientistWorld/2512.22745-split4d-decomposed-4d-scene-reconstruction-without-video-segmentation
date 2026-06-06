@@ -22,7 +22,9 @@
 - Removed the explicit post-optimizer temporal feature transfer, which was not part of the paper's algorithm. Streaming evidence must now come from temporally ordered sampling plus the paper-style loss terms and regularizers.
 - `scripts/evaluate.sh` now reports the `streaming_ablation` comparison by default when both streaming and random-order artifacts are present.
 - Job `665fe8cb-6d6` completed the first no-copy rendered-pixel run. It verified that the repaired algorithm executes, but scores regressed, so the milestone remains `method_runs`.
-- The next run switches synthetic rendered samples to paper-style alpha-transmittance compositing, composites raw primitive features before normalization, raises the 3D tracking regularization weight, and clears stale outputs before reproduction so printed evaluations cannot mix fresh and old artifacts.
+- The next run switches synthetic rendered samples to paper-style alpha-transmittance compositing, composites raw primitive features before normalization, and clears stale outputs before reproduction so printed evaluations cannot mix fresh and old artifacts.
+- Job `0ff27010-ea3` completed the alpha-transmittance run. It also stayed at `method_runs`; the reduced renderer still trained on too many occluded or mixed rays.
+- The next run filters observations to visible, confident surface samples before applying the same alpha-composited rendered-feature loss.
 
 ## Results
 
@@ -89,6 +91,13 @@ Job `665fe8cb-6d6` tested the renderer-based training path after removing direct
 
 This confirms the method runs but does not support the core claim. The likely issue is that the reduced synthetic renderer over-emphasized mixed boundary pixels and normalized primitive features before compositing. The next submission keeps rendered feature-map computation but uses alpha-transmittance weights from the paper, composites raw features before normalization, and applies nearest-neighbor 3D tracking alignment.
 
+Job `0ff27010-ea3` tested alpha-transmittance rendering, raw-feature compositing, KNN tracking, and DINO phi temperatures:
+
+- Linear motion, Split4D streaming: mIoU 0.192, F1 0.318, dynamic recall 0.352.
+- Interaction streaming ablation: streaming mIoU 0.156, random-order mIoU 0.205.
+
+This still does not support the core claim. The next submission keeps alpha compositing but filters out rays where the sampled primitive is occluded by a different dominant contributor or where the rendered feature is too mixed, matching the paper's use of points inside visible 2D instance masks.
+
 ## Remaining
 
 - Reaching `core_claim` now requires the repaired rendered-pixel method to recover the linear-motion score and preserve a same-benchmark streaming advantage on `streaming_ablation`.
@@ -102,13 +111,14 @@ This confirms the method runs but does not support the core claim. The likely is
 - The login Python environment lacks NumPy, so only `py_compile` and repository validation were run locally. Dependency-backed execution is deferred to the submitted job through `environment/setup.sh`.
 - Job `86f87ec1-124` failed inside `method/split4d.py` because the installed Torch build did not expose `torch.flatnonzero`. Replaced it with a local `_nonzero1d` wrapper around `torch.nonzero(...).flatten()`.
 - Job `dbd053f2-d80` failed at `validate.py --compare` because `scoring/scores.json` placed `split4d_random_order` inside primary experiments where `reference.json` only lists `split4d_streaming`. The evaluator now reports the baseline only under `streaming_ablation`.
-- The first completed method run showed streaming was weaker than the random-order ablation. The retry adds local temporal feature transfer along the synthetic scene's explicit adjacent-frame primitive matches and gives the streaming run more steps than the ablation.
-- Job `3ac23854-ac0` succeeded, but its ablation used unequal step budgets. `scripts/run.sh` now gives streaming and random-order 2200 steps each, while `--temporal-transfer` is exposed as an explicit method hyperparameter.
+- The first completed method run showed streaming was weaker than the random-order ablation. Later audited versions removed the local temporal feature-transfer shortcut and now rely on the paper-style loss terms.
+- Job `3ac23854-ac0` succeeded, but its ablation used unequal step budgets and the method still contained the now-removed temporal-transfer shortcut.
 - Job `9005fb39-3a1` resolved the unequal-step concern, but validation rejected the interaction and ablation scores due large gaps against the paper reference. The default evaluator now reports only the validated linear-motion experiment; use `python -m eval.metrics --include-exploratory` to inspect the rejected diagnostics.
 - A milestone-integrity audit found hidden-label leakage: `method/split4d.py` used `object_id` to align cluster ids and wrote evaluation labels into its output artifacts. A follow-up audit also found that tracking regularization used `object_id` to choose same-object adjacent matches. Both issues are fixed; cluster matching is now a method-agnostic evaluator step, and tracking pairs are spatial nearest-neighbor matches.
 - The first non-oracle run landed 0.006 mIoU below the strongest paper baseline on the accepted scaled scene, so the next submission improves the tracking regularizer without changing the benchmark or using evaluation labels.
 - The subsequent longer configuration regressed, likely because tiny-benchmark HDBSCAN accepted degenerate first-frame clusters. The inference fix now guards against that without using evaluation labels.
 - Job `665fe8cb-6d6` showed that the first rendered-pixel synthetic observations were too boundary-heavy for the reduced benchmark. The next data patch uses alpha-transmittance compositing rather than normalized distance weights, matching the paper's feature-rendering equation more closely.
+- Job `0ff27010-ea3` showed alpha-transmittance alone is insufficient when every active primitive projection is used as a supervision sample. The next data patch keeps only visible, confident surface observations for training.
 
 ## Deviations from Paper
 

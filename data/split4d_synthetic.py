@@ -202,6 +202,18 @@ def _precompute_observations(scene: Dict[str, np.ndarray], object_id: np.ndarray
             )
             weight = (alpha * trans).astype(np.float32)
             dominant = contrib[np.arange(len(contrib)), weight.argmax(axis=1)]
+            dominant_weight = weight.max(axis=1)
+            weight_sum = np.maximum(weight.sum(axis=1), 1e-8)
+            source_visible = dominant == idx
+            confident = dominant_weight / weight_sum >= 0.52
+            keep = source_visible & confident
+            if keep.sum() < max(inst_count * 4, len(idx) // 3):
+                keep = source_visible
+            if keep.sum() < max(inst_count * 3, len(idx) // 4):
+                keep = dominant_weight >= np.quantile(dominant_weight, 0.55)
+            contrib = contrib[keep]
+            weight = weight[keep]
+            dominant = dominant[keep]
             obj = object_id[dominant].copy()
             perm_rng = np.random.default_rng(10_000 + 97 * int(view) + 131 * int(t) + frames)
             perm = perm_rng.permutation(inst_count)

@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: method_runs
-notes: "Retest paper-style alpha-composited rendered features, KNN tracking alignment, DINO phi temperatures, equal 3200-step streaming/random budgets, and stale-output cleanup."
+notes: "Retest alpha-composited visible-surface observations with moderate tracking/DINO weights and equal 3200-step streaming/random budgets."

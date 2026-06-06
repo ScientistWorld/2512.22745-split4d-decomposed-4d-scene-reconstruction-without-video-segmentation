@@ -26,8 +26,8 @@ python -m method.split4d \
   --feature-dim 32 \
   --samples-per-mask 32 \
   --lr 2.5e-3 \
-  --lambda-align "${SPLIT4D_LAMBDA_ALIGN:-6.0}" \
-  --lambda-dino "${SPLIT4D_LAMBDA_DINO:-0.5}" \
+  --lambda-align "${SPLIT4D_LAMBDA_ALIGN:-1.0}" \
+  --lambda-dino "${SPLIT4D_LAMBDA_DINO:-0.08}" \
   --dino-fraction 0.35 \
   --no-streaming
 

@@ -31,3 +31,8 @@
 - Job `665fe8cb-6d6` completed with the rendered-pixel implementation and regenerated `scoring/scores.json`.
 - The run stayed at `method_runs`: linear-motion mIoU dropped to 0.194, and the streaming ablation improved over random order only weakly (0.180 vs 0.155 mIoU).
 - Updated the next submission to use paper-style alpha-transmittance feature rendering, KNN tracking alignment, stronger regularization, and stale-output cleanup.
+
+### [2026-06-06 17:12] - method_runs
+- Job `0ff27010-ea3` completed with alpha-transmittance rendering, but scores remained poor: linear-motion mIoU 0.192 and streaming ablation 0.156 vs random-order 0.205.
+- Kept the milestone at `method_runs`.
+- Updated the next submission to train only on visible, confident rendered surface samples and use moderate tracking/DINO weights.

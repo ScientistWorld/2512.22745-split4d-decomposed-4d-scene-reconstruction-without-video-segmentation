@@ -239,6 +239,13 @@ def hdbscan_centers(features: np.ndarray, first: np.ndarray, inst: int) -> np.nd
     if len(valid) < inst:
         return None
 
+    counts = np.asarray([(labels == lab).sum() for lab in valid], dtype=np.int64)
+    assigned = int(counts.sum())
+    if assigned < int(0.72 * len(first)):
+        return None
+    if counts.min() < max(2, int(0.04 * len(first))) or counts.max() > int(0.65 * len(first)):
+        return None
+
     valid = sorted(valid, key=lambda lab: int((labels == lab).sum()), reverse=True)[:inst]
     centers = []
     for lab in valid:

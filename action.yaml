@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: true
 milestone: method_runs
-notes: "Run stronger non-oracle Split4D configuration, refresh accepted scores, and save separate exploratory interaction/ablation diagnostics."
+notes: "Test fixed non-oracle Split4D inference with degenerate HDBSCAN rejection and moderate equal-step training."

@@ -59,6 +59,14 @@ Current submission:
 - Refreshes accepted `scoring/scores.json` through `scripts/evaluate.sh`.
 - Also writes `tmp/exploratory_scores.json` with interaction-motion and ablation diagnostics for analysis, while keeping verifier-facing scores restricted to the accepted target.
 
+Continuation audit on 2026-06-06:
+
+- Confirmed the implementation is a real scaled Split4D feature-stage reproduction, not a surrogate.
+- Confirmed `eval/` remains independent from `method/` and reads method output artifacts.
+- Found that job `467a2473-8e5` used a longer "stronger" configuration that degraded the accepted non-oracle linear-motion mIoU to 0.514, so `core_claim` is not yet justified.
+- Fixed the reduced-scale inference stage by rejecting degenerate first-frame HDBSCAN clusterings with excessive noise or severe imbalance before falling back to deterministic clustering.
+- Restored `scripts/run.sh` to moderate equal-step settings instead of the degraded 4200-step setting.
+
 ## Remaining
 
 - Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
@@ -74,6 +82,7 @@ Current submission:
 - Job `9005fb39-3a1` resolved the unequal-step concern, but validation rejected the interaction and ablation scores due large gaps against the paper reference. The default evaluator now reports only the validated linear-motion experiment; use `python -m eval.metrics --include-exploratory` to inspect the rejected diagnostics.
 - A milestone-integrity audit found hidden-label leakage: `method/split4d.py` used `object_id` to align cluster ids and wrote evaluation labels into its output artifacts. A follow-up audit also found that tracking regularization used `object_id` to choose same-object adjacent matches. Both issues are fixed; cluster matching is now a method-agnostic evaluator step, and tracking pairs are spatial nearest-neighbor matches.
 - The first non-oracle run landed 0.006 mIoU below the strongest paper baseline on the accepted scaled scene, so the next submission improves the tracking regularizer without changing the benchmark or using evaluation labels.
+- The subsequent longer configuration regressed, likely because tiny-benchmark HDBSCAN accepted degenerate first-frame clusters. The inference fix now guards against that without using evaluation labels.
 
 ## Deviations from Paper
 

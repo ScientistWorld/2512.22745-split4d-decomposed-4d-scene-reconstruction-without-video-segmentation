@@ -139,18 +139,30 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
     generator = torch.Generator(device=device).manual_seed(args.seed + 17)
 
     raw_features = torch.nn.Parameter(torch.randn(n, args.feature_dim, device=device) * 0.05)
+    # Reduced-scale substitute for DINOv2 image descriptors: the procedural
+    # benchmark stores fixed semantic observation vectors because it has no RGB
+    # frames. They are used only in the paper's early alignment-loss role.
     projection = torch.randn(scene["semantic"].shape[1], args.feature_dim, device=device)
     projection = F.normalize(projection, dim=0)
     projected_semantic = F.normalize(scene["semantic"].float() @ projection, dim=-1)
     optim = torch.optim.Adam([raw_features], lr=args.lr)
     pairs = tracking_pairs(scene_np)
     obs = list(iter_observations(scene_np, streaming=args.streaming))
+    random_order_rng = np.random.default_rng(args.seed + 991)
     if not args.streaming:
-        # Keep a fixed random order per epoch, matching the ablation setting.
+        # The ablation samples observations in random temporal order rather
+        # than following the paper's streaming sequence.
         obs = list(iter_observations(scene_np, streaming=False))
 
     history = []
     for step in range(args.steps):
+        if args.lr_final > 0 and args.steps > 1:
+            progress = step / float(args.steps - 1)
+            lr = args.lr + (args.lr_final - args.lr) * progress
+            for group in optim.param_groups:
+                group["lr"] = lr
+        if not args.streaming and step > 0 and step % len(obs) == 0:
+            random_order_rng.shuffle(obs)
         t, _view, contrib_np, weights_np, labels_np = obs[step % len(obs)]
         contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
         weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
@@ -193,6 +205,10 @@ def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarr
     first = active_indices(scene, 0)
     if len(first) < inst:
         first = np.arange(len(features))
+    elif len(first) > inst:
+        sample_count = min(len(first), max(inst * 4, int(np.ceil(0.10 * len(first)))))
+        sample_rng = np.random.default_rng(919 + len(first) * 17 + inst)
+        first = np.sort(sample_rng.choice(first, size=sample_count, replace=False))
 
     centers = hdbscan_centers(features, first, inst)
     if centers is None:
@@ -216,7 +232,9 @@ def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarr
         sim = sims[members, c]
         bad = (dv > 3 * (dv.std() + 1e-6)) & (dp > 3 * (dp.std() + 1e-6)) & (sim < 0.5)
         if np.any(bad):
-            labels[members[bad]] = sims[members[bad]].argmax(axis=1)
+            alternatives = sims[members[bad]].copy()
+            alternatives[:, c] = -np.inf
+            labels[members[bad]] = alternatives.argmax(axis=1)
     return labels.astype(np.int64)
 
 
@@ -268,6 +286,7 @@ def main() -> None:
     parser.add_argument("--feature-dim", type=int, default=32)
     parser.add_argument("--samples-per-mask", type=int, default=32)
     parser.add_argument("--lr", type=float, default=2.5e-3)
+    parser.add_argument("--lr-final", type=float, default=2e-6)
     parser.add_argument("--lambda-align", type=float, default=0.35)
     parser.add_argument("--lambda-dino", type=float, default=0.08)
     parser.add_argument("--dino-fraction", type=float, default=0.35)

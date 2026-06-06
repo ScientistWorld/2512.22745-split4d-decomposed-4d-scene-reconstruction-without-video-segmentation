@@ -41,6 +41,8 @@ def instance_metrics(pred: np.ndarray, true: np.ndarray, dynamic_object: np.ndar
     recalls = []
     f1s = []
     dyn_recalls = []
+    static_recalls = []
+    size_errors = []
     for lab in labels:
         p = pred == lab
         y = true == lab
@@ -56,12 +58,17 @@ def instance_metrics(pred: np.ndarray, true: np.ndarray, dynamic_object: np.ndar
         f1s.append(2 * precision * recall / max(precision + recall, 1e-12))
         if dynamic_object[lab]:
             dyn_recalls.append(recall)
+        else:
+            static_recalls.append(recall)
+        size_errors.append(abs(float(p.sum()) - float(y.sum())) / max(float(y.sum()), 1.0))
     return {
         "mIoU": float(np.mean(ious)),
         "mAcc": float(np.mean(accs)),
         "Recall": float(np.mean(recalls)),
         "F1": float(np.mean(f1s)),
         "Recalldyn": float(np.mean(dyn_recalls) if dyn_recalls else np.mean(recalls)),
+        "Recallstatic": float(np.mean(static_recalls) if static_recalls else np.mean(recalls)),
+        "ClusterSizeError": float(np.mean(size_errors)),
     }
 
 

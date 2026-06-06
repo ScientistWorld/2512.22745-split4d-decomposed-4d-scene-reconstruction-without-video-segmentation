@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: done
+action: submit
 gpus: 1
 test: false
 milestone: core_claim
-notes: "Continuation audit restored core_claim: implementation, evaluation separation, scripts, docs, and validated scores are intact on the reduced Split4D benchmark."
+notes: "Regenerate Split4D method/baseline outputs after evaluator constraint-metric additions and paper-procedure fixes: LR decay, random ablation reshuffling, subset clustering, and filtering reassignment."

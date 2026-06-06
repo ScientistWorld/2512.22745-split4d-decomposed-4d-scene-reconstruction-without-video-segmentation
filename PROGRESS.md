@@ -32,6 +32,14 @@
 
 ## Results
 
+2026-06-06 18:02 audit and scoring refresh:
+
+- Confirmed from the paper text that the main evaluation metrics are mIoU, mAcc, Recall, F1, and Recalldyn, and that the main datasets are Neural3DV, Multi-Human, and SelfCap.
+- Patched `eval/metrics.py` so the standard `scores.json` reports `Recallstatic` and `ClusterSizeError`, matching the constraint metrics already defined for the scaled gym.
+- Added the omitted SelfCap full-scale Table 1 provenance group to `scoring/reference.json` and aligned `TARGETS.md` with `scaled_streaming_ablation`'s F1 primary metric.
+- Tightened the method implementation toward the paper procedure: random-order ablations now reshuffle each epoch, the feature optimizer decays learning rate from 2.5e-3 toward 2e-6, first-frame inference uses a small deterministic primitive subset before HDBSCAN/KMeans, and filtering no longer reassigns an outlier to its current cluster.
+- Submitting the accepted 3200-step reproduction again to regenerate `scores.json`, `scores_train.json`, and `scores_test.json` inside the container.
+
 Job `dbd053f2-d80` produced the first complete method outputs:
 
 - Linear motion, Split4D streaming: mIoU 0.612, F1 0.730, dynamic recall 0.648.
@@ -146,5 +154,6 @@ This run is not accepted for the milestone because it violates the constraint si
 
 - Original datasets are Neural3DV, Multi-Human, and SelfCap with large multi-view videos and pretrained 4D Gaussian reconstructions. This reproduction uses deterministic procedural dynamic Gaussian scenes because the original data plus reconstruction pipeline are large and not released as a ready benchmark in the paper markdown.
 - The algorithm is not replaced: the implemented computation still keeps fixed Gaussian geometry and optimizes per-primitive instance features using the paper's contrastive mask loss, streaming temporal sampling, 3D tracking regularization, semantic alignment, and clustering/filtering inference.
+- The paper's DINOv2 regularizer uses pretrained image features. The reduced benchmark has no RGB frames, so it uses fixed procedural semantic vectors in the same early contrastive alignment role; this is a data/resource substitute, not a replacement for the feature-learning algorithm.
 - HDBSCAN inference is now the primary clustering path, matching the paper's postprocess. Deterministic KMeans remains as a fallback for small reduced-scale runs where HDBSCAN produces too few usable clusters, followed by the paper's filtering cues.
 - The full paper learns identity continuity through rendered fixed Gaussian primitives and tracking constraints. Earlier workspace versions applied a post-update temporal feature transfer, but that non-paper shortcut has been removed; the current method relies on streaming sampling, contrastive rendered-feature learning, 3D tracking alignment, and semantic alignment.

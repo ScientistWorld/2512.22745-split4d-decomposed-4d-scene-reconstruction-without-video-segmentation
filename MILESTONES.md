@@ -15,7 +15,13 @@
 ### [2026-06-06 17:59] - core_claim
 - Continuation audit after the reset re-read `method/`, `eval/`, `data/`, scripts, briefing, scoring docs, and the current score files.
 - `python validate.py --compare` passed; the implementation remains a real scaled Split4D feature-stage reproduction and the evaluator reads method artifacts without importing `method/`.
-- No new compute job is submitted because the accepted configuration already supports `core_claim`, while the documented longer run improved one score but broke the streaming-ablation constraint.
+- No new compute job was submitted in that audit because the accepted configuration already supported `core_claim`, while the documented longer run improved one score but broke the streaming-ablation constraint.
+
+### [2026-06-06 18:02] - core_claim
+- Re-read the paper experiment section and audited the live workspace after the reset.
+- Added standard-score reporting for `Recallstatic` and `ClusterSizeError` so `scores.json` covers both benefit and constraint metrics already defined in `reference.json`.
+- Added the missing SelfCap Table 1 full-scale provenance group and reconciled the streaming-ablation target description with the primary metric used by the reduced benchmark.
+- Tightened the reduced implementation toward the paper procedure: learning-rate decay, epoch-level random ablation resampling, subset clustering, and non-self outlier reassignment in filtering.
+- Submitting a container job to regenerate method, baseline, standard, train, and test scores with the accepted scaled configuration.
 
 ## Stop Justification
-- Completed at milestone `core_claim`.

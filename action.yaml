@@ -5,4 +5,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Hash-split primitive and observation slices; 27 train metrics and 27 test metrics; train/test method keys match, primary gaps are comparable, TrackingFeatureMargin replaces saturated agreement metric."
+notes: "Fixed fresh-clone packaging paths and made download.sh independent of host Python packages; no external artifacts are required."

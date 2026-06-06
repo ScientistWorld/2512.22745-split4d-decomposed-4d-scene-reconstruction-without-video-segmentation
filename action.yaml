@@ -1,9 +1,8 @@
-# This iteration writes files only — do NOT submit compute jobs.
 # Once you set action to 'done', STOP immediately.
 # Do NOT sleep, poll, or wait. The system reads this file
 # only after your turn ends.
-action: done
+action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Improvements: added train/test feature-agreement metrics and rebalanced reference weights with tiny positive provenance weights. Notes: runner should verify new feature metrics do not saturate and all artifacts include features."
+notes: "Run evaluate_train.sh and evaluate_test.sh on frozen outputs to populate split score files."

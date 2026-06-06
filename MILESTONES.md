@@ -45,4 +45,9 @@
 - Broadened the paper's 3D tracking regularization to include all visibly fading primitives in the reduced scenes, increased the temporal alignment weight, reduced early semantic alignment for the semantic-collision scene, and expanded the streaming temporal window.
 - Resubmitting the full regeneration; milestone remains `method_runs` until fresh standard, train, and test score files pass the gate.
 
+### [2026-06-06 19:18] - method_runs
+- Job `2c49d8db-c8a` failed the gate again; broadened tracking reduced random-order performance but also reduced streaming performance, leaving streaming F1 0.420 below random-order F1 0.432 and streaming dynamic recall 0.444 below random-order 0.540.
+- Reverted the broadened tracking selection to the prior disappearing-primitive quantile and added an ordered adjacent-frame mask-center consistency term that activates only for streaming batches with neighboring frames.
+- Resubmitting the standard/train/test regeneration with moderate tracking, reduced semantic alignment, and the new streaming-pair propagation term.
+
 ## Stop Justification

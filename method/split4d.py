@@ -90,6 +90,30 @@ def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor
     return torch.stack(losses).mean()
 
 
+def mask_centers(features: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+    centers: List[torch.Tensor] = []
+    for lab in torch.unique(labels):
+        local = _nonzero1d(labels == lab)
+        if local.numel() < 2:
+            continue
+        centers.append(F.normalize(features[local].mean(dim=0), dim=0))
+    if not centers:
+        return features.new_zeros((0, features.shape[-1]))
+    return torch.stack(centers, dim=0)
+
+
+def temporal_center_loss(prev_features: torch.Tensor, prev_labels: torch.Tensor, curr_features: torch.Tensor, curr_labels: torch.Tensor) -> torch.Tensor:
+    """Match adjacent-frame mask centers by current feature similarity."""
+
+    prev_centers = mask_centers(prev_features, prev_labels)
+    curr_centers = mask_centers(curr_features, curr_labels)
+    if prev_centers.shape[0] < 2 or curr_centers.shape[0] < 2:
+        return curr_features.sum() * 0.0
+    sims = curr_centers @ prev_centers.T
+    best = sims.max(dim=1).values
+    return (1.0 - best).mean()
+
+
 def render_pixel_features(raw_features: torch.Tensor, contrib_idx: torch.Tensor, weights: torch.Tensor) -> torch.Tensor:
     """Render per-primitive features to synthetic 2D pixel samples."""
 
@@ -127,10 +151,7 @@ def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.nd
         op_now = temporal_opacity(scene, t)[a]
         op_next = temporal_opacity(scene, t + 1)[a]
         fade = op_now - op_next
-        # The paper regularizes disappearing Gaussians.  In the compact
-        # synthetic scenes, replacement is gradual, so include every visibly
-        # fading primitive instead of only the top fade quantile.
-        disappearing = a[(fade > 0.0) & (op_now > 0.28)]
+        disappearing = a[(fade > np.quantile(fade, 0.55)) & (op_now > 0.28)]
         if len(disappearing) == 0:
             disappearing = a[: min(8, len(a))]
         pos_a = position_at(scene, t)[disappearing]
@@ -189,11 +210,13 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
 
         feats_all = F.normalize(raw_features, dim=-1)
         batch_losses: List[torch.Tensor] = []
+        rendered_batch: List[Tuple[torch.Tensor, torch.Tensor]] = []
         for t, _view, contrib_np, weights_np, labels_np in batch:
             contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
             weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
             labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)
             feats = render_pixel_features(raw_features, contrib, weights)
+            rendered_batch.append((feats, labels))
             sample_loss = contrastive_cluster_loss(feats, labels, args.samples_per_mask, generator)
 
             if args.lambda_align > 0 and t < len(pairs):
@@ -209,6 +232,12 @@ def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> 
                 )
             batch_losses.append(sample_loss)
         loss = torch.stack(batch_losses).mean()
+        if args.lambda_stream > 0 and len(rendered_batch) > 1:
+            pair_losses = [
+                temporal_center_loss(prev_feats, prev_labels, curr_feats, curr_labels)
+                for (prev_feats, prev_labels), (curr_feats, curr_labels) in zip(rendered_batch[:-1], rendered_batch[1:])
+            ]
+            loss = loss + args.lambda_stream * torch.stack(pair_losses).mean()
 
         optim.zero_grad(set_to_none=True)
         loss.backward()
@@ -322,6 +351,7 @@ def main() -> None:
     parser.add_argument("--lr-final", type=float, default=2e-6)
     parser.add_argument("--lambda-align", type=float, default=0.35)
     parser.add_argument("--lambda-dino", type=float, default=0.08)
+    parser.add_argument("--lambda-stream", type=float, default=0.0, help="Adjacent-frame center consistency used by ordered streaming batches.")
     parser.add_argument("--dino-fraction", type=float, default=0.35)
     parser.add_argument("--streaming-window", type=int, default=1, help="Causal same-view temporal frames per ordered streaming step.")
     parser.add_argument("--temporal-transfer", type=float, default=0.0, help="Deprecated compatibility flag; Split4D uses ordered sampling and losses, not direct feature copying.")

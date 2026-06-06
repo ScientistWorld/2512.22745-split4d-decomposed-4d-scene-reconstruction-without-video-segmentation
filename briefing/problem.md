@@ -1,9 +1,5 @@
 # Problem Definition
 
-What problem does this paper address? Write this so that someone with no knowledge of the paper can understand what needs to be solved and how success is measured.
-
-Do NOT describe the paper's method or solution here — only the problem itself. Think about if a future scientist agent try to solve this problem from scratch without knowing what approach the paper took. If you leak the solution, you compromise the benchmark.
-
 ## Research Question
 
 How can a system recover temporally consistent instance-level segmentation of a dynamic 3D scene from multi-view videos when the available 2D masks are independent per image and do not have stable labels across views or time?

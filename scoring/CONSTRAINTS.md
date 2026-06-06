@@ -14,7 +14,7 @@ Training may use only the per-observation inconsistent mask ids and fixed semant
 
 ## Compliance Checklist
 - [ ] Scored experiments use only `linear_motion` and `interaction_motion` from `data/split4d_synthetic.py`
-- [ ] The `streaming_ablation` comparison uses both provided methods on the same `interaction_motion` scene
+- [ ] The ordered-vs-random comparison uses both output artifacts on the same `interaction_motion` scene
 - [ ] Primitive count, frame count, view count, and feature dimension are unchanged for scored runs
 - [ ] Evaluation labels are not used during training or hyperparameter selection
 - [ ] `eval/metrics.py` and the metric formulas are unchanged

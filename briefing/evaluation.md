@@ -1,6 +1,6 @@
 # Evaluation
 
-How success is measured. Describe only the metrics, targets, and evaluation procedure — do NOT describe the paper's method or how they achieved these results. Think of this as a general evaluation protocal for other scientists trying to solve the same problem, where they should not see this paper's solution.
+This file defines how candidate outputs are scored. It describes the target metrics and output contract only; method design choices belong outside the problem definition.
 
 ## Metrics
 
@@ -11,11 +11,15 @@ Evaluation uses instance segmentation metrics over annotated objects:
 - `Recall`: mean foreground recall per instance. Higher is better.
 - `F1`: mean per-instance harmonic mean of precision and recall. Higher is better.
 - `Recalldyn`: recall restricted to dynamic instances. Higher is better and is the key constraint against methods that only handle static or slow objects.
+- `Recallstatic`: recall restricted to static instances. Higher is better.
+- `ClusterSizeError`: mean relative error in predicted instance sizes. Lower is better.
+- `MaskFeatureAgreement`: separation margin between features rendered within the same 2D mask and competing masks. Higher is better.
+- `TrackingFeatureMargin`: feature consistency margin for geometrically matched elements across adjacent frames. Higher is better.
 
 ## Baselines and Targets
 
-The paper reports comparisons against OmniSeg3D, DGD, SA4D, and SADG on Neural3DV, Multi-Human, and SelfCap. Its reported headline mIoU values are 0.801 on Neural3DV, 0.893 on Multi-Human, and 0.882 on SelfCap. The most important ablation is replacing temporally ordered training with random sampling, which drops mIoU from 0.895 to 0.552 on the Multi-Human Juggle sequence and strongly reduces dynamic recall.
+The paper reports comparisons against OmniSeg3D, DGD, SA4D, and SADG on Neural3DV, Multi-Human, and SelfCap. Its reported headline mIoU values are 0.801 on Neural3DV, 0.893 on Multi-Human, and 0.882 on SelfCap. This gym keeps those full-scale numbers in `scoring/reference.json` for provenance, but the accepted scored experiments use deterministic reduced scenes so the environment is reproducible within the available budget.
 
 ## Evaluation Protocol
 
-This reproduction evaluates on deterministic scaled dynamic scenes with fixed 4D primitive geometry and fixed per-image inconsistent supervision. Methods write predicted primitive-level instance labels to JSON. `scripts/evaluate.sh` reads those artifacts and computes metrics without importing method code. Scores are written to `scoring/scores.json`.
+Accepted runs evaluate on deterministic dynamic scenes with fixed geometry, fixed observation masks, and hidden instance labels. Methods write primitive-level predicted instance labels and per-primitive features to JSON. `scripts/evaluate.sh` reads those artifacts and computes metrics without importing method code. Scores are written to `scoring/scores.json`.

@@ -60,5 +60,10 @@
 - Patched the standard evaluator and core-claim gate to require those metrics.
 - Submitting a CPU-only validation job to regenerate `scores.json`, train/test scores, and run the stricter gate inside the container.
 
+### [2026-06-06 19:34] - core_claim
+- Final verification tightened method-agnostic problem, evaluation, experiment, target, constraint, and direction documentation so from-scratch agents see the task and scoring contract without solution details.
+- Rechecked that `eval/` and `data/` do not import `method/`, and that committed method/eval/script/data paths contain no `shared/` references.
+- The stricter core-claim gate still requires a container refresh because the login-node Python environment lacks evaluator dependencies and the current canonical `scores.json` predates the full metric set.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

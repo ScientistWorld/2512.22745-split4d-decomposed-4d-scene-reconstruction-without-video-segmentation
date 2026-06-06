@@ -1,4 +1,4 @@
-action: done
+action: submit
 gpus: 0
 test: false
-notes: "Deterministic 50/50 stratified primitive split; 21 train and 21 test metrics; train/test gaps are small, but current artifacts fail the ablation reasonableness gate because streaming scores below random-order on every ablation metric."
+notes: "Regenerate scaled Split4D artifacts with accepted 3200-step settings, validate core scores, then rerun train/test split scoring."

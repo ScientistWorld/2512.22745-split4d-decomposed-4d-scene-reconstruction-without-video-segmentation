@@ -4,5 +4,5 @@
 action: submit
 gpus: 0
 test: true
-milestone: method_runs
-notes: "Retest alpha-composited visible-surface observations with moderate tracking/DINO weights and equal 3200-step streaming/random budgets."
+milestone: core_claim
+notes: "Core claim restored in job 82b7b084-80f; run equal 4200-step/48-sample configuration to try to improve the harder interaction setting toward core_claim_plus."

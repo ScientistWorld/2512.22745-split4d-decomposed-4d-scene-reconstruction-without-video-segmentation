@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: method_runs**
+**Current: core_claim**
 
 ## Progress Log
 
@@ -36,3 +36,9 @@
 - Job `0ff27010-ea3` completed with alpha-transmittance rendering, but scores remained poor: linear-motion mIoU 0.192 and streaming ablation 0.156 vs random-order 0.205.
 - Kept the milestone at `method_runs`.
 - Updated the next submission to train only on visible, confident rendered surface samples and use moderate tracking/DINO weights.
+
+### [2026-06-06 17:12] - core_claim
+- Job `82b7b084-80f` completed with visible, confident alpha-composited surface supervision.
+- Restored `core_claim`: linear-motion Split4D streaming reached mIoU 0.365 and dynamic recall 0.602 on the scaled rendered-feature benchmark.
+- The same run supports the required constraint/ablation: streaming outperformed random-order training on the interaction scene, 0.373 vs 0.249 mIoU and 0.611 vs 0.317 dynamic recall.
+- Submitted one more equal-budget run with more contrastive samples and more steps to try to strengthen the harder interaction setting toward `core_claim_plus`.

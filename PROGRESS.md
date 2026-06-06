@@ -25,6 +25,8 @@
 - The next run switches synthetic rendered samples to paper-style alpha-transmittance compositing, composites raw primitive features before normalization, and clears stale outputs before reproduction so printed evaluations cannot mix fresh and old artifacts.
 - Job `0ff27010-ea3` completed the alpha-transmittance run. It also stayed at `method_runs`; the reduced renderer still trained on too many occluded or mixed rays.
 - The next run filters observations to visible, confident surface samples before applying the same alpha-composited rendered-feature loss.
+- Job `82b7b084-80f` completed the visible-surface run and restored `core_claim`. The method now produces a non-trivial linear-motion segmentation result and beats the random-order ablation on the same harder interaction scene.
+- The next run keeps the accepted protocol but increases the equal streaming/random budgets and per-mask contrastive samples to see whether the harder interaction setting can support `core_claim_plus`.
 
 ## Results
 
@@ -98,10 +100,18 @@ Job `0ff27010-ea3` tested alpha-transmittance rendering, raw-feature compositing
 
 This still does not support the core claim. The next submission keeps alpha compositing but filters out rays where the sampled primitive is occluded by a different dominant contributor or where the rendered feature is too mixed, matching the paper's use of points inside visible 2D instance masks.
 
+Job `82b7b084-80f` tested visible, confident alpha-composited surface samples with moderate tracking and DINO weights:
+
+- Linear motion, Split4D streaming: mIoU 0.365, F1 0.522, dynamic recall 0.602.
+- Interaction streaming ablation: streaming mIoU 0.373, F1 0.534, dynamic recall 0.611.
+- Interaction streaming ablation baseline: random-order mIoU 0.249, F1 0.389, dynamic recall 0.317.
+
+This restores `core_claim`. The absolute scores remain below the paper's full-scale values, but the run uses the paper's actual computation on a reduced rendered-feature benchmark and demonstrates the central claim under a same-benchmark constraint: temporally ordered Split4D training improves moving-object segmentation over random temporal sampling.
+
 ## Remaining
 
-- Reaching `core_claim` now requires the repaired rendered-pixel method to recover the linear-motion score and preserve a same-benchmark streaming advantage on `streaming_ablation`.
-- Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
+- Reaching `core_claim_plus` requires improving or formally accepting an additional setting beyond the current linear-motion target and interaction streaming ablation.
+- Higher milestones would require improving the harder interaction-motion primary score, closing the streaming-ablation magnitude gap further, and adding more direct reproductions of the paper's Neural3DV, Multi-Human, and SelfCap tables.
 - The current environment is ready for future agents to optimize against `scripts/evaluate.sh` and the constraints in `scoring/`.
 - The bare login Python does not have NumPy, so `python -m eval.metrics` cannot run outside the configured container. The built container overlay has NumPy, SciPy, scikit-learn, hdbscan, and Torch installed, and prior jobs ran the evaluator there successfully.
 - `README.md` and `manifest.json` are host bind mounts to `/dev/null` in this session, so they cannot be removed or rewritten without superuser unmount privileges. Their tracked contents are still recoverable through git, but the live paths are controlled by the host mount table.
@@ -119,6 +129,7 @@ This still does not support the core claim. The next submission keeps alpha comp
 - The subsequent longer configuration regressed, likely because tiny-benchmark HDBSCAN accepted degenerate first-frame clusters. The inference fix now guards against that without using evaluation labels.
 - Job `665fe8cb-6d6` showed that the first rendered-pixel synthetic observations were too boundary-heavy for the reduced benchmark. The next data patch uses alpha-transmittance compositing rather than normalized distance weights, matching the paper's feature-rendering equation more closely.
 - Job `0ff27010-ea3` showed alpha-transmittance alone is insufficient when every active primitive projection is used as a supervision sample. The next data patch keeps only visible, confident surface observations for training.
+- Job `82b7b084-80f` verified that visible-surface filtering fixes the same-benchmark ablation direction. The next risk is whether a longer run improves interaction segmentation or overfits the reduced benchmark.
 
 ## Deviations from Paper
 

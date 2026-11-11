@@ -1,0 +1,9370 @@
+{
+ "contact_mid": {
+  "scaled_dynamic_scene_segmentation": {
+   "objects": {
+    "streaming": {
+     "dynamic_dev_0": {
+      "n_labels": 9,
+      "filtered_frac": 0.009,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.864,
+        "precision": 0.801,
+        "recall_by_third": [
+         0.745,
+         0.914,
+         0.937
+        ],
+        "unassigned_frac": 0.018
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.854,
+        "precision": 0.946,
+        "recall_by_third": [
+         0.799,
+         0.908,
+         0.85
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.948,
+        "precision": 0.984,
+        "recall_by_third": [
+         1.0,
+         0.886,
+         0.948
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.954,
+        "precision": 0.877,
+        "recall_by_third": [
+         0.958,
+         0.977,
+         0.929
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.876,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.905,
+         0.87,
+         0.854
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.73,
+        "precision": 0.928,
+        "recall_by_third": [
+         0.742,
+         0.722,
+         0.726
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.977,
+        "precision": 0.956,
+        "recall_by_third": [
+         0.996,
+         0.972,
+         0.964
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.986,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.982,
+         0.988,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 9,
+      "filtered_frac": 0.01,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.913,
+        "precision": 0.93,
+        "recall_by_third": [
+         0.86,
+         0.923,
+         0.954
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.903,
+        "precision": 0.897,
+        "recall_by_third": [
+         0.761,
+         0.922,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.904,
+        "precision": 0.977,
+        "recall_by_third": [
+         0.998,
+         0.956,
+         0.729
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.949,
+        "precision": 0.921,
+        "recall_by_third": [
+         0.977,
+         0.94,
+         0.933
+        ],
+        "unassigned_frac": 0.022
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.982,
+        "precision": 0.965,
+        "recall_by_third": [
+         0.989,
+         0.988,
+         0.97
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.682,
+        "precision": 0.973,
+        "recall_by_third": [
+         0.7,
+         0.682,
+         0.663
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.988,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.996,
+         0.989,
+         0.979
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 10,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.796,
+        "precision": 0.951,
+        "recall_by_third": [
+         0.806,
+         0.762,
+         0.826
+        ],
+        "unassigned_frac": 0.018
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.886,
+        "precision": 0.973,
+        "recall_by_third": [
+         0.976,
+         0.711,
+         0.929
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.992,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.931,
+        "precision": 0.929,
+        "recall_by_third": [
+         0.919,
+         0.901,
+         0.967
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.989,
+        "recall_by_third": [
+         0.998,
+         0.996,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.952,
+        "recall_by_third": [
+         0.748,
+         0.724,
+         0.735
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.967,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.969,
+         0.96,
+         0.972
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.998,
+         0.995,
+         0.987
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 11,
+      "filtered_frac": 0.016,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.554,
+        "precision": 0.94,
+        "recall_by_third": [
+         0.572,
+         0.567,
+         0.524
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.861,
+        "precision": 0.961,
+        "recall_by_third": [
+         0.885,
+         0.711,
+         0.972
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.98,
+        "precision": 0.984,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.932
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.317,
+        "precision": 0.652,
+        "recall_by_third": [
+         0.52,
+         0.154,
+         0.297
+        ],
+        "unassigned_frac": 0.06
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.967,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.98,
+         0.96,
+         0.961
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.762,
+        "precision": 0.875,
+        "recall_by_third": [
+         0.776,
+         0.755,
+         0.757
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.991,
+        "precision": 0.986,
+        "recall_by_third": [
+         0.999,
+         0.987,
+         0.987
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.975,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "random": {
+     "dynamic_dev_0": {
+      "n_labels": 11,
+      "filtered_frac": 0.006,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.25,
+        "precision": 0.57,
+        "recall_by_third": [
+         0.387,
+         0.241,
+         0.12
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.784,
+        "precision": 0.58,
+        "recall_by_third": [
+         0.829,
+         0.804,
+         0.732
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.971,
+        "precision": 0.984,
+        "recall_by_third": [
+         1.0,
+         0.953,
+         0.955
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.903,
+        "precision": 0.725,
+        "recall_by_third": [
+         0.807,
+         0.977,
+         0.927
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.863,
+        "precision": 0.822,
+        "recall_by_third": [
+         0.829,
+         0.874,
+         0.886
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.735,
+        "precision": 0.851,
+        "recall_by_third": [
+         0.745,
+         0.728,
+         0.731
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.565,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.561,
+         0.573,
+         0.561
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.984,
+        "recall_by_third": [
+         0.999,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 9,
+      "filtered_frac": 0.006,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.897,
+        "precision": 0.942,
+        "recall_by_third": [
+         0.822,
+         0.903,
+         0.963
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.855,
+        "precision": 0.85,
+        "recall_by_third": [
+         0.687,
+         0.892,
+         0.956
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.92,
+        "precision": 0.989,
+        "recall_by_third": [
+         1.0,
+         0.967,
+         0.77
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.958,
+        "precision": 0.931,
+        "recall_by_third": [
+         0.978,
+         0.947,
+         0.95
+        ],
+        "unassigned_frac": 0.021
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.982,
+        "precision": 0.975,
+        "recall_by_third": [
+         0.988,
+         0.987,
+         0.97
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.7,
+        "precision": 0.944,
+        "recall_by_third": [
+         0.709,
+         0.703,
+         0.687
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.997,
+         0.995,
+         0.986
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.998,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 12,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.364,
+        "precision": 0.927,
+        "recall_by_third": [
+         0.404,
+         0.355,
+         0.336
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.819,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.923,
+         0.535,
+         0.925
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.985,
+        "precision": 0.985,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.947
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.928,
+        "precision": 0.916,
+        "recall_by_third": [
+         0.889,
+         0.959,
+         0.932
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.984,
+        "recall_by_third": [
+         0.998,
+         0.998,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.717,
+        "precision": 0.952,
+        "recall_by_third": [
+         0.734,
+         0.707,
+         0.711
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.987,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.986,
+         0.99,
+         0.985
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.998,
+         0.995,
+         0.987
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 11,
+      "filtered_frac": 0.021,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.517,
+        "precision": 0.898,
+        "recall_by_third": [
+         0.567,
+         0.492,
+         0.492
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.772,
+        "precision": 0.987,
+        "recall_by_third": [
+         0.788,
+         0.525,
+         0.971
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 1.0,
+        "precision": 0.981,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.351,
+        "precision": 0.423,
+        "recall_by_third": [
+         0.542,
+         0.268,
+         0.259
+        ],
+        "unassigned_frac": 0.079
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.931,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.968,
+         0.919,
+         0.902
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.763,
+        "precision": 0.883,
+        "recall_by_third": [
+         0.776,
+         0.756,
+         0.756
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.976,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.988,
+         0.972,
+         0.97
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.977,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "dynamic_dev_0": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.458,
+        "precision": 0.613,
+        "recall_by_third": [
+         0.0,
+         0.38,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.444,
+        "precision": 0.215,
+        "recall_by_third": [
+         1.0,
+         0.466,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.462,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.997,
+         0.345,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.64,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.988,
+         0.893,
+         0.048
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.996,
+         0.998,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.804,
+        "recall_by_third": [
+         0.999,
+         0.997,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.997,
+         1.0,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.455,
+        "precision": 0.785,
+        "recall_by_third": [
+         0.0,
+         0.331,
+         0.99
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.445,
+        "precision": 0.208,
+        "recall_by_third": [
+         0.998,
+         0.443,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.572,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.993,
+         0.626,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.995,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.991,
+         0.999,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.993,
+         0.999,
+         0.991
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.806,
+        "recall_by_third": [
+         0.998,
+         0.995,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.998,
+         1.0,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.313,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.912,
+         0.012,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.619,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         0.689,
+         0.017
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.72,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.109,
+         0.958,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.559,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.814,
+        "recall_by_third": [
+         0.999,
+         0.99,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.993,
+         0.998,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.412,
+        "precision": 0.796,
+        "recall_by_third": [
+         0.0,
+         0.239,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.423,
+        "precision": 0.262,
+        "recall_by_third": [
+         0.998,
+         0.389,
+         0.001
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.769,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.993,
+         0.221
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.996,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.995,
+         0.998,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.791,
+        "recall_by_third": [
+         1.0,
+         0.995,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.846,
+    "no_filter": 0.843,
+    "eps0": 0.846,
+    "min_cluster_10": 0.621,
+    "all_frames_sample": 0.673,
+    "kmeans_true_k": 0.934
+   }
+  },
+  "scaled_interaction_segmentation": {
+   "objects": {
+    "streaming": {
+     "interaction_dev_0": {
+      "n_labels": 11,
+      "filtered_frac": 0.014,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.34,
+        "precision": 0.477,
+        "recall_by_third": [
+         0.53,
+         0.32,
+         0.092
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.379,
+        "precision": 0.688,
+        "recall_by_third": [
+         0.402,
+         0.306,
+         0.431
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.297,
+        "precision": 0.662,
+        "recall_by_third": [
+         0.166,
+         0.166,
+         0.518
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.343,
+        "precision": 0.743,
+        "recall_by_third": [
+         0.405,
+         0.264,
+         0.355
+        ],
+        "unassigned_frac": 0.024
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.319,
+        "precision": 0.113,
+        "recall_by_third": [
+         0.065,
+         0.48,
+         0.306
+        ],
+        "unassigned_frac": 0.036
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.996,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.716,
+        "precision": 0.981,
+        "recall_by_third": [
+         0.754,
+         0.687,
+         0.704
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 10,
+      "filtered_frac": 0.017,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.698,
+        "precision": 0.71,
+        "recall_by_third": [
+         0.656,
+         0.845,
+         0.591
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.427,
+        "precision": 0.655,
+        "recall_by_third": [
+         0.379,
+         0.43,
+         0.473
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.448,
+        "precision": 0.784,
+        "recall_by_third": [
+         0.529,
+         0.538,
+         0.266
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.528,
+        "precision": 0.559,
+        "recall_by_third": [
+         0.549,
+         0.523,
+         0.516
+        ],
+        "unassigned_frac": 0.029
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.084,
+        "precision": 0.092,
+        "recall_by_third": [
+         0.081,
+         0.062,
+         0.11
+        ],
+        "unassigned_frac": 0.046
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.995,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.563,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.551,
+         0.572,
+         0.566
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 8,
+      "filtered_frac": 0.015,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.521,
+        "precision": 0.815,
+        "recall_by_third": [
+         0.813,
+         0.566,
+         0.228
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.785,
+        "precision": 0.756,
+        "recall_by_third": [
+         0.704,
+         0.869,
+         0.798
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.508,
+        "precision": 0.662,
+        "recall_by_third": [
+         0.234,
+         0.66,
+         0.618
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.733,
+        "precision": 0.676,
+        "recall_by_third": [
+         0.645,
+         0.858,
+         0.689
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.241,
+        "precision": 0.285,
+        "recall_by_third": [
+         0.247,
+         0.356,
+         0.128
+        ],
+        "unassigned_frac": 0.06
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.958,
+        "precision": 0.969,
+        "recall_by_third": [
+         0.964,
+         0.959,
+         0.951
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.962,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.959,
+         0.963,
+         0.963
+        ],
+        "unassigned_frac": 0.019
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 10,
+      "filtered_frac": 0.019,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.293,
+        "precision": 0.874,
+        "recall_by_third": [
+         0.154,
+         0.365,
+         0.362
+        ],
+        "unassigned_frac": 0.049
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.485,
+        "precision": 0.605,
+        "recall_by_third": [
+         0.168,
+         0.554,
+         0.739
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.553,
+        "precision": 0.636,
+        "recall_by_third": [
+         0.671,
+         0.498,
+         0.507
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.386,
+        "precision": 0.61,
+        "recall_by_third": [
+         0.243,
+         0.469,
+         0.499
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.12,
+        "precision": 0.114,
+        "recall_by_third": [
+         0.094,
+         0.087,
+         0.17
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.98,
+        "precision": 0.969,
+        "recall_by_third": [
+         0.981,
+         0.977,
+         0.982
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.998,
+         0.994,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "random": {
+     "interaction_dev_0": {
+      "n_labels": 13,
+      "filtered_frac": 0.012,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.229,
+        "precision": 0.36,
+        "recall_by_third": [
+         0.406,
+         0.145,
+         0.075
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.257,
+        "precision": 0.319,
+        "recall_by_third": [
+         0.269,
+         0.358,
+         0.151
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.256,
+        "precision": 0.335,
+        "recall_by_third": [
+         0.348,
+         0.287,
+         0.149
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.177,
+        "precision": 0.351,
+        "recall_by_third": [
+         0.128,
+         0.13,
+         0.27
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.119,
+        "precision": 0.152,
+        "recall_by_third": [
+         0.228,
+         0.117,
+         0.044
+        ],
+        "unassigned_frac": 0.072
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.995,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.631,
+        "precision": 0.984,
+        "recall_by_third": [
+         0.669,
+         0.609,
+         0.612
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 10,
+      "filtered_frac": 0.021,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.303,
+        "precision": 0.626,
+        "recall_by_third": [
+         0.477,
+         0.319,
+         0.105
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.637,
+        "precision": 0.469,
+        "recall_by_third": [
+         0.816,
+         0.537,
+         0.549
+        ],
+        "unassigned_frac": 0.021
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.358,
+        "precision": 0.465,
+        "recall_by_third": [
+         0.117,
+         0.572,
+         0.366
+        ],
+        "unassigned_frac": 0.031
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.225,
+        "precision": 0.57,
+        "recall_by_third": [
+         0.083,
+         0.355,
+         0.223
+        ],
+        "unassigned_frac": 0.02
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.386,
+        "precision": 0.417,
+        "recall_by_third": [
+         0.283,
+         0.43,
+         0.489
+        ],
+        "unassigned_frac": 0.036
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.997,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.748,
+         0.749,
+         0.709
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 8,
+      "filtered_frac": 0.017,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.609,
+        "precision": 0.582,
+        "recall_by_third": [
+         0.678,
+         0.774,
+         0.396
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.607,
+        "precision": 0.654,
+        "recall_by_third": [
+         0.835,
+         0.584,
+         0.366
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.493,
+        "precision": 0.41,
+        "recall_by_third": [
+         0.204,
+         0.801,
+         0.44
+        ],
+        "unassigned_frac": 0.022
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.157,
+        "precision": 0.436,
+        "recall_by_third": [
+         0.119,
+         0.2,
+         0.148
+        ],
+        "unassigned_frac": 0.026
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.301,
+        "precision": 0.231,
+        "recall_by_third": [
+         0.414,
+         0.312,
+         0.183
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.904,
+        "precision": 0.981,
+        "recall_by_third": [
+         0.938,
+         0.893,
+         0.878
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.975,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 11,
+      "filtered_frac": 0.014,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.215,
+        "precision": 0.586,
+        "recall_by_third": [
+         0.002,
+         0.328,
+         0.318
+        ],
+        "unassigned_frac": 0.026
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.448,
+        "precision": 0.549,
+        "recall_by_third": [
+         0.557,
+         0.528,
+         0.242
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.381,
+        "precision": 0.52,
+        "recall_by_third": [
+         0.205,
+         0.594,
+         0.351
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.351,
+        "precision": 0.659,
+        "recall_by_third": [
+         0.536,
+         0.181,
+         0.289
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.236,
+        "precision": 0.198,
+        "recall_by_third": [
+         0.211,
+         0.382,
+         0.133
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.985,
+        "precision": 0.98,
+        "recall_by_third": [
+         0.988,
+         0.979,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.998,
+         0.998,
+         0.989
+        ],
+        "unassigned_frac": 0.003
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "interaction_dev_0": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.511,
+        "precision": 0.609,
+        "recall_by_third": [
+         0.981,
+         0.377,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.18,
+        "precision": 0.292,
+        "recall_by_third": [
+         0.0,
+         0.001,
+         0.499
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.694,
+        "precision": 0.333,
+        "recall_by_third": [
+         0.085,
+         0.974,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.429,
+        "precision": 0.507,
+        "recall_by_third": [
+         0.989,
+         0.296,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.996,
+         0.995,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.67,
+        "precision": 0.369,
+        "recall_by_third": [
+         1.0,
+         0.926,
+         0.062
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.593,
+        "precision": 0.551,
+        "recall_by_third": [
+         0.004,
+         0.801,
+         0.991
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.504,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.563,
+         0.88,
+         0.031
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.575,
+        "precision": 0.634,
+        "recall_by_third": [
+         0.001,
+         0.642,
+         0.979
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.998,
+         0.997,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.997,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.53,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.0,
+         0.535,
+         0.98
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.43,
+        "precision": 0.241,
+        "recall_by_third": [
+         0.985,
+         0.21,
+         0.001
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.668,
+        "precision": 0.459,
+        "recall_by_third": [
+         0.06,
+         0.929,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.519,
+        "precision": 0.871,
+        "recall_by_third": [
+         0.0,
+         0.479,
+         0.986
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.991,
+         0.996,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.996,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.43,
+        "precision": 0.74,
+        "recall_by_third": [
+         0.0,
+         0.304,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.44,
+        "precision": 0.873,
+        "recall_by_third": [
+         0.0,
+         0.371,
+         0.986
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.459,
+        "precision": 0.44,
+        "recall_by_third": [
+         0.004,
+         0.647,
+         0.651
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.546,
+        "precision": 0.248,
+        "recall_by_third": [
+         1.0,
+         0.423,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.988,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.972,
+         0.993,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.993,
+         0.996,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.489,
+    "no_filter": 0.488,
+    "eps0": 0.489,
+    "min_cluster_10": 0.281,
+    "all_frames_sample": 0.339,
+    "kmeans_true_k": 0.462
+   }
+  }
+ },
+ "contact_long": {
+  "scaled_dynamic_scene_segmentation": {
+   "objects": {
+    "streaming": {
+     "dynamic_dev_0": {
+      "n_labels": 15,
+      "filtered_frac": 0.009,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.837,
+        "precision": 0.886,
+        "recall_by_third": [
+         0.725,
+         0.883,
+         0.9
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.744,
+        "precision": 0.914,
+        "recall_by_third": [
+         0.525,
+         0.768,
+         0.881
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.966,
+        "precision": 0.973,
+        "recall_by_third": [
+         0.997,
+         0.949,
+         0.944
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.56,
+        "precision": 0.755,
+        "recall_by_third": [
+         0.544,
+         0.626,
+         0.507
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.848,
+        "precision": 0.978,
+        "recall_by_third": [
+         0.847,
+         0.841,
+         0.856
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.733,
+        "precision": 0.901,
+        "recall_by_third": [
+         0.749,
+         0.729,
+         0.719
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.259,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.249,
+         0.25,
+         0.276
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.986,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.991
+        ],
+        "unassigned_frac": 0.002
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 11,
+      "filtered_frac": 0.001,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.596,
+        "precision": 0.932,
+        "recall_by_third": [
+         0.498,
+         0.624,
+         0.662
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.849,
+        "precision": 0.774,
+        "recall_by_third": [
+         0.824,
+         0.763,
+         0.945
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.892,
+        "precision": 0.961,
+        "recall_by_third": [
+         0.992,
+         0.951,
+         0.696
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.952,
+        "precision": 0.829,
+        "recall_by_third": [
+         0.93,
+         0.959,
+         0.966
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.919,
+        "precision": 0.963,
+        "recall_by_third": [
+         0.947,
+         0.917,
+         0.894
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.707,
+        "precision": 0.93,
+        "recall_by_third": [
+         0.732,
+         0.696,
+         0.689
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.955,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.943,
+         0.96,
+         0.962
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.998,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 9,
+      "filtered_frac": 0.006,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.385,
+        "precision": 0.928,
+        "recall_by_third": [
+         0.316,
+         0.435,
+         0.398
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.908,
+        "precision": 0.97,
+        "recall_by_third": [
+         0.957,
+         0.742,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.994,
+        "precision": 0.991,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.979
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.977,
+        "precision": 0.865,
+        "recall_by_third": [
+         0.971,
+         0.967,
+         0.99
+        ],
+        "unassigned_frac": 0.002
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.985,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.702,
+        "precision": 0.449,
+        "recall_by_third": [
+         0.733,
+         0.668,
+         0.703
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.948,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.97,
+         0.947,
+         0.927
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 10,
+      "filtered_frac": 0.012,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.488,
+        "precision": 0.946,
+        "recall_by_third": [
+         0.388,
+         0.41,
+         0.672
+        ],
+        "unassigned_frac": 0.018
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.559,
+        "precision": 0.665,
+        "recall_by_third": [
+         0.397,
+         0.509,
+         0.724
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.98,
+        "precision": 0.981,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         0.932
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.925,
+        "precision": 0.875,
+        "recall_by_third": [
+         0.845,
+         0.945,
+         0.975
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.989,
+        "precision": 0.985,
+        "recall_by_third": [
+         0.992,
+         0.992,
+         0.984
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.921,
+        "recall_by_third": [
+         0.75,
+         0.725,
+         0.733
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.975,
+        "precision": 0.978,
+        "recall_by_third": [
+         0.978,
+         0.971,
+         0.977
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "random": {
+     "dynamic_dev_0": {
+      "n_labels": 16,
+      "filtered_frac": 0.01,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.492,
+        "precision": 0.949,
+        "recall_by_third": [
+         0.346,
+         0.539,
+         0.586
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.701,
+        "precision": 0.874,
+        "recall_by_third": [
+         0.523,
+         0.689,
+         0.838
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.965,
+        "precision": 0.946,
+        "recall_by_third": [
+         0.999,
+         0.941,
+         0.948
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.83,
+        "precision": 0.841,
+        "recall_by_third": [
+         0.701,
+         0.933,
+         0.856
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.652,
+        "precision": 0.978,
+        "recall_by_third": [
+         0.65,
+         0.659,
+         0.645
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.903,
+        "recall_by_third": [
+         0.757,
+         0.733,
+         0.718
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.456,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.434,
+         0.453,
+         0.482
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.987,
+        "recall_by_third": [
+         0.999,
+         0.996,
+         0.991
+        ],
+        "unassigned_frac": 0.002
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 11,
+      "filtered_frac": 0.006,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.519,
+        "precision": 0.888,
+        "recall_by_third": [
+         0.403,
+         0.542,
+         0.608
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.77,
+        "precision": 0.674,
+        "recall_by_third": [
+         0.775,
+         0.65,
+         0.876
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.879,
+        "precision": 0.931,
+        "recall_by_third": [
+         0.997,
+         0.948,
+         0.649
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.961,
+        "precision": 0.683,
+        "recall_by_third": [
+         0.953,
+         0.956,
+         0.974
+        ],
+        "unassigned_frac": 0.02
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.64,
+        "precision": 0.965,
+        "recall_by_third": [
+         0.649,
+         0.613,
+         0.658
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.701,
+        "precision": 0.91,
+        "recall_by_third": [
+         0.726,
+         0.686,
+         0.689
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.972,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.962,
+         0.974,
+         0.98
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.998,
+         0.992,
+         0.99
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 11,
+      "filtered_frac": 0.01,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.803,
+        "precision": 0.884,
+        "recall_by_third": [
+         0.814,
+         0.774,
+         0.825
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.42,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.69,
+         0.172,
+         0.373
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.994,
+        "precision": 0.993,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.977
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.934,
+        "precision": 0.807,
+        "recall_by_third": [
+         0.939,
+         0.938,
+         0.928
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.979,
+        "recall_by_third": [
+         0.999,
+         0.997,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.706,
+        "precision": 0.934,
+        "recall_by_third": [
+         0.746,
+         0.674,
+         0.697
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.915,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.934,
+         0.915,
+         0.896
+        ],
+        "unassigned_frac": 0.025
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.997,
+         0.997,
+         0.985
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 12,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.372,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.318,
+         0.302,
+         0.5
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.768,
+        "precision": 0.887,
+        "recall_by_third": [
+         0.791,
+         0.612,
+         0.888
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.986,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.741,
+        "precision": 0.926,
+        "recall_by_third": [
+         0.779,
+         0.703,
+         0.746
+        ],
+        "unassigned_frac": 0.03
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.946,
+        "precision": 0.976,
+        "recall_by_third": [
+         0.954,
+         0.936,
+         0.948
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.733,
+        "precision": 0.874,
+        "recall_by_third": [
+         0.747,
+         0.72,
+         0.73
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.977,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.97,
+         0.974,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "dynamic_dev_0": {
+      "n_labels": 7,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.998,
+        "precision": 0.765,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.412,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.928,
+         0.206,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.993,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.991,
+         0.994,
+         0.993
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.989,
+         0.996,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.772,
+        "recall_by_third": [
+         0.999,
+         0.995,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.997,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 7,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.998,
+        "precision": 0.772,
+        "recall_by_third": [
+         0.999,
+         0.996,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.547,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.992,
+         0.539,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.992,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.988,
+         0.992,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.993,
+         0.996,
+         0.992
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.795,
+        "recall_by_third": [
+         0.997,
+         0.995,
+         0.993
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.994,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 1.0,
+        "precision": 0.932,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.859,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.93,
+         0.608,
+         0.983
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.944,
+        "precision": 0.998,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.799
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.998,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.996,
+        "recall_by_third": [
+         1.0,
+         0.997,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.997,
+         0.998,
+         0.993
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 0.834,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.991
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.675,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.04,
+         0.848,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.868,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.995,
+         0.542
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.998,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         0.997,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.997,
+         0.998,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.999,
+         0.997,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.998,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.774,
+    "no_filter": 0.773,
+    "eps0": 0.774,
+    "min_cluster_10": 0.452,
+    "all_frames_sample": 0.685,
+    "kmeans_true_k": 0.921
+   }
+  },
+  "scaled_interaction_segmentation": {
+   "objects": {
+    "streaming": {
+     "interaction_dev_0": {
+      "n_labels": 16,
+      "filtered_frac": 0.01,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.182,
+        "precision": 0.451,
+        "recall_by_third": [
+         0.325,
+         0.118,
+         0.049
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.309,
+        "precision": 0.609,
+        "recall_by_third": [
+         0.286,
+         0.447,
+         0.194
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.217,
+        "precision": 0.806,
+        "recall_by_third": [
+         0.202,
+         0.261,
+         0.191
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.235,
+        "precision": 0.592,
+        "recall_by_third": [
+         0.234,
+         0.32,
+         0.159
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.741,
+        "precision": 0.455,
+        "recall_by_third": [
+         0.634,
+         0.859,
+         0.681
+        ],
+        "unassigned_frac": 0.022
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.853,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.827,
+         0.859,
+         0.872
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.73,
+        "precision": 0.984,
+        "recall_by_third": [
+         0.722,
+         0.718,
+         0.75
+        ],
+        "unassigned_frac": 0.03
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 15,
+      "filtered_frac": 0.014,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.529,
+        "precision": 0.761,
+        "recall_by_third": [
+         0.389,
+         0.608,
+         0.602
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.228,
+        "precision": 0.353,
+        "recall_by_third": [
+         0.312,
+         0.144,
+         0.224
+        ],
+        "unassigned_frac": 0.018
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.329,
+        "precision": 0.569,
+        "recall_by_third": [
+         0.241,
+         0.356,
+         0.39
+        ],
+        "unassigned_frac": 0.015
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.137,
+        "precision": 0.62,
+        "recall_by_third": [
+         0.063,
+         0.238,
+         0.109
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.441,
+        "precision": 0.314,
+        "recall_by_third": [
+         0.557,
+         0.303,
+         0.447
+        ],
+        "unassigned_frac": 0.036
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.953,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.97,
+         0.945,
+         0.942
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.772,
+        "precision": 0.971,
+        "recall_by_third": [
+         0.741,
+         0.762,
+         0.814
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 18,
+      "filtered_frac": 0.013,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.387,
+        "precision": 0.752,
+        "recall_by_third": [
+         0.539,
+         0.393,
+         0.247
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.338,
+        "precision": 0.671,
+        "recall_by_third": [
+         0.328,
+         0.355,
+         0.333
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.292,
+        "precision": 0.666,
+        "recall_by_third": [
+         0.261,
+         0.372,
+         0.234
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.315,
+        "precision": 0.686,
+        "recall_by_third": [
+         0.357,
+         0.445,
+         0.16
+        ],
+        "unassigned_frac": 0.02
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.787,
+        "precision": 0.614,
+        "recall_by_third": [
+         0.792,
+         0.698,
+         0.861
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.757,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.761,
+         0.733,
+         0.778
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.991,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.999,
+         0.991,
+         0.982
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 16,
+      "filtered_frac": 0.013,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.426,
+        "precision": 0.636,
+        "recall_by_third": [
+         0.393,
+         0.5,
+         0.385
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.252,
+        "precision": 0.745,
+        "recall_by_third": [
+         0.221,
+         0.266,
+         0.267
+        ],
+        "unassigned_frac": 0.015
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.569,
+        "precision": 0.541,
+        "recall_by_third": [
+         0.304,
+         0.702,
+         0.676
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.233,
+        "precision": 0.48,
+        "recall_by_third": [
+         0.299,
+         0.265,
+         0.09
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.321,
+        "precision": 0.481,
+        "recall_by_third": [
+         0.45,
+         0.417,
+         0.124
+        ],
+        "unassigned_frac": 0.052
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.746,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.819,
+         0.717,
+         0.714
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.971,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.975,
+         0.967,
+         0.97
+        ],
+        "unassigned_frac": 0.003
+       }
+      ]
+     }
+    },
+    "random": {
+     "interaction_dev_0": {
+      "n_labels": 19,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.279,
+        "precision": 0.353,
+        "recall_by_third": [
+         0.368,
+         0.3,
+         0.125
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.159,
+        "precision": 0.465,
+        "recall_by_third": [
+         0.254,
+         0.2,
+         0.05
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.391,
+        "precision": 0.531,
+        "recall_by_third": [
+         0.337,
+         0.514,
+         0.329
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.192,
+        "precision": 0.487,
+        "recall_by_third": [
+         0.335,
+         0.238,
+         0.008
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.208,
+        "precision": 0.118,
+        "recall_by_third": [
+         0.083,
+         0.382,
+         0.093
+        ],
+        "unassigned_frac": 0.027
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.843,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.803,
+         0.855,
+         0.871
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.382,
+        "precision": 0.976,
+        "recall_by_third": [
+         0.392,
+         0.367,
+         0.386
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 16,
+      "filtered_frac": 0.016,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.236,
+        "precision": 0.539,
+        "recall_by_third": [
+         0.201,
+         0.089,
+         0.427
+        ],
+        "unassigned_frac": 0.02
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.168,
+        "precision": 0.372,
+        "recall_by_third": [
+         0.139,
+         0.21,
+         0.158
+        ],
+        "unassigned_frac": 0.027
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.299,
+        "precision": 0.501,
+        "recall_by_third": [
+         0.304,
+         0.395,
+         0.189
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.278,
+        "precision": 0.36,
+        "recall_by_third": [
+         0.114,
+         0.316,
+         0.384
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.358,
+        "precision": 0.675,
+        "recall_by_third": [
+         0.38,
+         0.308,
+         0.384
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.951,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.97,
+         0.944,
+         0.94
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.621,
+        "precision": 0.981,
+        "recall_by_third": [
+         0.621,
+         0.62,
+         0.621
+        ],
+        "unassigned_frac": 0.007
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 16,
+      "filtered_frac": 0.013,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.204,
+        "precision": 0.498,
+        "recall_by_third": [
+         0.352,
+         0.159,
+         0.119
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.241,
+        "precision": 0.434,
+        "recall_by_third": [
+         0.127,
+         0.305,
+         0.308
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.4,
+        "precision": 0.473,
+        "recall_by_third": [
+         0.153,
+         0.577,
+         0.47
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.197,
+        "precision": 0.424,
+        "recall_by_third": [
+         0.384,
+         0.213,
+         0.031
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.47,
+        "precision": 0.508,
+        "recall_by_third": [
+         0.59,
+         0.597,
+         0.259
+        ],
+        "unassigned_frac": 0.037
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.798,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.804,
+         0.772,
+         0.818
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.998,
+         0.998,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 20,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.119,
+        "precision": 0.389,
+        "recall_by_third": [
+         0.046,
+         0.118,
+         0.194
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.15,
+        "precision": 0.41,
+        "recall_by_third": [
+         0.007,
+         0.11,
+         0.332
+        ],
+        "unassigned_frac": 0.035
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.4,
+        "precision": 0.396,
+        "recall_by_third": [
+         0.223,
+         0.593,
+         0.39
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.231,
+        "precision": 0.581,
+        "recall_by_third": [
+         0.285,
+         0.306,
+         0.049
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.355,
+        "precision": 0.476,
+        "recall_by_third": [
+         0.526,
+         0.45,
+         0.12
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.695,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.753,
+         0.674,
+         0.666
+        ],
+        "unassigned_frac": 0.026
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.986,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.987,
+         0.984,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "interaction_dev_0": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.472,
+        "precision": 0.635,
+        "recall_by_third": [
+         0.92,
+         0.321,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.604,
+        "precision": 0.259,
+        "recall_by_third": [
+         0.017,
+         0.641,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.495,
+        "precision": 0.408,
+        "recall_by_third": [
+         0.984,
+         0.498,
+         0.004
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.999,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.99,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.982,
+         0.992,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.537,
+        "precision": 0.297,
+        "recall_by_third": [
+         0.999,
+         0.555,
+         0.01
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.537,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.457,
+         0.878,
+         0.248
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.523,
+        "precision": 0.274,
+        "recall_by_third": [
+         0.004,
+         0.491,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.993,
+         0.993,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.995,
+         0.996,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.455,
+        "precision": 0.409,
+        "recall_by_third": [
+         0.977,
+         0.319,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.61,
+        "precision": 0.417,
+        "recall_by_third": [
+         0.034,
+         0.83,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.873,
+        "precision": 0.499,
+        "recall_by_third": [
+         0.68,
+         0.984,
+         0.924
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.99,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.988,
+         0.994,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.997,
+         0.994,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.433,
+        "precision": 0.836,
+        "recall_by_third": [
+         0.001,
+         0.376,
+         0.925
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.539,
+        "precision": 0.257,
+        "recall_by_third": [
+         0.996,
+         0.614,
+         0.015
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.588,
+        "precision": 0.351,
+        "recall_by_third": [
+         0.009,
+         0.675,
+         0.986
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.987,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.976,
+         0.991,
+         0.992
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.99,
+         0.997,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.435,
+    "no_filter": 0.435,
+    "eps0": 0.435,
+    "min_cluster_10": 0.172,
+    "all_frames_sample": 0.198,
+    "kmeans_true_k": 0.532
+   }
+  }
+ },
+ "overlap_mid": {
+  "scaled_dynamic_scene_segmentation": {
+   "objects": {
+    "streaming": {
+     "dynamic_dev_0": {
+      "n_labels": 9,
+      "filtered_frac": 0.012,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.926,
+        "precision": 0.862,
+        "recall_by_third": [
+         0.898,
+         0.945,
+         0.935
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.811,
+        "precision": 0.981,
+        "recall_by_third": [
+         0.661,
+         0.911,
+         0.84
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.987,
+        "precision": 0.988,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.963
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.979,
+        "precision": 0.827,
+        "recall_by_third": [
+         0.957,
+         0.999,
+         0.982
+        ],
+        "unassigned_frac": 0.002
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.934,
+        "precision": 0.985,
+        "recall_by_third": [
+         0.948,
+         0.929,
+         0.924
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.733,
+        "precision": 0.948,
+        "recall_by_third": [
+         0.738,
+         0.743,
+         0.718
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.954,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.977,
+         0.958,
+         0.929
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.987,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.983,
+         0.993,
+         0.984
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 5,
+      "filtered_frac": 0.006,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.043,
+        "precision": 0.128,
+        "recall_by_third": [
+         0.047,
+         0.041,
+         0.039
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.975,
+        "precision": 0.622,
+        "recall_by_third": [
+         0.998,
+         0.983,
+         0.936
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.038
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.371,
+        "recall_by_third": [
+         0.997,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.697,
+        "precision": 0.665,
+        "recall_by_third": [
+         0.706,
+         0.693,
+         0.694
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.883,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 9,
+      "filtered_frac": 0.006,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.94,
+        "precision": 0.9,
+        "recall_by_third": [
+         0.953,
+         0.929,
+         0.939
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.918,
+        "precision": 0.975,
+        "recall_by_third": [
+         0.98,
+         0.732,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.981,
+        "precision": 0.986,
+        "recall_by_third": [
+         1.0,
+         0.995,
+         0.936
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.949,
+        "precision": 0.902,
+        "recall_by_third": [
+         0.937,
+         0.937,
+         0.968
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.999,
+         0.997,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.714,
+        "precision": 0.952,
+        "recall_by_third": [
+         0.733,
+         0.713,
+         0.695
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.956,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.968,
+         0.958,
+         0.943
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.973,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.987,
+         0.968,
+         0.964
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 11,
+      "filtered_frac": 0.008,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.616,
+        "precision": 0.952,
+        "recall_by_third": [
+         0.571,
+         0.618,
+         0.66
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.781,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.858,
+         0.459,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.995,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.815,
+        "precision": 0.908,
+        "recall_by_third": [
+         0.831,
+         0.802,
+         0.813
+        ],
+        "unassigned_frac": 0.028
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.997,
+         0.997,
+         0.992
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.755,
+        "precision": 0.946,
+        "recall_by_third": [
+         0.757,
+         0.752,
+         0.756
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.983,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.993,
+         0.98,
+         0.976
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.997,
+         0.986,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "random": {
+     "dynamic_dev_0": {
+      "n_labels": 11,
+      "filtered_frac": 0.012,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.82,
+        "precision": 0.888,
+        "recall_by_third": [
+         0.714,
+         0.875,
+         0.871
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.772,
+        "precision": 0.849,
+        "recall_by_third": [
+         0.613,
+         0.883,
+         0.8
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 0.957,
+        "recall_by_third": [
+         0.995,
+         1.0,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.741,
+        "precision": 0.529,
+        "recall_by_third": [
+         0.647,
+         0.795,
+         0.784
+        ],
+        "unassigned_frac": 0.03
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.708,
+        "precision": 0.988,
+        "recall_by_third": [
+         0.712,
+         0.699,
+         0.714
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.915,
+        "recall_by_third": [
+         0.741,
+         0.747,
+         0.72
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.894,
+        "precision": 0.959,
+        "recall_by_third": [
+         0.918,
+         0.897,
+         0.868
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.974,
+        "recall_by_third": [
+         0.997,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 9,
+      "filtered_frac": 0.007,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.811,
+        "precision": 0.914,
+        "recall_by_third": [
+         0.753,
+         0.694,
+         0.973
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.888,
+        "precision": 0.799,
+        "recall_by_third": [
+         0.805,
+         0.907,
+         0.936
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.851,
+        "precision": 0.996,
+        "recall_by_third": [
+         1.0,
+         0.883,
+         0.626
+        ],
+        "unassigned_frac": 0.023
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.969,
+        "precision": 0.813,
+        "recall_by_third": [
+         0.949,
+         0.992,
+         0.964
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.972,
+        "precision": 0.974,
+        "recall_by_third": [
+         0.982,
+         0.969,
+         0.965
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.697,
+        "precision": 0.937,
+        "recall_by_third": [
+         0.707,
+         0.691,
+         0.693
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.985,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.99,
+         0.984,
+         0.983
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 11,
+      "filtered_frac": 0.013,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.702,
+        "precision": 0.893,
+        "recall_by_third": [
+         0.691,
+         0.721,
+         0.691
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.842,
+        "precision": 0.898,
+        "recall_by_third": [
+         0.949,
+         0.618,
+         0.913
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.973,
+        "precision": 0.98,
+        "recall_by_third": [
+         1.0,
+         0.995,
+         0.907
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.922,
+        "precision": 0.83,
+        "recall_by_third": [
+         0.865,
+         0.931,
+         0.958
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.977,
+        "precision": 0.988,
+        "recall_by_third": [
+         0.973,
+         0.974,
+         0.984
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.715,
+        "precision": 0.915,
+        "recall_by_third": [
+         0.734,
+         0.716,
+         0.696
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.976,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.98,
+         0.981,
+         0.968
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.927,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.941,
+         0.927,
+         0.912
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 11,
+      "filtered_frac": 0.016,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.567,
+        "precision": 0.876,
+        "recall_by_third": [
+         0.568,
+         0.578,
+         0.556
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.8,
+        "precision": 0.976,
+        "recall_by_third": [
+         0.856,
+         0.522,
+         0.989
+        ],
+        "unassigned_frac": 0.015
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.937,
+        "recall_by_third": [
+         0.998,
+         1.0,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.487,
+        "precision": 0.808,
+        "recall_by_third": [
+         0.592,
+         0.334,
+         0.555
+        ],
+        "unassigned_frac": 0.045
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.971,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.984,
+         0.969,
+         0.957
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.755,
+        "precision": 0.948,
+        "recall_by_third": [
+         0.768,
+         0.746,
+         0.752
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.99,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.996,
+         0.988,
+         0.985
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.979,
+        "recall_by_third": [
+         0.998,
+         0.986,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "dynamic_dev_0": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.429,
+        "precision": 0.763,
+        "recall_by_third": [
+         0.0,
+         0.285,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.49,
+        "precision": 0.225,
+        "recall_by_third": [
+         1.0,
+         0.638,
+         0.01
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.562,
+        "precision": 0.998,
+        "recall_by_third": [
+         1.0,
+         0.677,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.992,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.995,
+         0.996,
+         0.985
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.994,
+         0.999,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.821,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.997,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.998,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 1.0,
+        "precision": 0.775,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.521,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.0,
+         0.457,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.528,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.995,
+         0.476,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.997,
+         0.999,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.995,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.998,
+         0.996,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.996,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.994,
+        "precision": 0.931,
+        "recall_by_third": [
+         1.0,
+         0.988,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.317,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.941,
+         0.039,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.885,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.579
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.998,
+         0.997,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.774,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.792,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.633,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.006,
+         0.854,
+         0.97
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.828,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.408
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.996,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.994,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.73,
+    "no_filter": 0.728,
+    "eps0": 0.73,
+    "min_cluster_10": 0.424,
+    "all_frames_sample": 0.818,
+    "kmeans_true_k": 0.929
+   }
+  },
+  "scaled_interaction_segmentation": {
+   "objects": {
+    "streaming": {
+     "interaction_dev_0": {
+      "n_labels": 8,
+      "filtered_frac": 0.017,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.301,
+        "precision": 0.642,
+        "recall_by_third": [
+         0.374,
+         0.323,
+         0.179
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.446,
+        "precision": 0.561,
+        "recall_by_third": [
+         0.544,
+         0.573,
+         0.242
+        ],
+        "unassigned_frac": 0.021
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.484,
+        "precision": 0.541,
+        "recall_by_third": [
+         0.517,
+         0.504,
+         0.439
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.615,
+        "precision": 0.697,
+        "recall_by_third": [
+         0.743,
+         0.469,
+         0.62
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.394,
+        "precision": 0.196,
+        "recall_by_third": [
+         0.615,
+         0.295,
+         0.354
+        ],
+        "unassigned_frac": 0.015
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.994,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.892,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.919,
+         0.88,
+         0.874
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 13,
+      "filtered_frac": 0.014,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.606,
+        "precision": 0.808,
+        "recall_by_third": [
+         0.573,
+         0.803,
+         0.432
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.327,
+        "precision": 0.725,
+        "recall_by_third": [
+         0.37,
+         0.277,
+         0.329
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.477,
+        "precision": 0.729,
+        "recall_by_third": [
+         0.628,
+         0.607,
+         0.185
+        ],
+        "unassigned_frac": 0.028
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.571,
+        "precision": 0.623,
+        "recall_by_third": [
+         0.46,
+         0.647,
+         0.588
+        ],
+        "unassigned_frac": 0.021
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.727,
+        "precision": 0.567,
+        "recall_by_third": [
+         0.639,
+         0.75,
+         0.82
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.968,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.954,
+         0.963,
+         0.986
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.569,
+        "precision": 0.985,
+        "recall_by_third": [
+         0.575,
+         0.561,
+         0.574
+        ],
+        "unassigned_frac": 0.032
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 12,
+      "filtered_frac": 0.018,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.347,
+        "precision": 0.729,
+        "recall_by_third": [
+         0.507,
+         0.406,
+         0.149
+        ],
+        "unassigned_frac": 0.055
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.788,
+        "precision": 0.756,
+        "recall_by_third": [
+         0.783,
+         0.828,
+         0.758
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.468,
+        "precision": 0.804,
+        "recall_by_third": [
+         0.221,
+         0.589,
+         0.594
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.63,
+        "precision": 0.594,
+        "recall_by_third": [
+         0.775,
+         0.827,
+         0.328
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.276,
+        "precision": 0.48,
+        "recall_by_third": [
+         0.379,
+         0.33,
+         0.131
+        ],
+        "unassigned_frac": 0.031
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.882,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.887,
+         0.879,
+         0.88
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.983,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.994,
+         0.986,
+         0.967
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 10,
+      "filtered_frac": 0.019,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.352,
+        "precision": 0.62,
+        "recall_by_third": [
+         0.253,
+         0.449,
+         0.356
+        ],
+        "unassigned_frac": 0.028
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.481,
+        "precision": 0.579,
+        "recall_by_third": [
+         0.184,
+         0.598,
+         0.656
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.515,
+        "precision": 0.512,
+        "recall_by_third": [
+         0.649,
+         0.439,
+         0.474
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.413,
+        "precision": 0.588,
+        "recall_by_third": [
+         0.239,
+         0.471,
+         0.61
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.07,
+        "precision": 0.082,
+        "recall_by_third": [
+         0.087,
+         0.062,
+         0.062
+        ],
+        "unassigned_frac": 0.051
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.95,
+        "precision": 0.984,
+        "recall_by_third": [
+         0.956,
+         0.949,
+         0.945
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.98,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.995,
+         0.979,
+         0.967
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "random": {
+     "interaction_dev_0": {
+      "n_labels": 14,
+      "filtered_frac": 0.019,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.272,
+        "precision": 0.563,
+        "recall_by_third": [
+         0.344,
+         0.226,
+         0.224
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.291,
+        "precision": 0.379,
+        "recall_by_third": [
+         0.138,
+         0.465,
+         0.245
+        ],
+        "unassigned_frac": 0.002
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.151,
+        "precision": 0.382,
+        "recall_by_third": [
+         0.142,
+         0.121,
+         0.184
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.12,
+        "precision": 0.307,
+        "recall_by_third": [
+         0.105,
+         0.097,
+         0.157
+        ],
+        "unassigned_frac": 0.024
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.27,
+        "precision": 0.158,
+        "recall_by_third": [
+         0.217,
+         0.123,
+         0.472
+        ],
+        "unassigned_frac": 0.062
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.988,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.593,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.62,
+         0.582,
+         0.574
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 8,
+      "filtered_frac": 0.024,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.132,
+        "precision": 0.384,
+        "recall_by_third": [
+         0.04,
+         0.085,
+         0.284
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.637,
+        "precision": 0.406,
+        "recall_by_third": [
+         0.806,
+         0.475,
+         0.608
+        ],
+        "unassigned_frac": 0.05
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.367,
+        "precision": 0.473,
+        "recall_by_third": [
+         0.642,
+         0.389,
+         0.068
+        ],
+        "unassigned_frac": 0.027
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.275,
+        "precision": 0.6,
+        "recall_by_third": [
+         0.148,
+         0.406,
+         0.255
+        ],
+        "unassigned_frac": 0.021
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.494,
+        "precision": 0.345,
+        "recall_by_third": [
+         0.457,
+         0.444,
+         0.602
+        ],
+        "unassigned_frac": 0.068
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.998,
+         1.0,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.961,
+        "precision": 0.989,
+        "recall_by_third": [
+         0.986,
+         0.955,
+         0.94
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 12,
+      "filtered_frac": 0.009,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.429,
+        "precision": 0.837,
+        "recall_by_third": [
+         0.59,
+         0.501,
+         0.218
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.671,
+        "precision": 0.75,
+        "recall_by_third": [
+         0.758,
+         0.729,
+         0.52
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.297,
+        "precision": 0.511,
+        "recall_by_third": [
+         0.134,
+         0.544,
+         0.188
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.366,
+        "precision": 0.527,
+        "recall_by_third": [
+         0.569,
+         0.539,
+         0.039
+        ],
+        "unassigned_frac": 0.023
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.2,
+        "precision": 0.226,
+        "recall_by_third": [
+         0.055,
+         0.179,
+         0.351
+        ],
+        "unassigned_frac": 0.035
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.84,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.878,
+         0.846,
+         0.79
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.996,
+         0.999,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 12,
+      "filtered_frac": 0.024,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.248,
+        "precision": 0.438,
+        "recall_by_third": [
+         0.003,
+         0.433,
+         0.31
+        ],
+        "unassigned_frac": 0.036
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.326,
+        "precision": 0.572,
+        "recall_by_third": [
+         0.308,
+         0.487,
+         0.157
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.227,
+        "precision": 0.39,
+        "recall_by_third": [
+         0.232,
+         0.32,
+         0.147
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.335,
+        "precision": 0.76,
+        "recall_by_third": [
+         0.594,
+         0.206,
+         0.097
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.172,
+        "precision": 0.138,
+        "recall_by_third": [
+         0.22,
+         0.033,
+         0.24
+        ],
+        "unassigned_frac": 0.115
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.964,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.976,
+         0.966,
+         0.95
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.995,
+         0.999,
+         0.989
+        ],
+        "unassigned_frac": 0.003
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "interaction_dev_0": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.617,
+        "precision": 0.667,
+        "recall_by_third": [
+         0.984,
+         0.724,
+         0.001
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.546,
+        "precision": 0.345,
+        "recall_by_third": [
+         0.0,
+         0.539,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.339,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.0,
+         0.076,
+         0.857
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.581,
+        "precision": 0.4,
+        "recall_by_third": [
+         0.994,
+         0.74,
+         0.007
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.995,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.454,
+        "precision": 0.32,
+        "recall_by_third": [
+         0.998,
+         0.317,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.601,
+        "precision": 0.478,
+        "recall_by_third": [
+         0.006,
+         0.832,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.654,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.918,
+         0.935,
+         0.087
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.652,
+        "precision": 0.667,
+        "recall_by_third": [
+         0.03,
+         0.838,
+         0.974
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.998,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.832,
+        "precision": 0.977,
+        "recall_by_third": [
+         0.501,
+         0.98,
+         0.977
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.422,
+        "precision": 0.313,
+        "recall_by_third": [
+         0.981,
+         0.186,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.665,
+        "precision": 0.459,
+        "recall_by_third": [
+         0.057,
+         0.941,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.674,
+        "precision": 0.893,
+        "recall_by_third": [
+         0.031,
+         0.893,
+         0.989
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.992,
+         0.997,
+         0.99
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.993,
+         0.999,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.599,
+        "precision": 0.469,
+        "recall_by_third": [
+         0.01,
+         0.803,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.443,
+        "precision": 0.283,
+        "recall_by_third": [
+         0.996,
+         0.327,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.437,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.949,
+         0.493,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.441,
+        "precision": 0.431,
+        "recall_by_third": [
+         0.001,
+         0.546,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.989,
+         0.998,
+         0.992
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.989,
+         0.999,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.501,
+    "no_filter": 0.498,
+    "eps0": 0.501,
+    "min_cluster_10": 0.324,
+    "all_frames_sample": 0.28,
+    "kmeans_true_k": 0.487
+   }
+  }
+ },
+ "overlap_long": {
+  "scaled_dynamic_scene_segmentation": {
+   "objects": {
+    "streaming": {
+     "dynamic_dev_0": {
+      "n_labels": 2,
+      "filtered_frac": 0.001,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.246,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.604,
+        "precision": 0.376,
+        "recall_by_third": [
+         0.607,
+         0.588,
+         0.616
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 11,
+      "filtered_frac": 0.004,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.467,
+        "precision": 0.94,
+        "recall_by_third": [
+         0.45,
+         0.52,
+         0.435
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.815,
+        "precision": 0.772,
+        "recall_by_third": [
+         0.837,
+         0.696,
+         0.912
+        ],
+        "unassigned_frac": 0.005
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.93,
+        "precision": 0.926,
+        "recall_by_third": [
+         0.998,
+         0.973,
+         0.793
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.924,
+        "precision": 0.898,
+        "recall_by_third": [
+         0.895,
+         0.917,
+         0.957
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.919,
+        "precision": 0.965,
+        "recall_by_third": [
+         0.947,
+         0.921,
+         0.89
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.708,
+        "precision": 0.907,
+        "recall_by_third": [
+         0.736,
+         0.697,
+         0.689
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.944,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.916,
+         0.953,
+         0.962
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.998,
+         0.995,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 9,
+      "filtered_frac": 0.005,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.926,
+        "precision": 0.849,
+        "recall_by_third": [
+         0.93,
+         0.92,
+         0.929
+        ],
+        "unassigned_frac": 0.002
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.892,
+        "precision": 0.972,
+        "recall_by_third": [
+         0.966,
+         0.725,
+         0.947
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.996,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.997,
+         0.999,
+         0.99
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.97,
+        "precision": 0.91,
+        "recall_by_third": [
+         0.973,
+         0.974,
+         0.963
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.985,
+        "recall_by_third": [
+         0.998,
+         0.997,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.731,
+        "precision": 0.958,
+        "recall_by_third": [
+         0.757,
+         0.741,
+         0.694
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.899,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.92,
+         0.9,
+         0.876
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.998,
+         0.995,
+         0.988
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 11,
+      "filtered_frac": 0.012,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.443,
+        "precision": 0.91,
+        "recall_by_third": [
+         0.497,
+         0.487,
+         0.349
+        ],
+        "unassigned_frac": 0.002
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.877,
+        "precision": 0.966,
+        "recall_by_third": [
+         0.93,
+         0.743,
+         0.956
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.993,
+        "precision": 0.989,
+        "recall_by_third": [
+         1.0,
+         0.997,
+         0.98
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.922,
+        "precision": 0.875,
+        "recall_by_third": [
+         0.949,
+         0.92,
+         0.899
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.982,
+        "precision": 0.989,
+        "recall_by_third": [
+         0.988,
+         0.986,
+         0.971
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.743,
+        "precision": 0.953,
+        "recall_by_third": [
+         0.738,
+         0.736,
+         0.756
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.94,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.96,
+         0.949,
+         0.914
+        ],
+        "unassigned_frac": 0.031
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.933,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.953,
+         0.931,
+         0.913
+        ],
+        "unassigned_frac": 0.001
+       }
+      ]
+     }
+    },
+    "random": {
+     "dynamic_dev_0": {
+      "n_labels": 15,
+      "filtered_frac": 0.01,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.546,
+        "precision": 0.934,
+        "recall_by_third": [
+         0.366,
+         0.627,
+         0.645
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.82,
+        "precision": 0.912,
+        "recall_by_third": [
+         0.614,
+         0.888,
+         0.911
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.945,
+        "precision": 0.952,
+        "recall_by_third": [
+         1.0,
+         0.88,
+         0.939
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.871,
+        "precision": 0.86,
+        "recall_by_third": [
+         0.752,
+         0.935,
+         0.923
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.972,
+        "recall_by_third": [
+         0.747,
+         0.729,
+         0.731
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.729,
+        "precision": 0.955,
+        "recall_by_third": [
+         0.724,
+         0.738,
+         0.726
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.524,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.598,
+         0.514,
+         0.462
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.98,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.989,
+         0.971,
+         0.981
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 15,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.312,
+        "precision": 0.932,
+        "recall_by_third": [
+         0.219,
+         0.301,
+         0.411
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.851,
+        "precision": 0.772,
+        "recall_by_third": [
+         0.881,
+         0.787,
+         0.887
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.944,
+        "precision": 0.941,
+        "recall_by_third": [
+         0.997,
+         0.973,
+         0.844
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.907,
+        "precision": 0.867,
+        "recall_by_third": [
+         0.94,
+         0.85,
+         0.934
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.394,
+        "precision": 0.974,
+        "recall_by_third": [
+         0.381,
+         0.399,
+         0.402
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.718,
+        "precision": 0.932,
+        "recall_by_third": [
+         0.742,
+         0.699,
+         0.71
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.944,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.937,
+         0.94,
+         0.954
+        ],
+        "unassigned_frac": 0.026
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.991,
+        "recall_by_third": [
+         0.998,
+         0.995,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 12,
+      "filtered_frac": 0.008,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.866,
+        "precision": 0.848,
+        "recall_by_third": [
+         0.859,
+         0.852,
+         0.889
+        ],
+        "unassigned_frac": 0.007
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.464,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.711,
+         0.23,
+         0.416
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.996,
+        "precision": 0.99,
+        "recall_by_third": [
+         0.997,
+         0.999,
+         0.99
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.966,
+        "precision": 0.915,
+        "recall_by_third": [
+         0.959,
+         0.974,
+         0.964
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.872,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.872,
+         0.864,
+         0.88
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.717,
+        "precision": 0.933,
+        "recall_by_third": [
+         0.754,
+         0.724,
+         0.67
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.914,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.945,
+         0.911,
+         0.885
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.992,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.996,
+         0.993,
+         0.986
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 2,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.987,
+        "precision": 0.461,
+        "recall_by_third": [
+         1.0,
+         0.99,
+         0.97
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.249,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "dynamic_dev_0": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.974,
+        "recall_by_third": [
+         0.998,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.957,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.875,
+         0.977,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.961,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.917,
+         0.956
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.995,
+         1.0,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.997,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         0.998,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_1": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.828,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.67,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.081,
+         0.84,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.623,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.998,
+         0.731,
+         0.018
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.997,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.996,
+         0.999,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.995,
+         0.997,
+         0.99
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.999,
+         0.999,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 0.997,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.993,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_2": {
+      "n_labels": 7,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.706,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.951,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.996,
+         0.999,
+         0.829
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.993,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.99,
+         0.995,
+         0.993
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.998,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         0.996,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.999,
+         0.985,
+         0.995
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "dynamic_dev_3": {
+      "n_labels": 8,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.999,
+        "precision": 0.971,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pan",
+        "dynamic": true,
+        "recall": 0.944,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.844,
+         0.969,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "cup",
+        "dynamic": true,
+        "recall": 0.995,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         0.997,
+         0.985
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pet",
+        "dynamic": true,
+        "recall": 0.998,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         0.997,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "counter",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.998,
+         0.999,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "table",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         1.0,
+         0.999,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "shelf",
+        "dynamic": false,
+        "recall": 1.0,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.999,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "stool",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         1.0,
+         0.998,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.643,
+    "no_filter": 0.644,
+    "eps0": 0.643,
+    "min_cluster_10": 0.364,
+    "all_frames_sample": 0.758,
+    "kmeans_true_k": 0.925
+   }
+  },
+  "scaled_interaction_segmentation": {
+   "objects": {
+    "streaming": {
+     "interaction_dev_0": {
+      "n_labels": 13,
+      "filtered_frac": 0.01,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.31,
+        "precision": 0.381,
+        "recall_by_third": [
+         0.467,
+         0.321,
+         0.085
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.334,
+        "precision": 0.537,
+        "recall_by_third": [
+         0.257,
+         0.271,
+         0.45
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.295,
+        "precision": 0.643,
+        "recall_by_third": [
+         0.159,
+         0.406,
+         0.319
+        ],
+        "unassigned_frac": 0.008
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.267,
+        "precision": 0.522,
+        "recall_by_third": [
+         0.334,
+         0.404,
+         0.068
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.197,
+        "precision": 0.116,
+        "recall_by_third": [
+         0.324,
+         0.184,
+         0.105
+        ],
+        "unassigned_frac": 0.026
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.86,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.837,
+         0.873,
+         0.869
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.535,
+        "precision": 0.95,
+        "recall_by_third": [
+         0.554,
+         0.52,
+         0.53
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 15,
+      "filtered_frac": 0.014,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.755,
+        "precision": 0.794,
+        "recall_by_third": [
+         0.648,
+         0.819,
+         0.807
+        ],
+        "unassigned_frac": 0.004
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.345,
+        "precision": 0.727,
+        "recall_by_third": [
+         0.306,
+         0.238,
+         0.482
+        ],
+        "unassigned_frac": 0.02
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.194,
+        "precision": 0.49,
+        "recall_by_third": [
+         0.307,
+         0.155,
+         0.121
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.343,
+        "precision": 0.723,
+        "recall_by_third": [
+         0.324,
+         0.485,
+         0.227
+        ],
+        "unassigned_frac": 0.01
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.398,
+        "precision": 0.324,
+        "recall_by_third": [
+         0.524,
+         0.307,
+         0.327
+        ],
+        "unassigned_frac": 0.039
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.969,
+        "precision": 0.995,
+        "recall_by_third": [
+         0.973,
+         0.97,
+         0.965
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.585,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.576,
+         0.559,
+         0.622
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 16,
+      "filtered_frac": 0.015,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.377,
+        "precision": 0.744,
+        "recall_by_third": [
+         0.58,
+         0.43,
+         0.148
+        ],
+        "unassigned_frac": 0.024
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.341,
+        "precision": 0.762,
+        "recall_by_third": [
+         0.275,
+         0.415,
+         0.345
+        ],
+        "unassigned_frac": 0.014
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.338,
+        "precision": 0.741,
+        "recall_by_third": [
+         0.315,
+         0.404,
+         0.289
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.32,
+        "precision": 0.661,
+        "recall_by_third": [
+         0.51,
+         0.377,
+         0.123
+        ],
+        "unassigned_frac": 0.021
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.822,
+        "precision": 0.657,
+        "recall_by_third": [
+         0.782,
+         0.746,
+         0.923
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.992,
+        "recall_by_third": [
+         0.77,
+         0.698,
+         0.738
+        ],
+        "unassigned_frac": 0.018
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.995,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.994,
+         0.998,
+         0.993
+        ],
+        "unassigned_frac": 0.001
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 14,
+      "filtered_frac": 0.011,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.364,
+        "precision": 0.718,
+        "recall_by_third": [
+         0.329,
+         0.384,
+         0.379
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.498,
+        "precision": 0.704,
+        "recall_by_third": [
+         0.559,
+         0.464,
+         0.475
+        ],
+        "unassigned_frac": 0.013
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.72,
+        "precision": 0.594,
+        "recall_by_third": [
+         0.677,
+         0.861,
+         0.637
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.205,
+        "precision": 0.833,
+        "recall_by_third": [
+         0.247,
+         0.227,
+         0.109
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.512,
+        "precision": 0.368,
+        "recall_by_third": [
+         0.696,
+         0.513,
+         0.36
+        ],
+        "unassigned_frac": 0.024
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.736,
+        "precision": 0.985,
+        "recall_by_third": [
+         0.773,
+         0.719,
+         0.722
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.951,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.966,
+         0.948,
+         0.94
+        ],
+        "unassigned_frac": 0.015
+       }
+      ]
+     }
+    },
+    "random": {
+     "interaction_dev_0": {
+      "n_labels": 16,
+      "filtered_frac": 0.014,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.219,
+        "precision": 0.349,
+        "recall_by_third": [
+         0.297,
+         0.245,
+         0.087
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.123,
+        "precision": 0.387,
+        "recall_by_third": [
+         0.059,
+         0.109,
+         0.183
+        ],
+        "unassigned_frac": 0.003
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.306,
+        "precision": 0.351,
+        "recall_by_third": [
+         0.298,
+         0.376,
+         0.247
+        ],
+        "unassigned_frac": 0.016
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.218,
+        "precision": 0.616,
+        "recall_by_third": [
+         0.39,
+         0.234,
+         0.021
+        ],
+        "unassigned_frac": 0.015
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.296,
+        "precision": 0.165,
+        "recall_by_third": [
+         0.049,
+         0.419,
+         0.356
+        ],
+        "unassigned_frac": 0.103
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.863,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.838,
+         0.881,
+         0.868
+        ],
+        "unassigned_frac": 0.023
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.714,
+        "precision": 0.949,
+        "recall_by_third": [
+         0.691,
+         0.728,
+         0.724
+        ],
+        "unassigned_frac": 0.001
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 18,
+      "filtered_frac": 0.013,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.291,
+        "precision": 0.533,
+        "recall_by_third": [
+         0.19,
+         0.48,
+         0.203
+        ],
+        "unassigned_frac": 0.012
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.24,
+        "precision": 0.829,
+        "recall_by_third": [
+         0.156,
+         0.165,
+         0.388
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.275,
+        "precision": 0.545,
+        "recall_by_third": [
+         0.369,
+         0.4,
+         0.038
+        ],
+        "unassigned_frac": 0.015
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.193,
+        "precision": 0.543,
+        "recall_by_third": [
+         0.296,
+         0.225,
+         0.078
+        ],
+        "unassigned_frac": 0.017
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.465,
+        "precision": 0.658,
+        "recall_by_third": [
+         0.436,
+         0.53,
+         0.438
+        ],
+        "unassigned_frac": 0.019
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.949,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.968,
+         0.952,
+         0.927
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.572,
+        "precision": 0.997,
+        "recall_by_third": [
+         0.589,
+         0.555,
+         0.572
+        ],
+        "unassigned_frac": 0.035
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 16,
+      "filtered_frac": 0.015,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.295,
+        "precision": 0.795,
+        "recall_by_third": [
+         0.577,
+         0.304,
+         0.037
+        ],
+        "unassigned_frac": 0.022
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.266,
+        "precision": 0.474,
+        "recall_by_third": [
+         0.131,
+         0.331,
+         0.361
+        ],
+        "unassigned_frac": 0.009
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.371,
+        "precision": 0.5,
+        "recall_by_third": [
+         0.149,
+         0.522,
+         0.443
+        ],
+        "unassigned_frac": 0.002
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.402,
+        "precision": 0.517,
+        "recall_by_third": [
+         0.692,
+         0.472,
+         0.119
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.356,
+        "precision": 0.373,
+        "recall_by_third": [
+         0.489,
+         0.386,
+         0.215
+        ],
+        "unassigned_frac": 0.044
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.681,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.679,
+         0.663,
+         0.704
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.986,
+        "precision": 0.996,
+        "recall_by_third": [
+         0.98,
+         0.982,
+         0.999
+        ],
+        "unassigned_frac": 0.01
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 21,
+      "filtered_frac": 0.019,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.245,
+        "precision": 0.325,
+        "recall_by_third": [
+         0.049,
+         0.356,
+         0.331
+        ],
+        "unassigned_frac": 0.029
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.241,
+        "precision": 0.421,
+        "recall_by_third": [
+         0.226,
+         0.372,
+         0.115
+        ],
+        "unassigned_frac": 0.028
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.257,
+        "precision": 0.414,
+        "recall_by_third": [
+         0.296,
+         0.314,
+         0.178
+        ],
+        "unassigned_frac": 0.011
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.183,
+        "precision": 0.589,
+        "recall_by_third": [
+         0.252,
+         0.201,
+         0.05
+        ],
+        "unassigned_frac": 0.006
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.48,
+        "precision": 0.63,
+        "recall_by_third": [
+         0.495,
+         0.61,
+         0.363
+        ],
+        "unassigned_frac": 0.001
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.758,
+        "precision": 0.993,
+        "recall_by_third": [
+         0.791,
+         0.745,
+         0.741
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.975,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.975,
+         0.982,
+         0.969
+        ],
+        "unassigned_frac": 0.009
+       }
+      ]
+     }
+    },
+    "mask_graph_spectral": {
+     "interaction_dev_0": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.578,
+        "precision": 0.454,
+        "recall_by_third": [
+         0.989,
+         0.596,
+         0.004
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.708,
+        "precision": 0.31,
+        "recall_by_third": [
+         0.099,
+         0.862,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.573,
+        "precision": 0.77,
+        "recall_by_third": [
+         0.958,
+         0.716,
+         0.035
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 1.0,
+        "recall_by_third": [
+         0.998,
+         1.0,
+         1.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.993,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.99,
+         0.994,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_1": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.493,
+        "precision": 0.31,
+        "recall_by_third": [
+         0.994,
+         0.431,
+         0.003
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.589,
+        "precision": 0.311,
+        "recall_by_third": [
+         0.012,
+         0.739,
+         0.999
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.872,
+        "precision": 0.994,
+        "recall_by_third": [
+         0.897,
+         0.959,
+         0.75
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.999,
+         0.993,
+         0.994
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.996,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.994,
+         0.995,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_2": {
+      "n_labels": 6,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.949,
+        "precision": 0.967,
+        "recall_by_third": [
+         0.888,
+         0.969,
+         0.983
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.616,
+        "precision": 0.341,
+        "recall_by_third": [
+         1.0,
+         0.758,
+         0.014
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.522,
+        "precision": 0.542,
+        "recall_by_third": [
+         0.011,
+         0.592,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.56,
+        "precision": 0.894,
+        "recall_by_third": [
+         0.009,
+         0.568,
+         0.97
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.991,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.984,
+         0.994,
+         0.997
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.999,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.998,
+         1.0,
+         0.998
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     },
+     "interaction_dev_3": {
+      "n_labels": 5,
+      "filtered_frac": 0.0,
+      "objects": [
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.574,
+        "precision": 0.464,
+        "recall_by_third": [
+         0.03,
+         0.686,
+         0.975
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.503,
+        "precision": 0.576,
+        "recall_by_third": [
+         0.001,
+         0.443,
+         0.963
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "person",
+        "dynamic": true,
+        "recall": 0.713,
+        "precision": 0.322,
+        "recall_by_third": [
+         0.998,
+         0.832,
+         0.107
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "ball",
+        "dynamic": true,
+        "recall": 0.0,
+        "precision": 0.0,
+        "recall_by_third": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "bench",
+        "dynamic": false,
+        "recall": 0.986,
+        "precision": 0.998,
+        "recall_by_third": [
+         0.976,
+         0.988,
+         0.992
+        ],
+        "unassigned_frac": 0.0
+       },
+       {
+        "category": "pillar",
+        "dynamic": false,
+        "recall": 0.994,
+        "precision": 0.999,
+        "recall_by_third": [
+         0.99,
+         0.997,
+         0.996
+        ],
+        "unassigned_frac": 0.0
+       }
+      ]
+     }
+    }
+   },
+   "alt_inference_mIoU": {
+    "paper_default": 0.444,
+    "no_filter": 0.443,
+    "eps0": 0.444,
+    "min_cluster_10": 0.152,
+    "all_frames_sample": 0.31,
+    "kmeans_true_k": 0.444
+   }
+  }
+ }
+}

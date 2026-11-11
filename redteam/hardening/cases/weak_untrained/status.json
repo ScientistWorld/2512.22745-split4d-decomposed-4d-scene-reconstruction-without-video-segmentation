@@ -1,0 +1,30 @@
+{
+  "case": "weak_untrained",
+  "candidate": "split4d_untrained",
+  "kind": "trained variant",
+  "args": [
+    "--steps",
+    "0"
+  ],
+  "seconds": 18.819811820983887,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.4
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.66
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

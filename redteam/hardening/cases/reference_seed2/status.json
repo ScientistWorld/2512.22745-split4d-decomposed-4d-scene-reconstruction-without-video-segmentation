@@ -1,0 +1,30 @@
+{
+  "case": "reference_seed2",
+  "candidate": "split4d_streaming",
+  "kind": "trained variant",
+  "args": [
+    "--seed",
+    "2"
+  ],
+  "seconds": 217.33450937271118,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.3
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.59
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

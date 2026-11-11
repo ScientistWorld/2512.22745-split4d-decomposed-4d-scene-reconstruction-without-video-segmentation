@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Final hardening pipeline on the dev-chosen contact_mid scenes (already built): random-order baseline + Split4D reference (paper settings), freeze comparison artifact, seeds/variants (ensemble, k-means inference, mask-vote refinement, long training)/simple baselines/shortcuts via unchanged evaluate_{train,test}.sh, regenerate reference scores, analyze, validate."
+notes: "Final pipeline with dev-selected loss-weight scale 0.001 (tracking as a mild regularizer, as in the paper): rerun random-order baseline + Split4D reference, refreeze comparison artifact, seeds/variants/simple baselines/shortcuts (incl. hybrid tracker-on-dynamic) via unchanged evaluate_{train,test}.sh, regenerate scores, analyze."

@@ -1,0 +1,30 @@
+{
+  "case": "variant_long_training",
+  "candidate": "split4d_long_training",
+  "kind": "trained variant",
+  "args": [
+    "--steps",
+    "30000"
+  ],
+  "seconds": 622.7013938426971,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.25
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.55
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

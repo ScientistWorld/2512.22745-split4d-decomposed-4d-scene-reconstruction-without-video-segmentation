@@ -1,0 +1,30 @@
+{
+  "case": "shortcut_replace_baseline",
+  "candidate": "split4d_streaming",
+  "kind": "shortcut",
+  "files": [
+    "baseline/random_order.json",
+    "split4d/results.json"
+  ],
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 3.33
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 4.28
+  },
+  "methods_on_disk": [
+    "baseline/random_order.json",
+    "split4d/results.json"
+  ],
+  "evaluator_unchanged": true
+}

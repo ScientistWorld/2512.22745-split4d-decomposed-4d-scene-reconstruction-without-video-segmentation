@@ -1,0 +1,30 @@
+{
+  "case": "shortcut_hide_method",
+  "candidate": "split4d_streaming",
+  "kind": "shortcut",
+  "files": [
+    "split4d/results.json",
+    "zz_extra/hidden.json"
+  ],
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.32
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.78
+  },
+  "methods_on_disk": [
+    "split4d/results.json",
+    "zz_extra/hidden.json"
+  ],
+  "evaluator_unchanged": true
+}

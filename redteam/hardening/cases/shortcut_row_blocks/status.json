@@ -1,0 +1,28 @@
+{
+  "case": "shortcut_row_blocks",
+  "candidate": "shortcut_row_blocks",
+  "kind": "shortcut",
+  "files": [
+    "candidate/results.json"
+  ],
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 3.31
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 3.19
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

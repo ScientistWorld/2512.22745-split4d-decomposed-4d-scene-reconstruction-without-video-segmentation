@@ -1,0 +1,56 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.792817599229959,
+      "Recall": 0.7972916711939967,
+      "Recalldyn": 0.6993398854332631,
+      "Recallstatic": 0.8952434569547302,
+      "mAcc": 0.9632942486010121,
+      "mIoU": 0.7252394005201594
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5881194945223013,
+      "Recall": 0.5646209455537081,
+      "Recalldyn": 0.3993449965846564,
+      "Recallstatic": 0.9778108179763375,
+      "mAcc": 0.9068499867770597,
+      "mIoU": 0.48358614788871035
+    }
+  },
+  "_per_scene_diagnostics": {},
+  "_status": {
+    "split4d_streaming": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "dynamic_test_0: pred_labels has length 811, expected 816",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

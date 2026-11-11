@@ -1,0 +1,25 @@
+{
+  "case": "random_order_seed0",
+  "candidate": "split4d_random_order",
+  "kind": "reference run",
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 7.96
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 7.41
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

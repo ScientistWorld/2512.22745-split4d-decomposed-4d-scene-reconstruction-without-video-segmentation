@@ -1,0 +1,122 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.8372005997120513,
+      "Recall": 0.8364771336805139,
+      "Recalldyn": 0.7917290163409898,
+      "Recallstatic": 0.8812252510200381,
+      "mAcc": 0.9616145770489293,
+      "mIoU": 0.7759095815902253
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5637154876299321,
+      "Recall": 0.5564202959692542,
+      "Recalldyn": 0.3909187202650384,
+      "Recallstatic": 0.9701742352297936,
+      "mAcc": 0.8982158555988087,
+      "mIoU": 0.4610652206710984
+    }
+  },
+  "_per_scene_diagnostics": {
+    "split4d_long_training": {
+      "dynamic_dev_0": {
+        "F1": 0.9064793864579089,
+        "Recall": 0.8660586563415537,
+        "Recalldyn": 0.817896123632865,
+        "Recallstatic": 0.9142211890502423,
+        "mAcc": 0.9821216154979042,
+        "mIoU": 0.8432587782865024
+      },
+      "dynamic_dev_1": {
+        "F1": 0.9322360364316205,
+        "Recall": 0.9025088017950439,
+        "Recalldyn": 0.8878391332106434,
+        "Recallstatic": 0.9171784703794443,
+        "mAcc": 0.9849743247843848,
+        "mIoU": 0.8808130532620851
+      },
+      "dynamic_dev_2": {
+        "F1": 0.9485855045772291,
+        "Recall": 0.9180664335737148,
+        "Recalldyn": 0.9097638047649718,
+        "Recallstatic": 0.926369062382458,
+        "mAcc": 0.9883669761235556,
+        "mIoU": 0.9113590791676002
+      },
+      "dynamic_dev_3": {
+        "F1": 0.8300436845177601,
+        "Recall": 0.8104285170024552,
+        "Recalldyn": 0.6819117914885123,
+        "Recallstatic": 0.9389452425163982,
+        "mAcc": 0.9722793408588122,
+        "mIoU": 0.7646357788837904
+      },
+      "interaction_dev_0": {
+        "F1": 0.7885905795668859,
+        "Recall": 0.7439602432957918,
+        "Recalldyn": 0.6505905042045221,
+        "Recallstatic": 0.9773845910239662,
+        "mAcc": 0.9538602064489012,
+        "mIoU": 0.6776019112721574
+      },
+      "interaction_dev_1": {
+        "F1": 0.6934606423700346,
+        "Recall": 0.6279191155551577,
+        "Recalldyn": 0.5443661664179643,
+        "Recallstatic": 0.836801488398141,
+        "mAcc": 0.9242672359765,
+        "mIoU": 0.5629373834094473
+      },
+      "interaction_dev_2": {
+        "F1": 0.7926050056029996,
+        "Recall": 0.7458289781728139,
+        "Recalldyn": 0.6525876176155627,
+        "Recallstatic": 0.9789323795659417,
+        "mAcc": 0.9539978979707333,
+        "mIoU": 0.6981570821839338
+      },
+      "interaction_dev_3": {
+        "F1": 0.7512709895009817,
+        "Recall": 0.6989101150966446,
+        "Recalldyn": 0.5848767432294002,
+        "Recallstatic": 0.9839935447647556,
+        "mAcc": 0.9388764607544641,
+        "mIoU": 0.6349324573651348
+      }
+    }
+  },
+  "_status": {
+    "split4d_long_training": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "valid": true
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "split4d_long_training": {
+          "F1": 0.9043361529961297,
+          "Recall": 0.8742656021781918,
+          "Recalldyn": 0.8243527132742482,
+          "Recallstatic": 0.9241784910821358,
+          "mAcc": 0.9819355643161641,
+          "mIoU": 0.8500166723999946
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "split4d_long_training": {
+          "F1": 0.7564818042602255,
+          "Recall": 0.704154613030102,
+          "Recalldyn": 0.6081052578668623,
+          "Recallstatic": 0.9442780009382012,
+          "mAcc": 0.9427504502876497,
+          "mIoU": 0.6434072085576683
+        }
+      }
+    }
+  }
+}

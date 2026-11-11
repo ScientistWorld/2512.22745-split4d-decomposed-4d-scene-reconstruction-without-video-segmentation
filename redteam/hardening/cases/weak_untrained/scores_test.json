@@ -1,0 +1,219 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.792817599229959,
+      "Recall": 0.7972916711939967,
+      "Recalldyn": 0.6993398854332631,
+      "Recallstatic": 0.8952434569547302,
+      "mAcc": 0.9632942486010121,
+      "mIoU": 0.7252394005201594
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5881194945223013,
+      "Recall": 0.5646209455537081,
+      "Recalldyn": 0.3993449965846564,
+      "Recallstatic": 0.9778108179763375,
+      "mAcc": 0.9068499867770597,
+      "mIoU": 0.48358614788871035
+    }
+  },
+  "_per_scene_diagnostics": {
+    "split4d_untrained": {
+      "dynamic_test_0": {
+        "F1": 0.08750448910463751,
+        "Recall": 0.14232451208541927,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.28464902417083854,
+        "mAcc": 0.8135335999773068,
+        "mIoU": 0.053067506141859115
+      },
+      "dynamic_test_1": {
+        "F1": 0.12672925765511125,
+        "Recall": 0.1517369666502598,
+        "Recalldyn": 0.07456312585902218,
+        "Recallstatic": 0.2289108074414974,
+        "mAcc": 0.8055732981320615,
+        "mIoU": 0.0731474700406602
+      },
+      "dynamic_test_2": {
+        "F1": 0.08731152872868111,
+        "Recall": 0.13762450314656283,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.27524900629312565,
+        "mAcc": 0.8143132913189122,
+        "mIoU": 0.05292048830351026
+      },
+      "dynamic_test_3": {
+        "F1": 0.1221422344907602,
+        "Recall": 0.14762300830289457,
+        "Recalldyn": 0.07574395845815858,
+        "Recallstatic": 0.21950205814763057,
+        "mAcc": 0.8041449345200975,
+        "mIoU": 0.06993160653621137
+      },
+      "dynamic_test_4": {
+        "F1": 0.09677174837330095,
+        "Recall": 0.1541441368774198,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.3082882737548396,
+        "mAcc": 0.8207607490977294,
+        "mIoU": 0.0600339293466995
+      },
+      "dynamic_test_5": {
+        "F1": 0.07763102880734682,
+        "Recall": 0.1279323817542964,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.2558647635085928,
+        "mAcc": 0.806234233723534,
+        "mIoU": 0.04603391329561931
+      },
+      "dynamic_test_6": {
+        "F1": 0.11754132897965745,
+        "Recall": 0.1577992715050603,
+        "Recalldyn": 0.07198383084577115,
+        "Recallstatic": 0.24361471216434943,
+        "mAcc": 0.8161852166525063,
+        "mIoU": 0.07109157616756105
+      },
+      "dynamic_test_7": {
+        "F1": 0.08076592277454941,
+        "Recall": 0.13152192482069383,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.26304384964138766,
+        "mAcc": 0.8083174675343128,
+        "mIoU": 0.048228985061412176
+      },
+      "dynamic_test_8": {
+        "F1": 0.0829723815219769,
+        "Recall": 0.13624637232366185,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.2724927446473237,
+        "mAcc": 0.8097849158058583,
+        "mIoU": 0.04979263464953923
+      },
+      "dynamic_test_9": {
+        "F1": 0.14053808519348143,
+        "Recall": 0.16001878118650031,
+        "Recalldyn": 0.06001011122345804,
+        "Recallstatic": 0.2600274511495426,
+        "mAcc": 0.802428146679881,
+        "mIoU": 0.07942572889801075
+      },
+      "interaction_test_0": {
+        "F1": 0.09186051187921006,
+        "Recall": 0.17774794762211907,
+        "Recalldyn": 0.11021320495185694,
+        "Recallstatic": 0.3465848042977744,
+        "mAcc": 0.7766902404526166,
+        "mIoU": 0.05482554380439865
+      },
+      "interaction_test_1": {
+        "F1": 0.07813162478684861,
+        "Recall": 0.1544668326284688,
+        "Recalldyn": 0.11496205276472715,
+        "Recallstatic": 0.25322878228782286,
+        "mAcc": 0.766661004473133,
+        "mIoU": 0.04525344369992563
+      },
+      "interaction_test_2": {
+        "F1": 0.0834056398882024,
+        "Recall": 0.168038205097249,
+        "Recalldyn": 0.11368421052631579,
+        "Recallstatic": 0.303923191524582,
+        "mAcc": 0.7698234986860594,
+        "mIoU": 0.04884009393633147
+      },
+      "interaction_test_3": {
+        "F1": 0.15228694786547978,
+        "Recall": 0.19397984912090246,
+        "Recalldyn": 0.18569317517761824,
+        "Recallstatic": 0.21469653397911306,
+        "mAcc": 0.777517166635663,
+        "mIoU": 0.08839834667169903
+      },
+      "interaction_test_4": {
+        "F1": 0.10207008600742938,
+        "Recall": 0.15583615263211864,
+        "Recalldyn": 0.12431936825734025,
+        "Recallstatic": 0.23462811356906463,
+        "mAcc": 0.76576911723675,
+        "mIoU": 0.05800716342214436
+      },
+      "interaction_test_5": {
+        "F1": 0.04591086256566683,
+        "Recall": 0.14285714285714285,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.5,
+        "mAcc": 0.7689863066802886,
+        "mIoU": 0.02735029619728718
+      },
+      "interaction_test_6": {
+        "F1": 0.11319028542553196,
+        "Recall": 0.16815019688652627,
+        "Recalldyn": 0.15139832783418822,
+        "Recallstatic": 0.2100298695173715,
+        "mAcc": 0.7709807028464717,
+        "mIoU": 0.06537201040814239
+      },
+      "interaction_test_7": {
+        "F1": 0.0837411075538786,
+        "Recall": 0.1696822187671861,
+        "Recalldyn": 0.0,
+        "Recallstatic": 0.5938877656851513,
+        "mAcc": 0.7700691433259113,
+        "mIoU": 0.0490633349728972
+      },
+      "interaction_test_8": {
+        "F1": 0.0862464988713316,
+        "Recall": 0.1714918496998463,
+        "Recalldyn": 0.10319187522669568,
+        "Recallstatic": 0.34224178588272286,
+        "mAcc": 0.7725173303566374,
+        "mIoU": 0.05097099479293036
+      },
+      "interaction_test_9": {
+        "F1": 0.1320748656090131,
+        "Recall": 0.17045234095194922,
+        "Recalldyn": 0.17762821305536236,
+        "Recallstatic": 0.15251266069341643,
+        "mAcc": 0.7682364587752794,
+        "mIoU": 0.07468571200633103
+      }
+    }
+  },
+  "_status": {
+    "split4d_untrained": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "constraint failed: scaled_interaction_segmentation F1 0.096892 does not exceed the fixed no-streaming reference 0.588119",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "split4d_untrained": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "split4d_untrained": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.8543653723177701,
+      "Recall": 0.8266310143414416,
+      "Recalldyn": 0.7641647348512772,
+      "Recallstatic": 0.889097293831606,
+      "mAcc": 0.970095252843698,
+      "mIoU": 0.7797702700700778
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5332658478926249,
+      "Recall": 0.5004961972730435,
+      "Recalldyn": 0.33762775167867287,
+      "Recallstatic": 0.9076673112589704,
+      "mAcc": 0.8937500403117913,
+      "mIoU": 0.424481288410515
+    }
+  },
+  "_per_scene_diagnostics": {
+    "geometry_kmeans": {
+      "dynamic_dev_0": {
+        "F1": 0.3744101424063542,
+        "Recall": 0.4248269639075611,
+        "Recalldyn": 0.10022053889783888,
+        "Recallstatic": 0.7494333889172833,
+        "mAcc": 0.9057154186020164,
+        "mIoU": 0.28703536186453205
+      },
+      "dynamic_dev_1": {
+        "F1": 0.3633579219670387,
+        "Recall": 0.42276816180413423,
+        "Recalldyn": 0.09633238492881224,
+        "Recallstatic": 0.7492039386794562,
+        "mAcc": 0.9016327167498865,
+        "mIoU": 0.28412372284234916
+      },
+      "dynamic_dev_2": {
+        "F1": 0.23026641663721334,
+        "Recall": 0.2836769831979175,
+        "Recalldyn": 0.06779772175431599,
+        "Recallstatic": 0.49955624464151904,
+        "mAcc": 0.8684808221900462,
+        "mIoU": 0.17523943589949528
+      },
+      "dynamic_dev_3": {
+        "F1": 0.2514095729049261,
+        "Recall": 0.3202101271393048,
+        "Recalldyn": 0.14096148505910072,
+        "Recallstatic": 0.4994587692195089,
+        "mAcc": 0.8524590163934427,
+        "mIoU": 0.16587557635752012
+      },
+      "interaction_dev_0": {
+        "F1": 0.30235431110861183,
+        "Recall": 0.37165798799157457,
+        "Recalldyn": 0.12064960160030358,
+        "Recallstatic": 0.9991789539697521,
+        "mAcc": 0.8402082272392916,
+        "mIoU": 0.20103969583566647
+      },
+      "interaction_dev_1": {
+        "F1": 0.31888326668575806,
+        "Recall": 0.37949965802901914,
+        "Recalldyn": 0.1316234420512589,
+        "Recallstatic": 0.9991901979734196,
+        "mAcc": 0.8394772700623088,
+        "mIoU": 0.2191216446759998
+      },
+      "interaction_dev_2": {
+        "F1": 0.4109837064485783,
+        "Recall": 0.47732268160416497,
+        "Recalldyn": 0.26929344144844874,
+        "Recallstatic": 0.9973957819934555,
+        "mAcc": 0.8531247473522516,
+        "mIoU": 0.29534928167373337
+      },
+      "interaction_dev_3": {
+        "F1": 0.3021342753959047,
+        "Recall": 0.37920850443322973,
+        "Recalldyn": 0.13203766197505495,
+        "Recallstatic": 0.9971356105786666,
+        "mAcc": 0.8321313487801136,
+        "mIoU": 0.19626031071011027
+      }
+    }
+  },
+  "_status": {
+    "geometry_kmeans": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "constraint failed: scaled_interaction_segmentation F1 0.333589 does not exceed the fixed no-streaming reference 0.533266",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "geometry_kmeans": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "geometry_kmeans": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

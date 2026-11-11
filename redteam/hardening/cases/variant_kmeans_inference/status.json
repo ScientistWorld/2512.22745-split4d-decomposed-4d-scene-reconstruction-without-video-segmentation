@@ -1,0 +1,26 @@
+{
+  "case": "variant_kmeans_inference",
+  "candidate": "split4d_kmeans_inference",
+  "kind": "trained variant",
+  "seconds": 7.193994045257568,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.38
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.73
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

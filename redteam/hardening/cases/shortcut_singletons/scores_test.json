@@ -1,0 +1,56 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.8593288860677852,
+      "Recall": 0.8227046999930925,
+      "Recalldyn": 0.8138196614951088,
+      "Recallstatic": 0.8315897384910762,
+      "mAcc": 0.969238761846548,
+      "mIoU": 0.7781198060024087
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5061171514925898,
+      "Recall": 0.4638156960745324,
+      "Recalldyn": 0.29372491995973893,
+      "Recallstatic": 0.889042636361516,
+      "mAcc": 0.8892972350674391,
+      "mIoU": 0.39933723468881754
+    }
+  },
+  "_per_scene_diagnostics": {},
+  "_status": {
+    "shortcut_singletons": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "dynamic_test_0: more than 512 distinct labels",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "shortcut_singletons": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "shortcut_singletons": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

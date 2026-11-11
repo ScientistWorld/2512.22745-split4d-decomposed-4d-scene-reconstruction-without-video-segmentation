@@ -1,0 +1,26 @@
+{
+  "case": "variant_seed_ensemble",
+  "candidate": "split4d_seed_ensemble",
+  "kind": "trained variant",
+  "seconds": 10.559074878692627,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.47
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.78
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

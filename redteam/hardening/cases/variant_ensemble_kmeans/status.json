@@ -1,0 +1,26 @@
+{
+  "case": "variant_ensemble_kmeans",
+  "candidate": "split4d_ensemble_kmeans",
+  "kind": "trained variant",
+  "seconds": 7.549994230270386,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.38
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.76
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

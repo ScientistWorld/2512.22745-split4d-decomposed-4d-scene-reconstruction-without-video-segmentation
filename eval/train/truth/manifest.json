@@ -1,0 +1,52 @@
+{
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": [
+      "dynamic_dev_0",
+      "dynamic_dev_1",
+      "dynamic_dev_2"
+    ],
+    "scaled_interaction_segmentation": [
+      "interaction_dev_0",
+      "interaction_dev_1",
+      "interaction_dev_2"
+    ]
+  },
+  "scenes": {
+    "dynamic_dev_0": {
+      "file": "dynamic_dev_0.npz",
+      "primitives": 807,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_dev_1": {
+      "file": "dynamic_dev_1.npz",
+      "primitives": 806,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_dev_2": {
+      "file": "dynamic_dev_2.npz",
+      "primitives": 830,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "interaction_dev_0": {
+      "file": "interaction_dev_0.npz",
+      "primitives": 1183,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_dev_1": {
+      "file": "interaction_dev_1.npz",
+      "primitives": 1184,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_dev_2": {
+      "file": "interaction_dev_2.npz",
+      "primitives": 1139,
+      "objects": 7,
+      "dynamic_objects": 5
+    }
+  }
+}

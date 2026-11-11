@@ -1,0 +1,119 @@
+{
+  "frames": 60,
+  "train_views": 6,
+  "contributors_per_pixel": 5,
+  "scenes": [
+    {
+      "id": "dynamic_dev_0",
+      "profile": "dynamic",
+      "split": "dev",
+      "file": "dynamic_dev_0.npz",
+      "primitives": 807
+    },
+    {
+      "id": "dynamic_dev_1",
+      "profile": "dynamic",
+      "split": "dev",
+      "file": "dynamic_dev_1.npz",
+      "primitives": 806
+    },
+    {
+      "id": "dynamic_dev_2",
+      "profile": "dynamic",
+      "split": "dev",
+      "file": "dynamic_dev_2.npz",
+      "primitives": 830
+    },
+    {
+      "id": "dynamic_test_0",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_0.npz",
+      "primitives": 816
+    },
+    {
+      "id": "dynamic_test_1",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_1.npz",
+      "primitives": 838
+    },
+    {
+      "id": "dynamic_test_2",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_2.npz",
+      "primitives": 788
+    },
+    {
+      "id": "dynamic_test_3",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_3.npz",
+      "primitives": 773
+    },
+    {
+      "id": "dynamic_test_4",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_4.npz",
+      "primitives": 790
+    },
+    {
+      "id": "interaction_dev_0",
+      "profile": "interaction",
+      "split": "dev",
+      "file": "interaction_dev_0.npz",
+      "primitives": 1183
+    },
+    {
+      "id": "interaction_dev_1",
+      "profile": "interaction",
+      "split": "dev",
+      "file": "interaction_dev_1.npz",
+      "primitives": 1184
+    },
+    {
+      "id": "interaction_dev_2",
+      "profile": "interaction",
+      "split": "dev",
+      "file": "interaction_dev_2.npz",
+      "primitives": 1139
+    },
+    {
+      "id": "interaction_test_0",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_0.npz",
+      "primitives": 1178
+    },
+    {
+      "id": "interaction_test_1",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_1.npz",
+      "primitives": 1168
+    },
+    {
+      "id": "interaction_test_2",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_2.npz",
+      "primitives": 1174
+    },
+    {
+      "id": "interaction_test_3",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_3.npz",
+      "primitives": 1168
+    },
+    {
+      "id": "interaction_test_4",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_4.npz",
+      "primitives": 1169
+    }
+  ]
+}

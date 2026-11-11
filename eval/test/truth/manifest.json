@@ -1,0 +1,80 @@
+{
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": [
+      "dynamic_test_0",
+      "dynamic_test_1",
+      "dynamic_test_2",
+      "dynamic_test_3",
+      "dynamic_test_4"
+    ],
+    "scaled_interaction_segmentation": [
+      "interaction_test_0",
+      "interaction_test_1",
+      "interaction_test_2",
+      "interaction_test_3",
+      "interaction_test_4"
+    ]
+  },
+  "scenes": {
+    "dynamic_test_0": {
+      "file": "dynamic_test_0.npz",
+      "primitives": 816,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_1": {
+      "file": "dynamic_test_1.npz",
+      "primitives": 838,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_2": {
+      "file": "dynamic_test_2.npz",
+      "primitives": 788,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_3": {
+      "file": "dynamic_test_3.npz",
+      "primitives": 773,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_4": {
+      "file": "dynamic_test_4.npz",
+      "primitives": 790,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "interaction_test_0": {
+      "file": "interaction_test_0.npz",
+      "primitives": 1178,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_1": {
+      "file": "interaction_test_1.npz",
+      "primitives": 1168,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_2": {
+      "file": "interaction_test_2.npz",
+      "primitives": 1174,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_3": {
+      "file": "interaction_test_3.npz",
+      "primitives": 1168,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_4": {
+      "file": "interaction_test_4.npz",
+      "primitives": 1169,
+      "objects": 7,
+      "dynamic_objects": 5
+    }
+  }
+}

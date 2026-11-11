@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+work/
+original/
+reference_artifacts/
+**/artifact.json
+**/*.log

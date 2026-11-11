@@ -1,0 +1,22 @@
+{
+  "output": "outputs/split4d/results.json",
+  "scenes": [
+    "linear_motion",
+    "interaction_motion"
+  ],
+  "steps": 3200,
+  "feature_dim": 32,
+  "samples_per_mask": 32,
+  "lr": 0.0025,
+  "lr_final": 2e-06,
+  "lambda_align": 1.0,
+  "lambda_dino": 0.03,
+  "lambda_stream": 0.25,
+  "dino_fraction": 0.35,
+  "streaming_window": 3,
+  "temporal_transfer": 0.0,
+  "seed": 7,
+  "streaming": true,
+  "cpu": false,
+  "method_name": null
+}

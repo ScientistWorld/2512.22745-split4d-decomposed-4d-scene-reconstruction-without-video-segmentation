@@ -1,8 +1,6 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: submit
-gpus: 0
-test: false
+action: done
 milestone: core_claim
-notes: "Final pipeline with dev-selected loss-weight scale 0.001 (tracking as a mild regularizer, as in the paper): rerun random-order baseline + Split4D reference, refreeze comparison artifact, seeds/variants/simple baselines/shortcuts (incl. hybrid tracker-on-dynamic) via unchanged evaluate_{train,test}.sh, regenerate scores, analyze."
+notes: "Hardened: hidden-only answers/generator, fail-closed evaluators with frozen random-order constraint, paper-faithful Split4D (Eq.4 temps, 10k iters, paper lambdas), 2x10 hidden test scenes; streaming beats random order beyond seed noise, k-means-inference variants beat the reference beyond noise, all red-team shortcuts fail or tie (hybrid tracker-on-dynamic ties within noise). See HARDENING.md."

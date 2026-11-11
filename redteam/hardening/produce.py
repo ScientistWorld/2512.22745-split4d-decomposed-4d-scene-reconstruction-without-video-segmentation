@@ -29,7 +29,7 @@ TRAINED = {
     "ablation_no_tracking": ("split4d_no_tracking", ["--lambda-align", "0"]),
     "ablation_no_dino": ("split4d_no_dino", ["--lambda-dino", "0"]),
     "variant_long_training": ("split4d_long_training", ["--steps", "30000"]),
-    "variant_weak_regularizers": ("split4d_weak_regularizers", ["--loss-weight-scale", "0.001"]),
+    "variant_previous_scale": ("split4d_previous_scale", ["--loss-weight-scale", "0.01"]),
 }
 SIMPLE = ("geometry_kmeans", "mask_graph_spectral", "mask_tracker", "semantic_kmeans")
 
@@ -169,6 +169,10 @@ def main() -> None:
     fixed_dev = json.loads((ROOT / "eval/train/fixed_baseline.json").read_text())
     copied = {"method": "shortcut_copy_fixed_baseline", "scenes": {**fixed_dev["scenes"], **fixed["scenes"]}}
     shortcuts["shortcut_copy_fixed_baseline"] = {"candidate/results.json": copied}
+    tracker = json.loads((ART / "mask_tracker/candidate/results.json").read_text())
+    hybrid = {"method": "shortcut_hybrid_tracker_dynamic", "scenes": {
+        sid: (tracker["scenes"][sid] if sid.startswith("dynamic_") else ref["scenes"][sid]) for sid in sizes}}
+    shortcuts["shortcut_hybrid_tracker_dynamic"] = {"candidate/results.json": hybrid}
     for case, files in shortcuts.items():
         if done(case):
             continue

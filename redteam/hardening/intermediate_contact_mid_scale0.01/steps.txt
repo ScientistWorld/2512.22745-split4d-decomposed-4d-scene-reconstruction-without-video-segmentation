@@ -1,0 +1,17 @@
+usable cpus 8 numpy 2.4.6 torch 2.12.0+cu130
+usable cpus 8 numpy 2.4.6 torch 2.12.0+cu130
+sweep rc=0 seconds=19
+preset contact_mid
+build rc=0 seconds=62
+usable cpus 8 numpy 2.4.6 torch 2.12.0+cu130
+preset contact_mid
+baseline rc=0 seconds=131
+freeze_test rc=0 seconds=3
+freeze_train rc=0 seconds=2
+method rc=0 seconds=141
+score_reference rc=0 seconds=5
+produce rc=0 seconds=1288
+harness rc=0 seconds=160
+final rc=0 seconds=9
+analyze rc=0 seconds=0
+validate rc=1 seconds=0

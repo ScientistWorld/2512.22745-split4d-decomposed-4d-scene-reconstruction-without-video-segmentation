@@ -28,7 +28,10 @@ primitive is optimized (Sec. 3.5). Implemented components:
 Loss weights use the paper's lambda values (100 for tracking; 500 for DINO by
 default and 10 for the multi-human interaction profile) multiplied by a fixed
 ``--loss-weight-scale`` that maps them onto this implementation's loss
-normalizations (per-pair mean L1 and mean cross-entropy).
+normalizations (per-pair mean L1 and mean cross-entropy). The scale (0.001)
+was chosen on the development scenes only, between 0.01 and 0.001: at 0.01
+the tracking term dominated and merged interacting people, whereas the paper
+reports tracking as a mild regularizer insensitive to lambda_1 in [10, 500].
 """
 
 from __future__ import annotations
@@ -316,7 +319,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--lr-final", type=float, default=2e-6)
     p.add_argument("--lambda-align", type=float, default=None, help="Paper lambda_1 (default 100).")
     p.add_argument("--lambda-dino", type=float, default=None, help="Paper lambda_2 (default 500; 10 for interaction scenes).")
-    p.add_argument("--loss-weight-scale", type=float, default=0.01)
+    p.add_argument("--loss-weight-scale", type=float, default=0.001)
     p.add_argument("--dino-fraction", type=float, default=0.3)
     p.add_argument("--streaming", action=argparse.BooleanOptionalAction, default=True)
     p.add_argument("--filter", action=argparse.BooleanOptionalAction, default=True)

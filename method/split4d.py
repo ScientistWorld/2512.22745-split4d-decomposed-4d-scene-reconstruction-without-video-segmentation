@@ -1,373 +1,361 @@
-"""Small-scale implementation of Split4D feature learning.
+"""Split4D feature learning (Hu et al., TOG 2025) on fixed Freetime FeatureGS primitives.
 
-This code implements the paper's feature-stage algorithm on fixed 4D Gaussian
-geometry: linear-motion Gaussian primitives, per-Gaussian learnable features,
-streaming feature learning from framewise inconsistent masks, 3D tracking
-regularization, semantic feature alignment, and clustering/filtering inference.
+The 4D reconstruction is fixed; only one learnable feature vector per Gaussian
+primitive is optimized (Sec. 3.5). Implemented components:
+
+* Eq. 2   rendered feature of a pixel = sum_i f_i alpha_i T_i over its blended
+          contributors (L2-normalized before the contrastive dot products).
+* Eq. 4   contrastive clustering loss: for every mask of the image, N_s pixels
+          are sampled uniformly, the mask center is their mean feature, and
+          phi_k = sum_j ||f_kj - fbar_k||^2 / (N_s log(N_s + 10)) is the
+          temperature of center k in every logit f . fbar_k / phi_k.
+* Eq. 5   3D tracking regularization: primitives fading out between t and t+1
+          are matched to their nearest primitive at t+1 (positions from the
+          linear motion model) and their features are aligned with an L1 loss.
+* Eq. 6   DINO-style alignment: the same contrastive form with centers taken
+          from the rendered (fixed, linearly projected) semantic descriptors,
+          applied only during the early part of training.
+* Eq. 7   L = L_CC + lambda_1 L_align + lambda_2 L_DINO.
+* Sec 3.2 streaming sampling: observations are visited in temporal order
+          (frames in order; views of a frame in random order). The paper's
+          ablation replaces this with uniformly random observation sampling.
+* Sec 3.5 inference: HDBSCAN on a sample of first-frame primitives, cluster
+          centers = mean features, every primitive assigned to its most
+          similar center, then the Eq. 8 dynamic-perception filter removes
+          primitives whose velocity, position, and feature similarity all
+          deviate from their cluster.
+
+Loss weights use the paper's lambda values (100 for tracking; 500 for DINO by
+default and 10 for the multi-human interaction profile) multiplied by a fixed
+``--loss-weight-scale`` that maps them onto this implementation's loss
+normalizations (per-pair mean L1 and mean cross-entropy).
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import math
+import os
+import time
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 import torch
 import torch.nn.functional as F
-from sklearn.cluster import KMeans
 
-from data.split4d_synthetic import SCENES, active_indices, build_scene, iter_observations, observation_labels, position_at, temporal_opacity
+from data.split4d_scenes import ACTIVE_OPACITY, list_scenes, load_scene, position_at, temporal_opacity
 
-try:
-    import hdbscan
-except ImportError:  # pragma: no cover - fallback is exercised when optional dep is absent.
-    hdbscan = None
+try:  # HDBSCAN [McInnes et al. 2017]
+    from hdbscan import HDBSCAN
+except ImportError:  # pragma: no cover
+    from sklearn.cluster import HDBSCAN  # type: ignore
 
-
-def _nonzero1d(mask: torch.Tensor) -> torch.Tensor:
-    return torch.nonzero(mask, as_tuple=False).flatten()
-
-
-def _torch_scene(scene: Dict[str, np.ndarray], device: torch.device) -> Dict[str, torch.Tensor]:
-    return {
-        k: torch.as_tensor(v, device=device)
-        for k, v in scene.items()
-        if isinstance(v, np.ndarray) and v.dtype.kind in {"f", "i", "u", "b"}
-    }
+PAPER_LAMBDA_ALIGN = 100.0
+PAPER_LAMBDA_DINO = {"dynamic": 500.0, "interaction": 10.0}
+PHI_FLOOR = 1e-2
 
 
-def contrastive_cluster_loss(features: torch.Tensor, labels: torch.Tensor, samples_per_mask: int, generator: torch.Generator) -> torch.Tensor:
-    unique = torch.unique(labels)
-    chunks: List[torch.Tensor] = []
-    centers: List[torch.Tensor] = []
-    for lab in unique:
-        local = _nonzero1d(labels == lab)
-        if local.numel() < 2:
-            continue
-        take = local[torch.randint(local.numel(), (min(samples_per_mask, local.numel()),), device=features.device, generator=generator)]
-        vals = F.normalize(features[take], dim=-1)
-        chunks.append(vals)
-        centers.append(F.normalize(vals.mean(dim=0), dim=0))
-    if len(chunks) < 2:
-        return features.sum() * 0.0
-    centers_t = torch.stack(centers, dim=0)
-    losses = []
-    for cls, vals in enumerate(chunks):
-        phi = ((vals - centers_t[cls]).pow(2).sum(dim=-1).mean() / (vals.shape[0] * np.log(vals.shape[0] + 10.0))).detach()
-        phi = torch.clamp(phi, min=0.035, max=0.25)
-        logits = vals @ centers_t.T / phi
-        target = torch.full((vals.shape[0],), cls, dtype=torch.long, device=features.device)
-        losses.append(F.cross_entropy(logits, target))
-    return torch.stack(losses).mean()
+# --------------------------------------------------------------------------- data
 
 
-def dino_alignment_loss(features: torch.Tensor, projected_semantic: torch.Tensor, labels: torch.Tensor, samples_per_mask: int, generator: torch.Generator) -> torch.Tensor:
-    unique = torch.unique(labels)
-    chunks: List[torch.Tensor] = []
-    centers: List[torch.Tensor] = []
-    temperatures: List[torch.Tensor] = []
-    for lab in unique:
-        local = _nonzero1d(labels == lab)
-        if local.numel() < 2:
-            continue
-        take = local[torch.randint(local.numel(), (min(samples_per_mask, local.numel()),), device=features.device, generator=generator)]
-        vals = F.normalize(features[take], dim=-1)
-        chunks.append(vals)
-        centers.append(F.normalize(projected_semantic[take].mean(dim=0), dim=0))
-        learned_center = F.normalize(vals.mean(dim=0), dim=0)
-        phi = ((vals - learned_center).pow(2).sum(dim=-1).mean() / (vals.shape[0] * np.log(vals.shape[0] + 10.0))).detach()
-        temperatures.append(torch.clamp(phi, min=0.035, max=0.25))
-    if len(chunks) < 2:
-        return features.sum() * 0.0
-    centers_t = torch.stack(centers, dim=0)
-    losses = []
-    for cls, vals in enumerate(chunks):
-        logits = vals @ centers_t.T / temperatures[cls]
-        target = torch.full((vals.shape[0],), cls, dtype=torch.long, device=features.device)
-        losses.append(F.cross_entropy(logits, target))
-    return torch.stack(losses).mean()
+def prepare_observations(scene: Dict[str, np.ndarray]) -> List[Dict[str, torch.Tensor]]:
+    """Group each image's pixels by mask id for uniform per-mask sampling."""
 
-
-def mask_centers(features: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
-    centers: List[torch.Tensor] = []
-    for lab in torch.unique(labels):
-        local = _nonzero1d(labels == lab)
-        if local.numel() < 2:
-            continue
-        centers.append(F.normalize(features[local].mean(dim=0), dim=0))
-    if not centers:
-        return features.new_zeros((0, features.shape[-1]))
-    return torch.stack(centers, dim=0)
-
-
-def temporal_center_loss(prev_features: torch.Tensor, prev_labels: torch.Tensor, curr_features: torch.Tensor, curr_labels: torch.Tensor) -> torch.Tensor:
-    """Match adjacent-frame mask centers by current feature similarity."""
-
-    prev_centers = mask_centers(prev_features, prev_labels)
-    curr_centers = mask_centers(curr_features, curr_labels)
-    if prev_centers.shape[0] < 2 or curr_centers.shape[0] < 2:
-        return curr_features.sum() * 0.0
-    sims = curr_centers @ prev_centers.T
-    best = sims.max(dim=1).values
-    return (1.0 - best).mean()
-
-
-def render_pixel_features(raw_features: torch.Tensor, contrib_idx: torch.Tensor, weights: torch.Tensor) -> torch.Tensor:
-    """Render per-primitive features to synthetic 2D pixel samples."""
-
-    rendered = (raw_features[contrib_idx] * weights.unsqueeze(-1)).sum(dim=1)
-    return F.normalize(rendered, dim=-1)
-
-
-def streaming_observation_batch(
-    observations: List[Tuple[int, int, np.ndarray, np.ndarray, np.ndarray]],
-    index: int,
-    window: int,
-) -> List[Tuple[int, int, np.ndarray, np.ndarray, np.ndarray]]:
-    """Return recent same-view frames from the temporally ordered sample stream."""
-
-    width = max(1, int(window))
-    current_t, current_view, *_ = observations[index]
-    min_t = current_t - width + 1
-    batch = [
-        item
-        for item in observations
-        if item[1] == current_view and min_t <= item[0] <= current_t
-    ]
-    return batch or [observations[index]]
-
-
-def tracking_pairs(scene: Dict[str, np.ndarray]) -> List[Tuple[np.ndarray, np.ndarray]]:
-    pairs: List[Tuple[np.ndarray, np.ndarray]] = []
-    frames = int(scene["frames"])
-    for t in range(frames - 1):
-        a = active_indices(scene, t)
-        b = active_indices(scene, t + 1)
-        if len(a) == 0 or len(b) == 0:
-            pairs.append((np.empty(0, dtype=np.int64), np.empty(0, dtype=np.int64)))
-            continue
-        op_now = temporal_opacity(scene, t)[a]
-        op_next = temporal_opacity(scene, t + 1)[a]
-        fade = op_now - op_next
-        disappearing = a[(fade > np.quantile(fade, 0.55)) & (op_now > 0.28)]
-        if len(disappearing) == 0:
-            disappearing = a[: min(8, len(a))]
-        pos_a = position_at(scene, t)[disappearing]
-        pos_b = position_at(scene, t + 1)[b]
-        vel_a = scene["velocity"][disappearing]
-        vel_b = scene["velocity"][b]
-        pos_scale = np.median(np.linalg.norm(pos_b - np.median(pos_b, axis=0), axis=1)) + 1e-6
-        vel_scale = np.median(np.linalg.norm(vel_b - np.median(vel_b, axis=0), axis=1)) + 1e-6
-        pos_cost = ((pos_a[:, None, :] - pos_b[None, :, :]) ** 2).sum(axis=2) / (pos_scale**2)
-        vel_cost = ((vel_a[:, None, :] - vel_b[None, :, :]) ** 2).sum(axis=2) / (vel_scale**2)
-        cost = pos_cost + 0.35 * vel_cost
-        cols = cost.argmin(axis=1)
-        best = cost[np.arange(len(disappearing)), cols]
-        robust_limit = np.median(best) + 2.5 * (np.median(np.abs(best - np.median(best))) + 1e-6)
-        keep = best <= max(float(np.quantile(best, 0.88)), float(robust_limit))
-        pairs.append((disappearing[keep].astype(np.int64), b[cols[keep]].astype(np.int64)))
-    return pairs
-
-
-def train_scene(args: argparse.Namespace, scene_name: str, method_name: str) -> Dict[str, object]:
-    device = torch.device("cuda" if torch.cuda.is_available() and not args.cpu else "cpu")
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
-    scene_np = build_scene(scene_name)
-    scene = _torch_scene(scene_np, device)
-    n = int(scene_np["mean_xyz"].shape[0])
-    generator = torch.Generator(device=device).manual_seed(args.seed + 17)
-
-    raw_features = torch.nn.Parameter(torch.randn(n, args.feature_dim, device=device) * 0.05)
-    # Reduced-scale substitute for DINOv2 image descriptors: the procedural
-    # benchmark stores fixed semantic observation vectors because it has no RGB
-    # frames. They are used only in the paper's early alignment-loss role.
-    projection = torch.randn(scene["semantic"].shape[1], args.feature_dim, device=device)
-    projection = F.normalize(projection, dim=0)
-    projected_semantic = F.normalize(scene["semantic"].float() @ projection, dim=-1)
-    optim = torch.optim.Adam([raw_features], lr=args.lr)
-    pairs = tracking_pairs(scene_np)
-    obs = list(iter_observations(scene_np, streaming=True))
-    random_order_rng = np.random.default_rng(args.seed + 991)
-
-    history = []
-    for step in range(args.steps):
-        if args.lr_final > 0 and args.steps > 1:
-            progress = step / float(args.steps - 1)
-            lr = args.lr + (args.lr_final - args.lr) * progress
-            for group in optim.param_groups:
-                group["lr"] = lr
-        if args.streaming:
-            stream_index = step % len(obs)
-            batch = streaming_observation_batch(obs, stream_index, args.streaming_window)
-        else:
-            # Paper ablation: observations are sampled randomly instead of
-            # walking the temporally ordered sequence, so long gaps and repeated
-            # frames can interrupt local feature propagation.
-            batch = [obs[int(random_order_rng.integers(len(obs)))]]
-
-        feats_all = F.normalize(raw_features, dim=-1)
-        batch_losses: List[torch.Tensor] = []
-        rendered_batch: List[Tuple[torch.Tensor, torch.Tensor]] = []
-        for t, _view, contrib_np, weights_np, labels_np in batch:
-            contrib = torch.as_tensor(contrib_np, dtype=torch.long, device=device)
-            weights = torch.as_tensor(weights_np, dtype=torch.float32, device=device)
-            labels = torch.as_tensor(labels_np, dtype=torch.long, device=device)
-            feats = render_pixel_features(raw_features, contrib, weights)
-            rendered_batch.append((feats, labels))
-            sample_loss = contrastive_cluster_loss(feats, labels, args.samples_per_mask, generator)
-
-            if args.lambda_align > 0 and t < len(pairs):
-                src_np, dst_np = pairs[t]
-                if len(src_np):
-                    src = torch.as_tensor(src_np, dtype=torch.long, device=device)
-                    dst = torch.as_tensor(dst_np, dtype=torch.long, device=device)
-                    sample_loss = sample_loss + args.lambda_align * (feats_all[src] - feats_all[dst]).abs().sum(dim=-1).mean()
-            if args.lambda_dino > 0 and step < int(args.steps * args.dino_fraction):
-                semantic_pixels = F.normalize((projected_semantic[contrib] * weights.unsqueeze(-1)).sum(dim=1), dim=-1)
-                sample_loss = sample_loss + args.lambda_dino * dino_alignment_loss(
-                    feats, semantic_pixels, labels, args.samples_per_mask, generator
-                )
-            batch_losses.append(sample_loss)
-        loss = torch.stack(batch_losses).mean()
-        if args.lambda_stream > 0 and len(rendered_batch) > 1:
-            pair_losses = [
-                temporal_center_loss(prev_feats, prev_labels, curr_feats, curr_labels)
-                for (prev_feats, prev_labels), (curr_feats, curr_labels) in zip(rendered_batch[:-1], rendered_batch[1:])
-            ]
-            loss = loss + args.lambda_stream * torch.stack(pair_losses).mean()
-
-        optim.zero_grad(set_to_none=True)
-        loss.backward()
-        optim.step()
-        if (step + 1) % max(1, args.steps // 8) == 0:
-            history.append(float(loss.detach().cpu()))
-
-    features = F.normalize(raw_features.detach(), dim=-1).cpu().numpy().astype(np.float32)
-    pred = infer_labels(scene_np, features)
-    out = {
-        "scene": scene_name,
-        "method": method_name,
-        "features": features.tolist(),
-        "pred_labels": pred.tolist(),
-        "history": history,
-        "config": vars(args),
-    }
+    out = []
+    offsets = scene["obs_offsets"]
+    for k in range(len(scene["obs_t"])):
+        lo, hi = int(offsets[k]), int(offsets[k + 1])
+        label = scene["pix_label"][lo:hi]
+        valid = np.flatnonzero(label >= 0)
+        labs, inverse, counts = np.unique(label[valid], return_inverse=True, return_counts=True)
+        good = counts >= 2
+        keep_pix = valid[good[inverse]]
+        mask_index = np.cumsum(good) - 1
+        mask_of_pix = mask_index[inverse[good[inverse]]]
+        order = np.argsort(mask_of_pix, kind="stable")
+        keep_pix = keep_pix[order]
+        mcounts = counts[good]
+        moffsets = np.concatenate([[0], np.cumsum(mcounts)])
+        out.append({
+            "t": int(scene["obs_t"][k]),
+            "contrib": torch.as_tensor(scene["pix_contrib"][lo:hi][keep_pix], dtype=torch.long),
+            "weight": torch.as_tensor(scene["pix_weight"][lo:hi][keep_pix], dtype=torch.float32),
+            "counts": torch.as_tensor(mcounts, dtype=torch.long),
+            "starts": torch.as_tensor(moffsets[:-1], dtype=torch.long),
+        })
     return out
 
 
-def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray) -> np.ndarray:
-    inst = infer_instance_count(scene)
-    first = active_indices(scene, 0)
-    if len(first) < inst:
-        first = np.arange(len(features))
-    elif len(first) > inst:
-        # The paper clusters a 2-10% sample of first-frame Gaussians.  The
-        # reduced benchmark has only hundreds of primitives, so keep a minimum
-        # absolute sample floor while preserving the same HDBSCAN-first
-        # inference path.
-        sample_count = min(len(first), max(inst * 10, int(np.ceil(0.10 * len(first)))))
-        sample_rng = np.random.default_rng(919 + len(first) * 17 + inst)
-        first = np.sort(sample_rng.choice(first, size=sample_count, replace=False))
+def tracking_pairs(scene: Dict[str, np.ndarray], frames: int) -> List[Tuple[torch.Tensor, torch.Tensor]]:
+    """Eq. 5 matches: disappearing primitives at t -> nearest primitive at t+1."""
 
-    centers = hdbscan_centers(features, first, inst)
-    if centers is None:
-        # Deterministic fallback for very small runs where density clustering
-        # finds too few clusters after downsampling.
-        kmeans = KMeans(n_clusters=inst, n_init=20, random_state=5).fit(features[first])
-        centers = kmeans.cluster_centers_
-    sims = features @ (centers / np.linalg.norm(centers, axis=1, keepdims=True)).T
-    labels = sims.argmax(axis=1)
-
-    pos0 = position_at(scene, 0)
-    velocity = scene["velocity"]
-    for c in range(inst):
-        members = np.flatnonzero(labels == c)
-        if len(members) < 3:
+    pairs = []
+    for t in range(frames - 1):
+        op_t = temporal_opacity(scene, t)
+        op_n = temporal_opacity(scene, t + 1)
+        op_nn = temporal_opacity(scene, t + 2)
+        disappearing = np.flatnonzero((op_t >= ACTIVE_OPACITY) & (op_n < op_t) & (op_n < 0.5))
+        candidates = np.flatnonzero((op_n >= ACTIVE_OPACITY) & (op_nn >= ACTIVE_OPACITY))
+        if len(disappearing) == 0 or len(candidates) == 0:
+            pairs.append((torch.empty(0, dtype=torch.long), torch.empty(0, dtype=torch.long)))
             continue
-        mean_v = velocity[members].mean(axis=0)
-        mean_p = pos0[members].mean(axis=0)
-        dv = np.linalg.norm(velocity[members] - mean_v, axis=1)
-        dp = np.linalg.norm(pos0[members] - mean_p, axis=1)
-        sim = sims[members, c]
-        bad = (dv > 3 * (dv.std() + 1e-6)) & (dp > 3 * (dp.std() + 1e-6)) & (sim < 0.5)
-        if np.any(bad):
-            alternatives = sims[members[bad]].copy()
-            alternatives[:, c] = -np.inf
-            labels[members[bad]] = alternatives.argmax(axis=1)
-    return labels.astype(np.int64)
+        pos = position_at(scene, t + 1)
+        d2 = ((pos[disappearing][:, None, :] - pos[candidates][None, :, :]) ** 2).sum(axis=2)
+        d2[disappearing[:, None] == candidates[None, :]] = np.inf
+        nearest = d2.argmin(axis=1)
+        best = d2[np.arange(len(disappearing)), nearest]
+        finite = np.isfinite(best)
+        if not finite.any():
+            pairs.append((torch.empty(0, dtype=torch.long), torch.empty(0, dtype=torch.long)))
+            continue
+        keep = finite & (best <= np.quantile(best[finite], 0.8))
+        pairs.append((torch.as_tensor(disappearing[keep], dtype=torch.long),
+                      torch.as_tensor(candidates[nearest[keep]], dtype=torch.long)))
+    return pairs
 
 
-def infer_instance_count(scene: Dict[str, np.ndarray]) -> int:
-    """Estimate object count from public per-image mask supervision."""
-
-    labels = scene.get("obs_labels")
-    if labels is not None and len(labels):
-        return int(max(int(np.max(x)) for x in labels if len(x)) + 1)
-    max_label = 0
-    for t in range(int(scene["frames"])):
-        for view in range(int(scene["views"])):
-            _, obs_labels = observation_labels(scene, view, t)
-            max_label = max(max_label, int(np.max(obs_labels)))
-    return max_label + 1
-
-
-def hdbscan_centers(features: np.ndarray, first: np.ndarray, inst: int) -> np.ndarray | None:
-    """Cluster the first-frame primitive sample with the paper's HDBSCAN step."""
-
-    if hdbscan is None or len(first) < max(inst * 3, 8):
-        return None
-    min_cluster_size = max(3, len(first) // max(inst * 4, 1))
-    labels = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size, min_samples=2).fit_predict(features[first])
-    valid = [lab for lab in np.unique(labels) if lab >= 0]
-    if len(valid) < inst:
-        return None
-
-    counts = np.asarray([(labels == lab).sum() for lab in valid], dtype=np.int64)
-    assigned = int(counts.sum())
-    if assigned < int(0.72 * len(first)):
-        return None
-    if counts.min() < max(2, int(0.04 * len(first))) or counts.max() > int(0.65 * len(first)):
-        return None
-
-    valid = sorted(valid, key=lambda lab: int((labels == lab).sum()), reverse=True)[:inst]
-    centers = []
-    for lab in valid:
-        members = first[labels == lab]
-        centers.append(features[members].mean(axis=0))
-    return np.stack(centers, axis=0)
+def observation_schedule(obs_t: np.ndarray, frames: int, steps: int, streaming: bool,
+                         steps_per_frame: int, rng: np.random.Generator) -> np.ndarray:
+    if not streaming:
+        return rng.integers(0, len(obs_t), size=steps)
+    by_t = {t: np.flatnonzero(obs_t == t) for t in range(frames)}
+    sched = np.empty(steps, dtype=np.int64)
+    perm = by_t[0]
+    for s in range(steps):
+        g = s // steps_per_frame
+        t = g % frames
+        within = s % steps_per_frame
+        if within == 0:
+            perm = rng.permutation(by_t[t])
+        sched[s] = perm[within % len(perm)]
+    return sched
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--output", default="outputs/split4d/results.json")
-    parser.add_argument("--scenes", nargs="+", default=list(SCENES))
-    parser.add_argument("--steps", type=int, default=1200)
-    parser.add_argument("--feature-dim", type=int, default=32)
-    parser.add_argument("--samples-per-mask", type=int, default=32)
-    parser.add_argument("--lr", type=float, default=2.5e-3)
-    parser.add_argument("--lr-final", type=float, default=2e-6)
-    parser.add_argument("--lambda-align", type=float, default=0.35)
-    parser.add_argument("--lambda-dino", type=float, default=0.08)
-    parser.add_argument("--lambda-stream", type=float, default=0.0, help="Adjacent-frame center consistency used by ordered streaming batches.")
-    parser.add_argument("--dino-fraction", type=float, default=0.35)
-    parser.add_argument("--streaming-window", type=int, default=1, help="Causal same-view temporal frames per ordered streaming step.")
-    parser.add_argument("--temporal-transfer", type=float, default=0.0, help="Deprecated compatibility flag; Split4D uses ordered sampling and losses, not direct feature copying.")
-    parser.add_argument("--seed", type=int, default=7)
-    parser.add_argument("--streaming", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--cpu", action="store_true")
-    parser.add_argument("--method-name", default=None)
-    args = parser.parse_args()
+# --------------------------------------------------------------------------- losses
 
-    method_name = args.method_name or ("split4d_streaming" if args.streaming else "split4d_random_order")
-    results = {"method": method_name, "scenes": {}}
-    for scene_name in args.scenes:
-        results["scenes"][scene_name] = train_scene(args, scene_name, method_name)
-    out_path = Path(args.output)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(results), encoding="utf-8")
+
+def sample_mask_pixels(ob: Dict[str, torch.Tensor], ns: int, gen: torch.Generator) -> torch.Tensor:
+    counts = ob["counts"]
+    u = torch.rand((counts.numel(), ns), generator=gen)
+    j = torch.minimum((u * counts[:, None]).long(), counts[:, None] - 1)
+    return j + ob["starts"][:, None]
+
+
+def render(values: torch.Tensor, contrib: torch.Tensor, weight: torch.Tensor) -> torch.Tensor:
+    """Eq. 2 on sampled pixels: (M, ns, C) contributors -> (M, ns, d) unit features."""
+
+    return F.normalize((values[contrib] * weight[..., None]).sum(dim=-2), dim=-1)
+
+
+def pcl_temperature(vals: torch.Tensor, center: torch.Tensor) -> torch.Tensor:
+    ns = vals.shape[1]
+    disp = (vals - center[:, None, :]).pow(2).sum(dim=-1).sum(dim=1)
+    return (disp / (ns * math.log(ns + 10.0))).clamp_min(PHI_FLOOR).detach()
+
+
+def center_contrast(vals: torch.Tensor, centers: torch.Tensor, phi: torch.Tensor) -> torch.Tensor:
+    """-1/(N_inst N_s) sum_i sum_j log softmax_k(f_ij . c_k / phi_k)[i] (Eqs. 4, 6)."""
+
+    m, ns, _ = vals.shape
+    logits = torch.einsum("mjd,kd->mjk", vals, centers) / phi[None, None, :]
+    target = torch.arange(m)[:, None].expand(m, ns).reshape(-1)
+    return F.cross_entropy(logits.reshape(m * ns, m), target)
+
+
+# --------------------------------------------------------------------------- training
+
+
+def train_features(scene: Dict[str, np.ndarray], args: argparse.Namespace, seed: int) -> Tuple[np.ndarray, Dict[str, object]]:
+    torch.manual_seed(seed)
+    gen = torch.Generator().manual_seed(seed + 17)
+    rng = np.random.default_rng(seed + 991)
+    profile = str(scene["profile"])
+    frames = int(scene["frames"])
+    n = int(len(scene["mu_t"]))
+    lam_align = args.loss_weight_scale * (PAPER_LAMBDA_ALIGN if args.lambda_align is None else args.lambda_align)
+    lam_dino = args.loss_weight_scale * (PAPER_LAMBDA_DINO.get(profile, 500.0) if args.lambda_dino is None else args.lambda_dino)
+
+    raw = torch.nn.Parameter(torch.randn(n, args.feature_dim) * 0.1)
+    proj_gen = torch.Generator().manual_seed(1234)
+    projection = F.normalize(torch.randn(scene["semantic"].shape[1], args.feature_dim, generator=proj_gen), dim=0)
+    semantic = F.normalize(torch.as_tensor(scene["semantic"], dtype=torch.float32) @ projection, dim=-1)
+    obs = prepare_observations(scene)
+    pairs = tracking_pairs(scene, frames)
+    sched = observation_schedule(scene["obs_t"].astype(np.int64), frames, args.steps, args.streaming,
+                                 args.steps_per_frame, rng)
+    optim = torch.optim.Adam([raw], lr=args.lr)
+    dino_steps = int(args.steps * args.dino_fraction)
+    history: List[float] = []
+    for s in range(args.steps):
+        lr = args.lr * (args.lr_final / args.lr) ** (s / max(args.steps - 1, 1))
+        for group in optim.param_groups:
+            group["lr"] = lr
+        ob = obs[int(sched[s])]
+        loss = torch.zeros(())
+        has_term = False
+        if ob["counts"].numel() >= 2:
+            has_term = True
+            idx = sample_mask_pixels(ob, args.samples_per_mask, gen)
+            contrib = ob["contrib"][idx]
+            weight = ob["weight"][idx]
+            vals = render(raw, contrib, weight)
+            centers = vals.mean(dim=1)
+            phi = pcl_temperature(vals, centers)
+            loss = loss + center_contrast(vals, centers, phi)
+            if lam_dino > 0 and s < dino_steps:
+                dino_centers = render(semantic, contrib, weight).mean(dim=1)
+                loss = loss + lam_dino * center_contrast(vals, dino_centers, phi)
+        t = ob["t"]
+        if lam_align > 0 and t < len(pairs) and pairs[t][0].numel():
+            feats = F.normalize(raw, dim=-1)
+            src, dst = pairs[t]
+            loss = loss + lam_align * (feats[src] - feats[dst]).abs().sum(dim=-1).mean()
+            has_term = True
+        if has_term:
+            optim.zero_grad(set_to_none=True)
+            loss.backward()
+            optim.step()
+        if (s + 1) % max(1, args.steps // 10) == 0:
+            history.append(float(loss.detach()))
+    features = F.normalize(raw.detach(), dim=-1).numpy().astype(np.float32)
+    return features, {"loss_history": history, "lambda_align_effective": lam_align, "lambda_dino_effective": lam_dino}
+
+
+# --------------------------------------------------------------------------- inference
+
+
+def infer_labels(scene: Dict[str, np.ndarray], features: np.ndarray, args: argparse.Namespace, seed: int) -> Tuple[np.ndarray, int]:
+    n = len(features)
+    first = np.flatnonzero(temporal_opacity(scene, 0) >= ACTIVE_OPACITY)
+    rng = np.random.default_rng(seed + 919)
+    sample_size = max(int(math.ceil(args.cluster_fraction * len(first))), min(len(first), args.cluster_min_sample))
+    if sample_size < len(first):
+        first = np.sort(rng.choice(first, size=sample_size, replace=False))
+    if len(first) < args.hdbscan_min_cluster_size:
+        return np.zeros(n, dtype=np.int64), 1
+    clusterer = HDBSCAN(min_cluster_size=args.hdbscan_min_cluster_size, min_samples=args.hdbscan_min_samples,
+                        cluster_selection_epsilon=args.hdbscan_epsilon)
+    hl = clusterer.fit_predict(features[first].astype(np.float64))
+    clusters = [c for c in np.unique(hl) if c >= 0]
+    if not clusters:
+        return np.zeros(n, dtype=np.int64), 1
+    centers = np.stack([features[first[hl == c]].mean(axis=0) for c in clusters])
+    centers /= np.maximum(np.linalg.norm(centers, axis=1, keepdims=True), 1e-8)
+    sims = features @ centers.T
+    labels = sims.argmax(axis=1).astype(np.int64)
+    if args.filter:
+        labels = dynamic_perception_filter(scene, labels, sims, args.tau_sim)
+    return labels, len(clusters)
+
+
+def dynamic_perception_filter(scene: Dict[str, np.ndarray], labels: np.ndarray, sims: np.ndarray, tau_sim: float,
+                              window: float = 3.0) -> np.ndarray:
+    """Eq. 8: remove primitives deviating in velocity AND position AND feature similarity."""
+
+    out = labels.copy()
+    pos = scene["mean_xyz"].astype(np.float64)
+    vel = scene["velocity"].astype(np.float64)
+    mu = scene["mu_t"].astype(np.float64)
+    for c in np.unique(labels):
+        members = np.flatnonzero(labels == c)
+        if len(members) < 5:
+            continue
+        near = (np.abs(mu[members][:, None] - mu[members][None, :]) <= window).astype(np.float64)
+        cnt = near.sum(axis=1, keepdims=True)
+        mean_p = (near @ pos[members]) / cnt
+        mean_v = (near @ vel[members]) / cnt
+        dp = np.linalg.norm(pos[members] - mean_p, axis=1)
+        dv = np.linalg.norm(vel[members] - mean_v, axis=1)
+        bad = (dv > 3.0 * dv.std()) & (dp > 3.0 * dp.std()) & (sims[members, c] < tau_sim)
+        out[members[bad]] = -1
+    return out
+
+
+# --------------------------------------------------------------------------- driver
+
+
+def run_scene(job: Tuple[str, argparse.Namespace]) -> Tuple[str, Dict[str, object], np.ndarray]:
+    scene_id, args = job
+    torch.set_num_threads(1)
+    start = time.time()
+    scene = load_scene(scene_id, args.scene_dir)
+    seed = args.seed
+    if args.ensemble_from:
+        feats = []
+        for path in args.ensemble_from:
+            with np.load(path) as z:
+                feats.append(z[scene_id].astype(np.float32))
+        features = np.concatenate(feats, axis=1)
+        features /= np.maximum(np.linalg.norm(features, axis=1, keepdims=True), 1e-8)
+        info: Dict[str, object] = {"ensemble_from": list(args.ensemble_from)}
+    elif args.steps > 0:
+        features, info = train_features(scene, args, seed)
+    else:
+        gen = torch.Generator().manual_seed(seed)
+        features = F.normalize(torch.randn(len(scene["mu_t"]), args.feature_dim, generator=gen) * 0.1, dim=-1).numpy()
+        info = {"untrained": True}
+    labels, k = infer_labels(scene, features, args, seed)
+    info.update(clusters=int(k), seconds=round(time.time() - start, 2))
+    return scene_id, {"pred_labels": labels.tolist(), "info": info}, features
+
+
+def build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(description="Split4D streaming feature learning on the benchmark scenes.")
+    p.add_argument("--output", default="outputs/split4d/results.json")
+    p.add_argument("--method-name", default=None)
+    p.add_argument("--scene-dir", default=None)
+    p.add_argument("--scenes", nargs="*", default=None, help="Scene ids (default: every public scene).")
+    p.add_argument("--split", default=None, choices=["dev", "test"])
+    p.add_argument("--steps", type=int, default=10000)
+    p.add_argument("--steps-per-frame", type=int, default=33, help="Streaming iterations per frame visit (paper: ~10k over 300 frames).")
+    p.add_argument("--feature-dim", type=int, default=32)
+    p.add_argument("--samples-per-mask", type=int, default=32)
+    p.add_argument("--lr", type=float, default=2.5e-3)
+    p.add_argument("--lr-final", type=float, default=2e-6)
+    p.add_argument("--lambda-align", type=float, default=None, help="Paper lambda_1 (default 100).")
+    p.add_argument("--lambda-dino", type=float, default=None, help="Paper lambda_2 (default 500; 10 for interaction scenes).")
+    p.add_argument("--loss-weight-scale", type=float, default=0.01)
+    p.add_argument("--dino-fraction", type=float, default=0.3)
+    p.add_argument("--streaming", action=argparse.BooleanOptionalAction, default=True)
+    p.add_argument("--filter", action=argparse.BooleanOptionalAction, default=True)
+    p.add_argument("--tau-sim", type=float, default=0.5)
+    p.add_argument("--cluster-fraction", type=float, default=0.10)
+    p.add_argument("--cluster-min-sample", type=int, default=600,
+                   help="Sample floor for the reduced scenes (the paper's 2-10%% of millions of primitives).")
+    p.add_argument("--hdbscan-min-cluster-size", type=int, default=5)
+    p.add_argument("--hdbscan-min-samples", type=int, default=5)
+    p.add_argument("--hdbscan-epsilon", type=float, default=0.25)
+    p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--ensemble-from", nargs="*", default=None, help="Cluster concatenated saved features instead of training.")
+    p.add_argument("--workers", type=int, default=0)
+    return p
+
+
+def main(argv: Optional[Sequence[str]] = None) -> None:
+    args = build_parser().parse_args(argv)
+    name = args.method_name or ("split4d_streaming" if args.streaming else "split4d_random_order")
+    scene_ids = args.scenes or [s["id"] for s in list_scenes(args.scene_dir, split=args.split)]
+    workers = args.workers or max(1, min(len(scene_ids), len(os.sched_getaffinity(0))))
+    jobs = [(sid, args) for sid in scene_ids]
+    if workers > 1:
+        import multiprocessing as mp
+
+        with mp.get_context("fork").Pool(workers) as pool:
+            results = pool.map(run_scene, jobs, chunksize=1)
+    else:
+        results = [run_scene(j) for j in jobs]
+    payload = {"method": name, "scenes": {}, "config": {k: v for k, v in vars(args).items() if k != "output"}}
+    features = {}
+    for sid, body, feats in results:
+        payload["scenes"][sid] = body
+        features[sid] = feats.astype(np.float16)
+        print(f"{name} {sid}: clusters={body['info']['clusters']} seconds={body['info']['seconds']}", flush=True)
+    out = Path(args.output)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(payload), encoding="utf-8")
+    np.savez_compressed(out.with_suffix(".features.npz"), **features)
 
 
 if __name__ == "__main__":

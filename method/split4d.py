@@ -333,11 +333,32 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def available_cpus() -> int:
+    """CPUs usable by this process: affinity mask capped by a cgroup CPU quota."""
+
+    n = len(os.sched_getaffinity(0))
+    try:
+        quota, period = Path("/sys/fs/cgroup/cpu.max").read_text().split()[:2]
+        if quota != "max":
+            n = min(n, max(1, int(int(quota) // int(period))))
+    except (OSError, ValueError):
+        try:
+            quota = int(Path("/sys/fs/cgroup/cpu/cpu.cfs_quota_us").read_text())
+            period = int(Path("/sys/fs/cgroup/cpu/cpu.cfs_period_us").read_text())
+            if quota > 0:
+                n = min(n, max(1, quota // period))
+        except (OSError, ValueError):
+            pass
+    env = os.environ.get("SPLIT4D_WORKERS")
+    return int(env) if env else n
+
+
 def main(argv: Optional[Sequence[str]] = None) -> None:
     args = build_parser().parse_args(argv)
     name = args.method_name or ("split4d_streaming" if args.streaming else "split4d_random_order")
     scene_ids = args.scenes or [s["id"] for s in list_scenes(args.scene_dir, split=args.split)]
-    workers = args.workers or max(1, min(len(scene_ids), len(os.sched_getaffinity(0))))
+    workers = args.workers or max(1, min(len(scene_ids), available_cpus()))
+    print(f"{name}: {len(scene_ids)} scenes, {workers} worker(s)", flush=True)
     jobs = [(sid, args) for sid in scene_ids]
     if workers > 1:
         import multiprocessing as mp

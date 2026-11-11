@@ -25,13 +25,16 @@ step() {
   return $rc
 }
 
-python -c "import os, numpy, scipy, sklearn, torch; print('cpus', len(os.sched_getaffinity(0)), 'numpy', numpy.__version__, 'torch', torch.__version__)" | tee -a "$H/logs/steps.txt"
+python -c "import numpy, scipy, sklearn, torch; from method.split4d import available_cpus; print('usable cpus', available_cpus(), 'numpy', numpy.__version__, 'torch', torch.__version__)" | tee -a "$H/logs/steps.txt"
+
+# An output only counts as finished if it covers the current scene set.
+fresh() { [ -f "$1" ] && grep -q '"interaction_test_4"' "$1"; }
 
 [ -f data/scenes/manifest.json ] || step build python -m eval.test.scene_builder || exit 1
-[ -f outputs/baseline/random_order.json ] || step baseline bash scripts/baseline.sh || exit 1
+fresh outputs/baseline/random_order.json || step baseline bash scripts/baseline.sh || exit 1
 step freeze_test python -m eval.test.evaluate --freeze-baseline outputs/baseline/random_order.json || exit 1
 step freeze_train python -m eval.train.evaluate --freeze-baseline outputs/baseline/random_order.json || exit 1
-[ -f outputs/split4d/results.json ] || step method bash scripts/method.sh || exit 1
+fresh outputs/split4d/results.json || step method bash scripts/method.sh || exit 1
 step score_reference bash -c "bash scripts/evaluate_train.sh && bash scripts/evaluate_test.sh"
 step produce python -m redteam.hardening.produce
 step harness python -m redteam.hardening.harness

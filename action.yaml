@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Hardening job 1: build hidden-truth scenes, run Split4D reference + random-order baseline (paper settings), freeze comparison artifact, produce seeds/variants/simple baselines/shortcuts, score each through unchanged evaluate_{train,test}.sh, analyze."
+notes: "Hardening job 3: dev-only preset sweep (contact vs overlap merges x primitive lifetime), rebuild 4 dev + 10 test scenes per experiment with the chosen preset, rerun reference + random-order baseline, freeze comparison artifact, seeds/variants (incl. mask-vote refinement)/simple baselines/shortcuts through unchanged evaluate_{train,test}.sh, analyze."

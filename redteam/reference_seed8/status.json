@@ -1,0 +1,39 @@
+{
+  "case": "reference_seed8",
+  "hidden_test_no_arguments": true,
+  "producer": {
+    "command": [
+      "/usr/local/bin/python",
+      "-m",
+      "redteam.candidates",
+      "reference_seed8",
+      "--output",
+      "/home/user/outputs/candidate.json"
+    ],
+    "returncode": 0,
+    "seconds": 52.55908326400095
+  },
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.121662846999243
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.251018732000375
+  },
+  "score_file_exists": true,
+  "test_wrote_scores": true,
+  "methods_on_disk": {
+    "baseline.json": "split4d_random_order",
+    "candidate.json": "split4d_streaming"
+  },
+  "evaluator_unchanged": true
+}

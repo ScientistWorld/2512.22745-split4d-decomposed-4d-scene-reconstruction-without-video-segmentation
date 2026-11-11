@@ -1,0 +1,45 @@
+{
+  "experiments": {
+    "scaled_linear_motion_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "ClusterSizeError": 0.2222222222222222,
+          "F1": 0.794743415514462,
+          "MaskFeatureAgreement": 0.21890286159515382,
+          "Recall": 0.8055555555555556,
+          "Recalldyn": 0.9074074074074074,
+          "Recallstatic": 0.5,
+          "TrackingFeatureMargin": 0.4215405287251842,
+          "mAcc": 0.9027777777777777,
+          "mIoU": 0.6753172456833785
+        }
+      }
+    },
+    "scaled_streaming_ablation": {
+      "results": {
+        "split4d_random_order": {
+          "ClusterSizeError": 0.2285714285714286,
+          "F1": 0.41045169253657177,
+          "MaskFeatureAgreement": 0.2794349437300493,
+          "Recall": 0.43809523809523815,
+          "Recalldyn": 0.5873015873015873,
+          "Recallstatic": 0.21428571428571427,
+          "TrackingFeatureMargin": 0.5872727483098767,
+          "mAcc": 0.7752380952380953,
+          "mIoU": 0.2741417512162785
+        },
+        "split4d_streaming": {
+          "ClusterSizeError": 0.22857142857142856,
+          "F1": 0.5260119758569275,
+          "MaskFeatureAgreement": 0.1481266425930054,
+          "Recall": 0.5238095238095238,
+          "Recalldyn": 0.5079365079365079,
+          "Recallstatic": 0.5476190476190477,
+          "TrackingFeatureMargin": 0.518622824430136,
+          "mAcc": 0.8095238095238095,
+          "mIoU": 0.37148197322110366
+        }
+      }
+    }
+  }
+}

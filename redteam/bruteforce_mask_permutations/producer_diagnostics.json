@@ -1,0 +1,16 @@
+{
+  "linear_motion": {
+    "permutations_per_image": 24,
+    "enumerated_candidates": 20736,
+    "seconds": 0.12215188698610291,
+    "primitives": 144,
+    "instances": 4
+  },
+  "interaction_motion": {
+    "permutations_per_image": 120,
+    "enumerated_candidates": 158400,
+    "seconds": 0.2156996980047552,
+    "primitives": 210,
+    "instances": 5
+  }
+}

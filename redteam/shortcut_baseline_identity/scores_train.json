@@ -1,0 +1,19 @@
+{
+  "experiments": {
+    "scaled_streaming_ablation": {
+      "results": {
+        "split4d_random_order": {
+          "ClusterSizeError": 0.2095238095238095,
+          "F1": 0.5317860434139504,
+          "MaskFeatureAgreement": 0.13960804228370768,
+          "Recall": 0.5428571428571429,
+          "Recalldyn": 0.5396825396825397,
+          "Recallstatic": 0.5476190476190477,
+          "TrackingFeatureMargin": 0.5124825944503149,
+          "mAcc": 0.8171428571428571,
+          "mIoU": 0.3668223443223443
+        }
+      }
+    }
+  }
+}

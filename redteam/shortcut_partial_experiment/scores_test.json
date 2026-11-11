@@ -1,0 +1,19 @@
+{
+  "experiments": {
+    "scaled_linear_motion_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "ClusterSizeError": 0.3611111111111111,
+          "F1": 0.773220513139868,
+          "MaskFeatureAgreement": 0.21578959512710572,
+          "Recall": 0.7777777777777779,
+          "Recalldyn": 0.8333333333333334,
+          "Recallstatic": 0.6111111111111112,
+          "TrackingFeatureMargin": 0.4236160218336985,
+          "mAcc": 0.888888888888889,
+          "mIoU": 0.638888888888889
+        }
+      }
+    }
+  }
+}

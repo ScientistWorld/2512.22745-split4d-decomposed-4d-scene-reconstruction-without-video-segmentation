@@ -1,0 +1,12 @@
+{
+  "linear_motion": {
+    "seconds": 0.1839060999918729,
+    "primitives": 144,
+    "instances": 4
+  },
+  "interaction_motion": {
+    "seconds": 0.1628706869960297,
+    "primitives": 210,
+    "instances": 5
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "experiments": {
+    "scaled_linear_motion_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "mIoU": 1,
+          "F1": 1,
+          "Recalldyn": 1
+        }
+      }
+    }
+  }
+}

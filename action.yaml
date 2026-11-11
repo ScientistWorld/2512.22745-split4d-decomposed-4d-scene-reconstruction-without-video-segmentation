@@ -3,6 +3,6 @@
 # only after your turn ends.
 action: submit
 gpus: 0
-test: false
+test: true
 milestone: core_claim
-notes: "Hardening job 3: dev-only preset sweep (contact vs overlap merges x primitive lifetime), rebuild 4 dev + 10 test scenes per experiment with the chosen preset, rerun reference + random-order baseline, freeze comparison artifact, seeds/variants (incl. mask-vote refinement)/simple baselines/shortcuts through unchanged evaluate_{train,test}.sh, analyze."
+notes: "Short diagnostic (no training): per-object recall/precision, temporal drift and inference-setting ablations on the saved dev-scene sweep features, to find why the interaction experiment is weak before the final pipeline run."

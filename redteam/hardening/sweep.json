@@ -1,0 +1,422 @@
+{
+  "criterion": "Choose the scene preset on development scenes only (pre-registered criterion).\n\nFor every candidate preset: build its development scenes in tmp/, run the\npaper's streaming method, the random-order ablation and the simple grouping\nbaselines, and score them with the visible train evaluator (raw, ungated\nper-scene metrics). Criterion, per experiment e, on mean mIoU:\n\n    margin(e) = min(ref(e) - random_order(e), ref(e) - max(simple baselines)(e))\n\nA preset is admissible if the reference stays below 0.92 mIoU in both\nexperiments (room above the reference). The chosen preset maximizes\nmin_e margin(e) over admissible presets. Test scenes are never touched.",
+  "presets": {
+    "contact_long": {
+      "raw": {
+        "geometry_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.19226842742935962,
+            "F1": 0.26761054295982517,
+            "Recalldyn": 0.10168289994567699,
+            "Recallstatic": 0.5617382232342707
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.16583128312405968,
+            "F1": 0.25579261286738375,
+            "Recalldyn": 0.1673742385769679,
+            "Recallstatic": 0.7477665855266272
+          }
+        },
+        "mask_graph_spectral": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.8465707480346787,
+            "F1": 0.8827067960700719,
+            "Recalldyn": 0.7674067910256201,
+            "Recallstatic": 0.9974723161661281
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4203695500524668,
+            "F1": 0.48853415441072984,
+            "Recalldyn": 0.33333910369267467,
+            "Recallstatic": 0.9936448705982903
+          }
+        },
+        "mask_tracker": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.8214245907680477,
+            "F1": 0.8675997337839738,
+            "Recalldyn": 0.7469333928376044,
+            "Recallstatic": 0.9645476364003993
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.32856855145686736,
+            "F1": 0.3574841283458873,
+            "Recalldyn": 0.2149535521334286,
+            "Recallstatic": 0.9904115141821385
+          }
+        },
+        "semantic_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.4749441393150361,
+            "F1": 0.6065918110984916,
+            "Recalldyn": 0.7870990390832124,
+            "Recallstatic": 0.5039956337259469
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.23680049229884798,
+            "F1": 0.3392019722181985,
+            "Recalldyn": 0.41374139146673605,
+            "Recallstatic": 0.457602483883739
+          }
+        },
+        "split4d_random_order": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.7512187596792809,
+            "F1": 0.84361380082368,
+            "Recalldyn": 0.7592858474960671,
+            "Recallstatic": 0.8383779788403773
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.36317752205576986,
+            "F1": 0.4768019508965963,
+            "Recalldyn": 0.26665916624819275,
+            "Recallstatic": 0.7840872200656299
+          }
+        },
+        "split4d_streaming": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.7725727967456719,
+            "F1": 0.8526797669748116,
+            "Recalldyn": 0.788183110949896,
+            "Recallstatic": 0.86022550929254
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.43686489374206594,
+            "F1": 0.5617331481501154,
+            "Recalldyn": 0.36345584931660274,
+            "Recallstatic": 0.8464593906985389
+          }
+        }
+      },
+      "margins": {
+        "scaled_dynamic_scene_segmentation": {
+          "ref": 0.7725727967456719,
+          "vs_random": 0.02135403706639105,
+          "vs_best_simple": -0.07399795128900677,
+          "margin": -0.07399795128900677
+        },
+        "scaled_interaction_segmentation": {
+          "ref": 0.43686489374206594,
+          "vs_random": 0.07368737168629608,
+          "vs_best_simple": 0.01649534368959915,
+          "margin": 0.01649534368959915
+        }
+      },
+      "admissible": true,
+      "score": -0.07399795128900677
+    },
+    "contact_mid": {
+      "raw": {
+        "geometry_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.22806852424097415,
+            "F1": 0.30486101347888306,
+            "Recalldyn": 0.10132803266001696,
+            "Recallstatic": 0.6244130853644418
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.22794273322387748,
+            "F1": 0.33358888990971325,
+            "Recalldyn": 0.16340103676876655,
+            "Recallstatic": 0.9982251361288235
+          }
+        },
+        "mask_graph_spectral": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.7021371797586675,
+            "F1": 0.777482622220362,
+            "Recalldyn": 0.5452493182218121,
+            "Recallstatic": 0.997683183851443
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4841384030583027,
+            "F1": 0.575161487402076,
+            "Recalldyn": 0.4088534681276941,
+            "Recallstatic": 0.9959248800423908
+          }
+        },
+        "mask_tracker": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.826995762803509,
+            "F1": 0.8739820984368627,
+            "Recalldyn": 0.750740564829733,
+            "Recallstatic": 0.9762928732032229
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.38047720072366403,
+            "F1": 0.4312515148585648,
+            "Recalldyn": 0.3002882475016114,
+            "Recallstatic": 0.9943485437165016
+          }
+        },
+        "semantic_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.4660660125171776,
+            "F1": 0.602750562927891,
+            "Recalldyn": 0.7387987928005002,
+            "Recallstatic": 0.5475620532092673
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.2601222930067733,
+            "F1": 0.37433392886585554,
+            "Recalldyn": 0.4256031477244802,
+            "Recallstatic": 0.45739333217546263
+          }
+        },
+        "split4d_random_order": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.7796399351014283,
+            "F1": 0.8547548957156615,
+            "Recalldyn": 0.7671619998643657,
+            "Recallstatic": 0.8875207084789752
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4234990022957804,
+            "F1": 0.5321485029191828,
+            "Recalldyn": 0.3371581855760101,
+            "Recallstatic": 0.9060128068338952
+          }
+        },
+        "split4d_streaming": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.8485731724335507,
+            "F1": 0.9087020359698879,
+            "Recalldyn": 0.8508917875362676,
+            "Recallstatic": 0.9146715975401825
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4876989541242651,
+            "F1": 0.6040540088445718,
+            "Recalldyn": 0.4243500782253605,
+            "Recallstatic": 0.8967134936534478
+          }
+        }
+      },
+      "margins": {
+        "scaled_dynamic_scene_segmentation": {
+          "ref": 0.8485731724335507,
+          "vs_random": 0.06893323733212242,
+          "vs_best_simple": 0.021577409630041733,
+          "margin": 0.021577409630041733
+        },
+        "scaled_interaction_segmentation": {
+          "ref": 0.4876989541242651,
+          "vs_random": 0.0641999518284847,
+          "vs_best_simple": 0.003560551065962425,
+          "margin": 0.003560551065962425
+        }
+      },
+      "admissible": true,
+      "score": 0.003560551065962425
+    },
+    "overlap_long": {
+      "raw": {
+        "geometry_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.2154515991243334,
+            "F1": 0.29730622686198566,
+            "Recalldyn": 0.10412200828808982,
+            "Recallstatic": 0.6243505925427928
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.16975206205176024,
+            "F1": 0.2627814670107207,
+            "Recalldyn": 0.17051843858122487,
+            "Recallstatic": 0.7477722996609575
+          }
+        },
+        "mask_graph_spectral": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.9223116142347331,
+            "F1": 0.941996437909573,
+            "Recalldyn": 0.8801487436055937,
+            "Recallstatic": 0.9982626414157432
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4818549384986517,
+            "F1": 0.5498953663181251,
+            "Recalldyn": 0.4124593142304351,
+            "Recallstatic": 0.9942273146948619
+          }
+        },
+        "mask_tracker": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.9083596499625526,
+            "F1": 0.9293606477204648,
+            "Recalldyn": 0.8697462949947634,
+            "Recallstatic": 0.9989969815844078
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.3711068937017917,
+            "F1": 0.4158293120637826,
+            "Recalldyn": 0.2746146699262745,
+            "Recallstatic": 0.990011057075102
+          }
+        },
+        "semantic_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.46827866641546634,
+            "F1": 0.6005950236448458,
+            "Recalldyn": 0.7377665937341197,
+            "Recallstatic": 0.5470680332837933
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.24758563952263427,
+            "F1": 0.35411408181636383,
+            "Recalldyn": 0.42485352282587996,
+            "Recallstatic": 0.45713186303838343
+          }
+        },
+        "split4d_random_order": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.5868473772757219,
+            "F1": 0.6649435790374131,
+            "Recalldyn": 0.6545962365674556,
+            "Recallstatic": 0.6572089391483311
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.3846807101519706,
+            "F1": 0.5029734632620709,
+            "Recalldyn": 0.2860809876403555,
+            "Recallstatic": 0.8122043823864993
+          }
+        },
+        "split4d_streaming": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.6433096700062315,
+            "F1": 0.7025965375591163,
+            "Recalldyn": 0.6347004612986333,
+            "Recallstatic": 0.7743856616732678
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4441611968540721,
+            "F1": 0.5734646058913159,
+            "Recalldyn": 0.39663950523889424,
+            "Recallstatic": 0.7959600791226815
+          }
+        }
+      },
+      "margins": {
+        "scaled_dynamic_scene_segmentation": {
+          "ref": 0.6433096700062315,
+          "vs_random": 0.05646229273050962,
+          "vs_best_simple": -0.27900194422850155,
+          "margin": -0.27900194422850155
+        },
+        "scaled_interaction_segmentation": {
+          "ref": 0.4441611968540721,
+          "vs_random": 0.05948048670210154,
+          "vs_best_simple": -0.03769374164457956,
+          "margin": -0.03769374164457956
+        }
+      },
+      "admissible": true,
+      "score": -0.27900194422850155
+    },
+    "overlap_mid": {
+      "raw": {
+        "geometry_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.22704131627530583,
+            "F1": 0.30339969233659403,
+            "Recalldyn": 0.09915773069085757,
+            "Recallstatic": 0.6244678795847967
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.227191003115464,
+            "F1": 0.3325962900827041,
+            "Recalldyn": 0.16252680401010527,
+            "Recallstatic": 0.9977464986825424
+          }
+        },
+        "mask_graph_spectral": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.8392312535179028,
+            "F1": 0.8910217761376247,
+            "Recalldyn": 0.7605886524182444,
+            "Recallstatic": 0.99856897535333
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.5144049129632527,
+            "F1": 0.6023896996378781,
+            "Recalldyn": 0.44793229451085403,
+            "Recallstatic": 0.9964442549480729
+          }
+        },
+        "mask_tracker": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.8653141871697994,
+            "F1": 0.9027518675691923,
+            "Recalldyn": 0.8316588498330275,
+            "Recallstatic": 0.9504644096773652
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.5979884626144196,
+            "F1": 0.6575661898621135,
+            "Recalldyn": 0.5640379780068707,
+            "Recallstatic": 0.9978809296779392
+          }
+        },
+        "semantic_kmeans": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.4668404598295785,
+            "F1": 0.6033396488428833,
+            "Recalldyn": 0.7404983580988767,
+            "Recallstatic": 0.5471777799058152
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.2606474875899067,
+            "F1": 0.3748641565250483,
+            "Recalldyn": 0.4255387717573113,
+            "Recallstatic": 0.45910818102794654
+          }
+        },
+        "split4d_random_order": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.8050949279758358,
+            "F1": 0.8828428717013397,
+            "Recalldyn": 0.8213621114979054,
+            "Recallstatic": 0.8935110353531887
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.4217077853092124,
+            "F1": 0.5247972667297345,
+            "Recalldyn": 0.3139971512293345,
+            "Recallstatic": 0.918223672733498
+          }
+        },
+        "split4d_streaming": {
+          "scaled_dynamic_scene_segmentation": {
+            "mIoU": 0.7294280287327974,
+            "F1": 0.7886884520300896,
+            "Recalldyn": 0.7324838244935062,
+            "Recallstatic": 0.8544151310843714
+          },
+          "scaled_interaction_segmentation": {
+            "mIoU": 0.5080274728447268,
+            "F1": 0.6304116045845161,
+            "Recalldyn": 0.4644670779928064,
+            "Recallstatic": 0.9029561989634887
+          }
+        }
+      },
+      "margins": {
+        "scaled_dynamic_scene_segmentation": {
+          "ref": 0.7294280287327974,
+          "vs_random": -0.07566689924303838,
+          "vs_best_simple": -0.1358861584370019,
+          "margin": -0.1358861584370019
+        },
+        "scaled_interaction_segmentation": {
+          "ref": 0.5080274728447268,
+          "vs_random": 0.08631968753551444,
+          "vs_best_simple": -0.0899609897696928,
+          "margin": -0.0899609897696928
+        }
+      },
+      "admissible": true,
+      "score": -0.1358861584370019
+    }
+  },
+  "chosen": "contact_mid"
+}

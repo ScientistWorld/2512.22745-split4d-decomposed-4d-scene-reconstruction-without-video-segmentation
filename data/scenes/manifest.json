@@ -25,6 +25,13 @@
       "primitives": 830
     },
     {
+      "id": "dynamic_dev_3",
+      "profile": "dynamic",
+      "split": "dev",
+      "file": "dynamic_dev_3.npz",
+      "primitives": 759
+    },
+    {
       "id": "dynamic_test_0",
       "profile": "dynamic",
       "split": "test",
@@ -60,6 +67,41 @@
       "primitives": 790
     },
     {
+      "id": "dynamic_test_5",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_5.npz",
+      "primitives": 796
+    },
+    {
+      "id": "dynamic_test_6",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_6.npz",
+      "primitives": 787
+    },
+    {
+      "id": "dynamic_test_7",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_7.npz",
+      "primitives": 774
+    },
+    {
+      "id": "dynamic_test_8",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_8.npz",
+      "primitives": 766
+    },
+    {
+      "id": "dynamic_test_9",
+      "profile": "dynamic",
+      "split": "test",
+      "file": "dynamic_test_9.npz",
+      "primitives": 782
+    },
+    {
       "id": "interaction_dev_0",
       "profile": "interaction",
       "split": "dev",
@@ -78,7 +120,14 @@
       "profile": "interaction",
       "split": "dev",
       "file": "interaction_dev_2.npz",
-      "primitives": 1139
+      "primitives": 1162
+    },
+    {
+      "id": "interaction_dev_3",
+      "profile": "interaction",
+      "split": "dev",
+      "file": "interaction_dev_3.npz",
+      "primitives": 1179
     },
     {
       "id": "interaction_test_0",
@@ -114,6 +163,41 @@
       "split": "test",
       "file": "interaction_test_4.npz",
       "primitives": 1169
+    },
+    {
+      "id": "interaction_test_5",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_5.npz",
+      "primitives": 1187
+    },
+    {
+      "id": "interaction_test_6",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_6.npz",
+      "primitives": 1175
+    },
+    {
+      "id": "interaction_test_7",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_7.npz",
+      "primitives": 1177
+    },
+    {
+      "id": "interaction_test_8",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_8.npz",
+      "primitives": 1140
+    },
+    {
+      "id": "interaction_test_9",
+      "profile": "interaction",
+      "split": "test",
+      "file": "interaction_test_9.npz",
+      "primitives": 1101
     }
   ]
 }

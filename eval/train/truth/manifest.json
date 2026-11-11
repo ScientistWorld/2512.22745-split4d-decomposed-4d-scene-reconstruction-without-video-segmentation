@@ -1,14 +1,17 @@
 {
+  "preset": "contact_mid",
   "experiments": {
     "scaled_dynamic_scene_segmentation": [
       "dynamic_dev_0",
       "dynamic_dev_1",
-      "dynamic_dev_2"
+      "dynamic_dev_2",
+      "dynamic_dev_3"
     ],
     "scaled_interaction_segmentation": [
       "interaction_dev_0",
       "interaction_dev_1",
-      "interaction_dev_2"
+      "interaction_dev_2",
+      "interaction_dev_3"
     ]
   },
   "scenes": {
@@ -30,6 +33,12 @@
       "objects": 8,
       "dynamic_objects": 4
     },
+    "dynamic_dev_3": {
+      "file": "dynamic_dev_3.npz",
+      "primitives": 759,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
     "interaction_dev_0": {
       "file": "interaction_dev_0.npz",
       "primitives": 1183,
@@ -44,7 +53,13 @@
     },
     "interaction_dev_2": {
       "file": "interaction_dev_2.npz",
-      "primitives": 1139,
+      "primitives": 1162,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_dev_3": {
+      "file": "interaction_dev_3.npz",
+      "primitives": 1179,
       "objects": 7,
       "dynamic_objects": 5
     }

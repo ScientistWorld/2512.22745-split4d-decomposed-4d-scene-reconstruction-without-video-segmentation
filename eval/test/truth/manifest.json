@@ -1,18 +1,29 @@
 {
+  "preset": "contact_mid",
   "experiments": {
     "scaled_dynamic_scene_segmentation": [
       "dynamic_test_0",
       "dynamic_test_1",
       "dynamic_test_2",
       "dynamic_test_3",
-      "dynamic_test_4"
+      "dynamic_test_4",
+      "dynamic_test_5",
+      "dynamic_test_6",
+      "dynamic_test_7",
+      "dynamic_test_8",
+      "dynamic_test_9"
     ],
     "scaled_interaction_segmentation": [
       "interaction_test_0",
       "interaction_test_1",
       "interaction_test_2",
       "interaction_test_3",
-      "interaction_test_4"
+      "interaction_test_4",
+      "interaction_test_5",
+      "interaction_test_6",
+      "interaction_test_7",
+      "interaction_test_8",
+      "interaction_test_9"
     ]
   },
   "scenes": {
@@ -46,6 +57,36 @@
       "objects": 8,
       "dynamic_objects": 4
     },
+    "dynamic_test_5": {
+      "file": "dynamic_test_5.npz",
+      "primitives": 796,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_6": {
+      "file": "dynamic_test_6.npz",
+      "primitives": 787,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_7": {
+      "file": "dynamic_test_7.npz",
+      "primitives": 774,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_8": {
+      "file": "dynamic_test_8.npz",
+      "primitives": 766,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
+    "dynamic_test_9": {
+      "file": "dynamic_test_9.npz",
+      "primitives": 782,
+      "objects": 8,
+      "dynamic_objects": 4
+    },
     "interaction_test_0": {
       "file": "interaction_test_0.npz",
       "primitives": 1178,
@@ -73,6 +114,36 @@
     "interaction_test_4": {
       "file": "interaction_test_4.npz",
       "primitives": 1169,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_5": {
+      "file": "interaction_test_5.npz",
+      "primitives": 1187,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_6": {
+      "file": "interaction_test_6.npz",
+      "primitives": 1175,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_7": {
+      "file": "interaction_test_7.npz",
+      "primitives": 1177,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_8": {
+      "file": "interaction_test_8.npz",
+      "primitives": 1140,
+      "objects": 7,
+      "dynamic_objects": 5
+    },
+    "interaction_test_9": {
+      "file": "interaction_test_9.npz",
+      "primitives": 1101,
       "objects": 7,
       "dynamic_objects": 5
     }

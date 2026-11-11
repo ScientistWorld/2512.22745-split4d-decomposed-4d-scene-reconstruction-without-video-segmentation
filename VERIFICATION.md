@@ -1,3 +1,5 @@
+> **Superseded (iteration 11):** this note describes the earlier gym (procedural scenes in `data/split4d_synthetic.py`, feature-proxy metrics). The current benchmark, evaluators, and results are described in `HARDENING.md`, `briefing/`, and `scoring/`.
+
 # Verification Report
 
 ## Initial Assessment

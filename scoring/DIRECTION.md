@@ -1,16 +1,16 @@
 # Research Direction
 
 ## Research Problem
-The benchmark concerns decomposed 4D instance segmentation from dynamic scene observations when 2D mask labels are independent per image. The central question is how to produce temporally coherent object identities without relying on a precomputed video tracker or globally consistent annotation labels.
+Decomposed 4D instance segmentation of dynamic scenes from per-image automatic masks whose labels are independent across views and frames and contain the segmenter's errors. The central question is how to produce object identities that stay coherent over a whole sequence, including through contacts between objects, without a video tracker supplying consistent labels.
 
 ## Research Focus
-Work should stay within decomposed 4D instance grouping for fixed dynamic scene elements. Improvements should address how spatial, temporal, and observation-level evidence is combined to assign stable object identities under inconsistent mask supervision.
+Work should stay within instance grouping of the fixed 4D scene primitives. Improvements should address how spatial, temporal, observation-level, and semantic evidence is combined to assign stable identities. Moving and interacting objects are the hard part; static objects are comparatively easy.
 
 ## Approach Scope
-Valid changes include alternative uses of the provided observations, temporal and spatial consistency cues, grouping or refinement strategies, and representation choices that keep the fixed scene elements and output contract. The method should still solve the same 4D element-level decomposition problem using the benchmark observations and weak per-image masks.
+Valid changes include how the observations are used, how evidence propagates through time, representation learning on the primitives, grouping and inference procedures, robustness to segmenter merges and splits, and refinement of assignments. The output must remain one instance label per given primitive.
 
 ## Out of Bounds
-- Replacing the task with supervised classification from ground-truth object ids.
-- Using an external tracker that supplies temporally consistent labels as training targets.
-- Switching to a dense video segmentation model that ignores the fixed 4D primitive representation.
-- Increasing scene resolution, feature dimension, primitive count, or number of observations for scored experiments.
+- Training on development or test answers, or hard-coding them.
+- Using external trackers or segmenters that supply temporally consistent labels.
+- Editing the evaluator, truth files, fixed reference artifact, or scene inputs.
+- Changing the number of primitives, frames, or views, or re-rendering scenes.

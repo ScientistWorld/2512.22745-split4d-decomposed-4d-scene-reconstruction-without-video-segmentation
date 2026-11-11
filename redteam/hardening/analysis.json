@@ -36,10 +36,10 @@
   "reference_metrics_at_bound": [],
   "reference_seed_S": [
     0.0,
-    -0.4786558364421489,
-    -0.20478602519993025
+    -0.4176817238395455,
+    -0.18758009214337698
   ],
-  "reference_seed_S_range": 0.4786558364421489,
+  "reference_seed_S_range": 0.4176817238395455,
   "reference_seed_metric_spread": {
     "scaled_dynamic_scene_segmentation": {
       "mIoU": {
@@ -652,7 +652,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": -0.4437250391839636,
+      "S_test": -0.37997115464784315,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.7742986268145015,
@@ -718,7 +718,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": 0.14842163842072142,
+      "S_test": 0.28191809035078796,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.7931922838653049,
@@ -784,7 +784,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.318558 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -850,7 +850,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.533580 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -916,7 +916,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.516137 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -982,7 +982,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": -1.042213036910714,
+      "S_test": -1.136495438210231,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.792817599229959,
@@ -1048,7 +1048,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.576284 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1180,7 +1180,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": -0.4786558364421489,
+      "S_test": -0.4176817238395455,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.7529295154057761,
@@ -1246,7 +1246,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": -0.20478602519993025,
+      "S_test": -0.18758009214337698,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.8211179997745457,
@@ -1312,7 +1312,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.371499 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1444,7 +1444,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.043414 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1510,7 +1510,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": -1.042213036910714,
+      "S_test": -1.136495438210231,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.792817599229959,
@@ -1576,7 +1576,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "missing predictions for scene dynamic_test_0",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1625,7 +1625,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "missing predictions for scene dynamic_test_0",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1807,7 +1807,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": 0.08484651914315691,
+      "S_test": 0.06787721531452554,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.8813750319861896,
@@ -1873,7 +1873,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "dynamic_test_0: pred_labels has length 811, expected 816",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1922,7 +1922,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "interaction_test_9: pred_labels must contain only integers",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -1971,7 +1971,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "missing predictions for scene interaction_test_0",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -2087,7 +2087,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.175300 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -2153,7 +2153,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "dynamic_test_0: more than 512 distinct labels",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -2202,7 +2202,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": 1.1316065865355285,
+      "S_test": 1.0875336597407064,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.9928030126879449,
@@ -2268,7 +2268,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": 0.8356123164746783,
+      "S_test": 0.7354246140146348,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.9915421332363342,
@@ -2334,7 +2334,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": -0.2393259672814467,
+      "S_test": -0.2643701403283738,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.853386515931539,
@@ -2400,7 +2400,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": 0.15881181097663713,
+      "S_test": 0.15930119128333975,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.8671267752774648,
@@ -2466,7 +2466,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.583977 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,
@@ -2532,7 +2532,7 @@
       "train_returncode": 0,
       "valid": true,
       "reason": null,
-      "S_test": 0.2722133447089665,
+      "S_test": 0.2927450451549083,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.8697672843930194,
@@ -2598,7 +2598,7 @@
       "train_returncode": 0,
       "valid": false,
       "reason": "constraint failed: scaled_interaction_segmentation F1 0.096892 does not exceed the fixed no-streaming reference 0.588119",
-      "S_test": -7.269028189178699,
+      "S_test": -7.2667630643173435,
       "test": {
         "scaled_dynamic_scene_segmentation": {
           "F1": 0.0,

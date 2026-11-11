@@ -75,5 +75,19 @@
 - Removed remaining solution-specific hints from from-scratch-facing documentation while keeping the benchmark constraints, output contract, and active experiment descriptions clear.
 - Wrote `VERIFICATION.md` with the final gym-readiness judgment and the reduced-synthetic-benchmark limitation.
 
+### [2026-11-11 17:00] - core_claim
+- Hardening iteration (see `HARDENING.md`):
+  - Answers and their generator moved into `eval/` only.
+  - Public scene inputs carry no identity information.
+  - Both evaluators fail closed: worst values for invalid, partial or empty runs; a frozen random-order artifact constraint.
+  - The paper's six segmentation metrics only.
+  - 10 hidden test scenes per experiment.
+- The Split4D implementation was restored to the paper:
+  - Eq. 4 per-center PCL temperatures; no extra stream loss or frame batching.
+  - 10,000 iterations, the paper's λ ratios and LR schedule.
+  - First-frame HDBSCAN with the Eq. 8 filter.
+- Hidden-test reference: dynamic-scene mIoU 0.791 / Recalldyn 0.819; interaction mIoU 0.637 / Recalldyn 0.583.
+- Random-order ablation: 0.725 / 0.699 and 0.484 / 0.399. The paper's streaming claim holds in its direction, by more than seed noise (random order loses 17/20 paired scenes).
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

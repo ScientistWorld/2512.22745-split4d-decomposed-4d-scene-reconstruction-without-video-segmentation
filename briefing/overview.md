@@ -7,10 +7,13 @@
 
 ## Short Summary
 
-The paper addresses instance-level decomposition of dynamic 3D scenes captured by multi-view video. Its method attaches learnable instance features to FreetimeGS-style Gaussian primitives with linear motion, then trains those features with a contrastive mask loss over temporally ordered observations. The ordering is central: nearby frames share moving primitives, so streaming feature learning propagates identities through time even when mask labels change per frame or view. Experiments on Neural3DV, Multi-Human, and SelfCap report better mIoU, F1, and dynamic recall than SA4D, SADG, DGD, and OmniSeg3D.
+The paper addresses instance-level decomposition of dynamic 3D scenes captured by multi-view video. It attaches learnable instance features to FreeTimeGS-style Gaussian primitives with linear motion. It trains those features with a contrastive mask loss over temporally ordered observations. The ordering is central: nearby frames share moving primitives, so streaming feature learning propagates identities through time even when mask labels change per frame or view. Experiments on Neural3DV, Multi-Human, and SelfCap report better mIoU, F1, and dynamic recall than SA4D, SADG, DGD, and OmniSeg3D.
 
 ## Key Results
 
-- Reported mIoU: 0.801 on Neural3DV, 0.893 on Multi-Human, and 0.882 on SelfCap.
-- Streaming ablation on Multi-Human Juggle: mIoU drops from 0.895 to 0.552 and dynamic recall from 0.898 to 0.365 when temporal ordering is removed.
-- The paper trains only the instance features after reconstruction, using 32-dimensional features, Adam, and about 10,000 iterations per scene.
+- Paper (full scale): mIoU 0.801 on Neural3DV, 0.893 on Multi-Human, 0.882 on SelfCap.
+- Paper streaming ablation (Multi-Human Juggle): mIoU drops from 0.895 to 0.552 and dynamic recall from 0.898 to 0.365 when temporal ordering is removed.
+- This gym (reduced procedural scenes, hidden test, 10 scenes per experiment):
+  - Dynamic-scene experiment: Split4D mIoU 0.791 / Recalldyn 0.819; random order 0.725 / 0.699.
+  - Interaction experiment: Split4D 0.637 / 0.583; random order 0.484 / 0.399.
+  - The direction of the paper's claim reproduces; the absolute values are not on the paper's scale.

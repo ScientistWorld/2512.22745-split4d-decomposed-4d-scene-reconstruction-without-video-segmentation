@@ -232,3 +232,16 @@ This run is not accepted for the milestone because it violates the constraint si
 - The full paper learns identity continuity through rendered fixed Gaussian primitives and tracking constraints. Earlier workspace versions applied a post-update temporal feature transfer, but that non-paper shortcut has been removed; the current method relies on streaming sampling, contrastive rendered-feature learning, 3D tracking alignment, and semantic alignment.
 - The reduced streaming optimizer now uses a causal same-view temporal observation window instead of one image per step. This scales the paper's temporally ordered sample stream to a compact benchmark where adjacent-frame propagation is otherwise too sparse, without introducing direct feature copying or evaluation labels.
 - The reduced streaming optimizer now adds an adjacent-frame mask-center consistency term inside ordered temporal batches. This is a compact-benchmark implementation of streaming feature propagation from neighboring frames; it uses only rendered features and per-image mask centers, not hidden instance labels.
+
+
+## Iteration 11 (hardener)
+
+Rebuilt the benchmark so the hidden test rewards better segmentation and closes the red-team shortcuts. Full report: `HARDENING.md`. Evidence: `redteam/hardening/`.
+
+Jobs:
+- `dbcfe993-6da`: stale outputs from the old gym.
+- `0ba52c05-b7a`: first design; worker node lost after completion.
+- `2c2cde0f-a17`: dev preset sweep, then cancelled.
+- `948f22bb-0bf`: diagnostics.
+- `b06d187b-984`: pipeline with λ scale 0.01.
+- `df728028-fa4`: final pipeline with dev-selected λ scale 0.001.

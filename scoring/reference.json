@@ -3,7 +3,7 @@
     "scaled_dynamic_scene_segmentation": {
       "description": "Decomposed 4D instance segmentation of reduced kitchen-like dynamic scenes (one person handling objects, a pet, static furniture) from fixed linear-motion Gaussian primitives and independent per-image automatic masks; 5 hidden test scenes, scored in hidden test views over 60 frames.",
       "notes": "Scaled substitute for the paper's Neural3DV / SelfCap evaluations (Table 1). Results are this gym's reference runs on the hidden test scenes; the paper's own full-scale numbers are kept under _paper_reported and are not on this scale.",
-      "weight": 0.5,
+      "weight": 0.4,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {
@@ -40,28 +40,28 @@
       "results": {
         "split4d_streaming": {
           "type": "proposed",
-          "mIoU": 0.5,
-          "mAcc": 0.5,
-          "Recall": 0.5,
-          "F1": 0.5,
-          "Recalldyn": 0.5,
-          "Recallstatic": 0.5
+          "mIoU": 0.7907364276127019,
+          "mAcc": 0.9690540880779688,
+          "Recall": 0.8511664019906664,
+          "F1": 0.8530416711306221,
+          "Recalldyn": 0.8192762791033529,
+          "Recallstatic": 0.8830565248779803
         },
         "split4d_random_order": {
           "type": "baseline",
-          "mIoU": 0.5,
-          "mAcc": 0.5,
-          "Recall": 0.5,
-          "F1": 0.5,
-          "Recalldyn": 0.5,
-          "Recallstatic": 0.5
+          "mIoU": 0.7252394005201594,
+          "mAcc": 0.9632942486010121,
+          "Recall": 0.7972916711939967,
+          "F1": 0.792817599229959,
+          "Recalldyn": 0.6993398854332631,
+          "Recallstatic": 0.8952434569547302
         }
       }
     },
     "scaled_interaction_segmentation": {
       "description": "Decomposed 4D instance segmentation of reduced multi-person interaction scenes (four people with contacts and a passed ball, two static objects) from the same kind of inputs; 5 hidden test scenes. Also hosts the paper's streaming ablation: a run must beat the fixed random-order artifact on F1 and dynamic recall here.",
-      "notes": "Scaled substitute for the paper's Multi-Human evaluation (Table 1) and its Juggle streaming ablation (Table 2). The random-order baseline values are the gym's fixed comparison artifact.",
-      "weight": 0.5,
+      "notes": "Scaled substitute for the paper's Multi-Human evaluation (Table 1) and its Juggle streaming ablation (Table 2). The random-order baseline values are the gym's fixed comparison artifact. Weighted 0.6 (vs 0.4 for the dynamic-scene experiment) because the paper's central claim, streaming propagation of identities through interactions, is demonstrated on Multi-Human and its Table 2 ablation.",
+      "weight": 0.6,
       "primary_metric": "mIoU",
       "metrics": {
         "mIoU": {
@@ -98,21 +98,21 @@
       "results": {
         "split4d_streaming": {
           "type": "proposed",
-          "mIoU": 0.5,
-          "mAcc": 0.5,
-          "Recall": 0.5,
-          "F1": 0.5,
-          "Recalldyn": 0.5,
-          "Recallstatic": 0.5
+          "mIoU": 0.6372006411139901,
+          "mAcc": 0.9419587853530104,
+          "Recall": 0.700530806716902,
+          "F1": 0.7438457465716505,
+          "Recalldyn": 0.5832539455215653,
+          "Recallstatic": 0.9937229597052436
         },
         "split4d_random_order": {
           "type": "baseline",
-          "mIoU": 0.5,
-          "mAcc": 0.5,
-          "Recall": 0.5,
-          "F1": 0.5,
-          "Recalldyn": 0.5,
-          "Recallstatic": 0.5
+          "mIoU": 0.48358614788871035,
+          "mAcc": 0.9068499867770597,
+          "Recall": 0.5646209455537081,
+          "F1": 0.5881194945223013,
+          "Recalldyn": 0.3993449965846564,
+          "Recallstatic": 0.9778108179763375
         }
       }
     }

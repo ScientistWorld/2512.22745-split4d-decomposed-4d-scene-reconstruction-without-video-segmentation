@@ -1,0 +1,30 @@
+{
+  "case": "variant_strong_regularizers",
+  "candidate": "split4d_strong_regularizers",
+  "kind": "trained variant",
+  "args": [
+    "--loss-weight-scale",
+    "0.1"
+  ],
+  "seconds": 83.58303499221802,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.05
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.15
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

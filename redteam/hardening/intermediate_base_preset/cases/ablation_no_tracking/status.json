@@ -1,0 +1,30 @@
+{
+  "case": "ablation_no_tracking",
+  "candidate": "split4d_no_tracking",
+  "kind": "trained variant",
+  "args": [
+    "--lambda-align",
+    "0"
+  ],
+  "seconds": 88.02577209472656,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.06
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.15
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

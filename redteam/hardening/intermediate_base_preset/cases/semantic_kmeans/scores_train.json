@@ -1,0 +1,106 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.8456947018565136,
+      "Recall": 0.836460184697081,
+      "Recalldyn": 0.7535515435567346,
+      "Recallstatic": 0.9193688258374273,
+      "mAcc": 0.9778462304157908,
+      "mIoU": 0.784439040055504
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.4955631270284111,
+      "Recall": 0.48804338319291946,
+      "Recalldyn": 0.3246361733966455,
+      "Recallstatic": 0.8965614076836044,
+      "mAcc": 0.8828917563527332,
+      "mIoU": 0.39523427436401376
+    }
+  },
+  "_per_scene_diagnostics": {
+    "semantic_kmeans": {
+      "dynamic_dev_0": {
+        "F1": 0.7951814097674286,
+        "Recall": 0.8364030846139234,
+        "Recalldyn": 0.9525521404038977,
+        "Recallstatic": 0.7202540288239493,
+        "mAcc": 0.9516544846733526,
+        "mIoU": 0.7377202732877641
+      },
+      "dynamic_dev_1": {
+        "F1": 0.7659331766782047,
+        "Recall": 0.7693186927143538,
+        "Recalldyn": 0.8761288324278761,
+        "Recallstatic": 0.6625085530008317,
+        "mAcc": 0.9428903437916276,
+        "mIoU": 0.6952570231197203
+      },
+      "dynamic_dev_2": {
+        "F1": 0.7901472732088629,
+        "Recall": 0.8270971285219058,
+        "Recalldyn": 0.9723587807812398,
+        "Recallstatic": 0.6818354762625716,
+        "mAcc": 0.9556718997959647,
+        "mIoU": 0.7238778669905096
+      },
+      "interaction_dev_0": {
+        "F1": 0.5472483578149376,
+        "Recall": 0.5708616099697827,
+        "Recalldyn": 0.4362944668222921,
+        "Recallstatic": 0.9072794678385092,
+        "mAcc": 0.8838611697895251,
+        "mIoU": 0.4619854096905671
+      },
+      "interaction_dev_1": {
+        "F1": 0.5522447046243392,
+        "Recall": 0.5804166475952581,
+        "Recalldyn": 0.4330898683871897,
+        "Recallstatic": 0.948733595615429,
+        "mAcc": 0.8843173633089599,
+        "mIoU": 0.47803910635827646
+      },
+      "interaction_dev_2": {
+        "F1": 0.5516881443622601,
+        "Recall": 0.5822616929764368,
+        "Recalldyn": 0.4589380625391371,
+        "Recallstatic": 0.8905707690696859,
+        "mAcc": 0.8811981175900305,
+        "mIoU": 0.4571209741451006
+      }
+    }
+  },
+  "_status": {
+    "semantic_kmeans": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "valid": true
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "semantic_kmeans": {
+          "F1": 0.7837539532181653,
+          "Recall": 0.8109396352833943,
+          "Recalldyn": 0.9336799178710046,
+          "Recallstatic": 0.6881993526957841,
+          "mAcc": 0.9500722427536483,
+          "mIoU": 0.7189517211326647
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "semantic_kmeans": {
+          "F1": 0.5503937356005123,
+          "Recall": 0.5778466501804925,
+          "Recalldyn": 0.44277413258287296,
+          "Recallstatic": 0.9155279441745413,
+          "mAcc": 0.8831255502295052,
+          "mIoU": 0.4657151633979814
+        }
+      }
+    }
+  }
+}

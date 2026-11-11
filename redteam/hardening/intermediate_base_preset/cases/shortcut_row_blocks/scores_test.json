@@ -1,0 +1,139 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.7551188964122195,
+      "Recall": 0.7714422863236517,
+      "Recalldyn": 0.6391447787321051,
+      "Recallstatic": 0.9037397939151985,
+      "mAcc": 0.959661919703359,
+      "mIoU": 0.6878799564654651
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5395627797237141,
+      "Recall": 0.5191728488248222,
+      "Recalldyn": 0.3435506720996998,
+      "Recallstatic": 0.9582282906376278,
+      "mAcc": 0.898164285207619,
+      "mIoU": 0.43667675291504493
+    }
+  },
+  "_per_scene_diagnostics": {
+    "shortcut_row_blocks": {
+      "dynamic_test_0": {
+        "F1": 0.16439877323227928,
+        "Recall": 0.1815835239783145,
+        "Recalldyn": 0.16971955984090123,
+        "Recallstatic": 0.19344748811572784,
+        "mAcc": 0.7953571833862914,
+        "mIoU": 0.09080827631954325
+      },
+      "dynamic_test_1": {
+        "F1": 0.17737767320198985,
+        "Recall": 0.20178650721869656,
+        "Recalldyn": 0.21396367340365635,
+        "Recallstatic": 0.18960934103373675,
+        "mAcc": 0.7975910276769511,
+        "mIoU": 0.09803892135166048
+      },
+      "dynamic_test_2": {
+        "F1": 0.1636240927414169,
+        "Recall": 0.17631105938882963,
+        "Recalldyn": 0.15928122896653146,
+        "Recallstatic": 0.1933408898111278,
+        "mAcc": 0.7970914912305556,
+        "mIoU": 0.09063656147571919
+      },
+      "dynamic_test_3": {
+        "F1": 0.16204658328446295,
+        "Recall": 0.17455730618252205,
+        "Recalldyn": 0.16746206350727927,
+        "Recallstatic": 0.18165254885776483,
+        "mAcc": 0.7951484390506706,
+        "mIoU": 0.08928150128078578
+      },
+      "dynamic_test_4": {
+        "F1": 0.17165803574144867,
+        "Recall": 0.19151985957747392,
+        "Recalldyn": 0.19150494408913357,
+        "Recallstatic": 0.19153477506581423,
+        "mAcc": 0.7969254517645726,
+        "mIoU": 0.0947680168472616
+      },
+      "interaction_test_0": {
+        "F1": 0.18153407059407184,
+        "Recall": 0.17524650544165077,
+        "Recalldyn": 0.16379904118424954,
+        "Recallstatic": 0.20386516608515387,
+        "mAcc": 0.7816553166238096,
+        "mIoU": 0.10079432416091913
+      },
+      "interaction_test_1": {
+        "F1": 0.17453987923568737,
+        "Recall": 0.17099536165691145,
+        "Recalldyn": 0.16582774350145665,
+        "Recallstatic": 0.18391440704554846,
+        "mAcc": 0.77993926128149,
+        "mIoU": 0.09616459088651289
+      },
+      "interaction_test_2": {
+        "F1": 0.17146285015298815,
+        "Recall": 0.16972274744208415,
+        "Recalldyn": 0.16882501823516874,
+        "Recallstatic": 0.17196707045937273,
+        "mAcc": 0.7771945774491382,
+        "mIoU": 0.094069954944026
+      },
+      "interaction_test_3": {
+        "F1": 0.17213976448986942,
+        "Recall": 0.16671573233999085,
+        "Recalldyn": 0.16239976669201583,
+        "Recallstatic": 0.1775056464599284,
+        "mAcc": 0.7793033564525115,
+        "mIoU": 0.09463352886330144
+      },
+      "interaction_test_4": {
+        "F1": 0.1803187437225399,
+        "Recall": 0.17454311102817185,
+        "Recalldyn": 0.1599933071216158,
+        "Recallstatic": 0.210917620794562,
+        "mAcc": 0.7825777662807994,
+        "mIoU": 0.0998974191857168
+      }
+    }
+  },
+  "_status": {
+    "shortcut_row_blocks": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "constraint failed: scaled_interaction_segmentation F1 0.175999 does not exceed the fixed no-streaming reference 0.539563",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "shortcut_row_blocks": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "shortcut_row_blocks": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.7551188964122195,
+      "Recall": 0.7714422863236517,
+      "Recalldyn": 0.6391447787321051,
+      "Recallstatic": 0.9037397939151985,
+      "mAcc": 0.959661919703359,
+      "mIoU": 0.6878799564654651
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5395627797237141,
+      "Recall": 0.5191728488248222,
+      "Recalldyn": 0.3435506720996998,
+      "Recallstatic": 0.9582282906376278,
+      "mAcc": 0.898164285207619,
+      "mIoU": 0.43667675291504493
+    }
+  },
+  "_per_scene_diagnostics": {},
+  "_status": {
+    "split4d_streaming": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "missing predictions for scene dynamic_test_0",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "split4d_streaming": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

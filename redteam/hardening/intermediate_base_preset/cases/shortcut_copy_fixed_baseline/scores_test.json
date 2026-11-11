@@ -1,0 +1,138 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.7551188964122195,
+      "Recall": 0.7714422863236517,
+      "Recalldyn": 0.6391447787321051,
+      "Recallstatic": 0.9037397939151985,
+      "mAcc": 0.959661919703359,
+      "mIoU": 0.6878799564654651
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5395627797237141,
+      "Recall": 0.5191728488248222,
+      "Recalldyn": 0.3435506720996998,
+      "Recallstatic": 0.9582282906376278,
+      "mAcc": 0.898164285207619,
+      "mIoU": 0.43667675291504493
+    }
+  },
+  "_per_scene_diagnostics": {
+    "shortcut_copy_fixed_baseline": {
+      "dynamic_test_0": {
+        "F1": 0.9326396558060596,
+        "Recall": 0.9150208346319111,
+        "Recalldyn": 0.839676328611867,
+        "Recallstatic": 0.990365340651955,
+        "mAcc": 0.9890490240581026,
+        "mIoU": 0.8853861768587196
+      },
+      "dynamic_test_1": {
+        "F1": 0.8202902930429014,
+        "Recall": 0.7857494306259611,
+        "Recalldyn": 0.6475585463974912,
+        "Recallstatic": 0.9239403148544312,
+        "mAcc": 0.9776897118874772,
+        "mIoU": 0.7540839781650754
+      },
+      "dynamic_test_2": {
+        "F1": 0.5941120197688975,
+        "Recall": 0.683926991127616,
+        "Recalldyn": 0.6907024651332093,
+        "Recallstatic": 0.6771515171220227,
+        "mAcc": 0.9003662199302978,
+        "mIoU": 0.4993703965128613
+      },
+      "dynamic_test_3": {
+        "F1": 0.6971190539486238,
+        "Recall": 0.7375715863127312,
+        "Recalldyn": 0.48055546665386484,
+        "Recallstatic": 0.9945877059715977,
+        "mAcc": 0.9707977712876059,
+        "mIoU": 0.6518851835310957
+      },
+      "dynamic_test_4": {
+        "F1": 0.7314334594946159,
+        "Recall": 0.7349425889200396,
+        "Recalldyn": 0.5372310868640933,
+        "Recallstatic": 0.9326540909759858,
+        "mAcc": 0.9604068713533112,
+        "mIoU": 0.6486740472595736
+      },
+      "interaction_test_0": {
+        "F1": 0.5398540826340713,
+        "Recall": 0.512904040823671,
+        "Recalldyn": 0.3387988793962435,
+        "Recallstatic": 0.9481669443922398,
+        "mAcc": 0.8996823064471204,
+        "mIoU": 0.43610904869015893
+      },
+      "interaction_test_1": {
+        "F1": 0.571618040869347,
+        "Recall": 0.5725217518940404,
+        "Recalldyn": 0.4072461866212901,
+        "Recallstatic": 0.9857106650759162,
+        "mAcc": 0.9015095833097756,
+        "mIoU": 0.46377214014550094
+      },
+      "interaction_test_2": {
+        "F1": 0.5372700301102789,
+        "Recall": 0.5124500149863518,
+        "Recalldyn": 0.32117783059964156,
+        "Recallstatic": 0.9906304759531271,
+        "mAcc": 0.8996424025698528,
+        "mIoU": 0.4402435499270036
+      },
+      "interaction_test_3": {
+        "F1": 0.5100326804919783,
+        "Recall": 0.47961781324004576,
+        "Recalldyn": 0.32225480441395826,
+        "Recallstatic": 0.8730253353052647,
+        "mAcc": 0.8906912338212852,
+        "mIoU": 0.4001163338990386
+      },
+      "interaction_test_4": {
+        "F1": 0.5390390645128951,
+        "Recall": 0.5183706231800016,
+        "Recalldyn": 0.32827565946736564,
+        "Recallstatic": 0.9936080324615914,
+        "mAcc": 0.8992958998900603,
+        "mIoU": 0.44314269191352246
+      }
+    }
+  },
+  "_status": {
+    "shortcut_copy_fixed_baseline": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "valid": true
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "shortcut_copy_fixed_baseline": {
+          "F1": 0.7551188964122195,
+          "Recall": 0.7714422863236517,
+          "Recalldyn": 0.6391447787321051,
+          "Recallstatic": 0.9037397939151985,
+          "mAcc": 0.959661919703359,
+          "mIoU": 0.6878799564654651
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "shortcut_copy_fixed_baseline": {
+          "F1": 0.5395627797237141,
+          "Recall": 0.5191728488248222,
+          "Recalldyn": 0.3435506720996998,
+          "Recallstatic": 0.9582282906376278,
+          "mAcc": 0.898164285207619,
+          "mIoU": 0.43667675291504493
+        }
+      }
+    }
+  }
+}

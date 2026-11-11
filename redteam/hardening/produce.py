@@ -29,7 +29,6 @@ TRAINED = {
     "ablation_no_tracking": ("split4d_no_tracking", ["--lambda-align", "0"]),
     "ablation_no_dino": ("split4d_no_dino", ["--lambda-dino", "0"]),
     "variant_long_training": ("split4d_long_training", ["--steps", "30000"]),
-    "variant_strong_regularizers": ("split4d_strong_regularizers", ["--loss-weight-scale", "0.1"]),
     "variant_weak_regularizers": ("split4d_weak_regularizers", ["--loss-weight-scale", "0.001"]),
 }
 SIMPLE = ("geometry_kmeans", "mask_graph_spectral", "mask_tracker", "semantic_kmeans")
@@ -87,12 +86,26 @@ def main() -> None:
                     "split4d_seed_ensemble", "--ensemble-from", *feats])
         mark("variant_seed_ensemble", {"candidate": "split4d_seed_ensemble", "kind": "trained variant", "seconds": secs})
 
+    if not done("variant_mask_vote_refine"):
+        out = ART / "variant_mask_vote_refine" / "candidate" / "results.json"
+        secs = run([sys.executable, "-m", "redteam.hardening.refine", str(REF_OUT), "--output", str(out)])
+        mark("variant_mask_vote_refine", {"candidate": "split4d_mask_vote_refine", "kind": "trained variant",
+                                          "source": "reference_seed0", "seconds": secs})
+
+    procs = {}
     for method in SIMPLE:
         if done(method):
             continue
         out = ART / method / "candidate" / "results.json"
-        secs = run([sys.executable, "-m", "baseline.simple_grouping", method, "--output", str(out)])
-        mark(method, {"candidate": method, "kind": "simple baseline", "seconds": secs})
+        out.parent.mkdir(parents=True, exist_ok=True)
+        log(f"start simple baseline {method}")
+        procs[method] = (subprocess.Popen([sys.executable, "-m", "baseline.simple_grouping", method, "--output", str(out)],
+                                          cwd=ROOT), time.time())
+    for method, (proc, t0) in procs.items():
+        if proc.wait() == 0:
+            mark(method, {"candidate": method, "kind": "simple baseline", "seconds": time.time() - t0})
+        else:
+            log(f"simple baseline {method} failed rc={proc.returncode}")
 
     # ---------------------------------------------------------------- shortcuts
     import numpy as np

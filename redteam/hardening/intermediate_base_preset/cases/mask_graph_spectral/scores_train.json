@@ -1,0 +1,107 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.8456947018565136,
+      "Recall": 0.836460184697081,
+      "Recalldyn": 0.7535515435567346,
+      "Recallstatic": 0.9193688258374273,
+      "mAcc": 0.9778462304157908,
+      "mIoU": 0.784439040055504
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.4955631270284111,
+      "Recall": 0.48804338319291946,
+      "Recalldyn": 0.3246361733966455,
+      "Recallstatic": 0.8965614076836044,
+      "mAcc": 0.8828917563527332,
+      "mIoU": 0.39523427436401376
+    }
+  },
+  "_per_scene_diagnostics": {
+    "mask_graph_spectral": {
+      "dynamic_dev_0": {
+        "F1": 0.6279048821140321,
+        "Recall": 0.6528544232847794,
+        "Recalldyn": 0.3075228007343237,
+        "Recallstatic": 0.9981860458352352,
+        "mAcc": 0.9555782197291631,
+        "mIoU": 0.5448013589923318
+      },
+      "dynamic_dev_1": {
+        "F1": 0.5204572424091705,
+        "Recall": 0.5250429655822992,
+        "Recalldyn": 0.3008952297115545,
+        "Recallstatic": 0.749190701453044,
+        "mAcc": 0.8983575659666128,
+        "mIoU": 0.42570231932265923
+      },
+      "dynamic_dev_2": {
+        "F1": 0.7055954671127654,
+        "Recall": 0.7046812675561639,
+        "Recalldyn": 0.4105344653912979,
+        "Recallstatic": 0.9988280697210299,
+        "mAcc": 0.9672693266832917,
+        "mIoU": 0.6181698545706422
+      },
+      "interaction_dev_0": {
+        "F1": 0.46153325077154456,
+        "Recall": 0.46709081992244783,
+        "Recalldyn": 0.2545977948500436,
+        "Recallstatic": 0.9983233826034583,
+        "mAcc": 0.8820435975006361,
+        "mIoU": 0.3895507136640843
+      },
+      "interaction_dev_1": {
+        "F1": 0.49836814373891525,
+        "Recall": 0.49844248298826993,
+        "Recalldyn": 0.29826663500122585,
+        "Recallstatic": 0.99888210295588,
+        "mAcc": 0.8885129809499558,
+        "mIoU": 0.41935234257203907
+      },
+      "interaction_dev_2": {
+        "F1": 0.5319978708826503,
+        "Recall": 0.552426803956995,
+        "Recalldyn": 0.3742715185560558,
+        "Recallstatic": 0.997815017459343,
+        "mAcc": 0.9003534568075782,
+        "mIoU": 0.4499396713112253
+      }
+    }
+  },
+  "_status": {
+    "mask_graph_spectral": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "constraint failed: scaled_interaction_segmentation Recalldyn 0.309045 does not exceed the fixed no-streaming reference 0.324636",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "mask_graph_spectral": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "mask_graph_spectral": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

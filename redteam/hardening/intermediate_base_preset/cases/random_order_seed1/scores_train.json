@@ -1,0 +1,107 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.8456947018565136,
+      "Recall": 0.836460184697081,
+      "Recalldyn": 0.7535515435567346,
+      "Recallstatic": 0.9193688258374273,
+      "mAcc": 0.9778462304157908,
+      "mIoU": 0.784439040055504
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.4955631270284111,
+      "Recall": 0.48804338319291946,
+      "Recalldyn": 0.3246361733966455,
+      "Recallstatic": 0.8965614076836044,
+      "mAcc": 0.8828917563527332,
+      "mIoU": 0.39523427436401376
+    }
+  },
+  "_per_scene_diagnostics": {
+    "split4d_random_order": {
+      "dynamic_dev_0": {
+        "F1": 0.9059531898461218,
+        "Recall": 0.8684023554114763,
+        "Recalldyn": 0.8502982771024012,
+        "Recallstatic": 0.8865064337205513,
+        "mAcc": 0.9797616012238655,
+        "mIoU": 0.8360278156426164
+      },
+      "dynamic_dev_1": {
+        "F1": 0.7403227332728943,
+        "Recall": 0.7503976840785004,
+        "Recalldyn": 0.5786398157126897,
+        "Recallstatic": 0.922155552444311,
+        "mAcc": 0.9656314655783238,
+        "mIoU": 0.6660106691923842
+      },
+      "dynamic_dev_2": {
+        "F1": 0.9541801803973713,
+        "Recall": 0.9354105912435252,
+        "Recalldyn": 0.9352452493088519,
+        "Recallstatic": 0.9355759331781984,
+        "mAcc": 0.9913780888687372,
+        "mIoU": 0.9161754451718425
+      },
+      "interaction_dev_0": {
+        "F1": 0.47586177362356985,
+        "Recall": 0.46991061555564356,
+        "Recalldyn": 0.26006788473790704,
+        "Recallstatic": 0.994517442599985,
+        "mAcc": 0.8889624893470068,
+        "mIoU": 0.39612473108736196
+      },
+      "interaction_dev_1": {
+        "F1": 0.48617166430650455,
+        "Recall": 0.4673898185261359,
+        "Recalldyn": 0.3460746660027726,
+        "Recallstatic": 0.7706776998345444,
+        "mAcc": 0.8743335718125634,
+        "mIoU": 0.37318937330264124
+      },
+      "interaction_dev_2": {
+        "F1": 0.4909086315037695,
+        "Recall": 0.5147874467383581,
+        "Recalldyn": 0.32594825529056987,
+        "Recallstatic": 0.9868854253578283,
+        "mAcc": 0.890206216800307,
+        "mIoU": 0.4019110719340346
+      }
+    }
+  },
+  "_status": {
+    "split4d_random_order": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "constraint failed: scaled_interaction_segmentation F1 0.484314 does not exceed the fixed no-streaming reference 0.495563",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "split4d_random_order": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "split4d_random_order": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

@@ -111,6 +111,17 @@ def main() -> None:
         paired[case] = {m: {"mean": statistics.mean(v), "wins": sum(x > 1e-12 for x in v), "losses": sum(x < -1e-12 for x in v),
                             "n": len(v)} for m, v in diffs.items() if v}
 
+    test_man = load(ROOT / "eval/test/truth/manifest.json")["experiments"]
+
+    def raw_row(case):
+        ps = per_scene(case)
+        if not ps:
+            return None
+        return {e: {m: statistics.mean(ps[s][m] for s in sids) for m in spec[e]["metrics"]} for e, sids in test_man.items()}
+
+    for case in cases:
+        records[case]["raw_ungated_test"] = raw_row(case)
+
     bounds = []
     for exp in spec:
         for m, ms in spec[exp]["metrics"].items():
@@ -146,6 +157,15 @@ def main() -> None:
         tr = rec["train"][exps[1]]["mIoU"] if rec["train"] else float("nan")
         lines.append(f"| {case} | {rec['kind']} | {rec['valid']} | {s} | {triple(rec['test'], exps[0])} | "
                      f"{triple(rec['test'], exps[1])} | {tr:.3f} |")
+    lines += ["", "Raw metrics before validity/constraint gating (from the evaluator's per-scene diagnostics):", "",
+              "| Case | Dyn mIoU / F1 / Rdyn / Rstatic | Inter mIoU / F1 / Rdyn / Rstatic |", "|---|---:|---:|"]
+    for case, rec in sorted(records.items(), key=lambda kv: kv[0]):
+        r = rec["raw_ungated_test"]
+        if not r:
+            lines.append(f"| {case} | no valid predictions | |")
+            continue
+        q = lambda x: " / ".join(f"{x[m]:.3f}" for m in ("mIoU", "F1", "Recalldyn", "Recallstatic"))
+        lines.append(f"| {case} | {q(r[exps[0]])} | {q(r[exps[1]])} |")
     (H / "score_table.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
     print(json.dumps({"seed_S": seed_scores, "bounds": bounds}, indent=2))

@@ -31,6 +31,7 @@ from typing import Dict, List, Sequence, Tuple
 
 import numpy as np
 from scipy.interpolate import CubicSpline
+from scipy.spatial import cKDTree
 
 ROOT = Path(__file__).resolve().parents[2]
 PUBLIC_DIR = ROOT / "data" / "scenes"
@@ -47,7 +48,7 @@ GRID_DT = 0.05
 T_PAD = 10.0
 RENDER_MIN_OPACITY = 0.10
 SEMANTIC_DIM = 12
-SPLITS = {"dev": 3, "test": 5}
+SPLITS = {"dev": 4, "test": 10}
 PROFILES = ("dynamic", "interaction")
 EXPERIMENT_OF_PROFILE = {
     "dynamic": "scaled_dynamic_scene_segmentation",
@@ -87,13 +88,31 @@ class Preset:
     flip_prob: float = 0.25
     noise_prob: float = 0.02
     dyn_duration: Tuple[float, float] = (1.5, 3.0)
+    # "overlap2d": objects whose image regions touch may be merged by the
+    # segmenter; "contact3d": merges mostly happen for objects in physical
+    # contact, image-only overlaps merge with overlap_scale of that rate.
+    merge_model: str = "overlap2d"
+    overlap_scale: float = 1.0
+    sem_noise: float = 0.25
+    ball_hold: Tuple[float, float] = (6.0, 10.0)
+    ball_flight: Tuple[float, float] = (3.0, 5.0)
 
 
 PRESETS = {
     "base": Preset(),
     "clean_masks": Preset(merge_scale=0.0, split_scale=0.0, flip_prob=0.0, noise_prob=0.02),
     "long_lived": Preset(dyn_duration=(6.0, 9.0)),
+    "contact_long": Preset(dyn_duration=(6.0, 9.0), merge_model="contact3d", overlap_scale=0.15, sem_noise=0.4,
+                           ball_hold=(4.0, 8.0), ball_flight=(4.0, 7.0)),
+    "contact_mid": Preset(dyn_duration=(3.5, 6.0), merge_model="contact3d", overlap_scale=0.15, sem_noise=0.4,
+                          ball_hold=(4.0, 8.0), ball_flight=(4.0, 7.0)),
+    "overlap_long": Preset(dyn_duration=(6.0, 9.0), merge_scale=0.6, sem_noise=0.4,
+                           ball_hold=(4.0, 8.0), ball_flight=(4.0, 7.0)),
+    "overlap_mid": Preset(dyn_duration=(3.5, 6.0), merge_scale=0.6, sem_noise=0.4,
+                          ball_hold=(4.0, 8.0), ball_flight=(4.0, 7.0)),
 }
+DEFAULT_PRESET = "contact_long"
+CONTACT_DIST = 0.12
 
 
 def merge_prob(cat_a: str, cat_b: str) -> float:
@@ -148,7 +167,7 @@ def _smoothstep(x: np.ndarray) -> np.ndarray:
     return x * x * (3.0 - 2.0 * x)
 
 
-def interaction_objects(rng: np.random.Generator, grid: np.ndarray) -> List[SceneObject]:
+def interaction_objects(rng: np.random.Generator, grid: np.ndarray, preset: Preset) -> List[SceneObject]:
     people = 4
     wp_times = np.arange(-T_PAD, FRAMES + T_PAD + 1e-6, 10.0)
     n_wp = len(wp_times)
@@ -180,12 +199,12 @@ def interaction_objects(rng: np.random.Generator, grid: np.ndarray) -> List[Scen
     t = -T_PAD - 1.0
     holder = 0
     while t < FRAMES + T_PAD + 1.0:
-        hold = float(rng.uniform(6.0, 10.0))
+        hold = float(rng.uniform(*preset.ball_hold))
         mask = (grid >= t) & (grid < t + hold)
         ball[mask] = roots[holder][mask] + hand
         t += hold
         nxt = int(rng.choice([p for p in range(people) if p != holder]))
-        fly = float(rng.uniform(3.0, 5.0))
+        fly = float(rng.uniform(*preset.ball_flight))
         p0 = _at(grid, roots[holder], t) + hand
         p1 = _at(grid, roots[nxt], t + fly) + hand
         mask = (grid >= t) & (grid < t + fly)
@@ -312,7 +331,7 @@ def sample_primitives(rng: np.random.Generator, objects: Sequence[SceneObject], 
         sem = (cat_emb[obj.category][None, :]
                + 0.40 * np.stack([part_emb[(obj.category, int(p))] for p in part])
                + 0.25 * inst[None, :]
-               + rng.normal(0.0, 0.25, size=(n, SEMANTIC_DIM)))
+               + rng.normal(0.0, preset.sem_noise, size=(n, SEMANTIC_DIM)))
         sem /= np.linalg.norm(sem, axis=1, keepdims=True)
         rows["mean_xyz"].append(pos)
         rows["velocity"].append(vel)
@@ -386,8 +405,24 @@ def object_weights(prims: Dict[str, np.ndarray], contrib: np.ndarray, weight: np
     return objw
 
 
+def contact_matrix(prims: Dict[str, np.ndarray], t: float, n_obj: int) -> np.ndarray:
+    """Objects in physical contact at time t (active primitives closer than CONTACT_DIST)."""
+
+    op_t = np.exp(-0.5 * ((t - prims["mu_t"]) / prims["duration"]) ** 2)
+    act = np.flatnonzero(op_t >= 0.22)
+    pos = prims["mean_xyz"][act] + prims["velocity"][act] * (t - prims["mu_t"][act])[:, None]
+    pairs = cKDTree(pos).query_pairs(CONTACT_DIST, output_type="ndarray")
+    contact = np.zeros((n_obj, n_obj), dtype=bool)
+    if len(pairs):
+        a = prims["object"][act[pairs[:, 0]]]
+        b = prims["object"][act[pairs[:, 1]]]
+        contact[a, b] = True
+        contact[b, a] = True
+    return contact
+
+
 def simulate_masks(prims: Dict[str, np.ndarray], objects: Sequence[SceneObject], contrib: np.ndarray, weight: np.ndarray,
-                   rng: np.random.Generator, preset: Preset) -> np.ndarray:
+                   rng: np.random.Generator, preset: Preset, contact: np.ndarray) -> np.ndarray:
     """Per-image automatic instance masks with realistic, structured errors."""
 
     n_obj = len(objects)
@@ -412,7 +447,12 @@ def simulate_masks(prims: Dict[str, np.ndarray], objects: Sequence[SceneObject],
     touch = touch + touch.T
     for a in range(n_obj):
         for b in range(a + 1, n_obj):
-            if touch[a, b] >= 2 and rng.random() < preset.merge_scale * merge_prob(objects[a].category, objects[b].category):
+            if touch[a, b] < 2:
+                continue
+            rate = preset.merge_scale * merge_prob(objects[a].category, objects[b].category)
+            if preset.merge_model == "contact3d" and not contact[a, b]:
+                rate *= preset.overlap_scale
+            if rng.random() < rate:
                 parent[find(a)] = find(b)
     roots = np.array([find(o) for o in range(n_obj)])
     group_size = np.bincount(roots, minlength=n_obj)
@@ -448,7 +488,7 @@ def simulate_masks(prims: Dict[str, np.ndarray], objects: Sequence[SceneObject],
 def build_scene(scene_id: str, profile: str, preset: Preset) -> Tuple[Dict[str, np.ndarray], Dict[str, np.ndarray]]:
     rng = np.random.default_rng(_seed("scene", scene_id))
     grid = np.arange(-T_PAD - 2.0, FRAMES + T_PAD + 2.0 + 1e-9, GRID_DT)
-    objects = interaction_objects(rng, grid) if profile == "interaction" else dynamic_objects(rng, grid)
+    objects = interaction_objects(rng, grid, preset) if profile == "interaction" else dynamic_objects(rng, grid)
     prims = sample_primitives(rng, objects, grid, preset)
     n_obj = len(objects)
 
@@ -463,9 +503,10 @@ def build_scene(scene_id: str, profile: str, preset: Preset) -> Tuple[Dict[str, 
 
     obs_t, obs_view, offsets, all_c, all_w, all_l = [], [], [0], [], [], []
     for t in range(FRAMES):
+        contact = contact_matrix(prims, float(t), n_obj)
         for v in range(TRAIN_VIEWS):
             c, w = render(prims, float(t), train_axes[v], rng)
-            lab = simulate_masks(prims, objects, c, w, rng, preset)
+            lab = simulate_masks(prims, objects, c, w, rng, preset, contact)
             obs_t.append(t)
             obs_view.append(v)
             all_c.append(c)
@@ -537,7 +578,7 @@ def main() -> None:
     parser.add_argument("--public-dir", default=str(PUBLIC_DIR))
     parser.add_argument("--train-truth-dir", default=str(TRAIN_TRUTH_DIR))
     parser.add_argument("--test-truth-dir", default=str(TEST_TRUTH_DIR))
-    parser.add_argument("--preset", default="base", choices=sorted(PRESETS))
+    parser.add_argument("--preset", default=DEFAULT_PRESET, choices=sorted(PRESETS))
     parser.add_argument("--only-split", default=None, choices=sorted(SPLITS))
     args = parser.parse_args()
     preset = PRESETS[args.preset]
@@ -547,7 +588,7 @@ def main() -> None:
         d.mkdir(parents=True, exist_ok=True)
 
     manifest = {"frames": FRAMES, "train_views": TRAIN_VIEWS, "contributors_per_pixel": CONTRIB, "scenes": []}
-    truth_manifests: Dict[str, Dict[str, object]] = {s: {"experiments": {}, "scenes": {}} for s in SPLITS}
+    truth_manifests: Dict[str, Dict[str, object]] = {s: {"preset": args.preset, "experiments": {}, "scenes": {}} for s in SPLITS}
     for scene_id, profile, split in scene_ids():
         if args.only_split and split != args.only_split:
             continue

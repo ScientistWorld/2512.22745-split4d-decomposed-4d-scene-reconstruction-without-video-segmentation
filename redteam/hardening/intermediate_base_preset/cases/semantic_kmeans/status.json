@@ -1,0 +1,26 @@
+{
+  "case": "semantic_kmeans",
+  "candidate": "semantic_kmeans",
+  "kind": "simple baseline",
+  "seconds": 4.921555757522583,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.04
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.13
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

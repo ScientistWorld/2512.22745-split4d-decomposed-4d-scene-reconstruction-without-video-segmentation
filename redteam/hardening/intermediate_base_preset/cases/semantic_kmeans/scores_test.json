@@ -1,0 +1,139 @@
+{
+  "_fixed_reference_artifact": {
+    "scaled_dynamic_scene_segmentation": {
+      "F1": 0.7551188964122195,
+      "Recall": 0.7714422863236517,
+      "Recalldyn": 0.6391447787321051,
+      "Recallstatic": 0.9037397939151985,
+      "mAcc": 0.959661919703359,
+      "mIoU": 0.6878799564654651
+    },
+    "scaled_interaction_segmentation": {
+      "F1": 0.5395627797237141,
+      "Recall": 0.5191728488248222,
+      "Recalldyn": 0.3435506720996998,
+      "Recallstatic": 0.9582282906376278,
+      "mAcc": 0.898164285207619,
+      "mIoU": 0.43667675291504493
+    }
+  },
+  "_per_scene_diagnostics": {
+    "semantic_kmeans": {
+      "dynamic_test_0": {
+        "F1": 0.5914343445017307,
+        "Recall": 0.632427904765783,
+        "Recalldyn": 0.6247378611031874,
+        "Recallstatic": 0.6401179484283788,
+        "mAcc": 0.9285349523377213,
+        "mIoU": 0.4968157251000279
+      },
+      "dynamic_test_1": {
+        "F1": 0.8227226414253017,
+        "Recall": 0.8544893577909503,
+        "Recalldyn": 0.9877016431894244,
+        "Recallstatic": 0.7212770723924762,
+        "mAcc": 0.9654817944646098,
+        "mIoU": 0.7821034408509896
+      },
+      "dynamic_test_2": {
+        "F1": 0.7917317355900779,
+        "Recall": 0.8292934669538827,
+        "Recalldyn": 0.9790249678777034,
+        "Recallstatic": 0.679561966030062,
+        "mAcc": 0.9543748052021648,
+        "mIoU": 0.7381330441283748
+      },
+      "dynamic_test_3": {
+        "F1": 0.8111775536607869,
+        "Recall": 0.8471656313157157,
+        "Recalldyn": 0.987146447647539,
+        "Recallstatic": 0.7071848149838924,
+        "mAcc": 0.9639677318739899,
+        "mIoU": 0.7690179678976701
+      },
+      "dynamic_test_4": {
+        "F1": 0.9160786579549823,
+        "Recall": 0.9324140115766612,
+        "Recalldyn": 0.9688893449025955,
+        "Recallstatic": 0.8959386782507268,
+        "mAcc": 0.9779924092222285,
+        "mIoU": 0.8483771059988405
+      },
+      "interaction_test_0": {
+        "F1": 0.42392215316623866,
+        "Recall": 0.49246180019829977,
+        "Recalldyn": 0.4924107748547775,
+        "Recallstatic": 0.4925893635571055,
+        "mAcc": 0.851955611711468,
+        "mIoU": 0.32855484793462963
+      },
+      "interaction_test_1": {
+        "F1": 0.5693774140534101,
+        "Recall": 0.5948002430056506,
+        "Recalldyn": 0.44526102954261315,
+        "Recallstatic": 0.968648276663244,
+        "mAcc": 0.8905572292805853,
+        "mIoU": 0.4962083175594408
+      },
+      "interaction_test_2": {
+        "F1": 0.5221998911435147,
+        "Recall": 0.5676578573784504,
+        "Recalldyn": 0.4012855360035533,
+        "Recallstatic": 0.9835886608156934,
+        "mAcc": 0.8816655554882115,
+        "mIoU": 0.47330431045813587
+      },
+      "interaction_test_3": {
+        "F1": 0.5088701137796987,
+        "Recall": 0.5650856749853589,
+        "Recalldyn": 0.415891891442908,
+        "Recallstatic": 0.9380701338414859,
+        "mAcc": 0.8809618008736303,
+        "mIoU": 0.44366496598193145
+      },
+      "interaction_test_4": {
+        "F1": 0.5666338315482768,
+        "Recall": 0.5941561391452227,
+        "Recalldyn": 0.46991537814760986,
+        "Recallstatic": 0.904758041639255,
+        "mAcc": 0.8844823126172152,
+        "mIoU": 0.4764650492241708
+      }
+    }
+  },
+  "_status": {
+    "semantic_kmeans": {
+      "files": [
+        "candidate/results.json"
+      ],
+      "reason": "constraint failed: scaled_interaction_segmentation F1 0.518201 does not exceed the fixed no-streaming reference 0.539563",
+      "valid": false
+    }
+  },
+  "experiments": {
+    "scaled_dynamic_scene_segmentation": {
+      "results": {
+        "semantic_kmeans": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    },
+    "scaled_interaction_segmentation": {
+      "results": {
+        "semantic_kmeans": {
+          "F1": 0.0,
+          "Recall": 0.0,
+          "Recalldyn": 0.0,
+          "Recallstatic": 0.0,
+          "mAcc": 0.0,
+          "mIoU": 0.0
+        }
+      }
+    }
+  }
+}

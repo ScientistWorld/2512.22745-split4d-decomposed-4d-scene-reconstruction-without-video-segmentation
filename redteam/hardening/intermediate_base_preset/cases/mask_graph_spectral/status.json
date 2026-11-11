@@ -1,0 +1,26 @@
+{
+  "case": "mask_graph_spectral",
+  "candidate": "mask_graph_spectral",
+  "kind": "simple baseline",
+  "seconds": 11.46157193183899,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.06
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.16
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

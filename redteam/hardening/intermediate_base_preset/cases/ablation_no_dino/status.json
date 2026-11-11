@@ -1,0 +1,30 @@
+{
+  "case": "ablation_no_dino",
+  "candidate": "split4d_no_dino",
+  "kind": "trained variant",
+  "args": [
+    "--lambda-dino",
+    "0"
+  ],
+  "seconds": 106.97612118721008,
+  "train": {
+    "command": [
+      "bash",
+      "scripts/evaluate_train.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.05
+  },
+  "test": {
+    "command": [
+      "bash",
+      "scripts/evaluate_test.sh"
+    ],
+    "returncode": 0,
+    "seconds": 2.15
+  },
+  "methods_on_disk": [
+    "candidate/results.json"
+  ],
+  "evaluator_unchanged": true
+}

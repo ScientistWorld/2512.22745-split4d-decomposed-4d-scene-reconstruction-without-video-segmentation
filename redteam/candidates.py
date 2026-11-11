@@ -45,6 +45,8 @@ def train(name):
         cfg["seed"] = int(name.removeprefix("reference_seed"))
     if name == "weak_untrained":
         cfg["steps"] = 0
+    if name == "strong_more_training":
+        cfg["steps"] = 10000
     if name == "strong_corrected_temperature":
         import torch.nn.functional as F
 
@@ -138,7 +140,7 @@ def public_grouping(name):
 
 
 def make(name):
-    if name.startswith("reference_seed") or name in {"weak_untrained", "strong_corrected_temperature"}:
+    if name.startswith("reference_seed") or name in {"weak_untrained", "strong_corrected_temperature", "strong_more_training"}:
         return train(name), {}
     if name in {"simple_geometry_baseline", "strong_mask_graph_refinement", "bruteforce_mask_permutations"}:
         return public_grouping(name)
@@ -146,7 +148,7 @@ def make(name):
         return {"method": "split4d_streaming", "scenes": {}}, {}
 
     payload = reference()
-    if name in {"reference_frozen", "shortcut_hide_method"}:
+    if name in {"reference_frozen", "shortcut_hide_method", "shortcut_replace_baseline"}:
         return payload, {}
     if name == "shortcut_baseline_identity":
         payload["method"] = "split4d_random_order"

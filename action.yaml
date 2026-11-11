@@ -1,4 +1,4 @@
 action: submit
 gpus: 0
 test: false
-notes: "Audit: bundle three 3200-step reference seeds, stronger/weaker variants, brute force, and 13 shortcut trials; save each unchanged no-argument hidden-test result under redteam."
+notes: "Audit follow-up: original method at 10000 steps and shortcut replacing only the fixed baseline with the unchanged candidate, then summarize 24 saved hidden-test trials."

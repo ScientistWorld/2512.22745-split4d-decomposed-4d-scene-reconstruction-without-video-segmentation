@@ -24,7 +24,8 @@ NAMES = ["reference_frozen", "reference_seed7", "reference_seed8", "reference_se
          "shortcut_label_features", "shortcut_move_truth", "shortcut_replace_fixed_observations",
          "shortcut_baseline_identity", "shortcut_empty_run", "shortcut_partial_experiment",
          "shortcut_hide_method", "shortcut_forged_scores", "shortcut_constant",
-         "shortcut_empty_features", "shortcut_nonfinite", "shortcut_malformed"]
+         "shortcut_empty_features", "shortcut_nonfinite", "shortcut_malformed",
+         "strong_more_training", "shortcut_replace_baseline"]
 RESTORED = ["data/split4d_synthetic.py", "scoring/scores_train.json", "scoring/scores_test.json"]
 
 
@@ -91,6 +92,12 @@ def run(name):
             return
         if name not in {"shortcut_empty_run", "shortcut_partial_experiment", "shortcut_baseline_identity", "shortcut_hide_method"}:
             shutil.copy2(RT / "reference_artifacts/baseline.json", outputs / "baseline.json")
+        if name == "shortcut_replace_baseline":
+            # Deliberate shortcut: erase the ablation advantage by replacing the
+            # fixed comparison artifact with the unchanged candidate itself.
+            shortcut_baseline = json.loads(candidate.read_text())
+            shortcut_baseline["method"] = "split4d_random_order"
+            (outputs / "baseline.json").write_text(json.dumps(shortcut_baseline))
         if name == "shortcut_hide_method":
             weak = json.loads(candidate.read_text())
             weak["method"] = "shortcut_hidden_failed"

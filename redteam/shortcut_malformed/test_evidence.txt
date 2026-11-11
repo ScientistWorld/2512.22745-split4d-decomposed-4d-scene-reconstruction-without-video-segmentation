@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/user/eval/test/evaluate.py", line 316, in <module>
+    main()
+  File "/home/user/eval/test/evaluate.py", line 308, in main
+    scores = merge_scores(input_paths, expected)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/eval/test/evaluate.py", line 285, in merge_scores
+    scores = evaluate_payload(payload)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/eval/test/evaluate.py", line 216, in evaluate_payload
+    metrics = score_scene(str(scene_name), scene_payload)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/eval/test/evaluate.py", line 189, in score_scene
+    raise ValueError(
+ValueError: linear_motion: pred_labels has length 0, expected 144

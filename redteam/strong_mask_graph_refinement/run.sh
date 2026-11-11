@@ -1,4 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 cd /home/user
-python -u -m redteam.harness strong_mask_graph_refinement
+REDTEAM_RERUN=1 python -u -m redteam.harness strong_mask_graph_refinement

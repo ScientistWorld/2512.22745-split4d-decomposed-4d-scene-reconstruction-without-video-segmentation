@@ -1,0 +1,11 @@
+{
+  "run_id": "0727a962-fdd",
+  "project_id": "swarm-2512.22745",
+  "command": "bash /home/user/scripts/run.sh",
+  "status": "completed",
+  "returncode": 0,
+  "duration": 420.1712565422058,
+  "submitted_at": 1794401639.8631198,
+  "started_at": 1794401659.4637277,
+  "completed_at": 1794402079.6349843
+}

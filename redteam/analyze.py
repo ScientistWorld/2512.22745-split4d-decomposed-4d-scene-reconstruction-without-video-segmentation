@@ -161,7 +161,8 @@ def main():
         score = record["audit_score"]
         numbers = ("invalid / absent | —" if score is None else
                    f'{score:.6f} | {record["delta_from_frozen"]:+.6f}')
-        table.append(f'| [{name}]({name}/scores_test.json) | {numbers} | '
+        evidence = "scores_test.json" if name in cases else "status.json"
+        table.append(f'| [{name}]({name}/{evidence}) | {numbers} | '
                      f'{pair("scaled_linear_motion_segmentation")} | {pair("scaled_streaming_ablation")} |')
     (RT / "score_table.md").write_text("\n".join(table) + "\n")
     print(json.dumps({"frozen_score": frozen, "seed_range": seed_range,

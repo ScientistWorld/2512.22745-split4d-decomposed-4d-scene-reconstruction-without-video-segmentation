@@ -1,4 +1,4 @@
 #!/bin/bash
 set -euo pipefail
 cd /home/user
-python -u -m redteam.harness shortcut_partial_experiment
+REDTEAM_RERUN=1 python -u -m redteam.harness shortcut_partial_experiment

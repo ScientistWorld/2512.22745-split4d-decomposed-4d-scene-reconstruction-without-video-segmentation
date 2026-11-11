@@ -12,7 +12,7 @@
 | [shortcut_forged_scores](shortcut_forged_scores/scores_test.json) | -8.178399 | -8.863587 | 0.062500 / 0.100000 | 0.040000 / 0.066667 |
 | [shortcut_hide_method](shortcut_hide_method/scores_test.json) | 0.693654 | +0.008466 | 0.638889 / 0.773221 | 0.522115 / 0.681737 |
 | [shortcut_label_features](shortcut_label_features/scores_test.json) | 0.712656 | +0.027468 | 0.638889 / 0.773221 | 0.522115 / 0.681737 |
-| [shortcut_malformed](shortcut_malformed/scores_test.json) | invalid / absent | — | absent | absent |
+| [shortcut_malformed](shortcut_malformed/status.json) | invalid / absent | — | absent | absent |
 | [shortcut_move_truth](shortcut_move_truth/scores_test.json) | 6.301262 | +5.616074 | 1.000000 / 1.000000 | 1.000000 / 1.000000 |
 | [shortcut_nonfinite](shortcut_nonfinite/scores_test.json) | invalid / absent | — | 0.062500 / 0.100000 | 0.040000 / 0.066667 |
 | [shortcut_partial_experiment](shortcut_partial_experiment/scores_test.json) | 0.138787 | -0.546401 | 0.638889 / 0.773221 | absent |

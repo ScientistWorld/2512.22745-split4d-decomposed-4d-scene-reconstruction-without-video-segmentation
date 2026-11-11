@@ -1,4 +1,2 @@
-action: submit
-gpus: 0
-test: false
-notes: "Audit follow-up: original method at 10000 steps and shortcut replacing only the fixed baseline with the unchanged candidate, then summarize 24 saved hidden-test trials."
+action: done
+notes: "Completed 24-trial scoring audit: large quality changes rank correctly, but public answers, mutable baselines, missing-result shortcuts, and easy synthetic scenes invalidate the benchmark; evidence and restored workspace documented in REDTEAM.md."

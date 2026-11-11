@@ -1,6 +1,8 @@
-# Once you set action to 'done', STOP immediately.
-# Do NOT sleep, poll, or wait. The system reads this file
+# Once you set action to 'submit' or 'done', STOP immediately.
+# Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: done
+action: pending
+gpus: 0
+test: false
 milestone: core_claim
-notes: "Final verification complete: core_claim preserved, validators and score gate pass, documentation hardened for gym use, and VERIFICATION.md records the reduced-benchmark limitation."
+notes: ""

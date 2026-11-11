@@ -111,7 +111,7 @@ PRESETS = {
     "overlap_mid": Preset(dyn_duration=(3.5, 6.0), merge_scale=0.6, sem_noise=0.4,
                           ball_hold=(4.0, 8.0), ball_flight=(4.0, 7.0)),
 }
-DEFAULT_PRESET = "contact_long"
+DEFAULT_PRESET = "contact_mid"  # chosen on dev scenes by redteam/hardening/sweep.py
 CONTACT_DIST = 0.12
 
 

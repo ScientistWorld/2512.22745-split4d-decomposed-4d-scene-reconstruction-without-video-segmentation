@@ -86,6 +86,18 @@ def main() -> None:
                     "split4d_seed_ensemble", "--ensemble-from", *feats])
         mark("variant_seed_ensemble", {"candidate": "split4d_seed_ensemble", "kind": "trained variant", "seconds": secs})
 
+    for case, feats, name in (
+        ("variant_kmeans_inference", [str(ROOT / "outputs/split4d/results.features.npz")], "split4d_kmeans_inference"),
+        ("variant_ensemble_kmeans", [str(ROOT / "outputs/split4d/results.features.npz"),
+                                     str(ART / "reference_seed1/candidate/results.features.npz"),
+                                     str(ART / "reference_seed2/candidate/results.features.npz")], "split4d_ensemble_kmeans"),
+    ):
+        if not done(case):
+            out = ART / case / "candidate" / "results.json"
+            secs = run([sys.executable, "-m", "redteam.hardening.kmeans_inference", *feats, "--output", str(out),
+                        "--method-name", name])
+            mark(case, {"candidate": name, "kind": "trained variant", "seconds": secs})
+
     if not done("variant_mask_vote_refine"):
         out = ART / "variant_mask_vote_refine" / "candidate" / "results.json"
         secs = run([sys.executable, "-m", "redteam.hardening.refine", str(REF_OUT), "--output", str(out)])
